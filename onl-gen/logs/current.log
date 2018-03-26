@@ -1,0 +1,791 @@
+2018-03-26 15:07:31,534[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:07:31,544[ INFO]
+-----------------------------------------------
+ONL_CART:购物车
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:07:31,565[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:07:31,567[ INFO]
+-----------------------------------------------
+ONL_ONLINE:上线信息
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:07:31,574[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:07:31,575[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PIC:上线图片
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:07:31,578[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:07:31,579[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PROMOTION:上线推广
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:07:31,597[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:07:31,598[ INFO]
+-----------------------------------------------
+ONL_ONLINE_LOG:上线日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:07:31,603[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:07:31,604[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC:上线规格
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:07:31,615[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:07:31,616[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC_LOG:上线规格日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:13:03,887[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:13:03,895[ INFO]
+-----------------------------------------------
+ONL_CART:购物车
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:13:03,915[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:13:03,920[ INFO]
+-----------------------------------------------
+ONL_ONLINE:上线信息
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:13:03,924[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:13:03,924[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PIC:上线图片
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:13:03,927[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:13:03,928[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PROMOTION:上线推广
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:13:03,944[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:13:03,945[ INFO]
+-----------------------------------------------
+ONL_ONLINE_LOG:上线日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:13:03,952[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:13:03,955[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC:上线规格
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:13:03,969[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:13:03,972[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC_LOG:上线规格日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:14:04,536[DEBUG]getTitleByRemarks: 购物车ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,541[DEBUG]getTitleByRemarks: 上线规格ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,542[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,543[DEBUG]getTitleByRemarks: 用户编号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,543[DEBUG]getTitleByRemarks: 购物车规格数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,546[DEBUG]getTitleByRemarks: 加入时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,717[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,833[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,852[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,874[ INFO]
+-----------------------------------------------
+ONL_CART:购物车
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:14:04,925[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,928[DEBUG]getTitleByRemarks: 上线标题 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,937[DEBUG]getTitleByRemarks: 上线描述 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,939[DEBUG]getTitleByRemarks: 上线状态（0：下线，1：上线  ） main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,939[DEBUG]getTitleByRemarks: 上线时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,940[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,945[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,948[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,948[ INFO]
+-----------------------------------------------
+ONL_ONLINE:上线信息
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:14:04,954[DEBUG]getTitleByRemarks: 上线图片ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,955[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,956[DEBUG]getTitleByRemarks: 图片类型 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,957[DEBUG]getTitleByRemarks: 图片路径 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,958[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:04,959[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,000[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,000[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PIC:上线图片
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:14:05,003[DEBUG]getTitleByRemarks: 上线推广ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,004[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,004[DEBUG]getTitleByRemarks: 推广类型 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,005[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,063[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,067[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,069[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PROMOTION:上线推广
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:14:05,079[DEBUG]getTitleByRemarks: 上线日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,080[DEBUG]getTitleByRemarks: 操作人ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,081[DEBUG]getTitleByRemarks: 操作时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,084[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,084[DEBUG]getTitleByRemarks: 上线标题 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,085[DEBUG]getTitleByRemarks: 上线描述 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,089[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,090[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,094[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,095[ INFO]
+-----------------------------------------------
+ONL_ONLINE_LOG:上线日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:14:05,100[DEBUG]getTitleByRemarks: 上线规格ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,101[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,101[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,102[DEBUG]getTitleByRemarks: 返现金额 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,102[DEBUG]getTitleByRemarks: 销售价格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,102[DEBUG]getTitleByRemarks: 销售单位 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,103[DEBUG]getTitleByRemarks: 销售数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,103[DEBUG]getTitleByRemarks: 排序号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,107[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,110[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,114[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,114[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC:上线规格
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:14:05,124[DEBUG]getTitleByRemarks: 上线规格日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,125[DEBUG]getTitleByRemarks: 上线日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,125[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,125[DEBUG]getTitleByRemarks: 销售价格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,126[DEBUG]getTitleByRemarks: 返现金额 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,126[DEBUG]getTitleByRemarks: 销售数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,127[DEBUG]getTitleByRemarks: 排序号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,127[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,138[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,142[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:14:05,143[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC_LOG:上线规格日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:35:19,545[DEBUG]getTitleByRemarks: 购物车ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:19,551[DEBUG]getTitleByRemarks: 上线规格ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:19,553[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:19,553[DEBUG]getTitleByRemarks: 用户编号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:19,554[DEBUG]getTitleByRemarks: 购物车规格数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:19,554[DEBUG]getTitleByRemarks: 加入时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:19,639[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,374[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,695[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,720[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,723[ INFO]
+-----------------------------------------------
+ONL_CART:购物车
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:35:20,748[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,750[DEBUG]getTitleByRemarks: 上线标题 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,751[DEBUG]getTitleByRemarks: 上线描述 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,752[DEBUG]getTitleByRemarks: 上线状态（0：下线，1：上线  ） main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,752[DEBUG]getTitleByRemarks: 上线时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,753[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,769[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,797[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,817[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,818[ INFO]
+-----------------------------------------------
+ONL_ONLINE:上线信息
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:35:20,820[DEBUG]getTitleByRemarks: 上线图片ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,821[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,822[DEBUG]getTitleByRemarks: 图片类型 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,830[DEBUG]getTitleByRemarks: 图片路径 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,831[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,886[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,921[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,956[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,956[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PIC:上线图片
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:35:20,960[DEBUG]getTitleByRemarks: 上线推广ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,961[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,961[DEBUG]getTitleByRemarks: 推广类型 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,962[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,970[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,977[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,986[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,988[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PROMOTION:上线推广
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:35:20,998[DEBUG]getTitleByRemarks: 上线日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:20,999[DEBUG]getTitleByRemarks: 操作人ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,000[DEBUG]getTitleByRemarks: 操作时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,000[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,000[DEBUG]getTitleByRemarks: 上线标题 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,001[DEBUG]getTitleByRemarks: 上线描述 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,001[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,006[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,164[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,171[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,175[ INFO]
+-----------------------------------------------
+ONL_ONLINE_LOG:上线日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:35:21,183[DEBUG]getTitleByRemarks: 上线规格ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,184[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,185[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,185[DEBUG]getTitleByRemarks: 返现金额 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,186[DEBUG]getTitleByRemarks: 销售价格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,186[DEBUG]getTitleByRemarks: 销售单位 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,186[DEBUG]getTitleByRemarks: 销售数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,187[DEBUG]getTitleByRemarks: 排序号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,187[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,191[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,207[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,231[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,232[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC:上线规格
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:35:21,247[DEBUG]getTitleByRemarks: 上线规格日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,248[DEBUG]getTitleByRemarks: 上线日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,252[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,252[DEBUG]getTitleByRemarks: 销售价格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,253[DEBUG]getTitleByRemarks: 返现金额 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,253[DEBUG]getTitleByRemarks: 销售数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,253[DEBUG]getTitleByRemarks: 排序号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,255[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,298[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,325[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,375[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:35:21,375[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC_LOG:上线规格日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:38:38,734[DEBUG]getTitleByRemarks: 购物车ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:38,740[DEBUG]getTitleByRemarks: 上线规格ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:38,741[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:38,741[DEBUG]getTitleByRemarks: 用户编号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:38,742[DEBUG]getTitleByRemarks: 购物车规格数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:38,742[DEBUG]getTitleByRemarks: 加入时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:38,851[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:39,572[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:39,905[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:39,977[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:39,994[ INFO]
+-----------------------------------------------
+ONL_CART:购物车
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:38:40,002[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,002[DEBUG]getTitleByRemarks: 上线标题 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,002[DEBUG]getTitleByRemarks: 上线描述 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,003[DEBUG]getTitleByRemarks: 上线状态（0：下线，1：上线  ） main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,003[DEBUG]getTitleByRemarks: 上线时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,004[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,010[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,027[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,118[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,122[ INFO]
+-----------------------------------------------
+ONL_ONLINE:上线信息
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:38:40,126[DEBUG]getTitleByRemarks: 上线图片ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,126[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,127[DEBUG]getTitleByRemarks: 图片类型 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,127[DEBUG]getTitleByRemarks: 图片路径 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,128[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,153[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,271[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,434[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,436[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PIC:上线图片
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:38:40,441[DEBUG]getTitleByRemarks: 上线推广ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,442[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,442[DEBUG]getTitleByRemarks: 推广类型 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,443[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,450[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,468[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,548[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,551[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PROMOTION:上线推广
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:38:40,563[DEBUG]getTitleByRemarks: 上线日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,566[DEBUG]getTitleByRemarks: 操作人ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,568[DEBUG]getTitleByRemarks: 操作时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,569[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,569[DEBUG]getTitleByRemarks: 上线标题 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,569[DEBUG]getTitleByRemarks: 上线描述 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,570[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,573[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,582[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,601[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,602[ INFO]
+-----------------------------------------------
+ONL_ONLINE_LOG:上线日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:38:40,757[DEBUG]getTitleByRemarks: 上线规格ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,764[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,766[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,768[DEBUG]getTitleByRemarks: 返现金额 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,770[DEBUG]getTitleByRemarks: 销售价格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,772[DEBUG]getTitleByRemarks: 销售单位 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,774[DEBUG]getTitleByRemarks: 销售数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,777[DEBUG]getTitleByRemarks: 排序号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,782[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,786[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,798[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,829[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,862[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC:上线规格
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:38:40,876[DEBUG]getTitleByRemarks: 上线规格日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,879[DEBUG]getTitleByRemarks: 上线日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,887[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,891[DEBUG]getTitleByRemarks: 销售价格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,893[DEBUG]getTitleByRemarks: 返现金额 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,894[DEBUG]getTitleByRemarks: 销售数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,911[DEBUG]getTitleByRemarks: 排序号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,912[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,945[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:40,979[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:41,004[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:38:41,006[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC_LOG:上线规格日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:39:34,843[DEBUG]getTitleByRemarks: 购物车ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:34,850[DEBUG]getTitleByRemarks: 上线规格ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:34,851[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:34,851[DEBUG]getTitleByRemarks: 用户编号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:34,852[DEBUG]getTitleByRemarks: 购物车规格数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:34,852[DEBUG]getTitleByRemarks: 加入时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:34,982[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:35,742[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,058[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,157[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,165[ INFO]
+-----------------------------------------------
+ONL_CART:购物车
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:39:36,187[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,189[DEBUG]getTitleByRemarks: 上线标题 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,190[DEBUG]getTitleByRemarks: 上线描述 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,190[DEBUG]getTitleByRemarks: 上线状态（0：下线，1：上线  ） main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,191[DEBUG]getTitleByRemarks: 上线时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,191[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,199[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,208[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,262[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,448[ INFO]
+-----------------------------------------------
+ONL_ONLINE:上线信息
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:39:36,455[DEBUG]getTitleByRemarks: 上线图片ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,457[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,459[DEBUG]getTitleByRemarks: 图片类型 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,461[DEBUG]getTitleByRemarks: 图片路径 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,468[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,488[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,532[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,686[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,688[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PIC:上线图片
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:39:36,693[DEBUG]getTitleByRemarks: 上线推广ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,695[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,701[DEBUG]getTitleByRemarks: 推广类型 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,704[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,710[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,748[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,817[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,831[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PROMOTION:上线推广
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:39:36,837[DEBUG]getTitleByRemarks: 上线日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,838[DEBUG]getTitleByRemarks: 操作人ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,838[DEBUG]getTitleByRemarks: 操作时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,839[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,839[DEBUG]getTitleByRemarks: 上线标题 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,843[DEBUG]getTitleByRemarks: 上线描述 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,843[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,850[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,910[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,935[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,937[ INFO]
+-----------------------------------------------
+ONL_ONLINE_LOG:上线日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:39:36,943[DEBUG]getTitleByRemarks: 上线规格ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,984[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,985[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,985[DEBUG]getTitleByRemarks: 返现金额 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,986[DEBUG]getTitleByRemarks: 销售价格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,986[DEBUG]getTitleByRemarks: 销售单位 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,986[DEBUG]getTitleByRemarks: 销售数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,986[DEBUG]getTitleByRemarks: 排序号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,987[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:36,990[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:37,029[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:37,074[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:37,075[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC:上线规格
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:39:37,085[DEBUG]getTitleByRemarks: 上线规格日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:37,085[DEBUG]getTitleByRemarks: 上线日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:37,096[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:37,096[DEBUG]getTitleByRemarks: 销售价格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:37,097[DEBUG]getTitleByRemarks: 返现金额 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:37,097[DEBUG]getTitleByRemarks: 销售数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:37,098[DEBUG]getTitleByRemarks: 排序号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:37,098[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:37,121[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:37,142[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:37,160[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:39:37,161[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC_LOG:上线规格日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:40:56,626[DEBUG]getTitleByRemarks: 购物车ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:56,632[DEBUG]getTitleByRemarks: 上线规格ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:56,638[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:56,639[DEBUG]getTitleByRemarks: 用户编号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:56,639[DEBUG]getTitleByRemarks: 购物车规格数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:56,640[DEBUG]getTitleByRemarks: 加入时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:56,737[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:57,436[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:57,722[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:57,794[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:57,815[ INFO]
+-----------------------------------------------
+ONL_CART:购物车
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:40:57,844[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:57,847[DEBUG]getTitleByRemarks: 上线标题 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:57,848[DEBUG]getTitleByRemarks: 上线描述 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:57,849[DEBUG]getTitleByRemarks: 上线状态（0：下线，1：上线  ） main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:57,849[DEBUG]getTitleByRemarks: 上线时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:57,850[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:57,856[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:57,868[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,109[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,111[ INFO]
+-----------------------------------------------
+ONL_ONLINE:上线信息
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:40:58,115[DEBUG]getTitleByRemarks: 上线图片ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,115[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,116[DEBUG]getTitleByRemarks: 图片类型 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,116[DEBUG]getTitleByRemarks: 图片路径 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,118[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,124[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,155[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,190[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,223[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PIC:上线图片
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:40:58,242[DEBUG]getTitleByRemarks: 上线推广ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,249[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,251[DEBUG]getTitleByRemarks: 推广类型 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,254[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,268[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,366[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,488[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,491[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PROMOTION:上线推广
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:40:58,502[DEBUG]getTitleByRemarks: 上线日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,504[DEBUG]getTitleByRemarks: 操作人ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,507[DEBUG]getTitleByRemarks: 操作时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,507[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,507[DEBUG]getTitleByRemarks: 上线标题 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,510[DEBUG]getTitleByRemarks: 上线描述 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,510[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,520[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,554[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,614[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,616[ INFO]
+-----------------------------------------------
+ONL_ONLINE_LOG:上线日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:40:58,718[DEBUG]getTitleByRemarks: 上线规格ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,723[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,726[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,726[DEBUG]getTitleByRemarks: 返现金额 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,726[DEBUG]getTitleByRemarks: 销售价格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,727[DEBUG]getTitleByRemarks: 销售单位 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,727[DEBUG]getTitleByRemarks: 销售数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,732[DEBUG]getTitleByRemarks: 排序号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,734[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,738[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,755[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,850[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,853[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC:上线规格
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:40:58,859[DEBUG]getTitleByRemarks: 上线规格日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,859[DEBUG]getTitleByRemarks: 上线日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,861[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,863[DEBUG]getTitleByRemarks: 销售价格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,864[DEBUG]getTitleByRemarks: 返现金额 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,864[DEBUG]getTitleByRemarks: 销售数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,864[DEBUG]getTitleByRemarks: 排序号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,865[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,900[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,915[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,949[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:40:58,955[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC_LOG:上线规格日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:41:20,351[DEBUG]getTitleByRemarks: 购物车ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:20,358[DEBUG]getTitleByRemarks: 上线规格ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:20,359[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:20,359[DEBUG]getTitleByRemarks: 用户编号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:20,360[DEBUG]getTitleByRemarks: 购物车规格数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:20,360[DEBUG]getTitleByRemarks: 加入时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:20,443[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,220[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,490[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,592[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,596[ INFO]
+-----------------------------------------------
+ONL_CART:购物车
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:41:21,607[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,608[DEBUG]getTitleByRemarks: 上线标题 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,608[DEBUG]getTitleByRemarks: 上线描述 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,612[DEBUG]getTitleByRemarks: 上线状态（0：下线，1：上线  ） main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,613[DEBUG]getTitleByRemarks: 上线时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,614[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,627[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,642[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,896[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,899[ INFO]
+-----------------------------------------------
+ONL_ONLINE:上线信息
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:41:21,902[DEBUG]getTitleByRemarks: 上线图片ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,905[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,905[DEBUG]getTitleByRemarks: 图片类型 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,905[DEBUG]getTitleByRemarks: 图片路径 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,907[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,911[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:21,927[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,040[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,127[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PIC:上线图片
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:41:22,137[DEBUG]getTitleByRemarks: 上线推广ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,139[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,142[DEBUG]getTitleByRemarks: 推广类型 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,144[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,150[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,164[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,255[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,255[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PROMOTION:上线推广
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:41:22,268[DEBUG]getTitleByRemarks: 上线日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,269[DEBUG]getTitleByRemarks: 操作人ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,270[DEBUG]getTitleByRemarks: 操作时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,270[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,271[DEBUG]getTitleByRemarks: 上线标题 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,271[DEBUG]getTitleByRemarks: 上线描述 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,272[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,279[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,314[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,456[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,457[ INFO]
+-----------------------------------------------
+ONL_ONLINE_LOG:上线日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:41:22,461[DEBUG]getTitleByRemarks: 上线规格ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,461[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,466[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,466[DEBUG]getTitleByRemarks: 返现金额 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,467[DEBUG]getTitleByRemarks: 销售价格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,467[DEBUG]getTitleByRemarks: 销售单位 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,467[DEBUG]getTitleByRemarks: 销售数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,468[DEBUG]getTitleByRemarks: 排序号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,468[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,481[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,488[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,525[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,527[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC:上线规格
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:41:22,540[DEBUG]getTitleByRemarks: 上线规格日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,540[DEBUG]getTitleByRemarks: 上线日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,544[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,545[DEBUG]getTitleByRemarks: 销售价格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,545[DEBUG]getTitleByRemarks: 返现金额 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,549[DEBUG]getTitleByRemarks: 销售数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,549[DEBUG]getTitleByRemarks: 排序号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,550[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,554[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,564[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,593[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:22,606[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC_LOG:上线规格日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:41:45,544[DEBUG]getTitleByRemarks: 购物车ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:45,553[DEBUG]getTitleByRemarks: 上线规格ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:45,558[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:45,559[DEBUG]getTitleByRemarks: 用户编号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:45,560[DEBUG]getTitleByRemarks: 购物车规格数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:45,560[DEBUG]getTitleByRemarks: 加入时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:45,647[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,364[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,631[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,701[DEBUG]getTitleByRemarks: 购物车 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,703[ INFO]
+-----------------------------------------------
+ONL_CART:购物车
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:41:46,714[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,719[DEBUG]getTitleByRemarks: 上线标题 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,721[DEBUG]getTitleByRemarks: 上线描述 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,723[DEBUG]getTitleByRemarks: 上线状态（0：下线，1：上线  ） main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,723[DEBUG]getTitleByRemarks: 上线时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,725[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,732[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,751[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,949[DEBUG]getTitleByRemarks: 上线信息 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,952[ INFO]
+-----------------------------------------------
+ONL_ONLINE:上线信息
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:41:46,957[DEBUG]getTitleByRemarks: 上线图片ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,960[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,962[DEBUG]getTitleByRemarks: 图片类型 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,963[DEBUG]getTitleByRemarks: 图片路径 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,964[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,971[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:46,989[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,141[DEBUG]getTitleByRemarks: 上线图片 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,143[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PIC:上线图片
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:41:47,146[DEBUG]getTitleByRemarks: 上线推广ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,149[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,149[DEBUG]getTitleByRemarks: 推广类型 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,150[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,158[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,172[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,257[DEBUG]getTitleByRemarks: 上线推广 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,264[ INFO]
+-----------------------------------------------
+ONL_ONLINE_PROMOTION:上线推广
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:41:47,273[DEBUG]getTitleByRemarks: 上线日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,275[DEBUG]getTitleByRemarks: 操作人ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,280[DEBUG]getTitleByRemarks: 操作时间 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,282[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,378[DEBUG]getTitleByRemarks: 上线标题 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,381[DEBUG]getTitleByRemarks: 上线描述 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,386[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,392[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,400[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,461[DEBUG]getTitleByRemarks: 上线日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,462[ INFO]
+-----------------------------------------------
+ONL_ONLINE_LOG:上线日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:41:47,477[DEBUG]getTitleByRemarks: 上线规格ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,477[DEBUG]getTitleByRemarks: 上线ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,482[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,483[DEBUG]getTitleByRemarks: 返现金额 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,483[DEBUG]getTitleByRemarks: 销售价格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,483[DEBUG]getTitleByRemarks: 销售单位 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,484[DEBUG]getTitleByRemarks: 销售数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,484[DEBUG]getTitleByRemarks: 排序号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,484[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,497[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,514[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,544[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,610[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC:上线规格
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
+2018-03-26 15:41:47,628[DEBUG]getTitleByRemarks: 上线规格日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,629[DEBUG]getTitleByRemarks: 上线日志ID main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,636[DEBUG]getTitleByRemarks: 上线规格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,637[DEBUG]getTitleByRemarks: 销售价格 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,637[DEBUG]getTitleByRemarks: 返现金额 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,637[DEBUG]getTitleByRemarks: 销售数量 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,638[DEBUG]getTitleByRemarks: 排序号 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,638[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,652[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,672[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,726[DEBUG]getTitleByRemarks: 上线规格日志 main (rebue.mbgx.util.RemarksUtil:21)
+2018-03-26 15:41:47,728[ INFO]
+-----------------------------------------------
+ONL_ONLINE_SPEC_LOG:上线规格日志
+-----------------------------------------------
+ main (rebue.mbgx.plugin.MapperAnnotationPlugin:32)
