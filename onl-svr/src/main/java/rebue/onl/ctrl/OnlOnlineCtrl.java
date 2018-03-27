@@ -43,63 +43,6 @@ public class OnlOnlineCtrl {
     	return svc.addEx(to);
 	}
 
-    /**
-     * 修改上线信息
-     * @mbg.generated
-     */
-    @PutMapping("/onl/online")
-    Map<String, Object> modify(OnlOnlineMo vo) throws Exception {
-        _log.info("modify OnlOnlineMo:" + vo);
-        svc.modify(vo);
-        Map<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        _log.info("modify OnlOnlineMo success!");
-        return result;
-    }
 
-    /**
-     * 删除上线信息
-     * @mbg.generated
-     */
-    @DeleteMapping("/onl/online/{id}")
-    Map<String, Object> del(@PathVariable("id") java.lang.Long id) {
-        _log.info("save OnlOnlineMo:" + id);
-        svc.del(id);		
-        Map<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        _log.info("delete OnlOnlineMo success!");
-        return result;
-    }
 
-    /**
-     * 查询上线信息
-     * @mbg.generated
-     */
-    @GetMapping("/onl/online")
-    PageInfo<OnlOnlineMo> list(OnlOnlineMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
-    		_log.info("list OnlOnlineMo:" + qo+", pageNum = " + pageNum + ", pageSize = " + pageSize);
-
-        if (pageSize > 50) {
-            String msg = "pageSize不能大于50";
-            _log.error(msg);
-            throw new IllegalArgumentException(msg);
-        }
-
-        PageInfo<OnlOnlineMo> result = svc.list(qo, pageNum, pageSize);
-        _log.info("result: " + result);
-        return result;
-    }
-
-    /**
-     * 获取单个上线信息
-     * @mbg.generated
-     */
-    @GetMapping("/onl/online/{id}")
-    OnlOnlineMo get(@PathVariable("id") java.lang.Long id) {
-        _log.info("get OnlOnlineMo by id: " + id);
-        OnlOnlineMo result = svc.getById(id);
-        _log.info("get: " + result);
-        return result;
-    }
-    
 }

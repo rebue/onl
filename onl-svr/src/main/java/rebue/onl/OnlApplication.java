@@ -14,20 +14,11 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringCloudApplication
-@EnableSwagger2
 public class OnlApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(OnlApplication.class, args);
     }
 
-    @Bean
-    public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage("rebue.onl")).paths(PathSelectors.any()).build();
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("超级用户中心APIs").contact(new Contact("张柏子", "", "")).version("1.0.0").build();
-    }
 
 }
