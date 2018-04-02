@@ -1,0 +1,156 @@
+2018-04-02 18:14:02,763[ WARN]An unexpected connection driver error occured (Exception message: Connection reset) --- com.rabbitmq.client.impl.ForgivingExceptionHandler.log(ForgivingExceptionHandler.java:115) AMQP Connection 192.168.1.201:5672
+2018-04-02 18:14:02,718[ WARN]Error during reading frames --- com.rabbitmq.client.impl.nio.NioLoop.run(NioLoop.java:169) rabbitmq-nio
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[?:1.8.0_151]
+	at sun.nio.ch.SocketDispatcher.read(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.IOUtil.read(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.SocketChannelImpl.read(Unknown Source) ~[?:1.8.0_151]
+	at com.rabbitmq.client.impl.nio.NioHelper.read(NioHelper.java:25) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.nio.SocketChannelFrameHandlerState.prepareForReadSequence(SocketChannelFrameHandlerState.java:185) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.nio.NioLoop.run(NioLoop.java:143) [amqp-client-5.1.2.jar:5.1.2]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_151]
+2018-04-02 18:14:02,712[ WARN]Error during reading frames --- com.rabbitmq.client.impl.nio.NioLoop.run(NioLoop.java:169) rabbitmq-nio
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[?:1.8.0_151]
+	at sun.nio.ch.SocketDispatcher.read(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.IOUtil.read(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.SocketChannelImpl.read(Unknown Source) ~[?:1.8.0_151]
+	at com.rabbitmq.client.impl.nio.NioHelper.read(NioHelper.java:25) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.nio.SocketChannelFrameHandlerState.prepareForReadSequence(SocketChannelFrameHandlerState.java:185) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.nio.NioLoop.run(NioLoop.java:143) [amqp-client-5.1.2.jar:5.1.2]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_151]
+2018-04-02 18:14:02,985[ERROR]Channel shutdown: connection error --- org.springframework.amqp.rabbit.connection.CachingConnectionFactory$DefaultChannelCloseLogger.log(CachingConnectionFactory.java:1292) AMQP Connection 192.168.1.201:5672
+2018-04-02 18:14:03,077[ERROR]An unexpected connection driver error occured --- com.rabbitmq.client.impl.ForgivingExceptionHandler.log(ForgivingExceptionHandler.java:119) rabbitmq-connection-shutdown-amqp://guest@192.168.1.201:5672/
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[?:1.8.0_151]
+	at sun.nio.ch.SocketDispatcher.read(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.IOUtil.read(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.SocketChannelImpl.read(Unknown Source) ~[?:1.8.0_151]
+	at com.rabbitmq.client.impl.nio.NioHelper.read(NioHelper.java:25) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.nio.SocketChannelFrameHandlerState.prepareForReadSequence(SocketChannelFrameHandlerState.java:185) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.nio.NioLoop.run(NioLoop.java:143) ~[amqp-client-5.1.2.jar:5.1.2]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_151]
+2018-04-02 18:14:03,111[ERROR]An unexpected connection driver error occured --- com.rabbitmq.client.impl.ForgivingExceptionHandler.log(ForgivingExceptionHandler.java:119) rabbitmq-connection-shutdown-amqp://guest@192.168.1.201:5672/
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[?:1.8.0_151]
+	at sun.nio.ch.SocketDispatcher.read(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.IOUtil.read(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.SocketChannelImpl.read(Unknown Source) ~[?:1.8.0_151]
+	at com.rabbitmq.client.impl.nio.NioHelper.read(NioHelper.java:25) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.nio.SocketChannelFrameHandlerState.prepareForReadSequence(SocketChannelFrameHandlerState.java:185) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.nio.NioLoop.run(NioLoop.java:143) ~[amqp-client-5.1.2.jar:5.1.2]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_151]
+2018-04-02 18:14:03,343[ INFO]Restarting Consumer@42474b18: tags=[{amq.ctag-SIKzLZQmseNv9YOwQ72mlw=springCloudBus.anonymous.gabU3gFmT1SKpwW1aLDZ4g}], channel=Cached Rabbit Channel: AMQChannel(amqp://guest@192.168.1.201:5672/,1), conn: Proxy@77f4038c Shared Rabbit Connection: SimpleConnection@69f3e556 [delegate=amqp://guest@192.168.1.201:5672/, localPort= 62213], acknowledgeMode=AUTO local queue size=0 --- org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1180) springCloudBus.anonymous.gabU3gFmT1SKpwW1aLDZ4g-1
+2018-04-02 18:14:03,534[ INFO]Attempting to connect to: [192.168.1.201:5672] --- org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:447) springCloudBus.anonymous.gabU3gFmT1SKpwW1aLDZ4g-2
+2018-04-02 18:14:06,198[ INFO]Application shutdown requested. --- org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin.shutdown(SpringApplicationAdminMXBeanRegistrar.java:132) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,199[ INFO]Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4fe89c24: startup date [Mon Apr 02 17:39:55 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@1bd39d3c --- org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:989) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,206[ INFO]Unregistering application onl-svr with eureka with status DOWN --- org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry.deregister(EurekaServiceRegistry.java:65) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,207[ INFO]Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@15d58530: startup date [Mon Apr 02 17:40:32 CST 2018]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4fe89c24 --- org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:989) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,208[ INFO]I/O exception (java.net.NoRouteToHostException) caught when connecting to {}->http://192.168.1.201:8761: No route to host: connect --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:623) DiscoveryClient-InstanceInfoReplicator-0
+2018-04-02 18:14:06,209[ INFO]Retrying connect to {}->http://192.168.1.201:8761 --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:631) DiscoveryClient-InstanceInfoReplicator-0
+2018-04-02 18:14:06,210[ INFO]I/O exception (java.net.NoRouteToHostException) caught when connecting to {}->http://192.168.1.201:8761: No route to host: connect --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:623) DiscoveryClient-InstanceInfoReplicator-0
+2018-04-02 18:14:06,210[ INFO]Retrying connect to {}->http://192.168.1.201:8761 --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:631) DiscoveryClient-InstanceInfoReplicator-0
+2018-04-02 18:14:06,211[ INFO]I/O exception (java.net.NoRouteToHostException) caught when connecting to {}->http://192.168.1.201:8761: No route to host: connect --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:623) DiscoveryClient-InstanceInfoReplicator-0
+2018-04-02 18:14:06,211[ INFO]Retrying connect to {}->http://192.168.1.201:8761 --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:631) DiscoveryClient-InstanceInfoReplicator-0
+2018-04-02 18:14:06,225[ INFO]I/O exception (java.net.NoRouteToHostException) caught when connecting to {}->http://192.168.1.201:8761: No route to host: connect --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:623) DiscoveryClient-InstanceInfoReplicator-0
+2018-04-02 18:14:06,225[ INFO]Retrying connect to {}->http://192.168.1.201:8761 --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:631) DiscoveryClient-InstanceInfoReplicator-0
+2018-04-02 18:14:06,229[ INFO]I/O exception (java.net.NoRouteToHostException) caught when connecting to {}->http://192.168.1.201:8761: No route to host: connect --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:623) DiscoveryClient-InstanceInfoReplicator-0
+2018-04-02 18:14:06,229[ INFO]Retrying connect to {}->http://192.168.1.201:8761 --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:631) DiscoveryClient-InstanceInfoReplicator-0
+2018-04-02 18:14:06,236[ INFO]I/O exception (java.net.NoRouteToHostException) caught when connecting to {}->http://192.168.1.201:8761: No route to host: connect --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:623) DiscoveryClient-InstanceInfoReplicator-0
+2018-04-02 18:14:06,236[ INFO]Retrying connect to {}->http://192.168.1.201:8761 --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:631) DiscoveryClient-InstanceInfoReplicator-0
+2018-04-02 18:14:06,239[ INFO]Stopping beans in phase 2147483647 --- org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.stop(DefaultLifecycleProcessor.java:366) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,240[ INFO]Stopping beans in phase 2147482647 --- org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.stop(DefaultLifecycleProcessor.java:366) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,243[ INFO]Waiting for workers to finish. --- org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doShutdown(SimpleMessageListenerContainer.java:537) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,248[ INFO]Successfully waited for workers to finish. --- org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doShutdown(SimpleMessageListenerContainer.java:540) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,250[ INFO]stopped inbound.springCloudBus.anonymous.gabU3gFmT1SKpwW1aLDZ4g --- org.springframework.integration.endpoint.AbstractEndpoint.stop(AbstractEndpoint.java:182) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,252[ INFO]Stopping beans in phase 0 --- org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.stop(DefaultLifecycleProcessor.java:366) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,263[ INFO]Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel --- org.springframework.integration.endpoint.EventDrivenConsumer.logComponentSubscriptionEvent(EventDrivenConsumer.java:107) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,265[ INFO]Channel 'onl-svr-1.errorChannel' has 0 subscriber(s). --- org.springframework.integration.channel.AbstractSubscribableChannel.adjustCounterIfNecessary(AbstractSubscribableChannel.java:64) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,266[ INFO]stopped _org.springframework.integration.errorLogger --- org.springframework.integration.endpoint.AbstractEndpoint.stop(AbstractEndpoint.java:199) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,267[ INFO]Stopping beans in phase -2147482648 --- org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.stop(DefaultLifecycleProcessor.java:366) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,283[ INFO]Unregistering existing Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController]. --- org.dozer.jmx.JMXPlatformImpl.unregister(JMXPlatformImpl.java:78) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,287[ INFO]Unregistering existing Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController]. --- org.dozer.jmx.JMXPlatformImpl.unregister(JMXPlatformImpl.java:78) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,291[ INFO]Unregistering JMX-exposed beans on shutdown --- org.springframework.jmx.export.MBeanExporter.destroy(MBeanExporter.java:452) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,293[ INFO]Unregistering JMX-exposed beans --- org.springframework.jmx.support.MBeanRegistrationSupport.unregisterBeans(MBeanRegistrationSupport.java:183) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,294[ INFO]Summary on shutdown: errorChannel --- org.springframework.integration.monitor.IntegrationMBeanExporter.destroy(IntegrationMBeanExporter.java:367) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,294[ INFO]Summary on shutdown: springCloudBusOutput --- org.springframework.integration.monitor.IntegrationMBeanExporter.destroy(IntegrationMBeanExporter.java:367) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,294[ INFO]Summary on shutdown: nullChannel --- org.springframework.integration.monitor.IntegrationMBeanExporter.destroy(IntegrationMBeanExporter.java:367) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,295[ INFO]Summary on shutdown: springCloudBusInput --- org.springframework.integration.monitor.IntegrationMBeanExporter.destroy(IntegrationMBeanExporter.java:367) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,295[ INFO]Summary on shutdown: _org.springframework.integration.errorLogger.handler --- org.springframework.integration.monitor.IntegrationMBeanExporter.destroy(IntegrationMBeanExporter.java:370) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,296[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Archaius' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,297[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Auditevents' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,297[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Beans' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,298[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Health' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,298[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Conditions' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,299[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Configprops' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,299[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Env' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,300[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Info' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,300[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Loggers' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,302[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Threaddump' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,302[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Metrics' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,302[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Scheduledtasks' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,303[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Httptrace' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,303[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Mappings' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,303[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Refresh' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,304[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Bus-env' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,304[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Bus-refresh' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,304[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Features' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,304[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Service-registry' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,305[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Bindings' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,305[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Bindings/stop/{name}' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,307[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Bindings/pause/{name}' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,307[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Bindings/start/{name}' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,311[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Bindings/resume/{name}' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,312[DEBUG]Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Channels' from the JMX domain --- org.springframework.boot.actuate.endpoint.jmx.JmxEndpointExporter.unregister(JmxEndpointExporter.java:113) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,312[ INFO]Unregistering JMX-exposed beans on shutdown --- org.springframework.jmx.export.MBeanExporter.destroy(MBeanExporter.java:452) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,313[ INFO]Unregistering JMX-exposed beans --- org.springframework.jmx.support.MBeanRegistrationSupport.unregisterBeans(MBeanRegistrationSupport.java:183) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,383[ WARN]No URLs will be polled as dynamic configuration sources. --- com.netflix.config.sources.URLConfigurationSource.<init>(URLConfigurationSource.java:121) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,384[ INFO]To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath. --- com.netflix.config.sources.URLConfigurationSource.<init>(URLConfigurationSource.java:122) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,393[ INFO]Shutting down ExecutorService 'taskScheduler' --- org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.shutdown(ExecutorConfigurationSupport.java:205) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,398[ INFO]I/O exception (java.net.NoRouteToHostException) caught when connecting to {}->http://192.168.1.201:8761: No route to host: connect --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:623) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,399[ INFO]Retrying connect to {}->http://192.168.1.201:8761 --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:631) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,403[ INFO]I/O exception (java.net.NoRouteToHostException) caught when connecting to {}->http://192.168.1.201:8761: No route to host: connect --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:623) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,404[ INFO]Retrying connect to {}->http://192.168.1.201:8761 --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:631) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,405[ INFO]I/O exception (java.net.NoRouteToHostException) caught when connecting to {}->http://192.168.1.201:8761: No route to host: connect --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:623) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,405[ INFO]Retrying connect to {}->http://192.168.1.201:8761 --- org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:631) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,429[ INFO]HikariPool-1 - Shutdown initiated... --- com.zaxxer.hikari.HikariDataSource.close(HikariDataSource.java:381) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,458[ INFO]HikariPool-1 - Shutdown completed. --- com.zaxxer.hikari.HikariDataSource.close(HikariDataSource.java:383) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:06,461[ INFO]Destroying Spring FrameworkServlet 'dispatcherServlet' --- io.undertow.servlet.spec.ServletContextImpl.log(ServletContextImpl.java:360) RMI TCP Connection(2)-127.0.0.1
+2018-04-02 18:14:13,188[ERROR]Caught an exception during connection recovery! --- com.rabbitmq.client.impl.ForgivingExceptionHandler.log(ForgivingExceptionHandler.java:119) rabbitmq-connection-shutdown-amqp://guest@192.168.1.201:5672/
+java.net.NoRouteToHostException: No route to host: connect
+	at sun.nio.ch.Net.connect0(Native Method) ~[?:1.8.0_151]
+	at sun.nio.ch.Net.connect(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.Net.connect(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.SocketChannelImpl.connect(Unknown Source) ~[?:1.8.0_151]
+	at com.rabbitmq.client.impl.nio.SocketChannelFrameHandlerFactory.create(SocketChannelFrameHandlerFactory.java:87) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.recovery.RecoveryAwareAMQConnectionFactory.newConnection(RecoveryAwareAMQConnectionFactory.java:62) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.recovery.AutorecoveringConnection.recoverConnection(AutorecoveringConnection.java:550) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.recovery.AutorecoveringConnection.beginAutomaticRecovery(AutorecoveringConnection.java:512) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.recovery.AutorecoveringConnection.access$000(AutorecoveringConnection.java:53) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.recovery.AutorecoveringConnection$2.recoveryCanBegin(AutorecoveringConnection.java:453) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.AMQConnection.notifyRecoveryCanBeginListeners(AMQConnection.java:702) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.AMQConnection.doFinalShutdown(AMQConnection.java:696) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.AMQConnection.handleIoError(AMQConnection.java:672) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.nio.NioLoop.lambda$dispatchIoErrorToConnection$0(NioLoop.java:275) ~[amqp-client-5.1.2.jar:5.1.2]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_151]
+2018-04-02 18:14:13,530[ERROR]Caught an exception during connection recovery! --- com.rabbitmq.client.impl.ForgivingExceptionHandler.log(ForgivingExceptionHandler.java:119) rabbitmq-connection-shutdown-amqp://guest@192.168.1.201:5672/
+java.net.NoRouteToHostException: No route to host: connect
+	at sun.nio.ch.Net.connect0(Native Method) ~[?:1.8.0_151]
+	at sun.nio.ch.Net.connect(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.Net.connect(Unknown Source) ~[?:1.8.0_151]
+	at sun.nio.ch.SocketChannelImpl.connect(Unknown Source) ~[?:1.8.0_151]
+	at com.rabbitmq.client.impl.nio.SocketChannelFrameHandlerFactory.create(SocketChannelFrameHandlerFactory.java:87) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.recovery.RecoveryAwareAMQConnectionFactory.newConnection(RecoveryAwareAMQConnectionFactory.java:62) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.recovery.AutorecoveringConnection.recoverConnection(AutorecoveringConnection.java:550) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.recovery.AutorecoveringConnection.beginAutomaticRecovery(AutorecoveringConnection.java:512) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.recovery.AutorecoveringConnection.access$000(AutorecoveringConnection.java:53) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.recovery.AutorecoveringConnection$2.recoveryCanBegin(AutorecoveringConnection.java:453) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.AMQConnection.notifyRecoveryCanBeginListeners(AMQConnection.java:702) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.AMQConnection.doFinalShutdown(AMQConnection.java:696) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.AMQConnection.handleIoError(AMQConnection.java:672) ~[amqp-client-5.1.2.jar:5.1.2]
+	at com.rabbitmq.client.impl.nio.NioLoop.lambda$dispatchIoErrorToConnection$0(NioLoop.java:275) ~[amqp-client-5.1.2.jar:5.1.2]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_151]
