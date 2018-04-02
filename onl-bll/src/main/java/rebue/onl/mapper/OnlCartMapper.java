@@ -3,6 +3,7 @@ package rebue.onl.mapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import rebue.onl.mo.OnlCartMo;
+import rebue.onl.ro.OnlCartRo;
 import rebue.robotech.mapper.MybatisBaseMapper;
 
 @Mapper
@@ -86,4 +87,44 @@ public interface OnlCartMapper extends MybatisBaseMapper<OnlCartMo, Long> {
      * @mbg.generated 2018-03-26 15:41:46
      */
     boolean existSelective(OnlCartMo record);
+    
+    /**
+     * 根据用户编号和购物车编号删除购物车
+     * Title: deleteByUserIdAndCartId
+     * Description: 
+     * @param record
+     * @return
+     * @date 2018年3月29日 下午3:03:11
+     */
+    int deleteByUserIdAndCartId(OnlCartMo record);
+    
+    /**
+     * 根据用户编号、上线编号、规格编号修改购物车数量
+     * Title: updateByCondition
+     * Description: 
+     * @param record
+     * @return
+     * @date 2018年3月30日 上午10:31:26
+     */
+    int updateByCondition(OnlCartMo record);
+    
+    /**
+     * 根据用户编号查询购物车数量
+     * Title: selectCartCountByUserId
+     * Description: 
+     * @param record
+     * @return
+     * @date 2018年3月30日 上午10:40:14
+     */
+    int selectCartCountByUserId(OnlCartMo record);
+    
+    /**
+     * 获取购物车列表
+     * Title: selectCartList
+     * Description: 
+     * @param record
+     * @return
+     * @date 2018年3月30日 下午1:52:14
+     */
+    List<OnlCartRo> selectCartList(OnlCartMo record);
 }

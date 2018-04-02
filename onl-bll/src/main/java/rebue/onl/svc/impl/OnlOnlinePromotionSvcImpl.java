@@ -1,6 +1,9 @@
 package rebue.onl.svc.impl;
 
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,4 +42,12 @@ public class OnlOnlinePromotionSvcImpl extends MybatisBaseSvcImpl<OnlOnlinePromo
         return super.add(mo);
     }
 
+    /**
+     * 获取推广上线商品列表
+     * 2018年3月29日11:41:30
+     */
+    @Override
+	public List<Map<String, Object>> promotionOnlineGoodsList() {
+		return _mapper.promotionOnlineGoodsList();
+	}
 }

@@ -1,6 +1,7 @@
 package rebue.onl.ctrl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -9,15 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rebue.onl.mo.OnlCartMo;
+import rebue.onl.ro.OnlCartRo;
 import rebue.onl.svc.OnlCartSvc;
-import com.github.pagehelper.PageInfo;
 
 @RestController
 public class OnlCartCtrl {
@@ -34,76 +32,69 @@ public class OnlCartCtrl {
 
     /**
      * 添加购物车
-     * @mbg.generated
+     * Title: add
+     * Description: 
+     * @param vo
+     * @return
+     * @throws Exception
+     * @date 2018年3月29日 下午2:27:03
      */
     @PostMapping("/onl/cart")
     Map<String, Object> add(OnlCartMo vo) throws Exception {
-        _log.info("add OnlCartMo:" + vo);
-        svc.add(vo);
-        Map<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        result.put("id", vo.getId());
-        _log.info("add OnlCartMo success!");
-        return result;
-    }
-
-    /**
-     * 修改购物车
-     * @mbg.generated
-     */
-    @PutMapping("/onl/cart")
-    Map<String, Object> modify(OnlCartMo vo) throws Exception {
-        _log.info("modify OnlCartMo:" + vo);
-        svc.modify(vo);
-        Map<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        _log.info("modify OnlCartMo success!");
-        return result;
+        _log.info("加入购物车的参数为：" + vo.toString());
+        return svc.addEx(vo);
     }
 
     /**
      * 删除购物车
-     * @mbg.generated
+     * Title: del
+     * Description: 
+     * @param id
+     * @return
+     * @date 2018年3月29日 下午2:54:51
      */
-    @DeleteMapping("/onl/cart/{id}")
-    Map<String, Object> del(@PathVariable("id") java.lang.Long id) {
-        _log.info("save OnlCartMo:" + id);
-        svc.del(id);		
-        Map<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        _log.info("delete OnlCartMo success!");
-        return result;
+    @DeleteMapping("/onl/cart")
+    Map<String, Object> del(OnlCartMo vo) {
+        _log.info("删除购物车的参数为：" + vo.toString());
+        int result = svc.deleteByUserIdAndCartId(vo);
+        _log.info("删除购物车的返回值为：{}", result);
+        Map<String, Object> resultMap = new HashMap<>();
+        if (result < 1) {
+        	_log.error("用户编号为：{}，删除购物车失败", vo.getUserId());
+        	resultMap.put("msg", "删除购物车失败");
+        	resultMap.put("result", result);
+		} else {
+			_log.info("用户编号为：{}，删除购物车成功", vo.getUserId());
+			resultMap.put("msg", "删除购物车成功");
+			resultMap.put("result", 1);
+		}
+        return resultMap;
     }
 
     /**
-     * 查询购物车
-     * @mbg.generated
+     * 查询购物车数量
+     * Title: Cartcount
+     * Description: 
+     * @param qo
+     * @return
+     * @date 2018年3月30日 上午10:52:33
+     */
+    @GetMapping("/onl/cart/count")
+    int Cartcount(OnlCartMo qo) {
+    	_log.info("查询购物车的参数为：{}", qo.toString());
+    	return svc.selectCartCount(qo);
+    }
+
+    /**
+     * 获取购物车列表
+     * Title: selectCartList
+     * Description: 
+     * @param qo
+     * @return
+     * @date 2018年3月30日 下午1:56:38
      */
     @GetMapping("/onl/cart")
-    PageInfo<OnlCartMo> list(OnlCartMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
-    		_log.info("list OnlCartMo:" + qo+", pageNum = " + pageNum + ", pageSize = " + pageSize);
-
-        if (pageSize > 50) {
-            String msg = "pageSize不能大于50";
-            _log.error(msg);
-            throw new IllegalArgumentException(msg);
-        }
-
-        PageInfo<OnlCartMo> result = svc.list(qo, pageNum, pageSize);
-        _log.info("result: " + result);
-        return result;
+    List<OnlCartRo> selectCartList(OnlCartMo qo) {
+    	return svc.selectCartList(qo);
     }
-
-    /**
-     * 获取单个购物车
-     * @mbg.generated
-     */
-    @GetMapping("/onl/cart/{id}")
-    OnlCartMo get(@PathVariable("id") java.lang.Long id) {
-        _log.info("get OnlCartMo by id: " + id);
-        OnlCartMo result = svc.getById(id);
-        _log.info("get: " + result);
-        return result;
-    }
-
 }

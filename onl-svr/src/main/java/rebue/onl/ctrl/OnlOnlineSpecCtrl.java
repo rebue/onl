@@ -1,6 +1,7 @@
 package rebue.onl.ctrl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import com.github.pagehelper.PageInfo;
 
@@ -104,6 +106,20 @@ public class OnlOnlineSpecCtrl {
         OnlOnlineSpecMo result = svc.getById(id);
         _log.info("get: " + result);
         return result;
+    }
+    
+    /**
+     * 获取上线规格信息
+     * Title: selectOnlineSpecInfoByOnlineId
+     * Description: 
+     * @param record
+     * @return
+     * @date 2018年4月1日 下午4:29:31
+     */
+    @GetMapping("/onl/onlinespec/details")
+    List<OnlOnlineSpecInfoRo> selectOnlineSpecInfo(OnlOnlineSpecMo mo){
+    	_log.info("根据上线编号获取上线规格信息的参数为：{}", mo.toString());
+    	return svc.selectOnlineSpecInfo(mo);
     }
 
 }

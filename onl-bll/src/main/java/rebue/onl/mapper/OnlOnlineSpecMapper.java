@@ -3,6 +3,7 @@ package rebue.onl.mapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.robotech.mapper.MybatisBaseMapper;
 
 @Mapper
@@ -86,4 +87,14 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
      * @mbg.generated 2018-03-26 15:41:47
      */
     boolean existSelective(OnlOnlineSpecMo record);
+    
+    /**
+     * 获取上线规格信息
+     * Title: selectOnlineSpecInfoByOnlineId
+     * Description: 
+     * @param record
+     * @return
+     * @date 2018年4月1日 下午4:29:31
+     */
+    List<OnlOnlineSpecInfoRo> selectOnlineSpecInfo(OnlOnlineSpecMo record);
 }

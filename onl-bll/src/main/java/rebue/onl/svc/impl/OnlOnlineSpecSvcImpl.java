@@ -1,12 +1,15 @@
 package rebue.onl.svc.impl;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import rebue.onl.mapper.OnlOnlineSpecMapper;
 import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
@@ -38,5 +41,23 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
         }
         return super.add(mo);
     }
+
+    /**
+     * 根据商品规格编号查询商品规格信息
+     * 2018年3月29日14:28:59
+     */
+	@Override
+	public OnlOnlineSpecMo selectByPrimaryKey(Long id) {
+		return _mapper.selectByPrimaryKey(id);
+	}
+
+	/**
+	 * 查询上线规格信息
+	 * 2018年4月1日16:31:06
+	 */
+	@Override
+	public List<OnlOnlineSpecInfoRo> selectOnlineSpecInfo(OnlOnlineSpecMo record) {
+		return _mapper.selectOnlineSpecInfo(record);
+	}
 
 }

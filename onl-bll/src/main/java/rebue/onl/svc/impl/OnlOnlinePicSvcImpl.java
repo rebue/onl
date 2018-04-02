@@ -1,6 +1,8 @@
 package rebue.onl.svc.impl;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,4 +41,12 @@ public class OnlOnlinePicSvcImpl extends MybatisBaseSvcImpl<OnlOnlinePicMo, java
         return super.add(mo);
     }
 
+    /**
+	 * 获取已上线商品轮播图
+	 * 2018年4月1日14:51:33
+	 */
+    @Override
+	public List<OnlOnlinePicMo> list(OnlOnlinePicMo mo){
+		return _mapper.selectSelective(mo);
+	}
 }

@@ -9,8 +9,6 @@ package rebue.onl.to;
 * 类说明：  上线商品返回值
 */
 
-import java.util.List;
-
 public class OnlineGoodsBaseTo {
 
 	/**
@@ -41,14 +39,14 @@ public class OnlineGoodsBaseTo {
 	/**
 	 * 商品规格信息
 	 */
-	private List<OnlineGoodsSpecBaseTo> list;
+	private String[] list;
 
 	public OnlineGoodsBaseTo() {
 		super();
 	}
 
 	public OnlineGoodsBaseTo(Long opId, String onlineTitle, String onlineDetail, String goodsQsmm, String faceImg,
-			List<OnlineGoodsSpecBaseTo> list) {
+			String[] list) {
 		super();
 		this.opId = opId;
 		this.onlineTitle = onlineTitle;
@@ -98,11 +96,11 @@ public class OnlineGoodsBaseTo {
 		this.faceImg = faceImg;
 	}
 
-	public List<OnlineGoodsSpecBaseTo> getList() {
+	public String[] getList() {
 		return list;
 	}
 
-	public void setList(List<OnlineGoodsSpecBaseTo> list) {
+	public void setList(String[] list) {
 		this.list = list;
 	}
 
