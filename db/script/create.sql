@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/3/26 11:01:42                           */
+/* Created on:     2018/4/3 9:08:47                             */
 /*==============================================================*/
 
 
@@ -8,15 +8,11 @@ drop table if exists ONL_CART;
 
 drop table if exists ONL_ONLINE;
 
-drop table if exists ONL_ONLINE_LOG;
-
 drop table if exists ONL_ONLINE_PIC;
 
 drop table if exists ONL_ONLINE_PROMOTION;
 
 drop table if exists ONL_ONLINE_SPEC;
-
-drop table if exists ONL_ONLINE_SPEC_LOG;
 
 /*==============================================================*/
 /* Table: ONL_CART                                              */
@@ -43,27 +39,13 @@ create table ONL_ONLINE
    ONLINE_TITLE         varchar(300) not null comment '上线标题',
    ONLINE_DETAIL        varchar(2000) comment '上线描述',
    ONLINE_STATE         tinyint not null comment '上线状态（0：下线，1：上线  ）',
+   OP_ID                bigint not null comment '操作人ID',
    ONLINE_TIME          datetime not null comment '上线时间',
+   PRODUCE_ID           bigint not null comment '产品ID,上一次上线的产品ID',
    primary key (ID)
 );
 
 alter table ONL_ONLINE comment '上线信息';
-
-/*==============================================================*/
-/* Table: ONL_ONLINE_LOG                                        */
-/*==============================================================*/
-create table ONL_ONLINE_LOG
-(
-   ID                   bigint not null comment '上线日志ID',
-   OP_ID                bigint not null comment '操作人ID',
-   OP_TIME              datetime not null comment '操作时间',
-   ONLINE_ID            bigint not null comment '上线ID',
-   ONLINE_TITLE         varchar(300) not null comment '上线标题',
-   ONLINE_DETAIL        varchar(2000) comment '上线描述',
-   primary key (ID)
-);
-
-alter table ONL_ONLINE_LOG comment '上线日志';
 
 /*==============================================================*/
 /* Table: ONL_ONLINE_PIC                                        */
@@ -109,21 +91,4 @@ create table ONL_ONLINE_SPEC
 );
 
 alter table ONL_ONLINE_SPEC comment '上线规格';
-
-/*==============================================================*/
-/* Table: ONL_ONLINE_SPEC_LOG                                   */
-/*==============================================================*/
-create table ONL_ONLINE_SPEC_LOG
-(
-   ID                   bigint not null comment '上线规格日志ID',
-   ONLINE_LOG_ID        bigint not null comment '上线日志ID',
-   ONLINE_SPEC          varchar(200) not null comment '上线规格',
-   SALE_PRICE           decimal(20,4) not null comment '销售价格',
-   CASHBACK_AMOUNT      decimal(20,4) not null comment '返现金额',
-   SALE_COUNT           int not null comment '销售数量',
-   SEQ_NO               int not null comment '排序号',
-   primary key (ID)
-);
-
-alter table ONL_ONLINE_SPEC_LOG comment '上线规格日志';
 

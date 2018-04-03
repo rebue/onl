@@ -16,7 +16,7 @@ import rebue.mbgx.MybatisGeneratorWrap;
 * @version 1.0   
 * @since JDK 1.8  
 * 文件名称：OnlGenTest.java  
-* 类说明：  
+* 类说明：  自动生成Mybatis
 */
 public class OnlGenTest {
 

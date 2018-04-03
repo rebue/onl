@@ -1,8 +1,5 @@
 package rebue.onl.svc.impl;
 
-
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +9,7 @@ import rebue.onl.mo.OnlOnlinePicMo;
 import rebue.onl.svc.OnlOnlinePicSvc;
 
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
+import java.util.List;
 
 @Service
 /**
@@ -26,27 +24,31 @@ import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
  * </pre>
  */
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-public class OnlOnlinePicSvcImpl extends MybatisBaseSvcImpl<OnlOnlinePicMo, java.lang.Long, OnlOnlinePicMapper> implements OnlOnlinePicSvc {
+public class OnlOnlinePicSvcImpl
+		extends
+			MybatisBaseSvcImpl<OnlOnlinePicMo, java.lang.Long, OnlOnlinePicMapper>
+		implements
+			OnlOnlinePicSvc {
 
-    /**
-     * @mbg.generated
-     */
-    @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public int add(OnlOnlinePicMo mo) {
-        // 如果id为空那么自动生成分布式id
-        if (mo.getId() == null || mo.getId() == 0) {
-            mo.setId(_idWorker.getId());
-        }
-        return super.add(mo);
-    }
-
-    /**
-	 * 获取已上线商品轮播图
-	 * 2018年4月1日14:51:33
+	/**
+	 * @mbg.generated
 	 */
-    @Override
-	public List<OnlOnlinePicMo> list(OnlOnlinePicMo mo){
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public int add(OnlOnlinePicMo mo) {
+		// 如果id为空那么自动生成分布式id
+		if (mo.getId() == null || mo.getId() == 0) {
+			mo.setId(_idWorker.getId());
+		}
+		return super.add(mo);
+	}
+
+	/**
+	 * 获取已上线商品轮播图 2018年4月1日14:51:33
+	 */
+	@Override
+	public List<OnlOnlinePicMo> list(OnlOnlinePicMo mo) {
 		return _mapper.selectSelective(mo);
 	}
+
 }
