@@ -13,7 +13,7 @@ import rebue.sbs.feign.FeignConfig;
 * @version 1.0   
 * @since JDK 1.8  
 * 文件名称：OnlOnlineSvc.java  
-* 类说明：  
+* 类说明：  上线对内接口
 */
 @FeignClient(name = "onl-svr", configuration = FeignConfig.class)
 public interface OnlOnlineSvc {
