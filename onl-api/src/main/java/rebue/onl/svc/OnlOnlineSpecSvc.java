@@ -27,4 +27,14 @@ public interface OnlOnlineSpecSvc
 	 */
 	List<OnlOnlineSpecInfoRo> selectOnlineSpecInfo(OnlOnlineSpecMo record);
 
+	/**
+	 * 修改上线规格信息
+	 * Title: updateSelective
+	 * Description: 
+	 * @param mo
+	 * @return
+	 * @date 2018年4月10日 下午2:21:42
+	 */
+	int updateSelective(OnlOnlineSpecMo mo);
+
 }

@@ -133,8 +133,7 @@ public class OnlCartSvcImpl
 	}
 
 	/**
-	 * 批量删除购物车
-	 * 2018年4月3日15:27:40
+	 * 批量删除购物车 2018年4月3日15:27:40
 	 */
 	@Override
 	public int deleteByUserIdAndCartIds(Map<String, Object> map) {

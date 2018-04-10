@@ -16,11 +16,10 @@ public interface OnlCartSvc extends MybatisBaseSvc<OnlCartMo, java.lang.Long> {
 	 * @date 2018年3月29日 下午3:03:11
 	 */
 	int deleteByUserIdAndCartId(OnlCartMo record);
-	
+
 	/**
-	 * 批量删除购物车
-	 * Title: deleteByUserIdAndCartIds
-	 * Description: 
+	 * 批量删除购物车 Title: deleteByUserIdAndCartIds Description:
+	 * 
 	 * @param map
 	 * @return
 	 * @date 2018年4月3日 下午3:26:23

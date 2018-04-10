@@ -25,11 +25,7 @@ import rebue.onl.ro.OnlOnlineSpecInfoRo;
  * </pre>
  */
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-public class OnlOnlineSpecSvcImpl
-		extends
-			MybatisBaseSvcImpl<OnlOnlineSpecMo, java.lang.Long, OnlOnlineSpecMapper>
-		implements
-			OnlOnlineSpecSvc {
+public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, java.lang.Long, OnlOnlineSpecMapper> implements OnlOnlineSpecSvc {
 
 	/**
 	 * @mbg.generated
@@ -60,4 +56,17 @@ public class OnlOnlineSpecSvcImpl
 		return _mapper.selectOnlineSpecInfo(record);
 	}
 
+	/**
+	 * 修改上线规格信息
+	 * 2018年4月10日14:21:30
+	 */
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public int updateSelective(OnlOnlineSpecMo mo) {
+		int updateResult = _mapper.updateSelective(mo);
+		if (updateResult < 1) {
+			throw new RuntimeException("修改上线规格信息失败");
+		}
+		return updateResult;
+	}
 }

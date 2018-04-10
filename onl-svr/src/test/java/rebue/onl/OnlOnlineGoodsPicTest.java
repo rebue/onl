@@ -26,7 +26,7 @@ public class OnlOnlineGoodsPicTest {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("onlineId", "454092105233596416");
 		map.put("picType", "0");
-		String results = OkhttpUtils.get(hostUrl + "/onl/onlinepic", map);
+		String results = OkhttpUtils.get(hostUrl + "/onl/onlinepromotion/exist");
 		System.out.println(results);
 	}
 }

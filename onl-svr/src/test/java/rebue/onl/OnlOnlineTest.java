@@ -6,6 +6,10 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import rebue.wheel.OkhttpUtils;
 
 /**
@@ -19,7 +23,7 @@ import rebue.wheel.OkhttpUtils;
 public class OnlOnlineTest {
 
 	private String hostUrl = "http://localhost:9100/";
-	/*private ObjectMapper _objectMapper = new ObjectMapper();*/
+	private ObjectMapper _objectMapper = new ObjectMapper();
 	
 	/**
 	 * 发布商品
@@ -28,17 +32,17 @@ public class OnlOnlineTest {
 	 * @throws IOException
 	 * @date 2018年3月28日 下午1:24:55
 	 */
-	/*@Test
+	@Test
 	public void onlineTest() throws JsonParseException, JsonMappingException, IOException {
-		String jsondata = "{\"onlineTitle\":\"测试商品2018年3月27日17:45:09\",\"onlineDetail\":\"测试商品描述2018年3月27日17:45:58\",\"faceImg\":\"2018/03/27/135652686517000124.jpg,2018/03/27/131285646606000386.jpg\",\"goodsQsmm\":\"2018/03/27/137750205491000502.jpg\",\"list\":[{\"goodsSpec\":\"测试规格01\",\"goodsPrice\":\"10\",\"cashbackAmount\":\"5\",\"saleCount\":\"10\",\"seqNo\":\"1\",\"saleUnit\":\"\"},{\"goodsSpec\":\"测试规格02\",\"goodsPrice\":\"20\",\"cashbackAmount\":\"10\",\"saleCount\":\"20\",\"seqNo\":\"2\",\"saleUnit\":\"\"},{\"goodsSpec\":\"测试规格03\",\"goodsPrice\":\"30\",\"cashbackAmount\":\"15\",\"saleCount\":\"30\",\"seqNo\":\"3\",\"saleUnit\":\"\"}],\"opId\":\"451273803712954379\"}";
+		String jsondata = "{\"onlineDetail\":\"测试2018年4月10日10:26:29\",\"faceImg\":\"2018/04/10/156787888008000577.jpg,2018/04/10/158206788155000574.jpg\",\"goodsQsmm\":\"2018/04/10/158560550136000048.jpg\",\"produceId\":0,\"specs\":[{\"goodsSpec\":\"规格01\",\"goodsPrice\":\"10\",\"cashbackAmount\":\"5\",\"saleCount\":\"10\",\"seqNo\":\"1\",\"saleUnit\":\"\"}],\"opId\":\"451273803712954379\"}";
 		String jsondatas = java.net.URLEncoder.encode(jsondata, "UTF-8");
 		Map map = _objectMapper.readValue(jsondata, Map.class);
 		System.out.println(String.valueOf(map));
 		String url = hostUrl + "/onl/online";
-		// Map m = _objectMapper.readValue(OkhttpUtils.postByFormParams(url, map), Map.class);
+	//	Map m = _objectMapper.readValue(OkhttpUtils.postByFormParams(url, map), Map.class);
 		Map m = _objectMapper.readValue(OkhttpUtils.post(url + "?onlineInfo=" + jsondatas), Map.class);
 		System.out.println(m.toString());
-	}*/
+	}
 	
 	/**
 	 * 获取上线商品

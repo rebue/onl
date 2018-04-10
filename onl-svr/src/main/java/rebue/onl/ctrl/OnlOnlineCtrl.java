@@ -1,6 +1,5 @@
 package rebue.onl.ctrl;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,9 +7,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,9 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.svc.OnlOnlineSvc;
+import com.github.pagehelper.PageInfo;
+import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.pagehelper.PageInfo;
 import java.util.List;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 
@@ -37,40 +35,46 @@ public class OnlOnlineCtrl {
 	private OnlOnlineSvc svc;
 
 	/**
-	 * 删除上线信息
-	 * 
-	 * @mbg.generated
-	 */
-	@DeleteMapping("/onl/online/{id}")
-	Map<String, Object> del(@PathVariable("id") java.lang.Long id) {
-		_log.info("save OnlOnlineMo:" + id);
-		svc.del(id);
-		Map<String, Object> result = new HashMap<>();
-		result.put("success", true);
-		_log.info("delete OnlOnlineMo success!");
-		return result;
-	}
-
-	/**
-	 * 获取单个上线信息
-	 * 
-	 * @mbg.generated
-	 */
-	@GetMapping("/onl/online/{id}")
-	OnlOnlineMo get(@PathVariable("id") java.lang.Long id) {
-		_log.info("get OnlOnlineMo by id: " + id);
-		OnlOnlineMo result = svc.getById(id);
-		_log.info("get: " + result);
-		return result;
-	}
-
-	/**
 	 * 添加上线信息
 	 */
+	@SuppressWarnings("finally")
 	@PostMapping("/onl/online")
-	Map<String, Object> add(String onlineInfo) throws Exception {
+	Map<String, Object> add(String onlineInfo) {
 		_log.info("开始发布商品，发布商品的参数为：" + onlineInfo);
-		return svc.addEx(onlineInfo);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		try {
+			resultMap = svc.addEx(onlineInfo);
+		} catch (RuntimeException e) {
+			String msg = e.getMessage();
+			_log.error("===============添加上线商品出现异常了============={}", msg);
+			if (msg.equals("上线标题不能为空")) {
+				resultMap.put("msg", "上线标题不能为空");
+				resultMap.put("result", -1);
+			} else if (msg.equals("上线详情不能为空")) {
+				resultMap.put("msg", "上线详情不能为空");
+				resultMap.put("result", -2);
+			} else if (msg.equals("添加商品上线信息出错")) {
+				resultMap.put("msg", "添加商品上线信息出错");
+				resultMap.put("result", -3);
+			} else if (msg.equals("添加商品规格信息出错")) {
+				resultMap.put("msg", "添加商品规格信息出错");
+				resultMap.put("result", -4);
+			} else if (msg.equals("商品规格不能为空")) {
+				resultMap.put("msg", "商品规格不能为空");
+				resultMap.put("result", -5);
+			} else if (msg.equals("添加商品主图出错")) {
+				resultMap.put("msg", "添加商品主图出错");
+				resultMap.put("result", -6);
+			} else if (msg.equals("添加商品轮播图出错")) {
+				resultMap.put("msg", "添加商品轮播图出错");
+				resultMap.put("result", -7);
+			} else {
+				resultMap.put("msg", "发布商品失败");
+				resultMap.put("result", -8);
+			}
+		} finally {
+			return resultMap;
+		}
 	}
 
 	/**
@@ -83,11 +87,8 @@ public class OnlOnlineCtrl {
 	 * @date 2018年3月28日 下午3:06:09
 	 */
 	@GetMapping("/onl/online")
-	PageInfo<OnlOnlineMo> list(OnlOnlineMo qo,
-			@RequestParam("pageNum") int pageNum,
-			@RequestParam("pageSize") int pageSize) {
-		_log.info("list OnlOnlineSpecMo:" + qo + ", pageNum = " + pageNum
-				+ ", pageSize = " + pageSize);
+	PageInfo<OnlOnlineMo> list(OnlOnlineMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+		_log.info("list OnlOnlineSpecMo:" + qo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
 		if (pageSize > 50) {
 			String msg = "pageSize不能大于50";
 			_log.error(msg);
@@ -130,24 +131,69 @@ public class OnlOnlineCtrl {
 	 * @date 2018年3月29日 下午5:42:46
 	 */
 	@GetMapping("/onl/online/list")
-	List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(
-			@RequestParam Map<String, Object> map) {
+	List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(@RequestParam Map<String, Object> map) {
 		_log.info("获取上线商品列表的参数为：{}", String.valueOf(map));
 		return svc.selectOnlineGoodsList(map);
 	}
 
 	/**
-	 * 重新上线
-	 * Title: anewOnline
-	 * Description: 
+	 * 重新上线 Title: anewOnline Description:
+	 * 
 	 * @param onlineInfo
 	 * @return
 	 * @throws JsonProcessingException
 	 * @throws IOException
 	 * @date 2018年4月3日 上午11:37:45
 	 */
+	@SuppressWarnings("finally")
 	@PostMapping("/onl/online/anewonline")
-	Map<String, Object> anewOnline(String onlineInfo) throws JsonProcessingException, IOException{
-		return svc.anewOnline(onlineInfo);
+	Map<String, Object> anewOnline(String onlineInfo) throws JsonProcessingException, IOException {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		try {
+			resultMap = svc.anewOnline(onlineInfo);
+		} catch (RuntimeException e) {
+			String msg = e.getMessage();
+			_log.error("===============添加上线商品出现异常了============={}", msg);
+			if (msg.equals("上线标题不能为空")) {
+				resultMap.put("msg", "上线标题不能为空");
+				resultMap.put("result", -1);
+			} else if (msg.equals("上线详情不能为空")) {
+				resultMap.put("msg", "上线详情不能为空");
+				resultMap.put("result", -2);
+			} else if (msg.equals("添加商品上线信息出错")) {
+				resultMap.put("msg", "添加商品上线信息出错");
+				resultMap.put("result", -3);
+			} else if (msg.equals("添加商品规格信息出错")) {
+				resultMap.put("msg", "添加商品规格信息出错");
+				resultMap.put("result", -4);
+			} else if (msg.equals("商品规格不能为空")) {
+				resultMap.put("msg", "商品规格不能为空");
+				resultMap.put("result", -5);
+			} else if (msg.equals("添加商品主图出错")) {
+				resultMap.put("msg", "添加商品主图出错");
+				resultMap.put("result", -6);
+			} else if (msg.equals("添加商品轮播图出错")) {
+				resultMap.put("msg", "添加商品轮播图出错");
+				resultMap.put("result", -7);
+			} else {
+				resultMap.put("msg", "重新上线失败");
+				resultMap.put("result", -8);
+			}
+		} finally {
+			return resultMap;
+		}
+	}
+
+	/**
+	 * 查询是否已上线
+	 * Title: existSelective
+	 * Description: 
+	 * @param qo
+	 * @return
+	 * @date 2018年4月10日 下午4:06:26
+	 */
+	@GetMapping("/onl/online/exist")
+	boolean existSelective(OnlOnlineMo qo) {
+		return svc.existSelective(qo);
 	}
 }

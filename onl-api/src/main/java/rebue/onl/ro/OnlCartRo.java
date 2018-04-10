@@ -3,13 +3,11 @@ package rebue.onl.ro;
 import java.math.BigDecimal;
 
 /**
- * 创建时间：2018年3月30日 上午11:47:44 
- * 项目名称：onl-api
+ * 创建时间：2018年3月30日 上午11:47:44 项目名称：onl-api
+ * 
  * @author daniel
  * @version 1.0
- * @since JDK 1.8 
- * 文件名称：OnlCartRo.java 
- * 类说明：购物车列表
+ * @since JDK 1.8 文件名称：OnlCartRo.java 类说明：购物车列表
  */
 public class OnlCartRo {
 
@@ -58,12 +56,17 @@ public class OnlCartRo {
 	 */
 	private String picPath;
 
+	/**
+	 * 产品Id
+	 */
+	private Long produceId;
+
 	public OnlCartRo() {
 		super();
 	}
 
 	public OnlCartRo(long id, long onlineId, String onlineTitle, long onlineSpecId, String onlineSpec,
-			BigDecimal cashbackAmount, BigDecimal salePrice, Integer cartCount, String picPath) {
+			BigDecimal cashbackAmount, BigDecimal salePrice, Integer cartCount, String picPath, Long produceId) {
 		super();
 		this.id = id;
 		this.onlineId = onlineId;
@@ -74,6 +77,7 @@ public class OnlCartRo {
 		this.salePrice = salePrice;
 		this.cartCount = cartCount;
 		this.picPath = picPath;
+		this.produceId = produceId;
 	}
 
 	public long getId() {
@@ -148,11 +152,19 @@ public class OnlCartRo {
 		this.picPath = picPath;
 	}
 
+	public Long getProduceId() {
+		return produceId;
+	}
+
+	public void setProduceId(Long produceId) {
+		this.produceId = produceId;
+	}
+
 	@Override
 	public String toString() {
 		return "OnlCartRo [id=" + id + ", onlineId=" + onlineId + ", onlineTitle=" + onlineTitle + ", onlineSpecId="
 				+ onlineSpecId + ", onlineSpec=" + onlineSpec + ", cashbackAmount=" + cashbackAmount + ", salePrice="
-				+ salePrice + ", cartCount=" + cartCount + ", picPath=" + picPath + "]";
+				+ salePrice + ", cartCount=" + cartCount + ", picPath=" + picPath + ", produceId=" + produceId + "]";
 	}
 
 }

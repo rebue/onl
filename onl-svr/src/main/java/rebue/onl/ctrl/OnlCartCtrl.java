@@ -25,8 +25,7 @@ public class OnlCartCtrl {
 	/**
 	 * @mbg.generated
 	 */
-	private final static Logger _log = LoggerFactory
-			.getLogger(OnlCartCtrl.class);
+	private final static Logger _log = LoggerFactory.getLogger(OnlCartCtrl.class);
 
 	/**
 	 * @mbg.generated
@@ -142,9 +141,8 @@ public class OnlCartCtrl {
 	}
 
 	/**
-	 * 批量删除购物车
-	 * Title: deleteByUserIdAndCartIds
-	 * Description: 
+	 * 批量删除购物车 Title: deleteByUserIdAndCartIds Description:
+	 * 
 	 * @param map
 	 * @return
 	 * @date 2018年4月3日 下午3:30:20
@@ -153,4 +151,5 @@ public class OnlCartCtrl {
 	int deleteByUserIdAndCartIds(@RequestParam Map<String, Object> map) {
 		return svc.deleteByUserIdAndCartIds(map);
 	}
+
 }

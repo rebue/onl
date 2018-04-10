@@ -34,14 +34,14 @@ public interface OnlOnlineSvc extends MybatisBaseSvc<OnlOnlineMo, java.lang.Long
 	List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(Map<String, Object> map);
 
 	/**
-	 * 重新上线
-	 * Title: anewOnline
-	 * Description: 
+	 * 重新上线 Title: anewOnline Description:
+	 * 
 	 * @param onlineInfo
 	 * @return
-	 * @throws JsonProcessingException 
-	 * @throws IOException 
+	 * @throws JsonProcessingException
+	 * @throws IOException
 	 * @date 2018年4月3日 上午11:12:05
 	 */
 	Map<String, Object> anewOnline(String onlineInfo) throws JsonProcessingException, IOException;
+
 }
