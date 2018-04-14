@@ -4,8 +4,8 @@ import java.util.Map;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import rebue.onl.mo.OnlCartMo;
 import rebue.sbs.feign.FeignConfig;
 
 /**  
@@ -29,8 +29,8 @@ public interface OnlCartSvc {
 	 * @return
 	 * @date 2018年3月29日 下午2:54:51
 	 */
-	@DeleteMapping("/onl/cart")
-	Map<String, Object> del(OnlCartMo vo);
+	@DeleteMapping(value = "/onl/cart", produces="application/json")
+	Map<String, Object> del(@RequestParam("id") Long id, @RequestParam("userId") Long userId);
 }
   
 

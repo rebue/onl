@@ -97,7 +97,7 @@ public class OnlCartCtrl {
 	 * @return
 	 * @date 2018年3月29日 下午2:54:51
 	 */
-	@DeleteMapping("/onl/cart")
+	@DeleteMapping(value = "/onl/cart", produces="application/json")
 	Map<String, Object> del(OnlCartMo vo) {
 		_log.info("删除购物车的参数为：" + vo.toString());
 		int result = svc.deleteByUserIdAndCartId(vo);

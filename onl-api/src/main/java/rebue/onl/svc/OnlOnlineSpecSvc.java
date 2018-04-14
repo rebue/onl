@@ -2,7 +2,14 @@ package rebue.onl.svc;
 
 import rebue.robotech.svc.MybatisBaseSvc;
 import rebue.onl.mo.OnlOnlineSpecMo;
+
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 
 public interface OnlOnlineSpecSvc
@@ -36,5 +43,18 @@ public interface OnlOnlineSpecSvc
 	 * @date 2018年4月10日 下午2:21:42
 	 */
 	int updateSelective(OnlOnlineSpecMo mo);
+
+	/**
+	 * 删除购物车和修改上线数量
+	 * Title: deleteCartAndModifyInventory
+	 * Description: 
+	 * @param ro
+	 * @return
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
+	 * @date 2018年4月11日 下午5:25:52
+	 */
+	Map<String, Object> deleteCartAndModifyInventory(String cartAndSpecInfo) throws JsonParseException, JsonMappingException, IOException;
 
 }

@@ -308,6 +308,13 @@
         SEQ_NO = #{seqNo,jdbcType=INTEGER},
       </if>
     </set>
-    where ONLINE_SPEC = #{onlineSpec,jdbcType=VARCHAR} AND ONLINE_ID = #{onlineId,jdbcType=BIGINT},
+    where ONLINE_SPEC = #{onlineSpec,jdbcType=VARCHAR} AND ONLINE_ID = #{onlineId,jdbcType=BIGINT}
   </update>
+  
+  <!-- 查询规格是否已上线 -->
+  <select id="selectSpecExistOnline" parameterType="rebue.onl.ro.DeleteCartAndModifyInventoryRo" resultType="boolean">
+  	SELECT COUNT(*) FROM ONL_ONLINE_SPEC ons
+	LEFT JOIN ONL_ONLINE oo ON ons.ONLINE_ID=oo.ID
+	WHERE oo.ONLINE_STATE=1 AND ons.ONLINE_SPEC = #{onlineSpec,jdbcType=VARCHAR} AND ons.ONLINE_ID = #{onlineId,jdbcType=BIGINT}
+  </select>
 </mapper>

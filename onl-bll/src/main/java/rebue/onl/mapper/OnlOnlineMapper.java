@@ -96,4 +96,14 @@ public interface OnlOnlineMapper extends MybatisBaseMapper<OnlOnlineMo, Long> {
 	 * @date 2018年3月29日 下午5:39:41
 	 */
 	List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(Map<String, Object> map);
+	
+	/**
+	 * 判断产品是否已上线
+	 * Title: existOnlineByProduceId
+	 * Description: 
+	 * @param record
+	 * @return
+	 * @date 2018年4月12日 下午4:33:35
+	 */
+	boolean existOnlineByProduceId(OnlOnlineMo record);
 }

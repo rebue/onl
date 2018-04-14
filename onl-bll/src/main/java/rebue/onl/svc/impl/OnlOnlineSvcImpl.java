@@ -115,13 +115,27 @@ public class OnlOnlineSvcImpl
 		long productId = Long.parseLong(String.valueOf(onlineMap.get("produceId")));
 		productId = productId == 0 ? onlineId : productId;
 		oom.setProduceId(productId);
+		
+		// ================================================判断产品是否已上线开始================================================
+		_log.info("判断产品是否已上线的参数为：{}", productId);
+		boolean existOnlineResult = _mapper.existOnlineByProduceId(oom);
+		_log.info("判断产品是否已上线的返回值为：{}", existOnlineResult);
+		if (existOnlineResult) {
+			_log.error("该商品已上线");
+			throw new RuntimeException("该商品已上线");
+		}
+		// ================================================判断产品是否已上线结束================================================
+		
+		// ================================================添加上线信息开始================================================
 		_log.info("添加商品上线信息的参数为：{}", oom.toString());
 		int addOnlineGoodsResult = add(oom);
 		_log.info("添加商品上线信息的返回值为：{}", addOnlineGoodsResult);
 		if (addOnlineGoodsResult < 1) {
-			_log.warn("添加商品上线信息出错，返回值为：{}", addOnlineGoodsResult);
+			_log.error("添加商品上线信息出错，返回值为：{}", addOnlineGoodsResult);
 			throw new RuntimeException("添加商品上线信息出错");
 		}
+		// ================================================添加上线信息结束================================================
+		
 		ObjectMapper mapper = new ObjectMapper();
 		String str = mapper.writeValueAsString(onlineMap.get("specs"));
 		_log.info("将商品规格信息转为json字符串：{}", str);
@@ -146,6 +160,8 @@ public class OnlOnlineSvcImpl
 				oosm.setSaleUnit(saleUnit);
 				oosm.setSeqNo(seqNo);
 				oosm.setCashbackAmount(cashbackAmount);
+				
+				// ================================================添加上线商品规格信息开始================================================
 				_log.info("添加上线商品规格信息的参数为：{}", oosm.toString());
 				int addSpecResult = onlOnlineSpecSvc.add(oosm);
 				_log.info("添加上线商品规格信息的返回值为：{}", addSpecResult);
@@ -153,6 +169,7 @@ public class OnlOnlineSvcImpl
 					_log.error("添加上线商品规格信息出错，返回值为：{}", addSpecResult);
 					throw new RuntimeException("添加商品规格信息出错");
 				}
+				// ================================================添加上线商品规格信息结束================================================
 			}
 		} else {
 			_log.error("没有找到商品规格信息，添加商品规格信息出错");
@@ -163,6 +180,8 @@ public class OnlOnlineSvcImpl
 		oopm.setOnlineId(onlineId);
 		oopm.setPicPath(String.valueOf(onlineMap.get("goodsQsmm")));
 		oopm.setPicType((byte) 1);;
+		
+		// ================================================添加上线商品主图开始================================================
 		_log.info("添加商品主图的参数为：{}", oopm.toString());
 		int addQsmmResult = onlOnlinePicSvc.add(oopm);
 		_log.info("添加商品主图的返回值为：{}", addQsmmResult);
@@ -170,6 +189,8 @@ public class OnlOnlineSvcImpl
 			_log.error("添加商品主图出错，返回值为：{}", addQsmmResult);
 			throw new RuntimeException("添加商品主图出错");
 		}
+		// ================================================添加上线商品主图结束================================================
+		
 		String[] carouselPics = String.valueOf(onlineMap.get("faceImg")).split(
 				",");
 		for (int i = 0; i < carouselPics.length; i++) {
@@ -178,6 +199,8 @@ public class OnlOnlineSvcImpl
 			oopm.setOnlineId(onlineId);
 			oopm.setPicPath(carouselPics[i]);
 			oopm.setPicType((byte) 0);
+			
+			// ================================================添加上线商品轮播图开始================================================
 			_log.info("添加商品轮播图的参数为：{}", oopm.toString());
 			int addCarouselPicResult = onlOnlinePicSvc.add(oopm);
 			_log.info("添加商品轮播图的返回值为：{}", addCarouselPicResult);
@@ -185,6 +208,7 @@ public class OnlOnlineSvcImpl
 				_log.error("添加商品轮播图出错，返回值为：", addCarouselPicResult);
 				throw new RuntimeException("添加商品轮播图出错");
 			}
+			// ================================================添加上线商品轮播图结束================================================
 		}
 		map.put("msg", "发布成功");
 		map.put("result", 1);

@@ -235,12 +235,10 @@
   <select id="selectOnlineGoodsList" parameterType="java.util.Map" resultMap="OnlineGoodsInfoResultMap">
   	SELECT oo.ID, oo.ONLINE_TITLE, oopc.PIC_PATH, oos.ONLINE_SPEC, oos.SALE_PRICE, oos.CASHBACK_AMOUNT, oos.ID AS SPEC_ID, oo.ONLINE_DETAIL
 	FROM ONL_ONLINE oo
-	LEFT JOIN ONL_ONLINE_SPEC oos ON oos.ID = (
-		SELECT MIN(ID) FROM ONL_ONLINE_SPEC WHERE SALE_PRICE=(SELECT min(SALE_PRICE) FROM ONL_ONLINE_SPEC WHERE ONLINE_ID=oo.ID)
-	)
+	LEFT JOIN ONL_ONLINE_SPEC oos ON oos.ONLINE_ID = oo.ID
 	LEFT JOIN ONL_ONLINE_PIC oopc ON oo.ID=oopc.ONLINE_ID
-	WHERE 1=1 AND oo.ID IN (
-		SELECT ONLINE_ID FROM ONL_ONLINE_SPEC WHERE SALE_PRICE=(SELECT min(SALE_PRICE) FROM ONL_ONLINE_SPEC WHERE ONLINE_ID = oo.ID)
+	WHERE 1=1 AND oos.ID IN (
+		SELECT ID FROM ONL_ONLINE_SPEC WHERE SALE_PRICE=(SELECT min(oos.SALE_PRICE) FROM ONL_ONLINE_SPEC oos WHERE oos.ONLINE_ID = oo.ID)
 	) AND oo.ONLINE_STATE=1 AND oopc.PIC_TYPE=1
 	<if test="id != null and id != '' ">
 		AND oo.ID = #{id,jdbcType=BIGINT}
@@ -261,5 +259,10 @@
 	WHERE 1=1 AND oo.ID IN (
 		SELECT ONLINE_ID FROM ONL_ONLINE_SPEC WHERE SALE_PRICE=(SELECT min(SALE_PRICE) FROM ONL_ONLINE_SPEC WHERE ONLINE_ID = oo.ID)
 	) AND oo.ONLINE_STATE=1 AND oopc.PIC_TYPE=1 AND oo.ID=#{id,jdbcType=BIGINT}
+  </select>
+  
+  <!-- 判断该产品是否已上线 -->
+  <select id="existOnlineByProduceId" parameterType="rebue.onl.mo.OnlOnlineMo" resultType="boolean">
+  	SELECT COUNT(*) FROM ONL_ONLINE WHERE PRODUCE_ID=#{produceId,jdbcType=BIGINT} AND ONLINE_STATE=1
   </select>
 </mapper>

@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.robotech.mapper.MybatisBaseMapper;
+import rebue.onl.ro.DeleteCartAndModifyInventoryRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 
 @Mapper
@@ -108,4 +109,14 @@ public interface OnlOnlineSpecMapper
 	 * @date 2018年4月10日 下午2:17:23
 	 */
 	int updateSelective(OnlOnlineSpecMo record);
+	
+	/**
+	 * 查询商品规格是否已上线
+	 * Title: selectSpecExistOnline
+	 * Description: 
+	 * @param record
+	 * @return
+	 * @date 2018年4月11日 下午5:02:30
+	 */
+	boolean selectSpecExistOnline(DeleteCartAndModifyInventoryRo record);
 }

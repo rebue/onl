@@ -1,6 +1,8 @@
 package rebue.onl.ctrl;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -11,16 +13,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import rebue.onl.mo.OnlOnlineMo;
-import rebue.onl.svc.OnlOnlineSvc;
-import com.github.pagehelper.PageInfo;
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
-import java.util.List;
+import com.github.pagehelper.PageInfo;
+
+import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
+import rebue.onl.svc.OnlOnlineSvc;
 
 @RestController
 public class OnlOnlineCtrl {
@@ -68,9 +69,12 @@ public class OnlOnlineCtrl {
 			} else if (msg.equals("添加商品轮播图出错")) {
 				resultMap.put("msg", "添加商品轮播图出错");
 				resultMap.put("result", -7);
+			} else if (msg.equals("该商品已上线")) {
+				resultMap.put("msg", "该商品已上线");
+				resultMap.put("result", -8);
 			} else {
 				resultMap.put("msg", "发布商品失败");
-				resultMap.put("result", -8);
+				resultMap.put("result", -9);
 			}
 		} finally {
 			return resultMap;
@@ -192,8 +196,15 @@ public class OnlOnlineCtrl {
 	 * @return
 	 * @date 2018年4月10日 下午4:06:26
 	 */
-	@GetMapping("/onl/online/exist")
-	boolean existSelective(OnlOnlineMo qo) {
-		return svc.existSelective(qo);
+	@GetMapping(value = "/onl/online/exist", produces="application/json")
+	@ResponseBody
+	Boolean existSelective(@RequestParam("id") Long id, @RequestParam("onlineState") Byte onlineState) {
+		OnlOnlineMo qo = new OnlOnlineMo();
+		qo.setId(id);
+		qo.setOnlineState(onlineState);
+		_log.info("查询是否已上线的参数为：{}", qo.toString());
+		boolean result = svc.existSelective(qo);
+		_log.info("查询是否已上线的返回值为：{}", result);
+		return result;
 	}
 }
