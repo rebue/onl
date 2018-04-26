@@ -6,8 +6,9 @@ import java.util.Map;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.sbs.feign.FeignConfig;
@@ -25,15 +26,16 @@ import rebue.sbs.feign.FeignConfig;
 public interface OnlOnlineSpecSvc {
 
 	/**
-	 * 修改上线规格信息
-	 * Title: updateSelective
+	 * 查询并修改上线规格信息
+	 * Title: updateSpenInfo
 	 * Description: 
-	 * @param mo
+	 * @param specList
 	 * @return
-	 * @date 2018年4月10日 下午2:31:56
+	 * @date 2018年4月23日 下午6:18:40
 	 */
-	@PutMapping(value = "/onl/onlinespec", produces="application/json")
-	Map<String, Object> updateSelective(@RequestParam("onlineId") Long onlineId, @RequestParam("onlineSpec") String onlineSpec, @RequestParam("saleCount") Integer saleCount);
+	@PostMapping(value = "/onl/onlinespec/selectandupdate")
+	@ResponseBody
+	Map<String, Object> updateSpenInfo(@RequestBody List<Map<String, Object>> specList);
 	
 	/**
 	 * 获取上线规格信息 Title: selectOnlineSpecInfoByOnlineId Description:
@@ -42,7 +44,7 @@ public interface OnlOnlineSpecSvc {
 	 * @return
 	 * @date 2018年4月1日 下午4:29:31
 	 */
-	@GetMapping(value = "/onl/onlinespec/details", produces="application/json")
+	@GetMapping(value = "/onl/onlinespec/details")
 	List<OnlOnlineSpecInfoRo> selectOnlineSpecInfo(@RequestParam("onlineId") Long onlineId, @RequestParam("onlineSpec") String onlineSpec);
 	
 	/**
@@ -52,7 +54,7 @@ public interface OnlOnlineSpecSvc {
 	 * @return
 	 * @date 2018年4月11日 下午5:52:30
 	 */
-	@PostMapping(value = "/onl/onlinespec/deleteandupdate", produces="application/json")
+	@PostMapping(value = "/onl/onlinespec/deleteandupdate")
 	Map<String, Object> deleteCartAndUpdateOnlineCount(@RequestParam("cartAndSpecInfo") String cartAndSpecInfo);
 }
   

@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rebue.onl.mo.OnlOnlinePromotionMo;
 import rebue.onl.svc.OnlOnlinePromotionSvc;
+import com.github.pagehelper.PageInfo;
 import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -23,13 +26,62 @@ public class OnlOnlinePromotionCtrl {
 	/**
 	 * @mbg.generated
 	 */
-	private final static Logger _log = LoggerFactory.getLogger(OnlOnlinePromotionCtrl.class);
+	private final static Logger _log = LoggerFactory
+			.getLogger(OnlOnlinePromotionCtrl.class);
 
 	/**
 	 * @mbg.generated
 	 */
 	@Resource
 	private OnlOnlinePromotionSvc svc;
+
+	/**
+	 * 修改上线推广
+	 * 
+	 * @mbg.generated
+	 */
+	@PutMapping("/onl/onlinepromotion")
+	Map<String, Object> modify(OnlOnlinePromotionMo vo) throws Exception {
+		_log.info("modify OnlOnlinePromotionMo:" + vo);
+		svc.modify(vo);
+		Map<String, Object> result = new HashMap<>();
+		result.put("success", true);
+		_log.info("modify OnlOnlinePromotionMo success!");
+		return result;
+	}
+
+	/**
+	 * 查询上线推广
+	 * 
+	 * @mbg.generated
+	 */
+	@GetMapping("/onl/onlinepromotion")
+	PageInfo<OnlOnlinePromotionMo> list(OnlOnlinePromotionMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+		_log.info("list OnlOnlinePromotionMo:" + qo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
+
+		if (pageSize > 50) {
+			String msg = "pageSize不能大于50";
+			_log.error(msg);
+			throw new IllegalArgumentException(msg);
+		}
+
+		PageInfo<OnlOnlinePromotionMo> result = svc.list(qo, pageNum, pageSize);
+		_log.info("result: " + result);
+		return result;
+	}
+
+	/**
+	 * 获取单个上线推广
+	 * 
+	 * @mbg.generated
+	 */
+	@GetMapping("/onl/onlinepromotion/{id}")
+	OnlOnlinePromotionMo get(@PathVariable("id") java.lang.Long id) {
+		_log.info("get OnlOnlinePromotionMo by id: " + id);
+		OnlOnlinePromotionMo result = svc.getById(id);
+		_log.info("get: " + result);
+		return result;
+	}
 
 	/**
 	 * 添加上线推广 Title: add Description:

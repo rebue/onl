@@ -25,7 +25,8 @@ public class OnlCartCtrl {
 	/**
 	 * @mbg.generated
 	 */
-	private final static Logger _log = LoggerFactory.getLogger(OnlCartCtrl.class);
+	private final static Logger _log = LoggerFactory
+			.getLogger(OnlCartCtrl.class);
 
 	/**
 	 * @mbg.generated
@@ -97,7 +98,7 @@ public class OnlCartCtrl {
 	 * @return
 	 * @date 2018年3月29日 下午2:54:51
 	 */
-	@DeleteMapping(value = "/onl/cart", produces="application/json")
+	@DeleteMapping(value = "/onl/cart")
 	Map<String, Object> del(OnlCartMo vo) {
 		_log.info("删除购物车的参数为：" + vo.toString());
 		int result = svc.deleteByUserIdAndCartId(vo);

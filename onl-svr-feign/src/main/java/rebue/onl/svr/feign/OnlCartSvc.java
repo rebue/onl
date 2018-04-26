@@ -29,7 +29,7 @@ public interface OnlCartSvc {
 	 * @return
 	 * @date 2018年3月29日 下午2:54:51
 	 */
-	@DeleteMapping(value = "/onl/cart", produces="application/json")
+	@DeleteMapping(value = "/onl/cart")
 	Map<String, Object> del(@RequestParam("id") Long id, @RequestParam("userId") Long userId);
 }
   

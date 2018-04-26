@@ -1,8 +1,7 @@
 package rebue.onl.ctrl;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -10,30 +9,44 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.pagehelper.PageInfo;
-
 import rebue.onl.mo.OnlOnlineMo;
-import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 import rebue.onl.svc.OnlOnlineSvc;
+import com.github.pagehelper.PageInfo;
+import java.io.IOException;
+import java.util.List;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 
 @RestController
 public class OnlOnlineCtrl {
 	/**
 	 */
-	private final static Logger _log = LoggerFactory
-			.getLogger(OnlOnlineCtrl.class);
+	private final static Logger _log = LoggerFactory.getLogger(OnlOnlineCtrl.class);
 
 	/**
 	 */
 	@Resource
 	private OnlOnlineSvc svc;
+
+	/**
+	 * 获取单个上线信息
+	 * 
+	 * @mbg.generated
+	 */
+	@GetMapping("/onl/online/{id}")
+	OnlOnlineMo get(@PathVariable("id") java.lang.Long id) {
+		_log.info("get OnlOnlineMo by id: " + id);
+		OnlOnlineMo result = svc.getById(id);
+		_log.info("get: " + result);
+		return result;
+	}
 
 	/**
 	 * 添加上线信息
@@ -134,10 +147,19 @@ public class OnlOnlineCtrl {
 	 * @return
 	 * @date 2018年3月29日 下午5:42:46
 	 */
+	@SuppressWarnings("finally")
 	@GetMapping("/onl/online/list")
 	List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(@RequestParam Map<String, Object> map) {
 		_log.info("获取上线商品列表的参数为：{}", String.valueOf(map));
-		return svc.selectOnlineGoodsList(map);
+		List<OnlOnlineGoodsInfoRo> list = new ArrayList<>();
+		try {
+			list = svc.selectOnlineGoodsList(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			return list;
+		}
+		
 	}
 
 	/**
@@ -189,14 +211,13 @@ public class OnlOnlineCtrl {
 	}
 
 	/**
-	 * 查询是否已上线
-	 * Title: existSelective
-	 * Description: 
+	 * 查询是否已上线 Title: existSelective Description:
+	 * 
 	 * @param qo
 	 * @return
 	 * @date 2018年4月10日 下午4:06:26
 	 */
-	@GetMapping(value = "/onl/online/exist", produces="application/json")
+	@GetMapping(value = "/onl/online/exist")
 	@ResponseBody
 	Boolean existSelective(@RequestParam("id") Long id, @RequestParam("onlineState") Byte onlineState) {
 		OnlOnlineMo qo = new OnlOnlineMo();
@@ -207,4 +228,5 @@ public class OnlOnlineCtrl {
 		_log.info("查询是否已上线的返回值为：{}", result);
 		return result;
 	}
+
 }

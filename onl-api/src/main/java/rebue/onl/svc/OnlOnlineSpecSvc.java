@@ -2,14 +2,11 @@ package rebue.onl.svc;
 
 import rebue.robotech.svc.MybatisBaseSvc;
 import rebue.onl.mo.OnlOnlineSpecMo;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 
 public interface OnlOnlineSpecSvc
@@ -35,9 +32,8 @@ public interface OnlOnlineSpecSvc
 	List<OnlOnlineSpecInfoRo> selectOnlineSpecInfo(OnlOnlineSpecMo record);
 
 	/**
-	 * 修改上线规格信息
-	 * Title: updateSelective
-	 * Description: 
+	 * 修改上线规格信息 Title: updateSelective Description:
+	 * 
 	 * @param mo
 	 * @return
 	 * @date 2018年4月10日 下午2:21:42
@@ -45,16 +41,26 @@ public interface OnlOnlineSpecSvc
 	int updateSelective(OnlOnlineSpecMo mo);
 
 	/**
-	 * 删除购物车和修改上线数量
-	 * Title: deleteCartAndModifyInventory
-	 * Description: 
+	 * 删除购物车和修改上线数量 Title: deleteCartAndModifyInventory Description:
+	 * 
 	 * @param ro
 	 * @return
-	 * @throws IOException 
-	 * @throws JsonMappingException 
-	 * @throws JsonParseException 
+	 * @throws IOException
+	 * @throws JsonMappingException
+	 * @throws JsonParseException
 	 * @date 2018年4月11日 下午5:25:52
 	 */
-	Map<String, Object> deleteCartAndModifyInventory(String cartAndSpecInfo) throws JsonParseException, JsonMappingException, IOException;
+	Map<String, Object> deleteCartAndModifyInventory(String cartAndSpecInfo)
+			throws JsonParseException, JsonMappingException, IOException;
+
+	/**
+	 * 查询和修改上线规格信息
+	 * Title: resultMap
+	 * Description: 
+	 * @param mo
+	 * @return
+	 * @date 2018年4月23日 下午5:46:50
+	 */
+	Map<String, Object> updateSpenInfo(List<Map<String, Object>> specList);
 
 }
