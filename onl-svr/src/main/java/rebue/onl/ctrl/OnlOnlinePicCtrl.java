@@ -39,7 +39,7 @@ public class OnlOnlinePicCtrl {
 	 * @mbg.generated
 	 */
 	@PostMapping("/onl/onlinepic")
-	Map<String, Object> add(@RequestBody OnlOnlinePicMo vo) throws Exception {
+	Map<String, Object> add(OnlOnlinePicMo vo) throws Exception {
 		_log.info("add OnlOnlinePicMo:" + vo);
 		svc.add(vo);
 		Map<String, Object> result = new HashMap<>();
@@ -55,7 +55,7 @@ public class OnlOnlinePicCtrl {
 	 * @mbg.generated
 	 */
 	@PutMapping("/onl/onlinepic")
-	Map<String, Object> modify(@RequestBody OnlOnlinePicMo vo) throws Exception {
+	Map<String, Object> modify(OnlOnlinePicMo vo) throws Exception {
 		_log.info("modify OnlOnlinePicMo:" + vo);
 		svc.modify(vo);
 		Map<String, Object> result = new HashMap<>();
@@ -102,7 +102,7 @@ public class OnlOnlinePicCtrl {
 	 * @date 2018年4月1日 下午2:48:16
 	 */
 	@GetMapping("/onl/onlinepic")
-	List<OnlOnlinePicMo> list(@RequestBody OnlOnlinePicMo qo) {
+	List<OnlOnlinePicMo> list(OnlOnlinePicMo qo) {
 		_log.info("获取上线商品轮播图的上线编号为：{}", qo.getOnlineId());
 		return svc.list(qo);
 	}

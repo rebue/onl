@@ -35,7 +35,7 @@ public interface OnlOnlineSpecSvc {
 	 */
 	@PostMapping(value = "/onl/onlinespec/selectandupdate")
 	@ResponseBody
-	Map<String, Object> updateSpenInfo(@RequestBody List<Map<String, Object>> specList);
+	Map<String, Object> updateSpenInfo(List<Map<String, Object>> specList);
 	
 	/**
 	 * 获取上线规格信息 Title: selectOnlineSpecInfoByOnlineId Description:

@@ -105,7 +105,7 @@ public class OnlOnlineCtrl {
 	 * @date 2018年3月28日 下午3:06:09
 	 */
 	@GetMapping("/onl/online")
-	PageInfo<OnlOnlineMo> list(@RequestBody OnlOnlineMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+	PageInfo<OnlOnlineMo> list(OnlOnlineMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
 		_log.info("list OnlOnlineSpecMo:" + qo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
 		if (pageSize > 50) {
 			String msg = "pageSize不能大于50";
@@ -126,7 +126,7 @@ public class OnlOnlineCtrl {
 	 * @date 2018年3月28日 下午3:14:23
 	 */
 	@PutMapping("/onl/online")
-	Map<String, Object> modify(@RequestBody OnlOnlineMo vo) throws Exception {
+	Map<String, Object> modify(OnlOnlineMo vo) throws Exception {
 		_log.info("开始商品下线，商品下线的参数为：" + vo.toString());
 		int result = svc.modify(vo);
 		Map<String, Object> resultMap = new HashMap<>();

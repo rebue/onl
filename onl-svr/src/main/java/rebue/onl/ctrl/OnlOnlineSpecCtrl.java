@@ -61,7 +61,7 @@ public class OnlOnlineSpecCtrl {
 	 * @mbg.generated
 	 */
 	@GetMapping("/onl/onlinespec")
-	PageInfo<OnlOnlineSpecMo> list(@RequestBody OnlOnlineSpecMo qo,
+	PageInfo<OnlOnlineSpecMo> list(OnlOnlineSpecMo qo,
 			@RequestParam("pageNum") int pageNum,
 			@RequestParam("pageSize") int pageSize) {
 		_log.info("list OnlOnlineSpecMo:" + qo + ", pageNum = " + pageNum
@@ -99,7 +99,7 @@ public class OnlOnlineSpecCtrl {
 	 * @date 2018年4月1日 下午4:29:31
 	 */
 	@GetMapping(value = "/onl/onlinespec/details")
-	List<OnlOnlineSpecInfoRo> selectOnlineSpecInfo(@RequestBody OnlOnlineSpecMo mo) {
+	List<OnlOnlineSpecInfoRo> selectOnlineSpecInfo(OnlOnlineSpecMo mo) {
 		_log.info("获取上线规格信息的参数为：{}", mo.toString());
 		return svc.selectOnlineSpecInfo(mo);
 	}
@@ -112,7 +112,7 @@ public class OnlOnlineSpecCtrl {
 	 * @date 2018年4月10日 下午2:28:28
 	 */
 	@PutMapping(value = "/onl/onlinespec")
-	Map<String, Object> updateSelective(@RequestBody OnlOnlineSpecMo mo) {
+	Map<String, Object> updateSelective(OnlOnlineSpecMo mo) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		try {
 			int result = svc.updateSelective(mo);
@@ -141,7 +141,7 @@ public class OnlOnlineSpecCtrl {
 	 */
 	@PostMapping(value = "/onl/onlinespec/selectandupdate")
 	@ResponseBody
-	Map<String, Object> updateSpenInfo(@RequestBody List<Map<String, Object>> specList) {
+	Map<String, Object> updateSpenInfo(List<Map<String, Object>> specList) {
 		_log.info("查询和修改上线规格信息为：{}", String.valueOf(specList));
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		try {
