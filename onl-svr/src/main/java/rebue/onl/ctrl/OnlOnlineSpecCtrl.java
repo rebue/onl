@@ -61,7 +61,7 @@ public class OnlOnlineSpecCtrl {
 	 * @mbg.generated
 	 */
 	@GetMapping("/onl/onlinespec")
-	PageInfo<OnlOnlineSpecMo> list(OnlOnlineSpecMo qo,
+	PageInfo<OnlOnlineSpecMo> list(@RequestBody OnlOnlineSpecMo qo,
 			@RequestParam("pageNum") int pageNum,
 			@RequestParam("pageSize") int pageSize) {
 		_log.info("list OnlOnlineSpecMo:" + qo + ", pageNum = " + pageNum
@@ -99,7 +99,7 @@ public class OnlOnlineSpecCtrl {
 	 * @date 2018年4月1日 下午4:29:31
 	 */
 	@GetMapping(value = "/onl/onlinespec/details")
-	List<OnlOnlineSpecInfoRo> selectOnlineSpecInfo(OnlOnlineSpecMo mo) {
+	List<OnlOnlineSpecInfoRo> selectOnlineSpecInfo(@RequestBody OnlOnlineSpecMo mo) {
 		_log.info("获取上线规格信息的参数为：{}", mo.toString());
 		return svc.selectOnlineSpecInfo(mo);
 	}
@@ -112,7 +112,7 @@ public class OnlOnlineSpecCtrl {
 	 * @date 2018年4月10日 下午2:28:28
 	 */
 	@PutMapping(value = "/onl/onlinespec")
-	Map<String, Object> updateSelective(OnlOnlineSpecMo mo) {
+	Map<String, Object> updateSelective(@RequestBody OnlOnlineSpecMo mo) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		try {
 			int result = svc.updateSelective(mo);
@@ -175,7 +175,7 @@ public class OnlOnlineSpecCtrl {
 	 * @date 2018年4月11日 下午5:52:30
 	 */
 	@PostMapping(value = "/onl/onlinespec/deleteandupdate")
-	Map<String, Object> deleteCartAndUpdateOnlineCount(String cartAndSpecInfo)
+	Map<String, Object> deleteCartAndUpdateOnlineCount(@RequestParam("cartAndSpecInfo") String cartAndSpecInfo)
 			throws JsonParseException, JsonMappingException, IOException {
 		_log.info("删除购物车和修改上线数量的参数为：", cartAndSpecInfo);
 		Map<String, Object> resultMap = new HashMap<String, Object>();

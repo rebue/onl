@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,7 +41,7 @@ public class OnlCartCtrl {
 	 * @mbg.generated
 	 */
 	@PutMapping("/onl/cart")
-	Map<String, Object> modify(OnlCartMo vo) throws Exception {
+	Map<String, Object> modify(@RequestBody OnlCartMo vo) throws Exception {
 		_log.info("modify OnlCartMo:" + vo);
 		svc.modify(vo);
 		Map<String, Object> result = new HashMap<>();
@@ -86,7 +87,7 @@ public class OnlCartCtrl {
 	 * @date 2018年3月29日 下午2:27:03
 	 */
 	@PostMapping("/onl/cart")
-	Map<String, Object> add(OnlCartMo vo) throws Exception {
+	Map<String, Object> add(@RequestBody OnlCartMo vo) throws Exception {
 		_log.info("加入购物车的参数为：" + vo.toString());
 		return svc.addEx(vo);
 	}
@@ -99,7 +100,7 @@ public class OnlCartCtrl {
 	 * @date 2018年3月29日 下午2:54:51
 	 */
 	@DeleteMapping(value = "/onl/cart")
-	Map<String, Object> del(OnlCartMo vo) {
+	Map<String, Object> del(@RequestBody OnlCartMo vo) {
 		_log.info("删除购物车的参数为：" + vo.toString());
 		int result = svc.deleteByUserIdAndCartId(vo);
 		_log.info("删除购物车的返回值为：{}", result);
@@ -124,7 +125,7 @@ public class OnlCartCtrl {
 	 * @date 2018年3月30日 上午10:52:33
 	 */
 	@GetMapping("/onl/cart/count")
-	int Cartcount(OnlCartMo qo) {
+	int Cartcount(@RequestBody OnlCartMo qo) {
 		_log.info("查询购物车的参数为：{}", qo.toString());
 		return svc.selectCartCount(qo);
 	}
@@ -137,7 +138,7 @@ public class OnlCartCtrl {
 	 * @date 2018年3月30日 下午1:56:38
 	 */
 	@GetMapping("/onl/cart")
-	List<OnlCartRo> selectCartList(OnlCartMo qo) {
+	List<OnlCartRo> selectCartList(@RequestBody OnlCartMo qo) {
 		return svc.selectCartList(qo);
 	}
 

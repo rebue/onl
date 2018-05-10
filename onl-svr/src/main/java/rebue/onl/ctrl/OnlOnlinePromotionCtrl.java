@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,7 +42,7 @@ public class OnlOnlinePromotionCtrl {
 	 * @mbg.generated
 	 */
 	@PutMapping("/onl/onlinepromotion")
-	Map<String, Object> modify(OnlOnlinePromotionMo vo) throws Exception {
+	Map<String, Object> modify(@RequestBody OnlOnlinePromotionMo vo) throws Exception {
 		_log.info("modify OnlOnlinePromotionMo:" + vo);
 		svc.modify(vo);
 		Map<String, Object> result = new HashMap<>();
@@ -56,7 +57,7 @@ public class OnlOnlinePromotionCtrl {
 	 * @mbg.generated
 	 */
 	@GetMapping("/onl/onlinepromotion")
-	PageInfo<OnlOnlinePromotionMo> list(OnlOnlinePromotionMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+	PageInfo<OnlOnlinePromotionMo> list(@RequestBody OnlOnlinePromotionMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
 		_log.info("list OnlOnlinePromotionMo:" + qo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
 
 		if (pageSize > 50) {
@@ -92,7 +93,7 @@ public class OnlOnlinePromotionCtrl {
 	 * @date 2018年3月28日 下午4:30:00
 	 */
 	@PostMapping("/onl/onlinepromotion")
-	Map<String, Object> add(OnlOnlinePromotionMo vo) throws Exception {
+	Map<String, Object> add(@RequestBody OnlOnlinePromotionMo vo) throws Exception {
 		_log.info("开始上线商品推广，添加上线商品推广的参数为：" + vo.toString());
 		boolean flag = svc.existSelective(vo);
 		_log.info("判断改商品是否已推广：{}", flag);
@@ -154,7 +155,7 @@ public class OnlOnlinePromotionCtrl {
 	 * @date 2018年3月28日 下午5:37:01
 	 */
 	@GetMapping("/onl/onlinepromotion/exist")
-	boolean existSelective(OnlOnlinePromotionMo vo) {
+	boolean existSelective(@RequestBody OnlOnlinePromotionMo vo) {
 		return svc.existSelective(vo);
 	}
 

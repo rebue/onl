@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,7 +54,7 @@ public class OnlOnlineCtrl {
 	 */
 	@SuppressWarnings("finally")
 	@PostMapping("/onl/online")
-	Map<String, Object> add(String onlineInfo) {
+	Map<String, Object> add(@RequestParam("onlineInfo") String onlineInfo) {
 		_log.info("开始发布商品，发布商品的参数为：" + onlineInfo);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		try {
@@ -104,7 +105,7 @@ public class OnlOnlineCtrl {
 	 * @date 2018年3月28日 下午3:06:09
 	 */
 	@GetMapping("/onl/online")
-	PageInfo<OnlOnlineMo> list(OnlOnlineMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+	PageInfo<OnlOnlineMo> list(@RequestBody OnlOnlineMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
 		_log.info("list OnlOnlineSpecMo:" + qo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
 		if (pageSize > 50) {
 			String msg = "pageSize不能大于50";
@@ -125,7 +126,7 @@ public class OnlOnlineCtrl {
 	 * @date 2018年3月28日 下午3:14:23
 	 */
 	@PutMapping("/onl/online")
-	Map<String, Object> modify(OnlOnlineMo vo) throws Exception {
+	Map<String, Object> modify(@RequestBody OnlOnlineMo vo) throws Exception {
 		_log.info("开始商品下线，商品下线的参数为：" + vo.toString());
 		int result = svc.modify(vo);
 		Map<String, Object> resultMap = new HashMap<>();
@@ -173,7 +174,7 @@ public class OnlOnlineCtrl {
 	 */
 	@SuppressWarnings("finally")
 	@PostMapping("/onl/online/anewonline")
-	Map<String, Object> anewOnline(String onlineInfo) throws JsonProcessingException, IOException {
+	Map<String, Object> anewOnline(@RequestParam("onlineInfo") String onlineInfo) throws JsonProcessingException, IOException {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		try {
 			resultMap = svc.anewOnline(onlineInfo);
