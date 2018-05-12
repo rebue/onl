@@ -102,11 +102,15 @@ public class OnlOnlineSvcImpl
 		String onlineDetail = String.valueOf(onlineMap.get("onlineDetail"));
 		if (onlineTitle == null || onlineTitle.equals("null")
 				|| onlineTitle.equals("")) {
-			throw new RuntimeException("上线标题不能为空");
+			map.put("result", -1);
+			map.put("msg", "上线标题不能为空");
+			return map;
 		}
 		if (onlineDetail == null || onlineDetail.equals("")
 				|| onlineDetail.equals("null")) {
-			throw new RuntimeException("上线详情不能为空");
+			map.put("result", -2);
+			map.put("msg", "上线详情不能为空");
+			return map;
 		}
 		oom.setId(onlineId);
 		oom.setOnlineTitle(onlineTitle);
@@ -114,8 +118,7 @@ public class OnlOnlineSvcImpl
 		oom.setOnlineState((byte) 1);
 		oom.setOnlineTime(date);
 		oom.setOpId(Long.parseLong(String.valueOf(onlineMap.get("opId"))));
-		long productId = Long.parseLong(String.valueOf(onlineMap
-				.get("produceId")));
+		long productId = Long.parseLong(String.valueOf(onlineMap.get("produceId")));
 		productId = productId == 0 ? onlineId : productId;
 		oom.setProduceId(productId);
 		_log.info("判断产品是否已上线的参数为：{}", productId);
@@ -123,7 +126,9 @@ public class OnlOnlineSvcImpl
 		_log.info("判断产品是否已上线的返回值为：{}", existOnlineResult);
 		if (existOnlineResult) {
 			_log.error("该商品已上线");
-			throw new RuntimeException("该商品已上线");
+			map.put("result", -3);
+			map.put("msg", "该商品已上线");
+			return map;
 		}
 		_log.info("添加商品上线信息的参数为：{}", oom.toString());
 		int addOnlineGoodsResult = add(oom);

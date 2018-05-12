@@ -62,31 +62,22 @@ public class OnlOnlineCtrl {
 		} catch (RuntimeException e) {
 			String msg = e.getMessage();
 			_log.error("===============添加上线商品出现异常了============={}", msg);
-			if (msg.equals("上线标题不能为空")) {
-				resultMap.put("msg", "上线标题不能为空");
-				resultMap.put("result", -1);
-			} else if (msg.equals("上线详情不能为空")) {
-				resultMap.put("msg", "上线详情不能为空");
-				resultMap.put("result", -2);
-			} else if (msg.equals("添加商品上线信息出错")) {
-				resultMap.put("msg", "添加商品上线信息出错");
-				resultMap.put("result", -3);
-			} else if (msg.equals("添加商品规格信息出错")) {
-				resultMap.put("msg", "添加商品规格信息出错");
+			if (msg.equals("添加商品上线信息出错")) {
+				resultMap.put("msg", msg);
 				resultMap.put("result", -4);
-			} else if (msg.equals("商品规格不能为空")) {
-				resultMap.put("msg", "商品规格不能为空");
+			} else if (msg.equals("添加商品规格信息出错")) {
+				resultMap.put("msg", msg);
 				resultMap.put("result", -5);
-			} else if (msg.equals("添加商品主图出错")) {
-				resultMap.put("msg", "添加商品主图出错");
+			} else if (msg.equals("商品规格不能为空")) {
+				resultMap.put("msg", msg);
 				resultMap.put("result", -6);
-			} else if (msg.equals("添加商品轮播图出错")) {
-				resultMap.put("msg", "添加商品轮播图出错");
+			} else if (msg.equals("添加商品主图出错")) {
+				resultMap.put("msg", msg);
 				resultMap.put("result", -7);
-			} else if (msg.equals("该商品已上线")) {
-				resultMap.put("msg", "该商品已上线");
+			} else if (msg.equals("添加商品轮播图出错")) {
+				resultMap.put("msg", msg);
 				resultMap.put("result", -8);
-			} else {
+			}  else {
 				resultMap.put("msg", "发布商品失败");
 				resultMap.put("result", -9);
 			}
