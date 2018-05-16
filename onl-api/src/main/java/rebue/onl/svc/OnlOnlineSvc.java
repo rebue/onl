@@ -8,11 +8,11 @@ import java.util.Map;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+
+import rebue.onl.ro.GoodsOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 
-public interface OnlOnlineSvc
-		extends
-			MybatisBaseSvc<OnlOnlineMo, java.lang.Long> {
+public interface OnlOnlineSvc extends MybatisBaseSvc<OnlOnlineMo, java.lang.Long> {
 
 	/**
 	 * 商品上线 Title: addEx Description:
@@ -24,8 +24,7 @@ public interface OnlOnlineSvc
 	 * @throws IOException
 	 * @date 2018年3月29日 上午11:24:09
 	 */
-	Map<String, Object> addEx(String onlineInfo) throws JsonParseException,
-			JsonMappingException, IOException;
+	GoodsOnlineRo goodsOnline(String onlineInfo) throws JsonParseException, JsonMappingException, IOException;
 
 	/**
 	 * 获取上线商品列表 Title: selectOnlineGoodsList Description:
@@ -44,7 +43,6 @@ public interface OnlOnlineSvc
 	 * @throws IOException
 	 * @date 2018年4月3日 上午11:12:05
 	 */
-	Map<String, Object> anewOnline(String onlineInfo)
-			throws JsonProcessingException, IOException;
+	GoodsOnlineRo anewOnline(String onlineInfo) throws JsonProcessingException, IOException;
 
 }

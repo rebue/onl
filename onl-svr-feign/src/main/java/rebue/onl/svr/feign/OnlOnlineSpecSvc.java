@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.sbs.feign.FeignConfig;
 
@@ -34,8 +33,7 @@ public interface OnlOnlineSpecSvc {
 	 * @date 2018年4月23日 下午6:18:40
 	 */
 	@PostMapping(value = "/onl/onlinespec/selectandupdate")
-	@ResponseBody
-	Map<String, Object> updateSpenInfo(List<Map<String, Object>> specList);
+	ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(@RequestBody List<Map<String, Object>> specList);
 	
 	/**
 	 * 获取上线规格信息 Title: selectOnlineSpecInfoByOnlineId Description:

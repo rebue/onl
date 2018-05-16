@@ -12,17 +12,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import rebue.onl.dic.GoodsOnlineDic;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.svc.OnlOnlineSvc;
+
 import com.github.pagehelper.PageInfo;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+import rebue.onl.ro.GoodsOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 
 @RestController
@@ -54,35 +57,32 @@ public class OnlOnlineCtrl {
 	 */
 	@SuppressWarnings("finally")
 	@PostMapping("/onl/online")
-	Map<String, Object> add(@RequestParam("onlineInfo") String onlineInfo) {
+	GoodsOnlineRo goodsOnline(@RequestParam("onlineInfo") String onlineInfo) {
 		_log.info("开始发布商品，发布商品的参数为：" + onlineInfo);
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		GoodsOnlineRo goodsOnlineRo = new GoodsOnlineRo();
 		try {
-			resultMap = svc.addEx(onlineInfo);
+			goodsOnlineRo = svc.goodsOnline(onlineInfo);
 		} catch (RuntimeException e) {
 			String msg = e.getMessage();
 			_log.error("===============添加上线商品出现异常了============={}", msg);
-			if (msg.equals("添加商品上线信息出错")) {
-				resultMap.put("msg", msg);
-				resultMap.put("result", -4);
-			} else if (msg.equals("添加商品规格信息出错")) {
-				resultMap.put("msg", msg);
-				resultMap.put("result", -5);
+			if (msg.equals("添加商品规格信息出错")) {
+				goodsOnlineRo.setResult(GoodsOnlineDic.ADD_GOODS_SPEC_ERROR);
+				goodsOnlineRo.setMsg(msg);
 			} else if (msg.equals("商品规格不能为空")) {
-				resultMap.put("msg", msg);
-				resultMap.put("result", -6);
+				goodsOnlineRo.setResult(GoodsOnlineDic.GOODS_SPEC_NOT_NULL);
+				goodsOnlineRo.setMsg(msg);
 			} else if (msg.equals("添加商品主图出错")) {
-				resultMap.put("msg", msg);
-				resultMap.put("result", -7);
+				goodsOnlineRo.setResult(GoodsOnlineDic.ADD_GOODS_QSMM_ERROR);
+				goodsOnlineRo.setMsg(msg);
 			} else if (msg.equals("添加商品轮播图出错")) {
-				resultMap.put("msg", msg);
-				resultMap.put("result", -8);
-			}  else {
-				resultMap.put("msg", "发布商品失败");
-				resultMap.put("result", -9);
+				goodsOnlineRo.setResult(GoodsOnlineDic.ADD_GOODS_CAROUSEL_ERROR);
+				goodsOnlineRo.setMsg(msg);
+			} else {
+				goodsOnlineRo.setResult(GoodsOnlineDic.ERROR);
+				goodsOnlineRo.setMsg("发布商品失败");
 			}
 		} finally {
-			return resultMap;
+			return goodsOnlineRo;
 		}
 	}
 
@@ -96,7 +96,8 @@ public class OnlOnlineCtrl {
 	 * @date 2018年3月28日 下午3:06:09
 	 */
 	@GetMapping("/onl/online")
-	PageInfo<OnlOnlineMo> list(OnlOnlineMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+	PageInfo<OnlOnlineMo> list(OnlOnlineMo qo, @RequestParam("pageNum") int pageNum,
+			@RequestParam("pageSize") int pageSize) {
 		_log.info("list OnlOnlineSpecMo:" + qo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
 		if (pageSize > 50) {
 			String msg = "pageSize不能大于50";
@@ -151,7 +152,7 @@ public class OnlOnlineCtrl {
 		} finally {
 			return list;
 		}
-		
+
 	}
 
 	/**
@@ -165,40 +166,32 @@ public class OnlOnlineCtrl {
 	 */
 	@SuppressWarnings("finally")
 	@PostMapping("/onl/online/anewonline")
-	Map<String, Object> anewOnline(@RequestParam("onlineInfo") String onlineInfo) throws JsonProcessingException, IOException {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+	GoodsOnlineRo anewOnline(@RequestParam("onlineInfo") String onlineInfo)
+			throws JsonProcessingException, IOException {
+		GoodsOnlineRo goodsOnlineRo = new GoodsOnlineRo();
 		try {
-			resultMap = svc.anewOnline(onlineInfo);
+			goodsOnlineRo = svc.anewOnline(onlineInfo);
 		} catch (RuntimeException e) {
 			String msg = e.getMessage();
-			_log.error("===============添加上线商品出现异常了============={}", msg);
-			if (msg.equals("上线标题不能为空")) {
-				resultMap.put("msg", "上线标题不能为空");
-				resultMap.put("result", -1);
-			} else if (msg.equals("上线详情不能为空")) {
-				resultMap.put("msg", "上线详情不能为空");
-				resultMap.put("result", -2);
-			} else if (msg.equals("添加商品上线信息出错")) {
-				resultMap.put("msg", "添加商品上线信息出错");
-				resultMap.put("result", -3);
-			} else if (msg.equals("添加商品规格信息出错")) {
-				resultMap.put("msg", "添加商品规格信息出错");
-				resultMap.put("result", -4);
+			_log.error("===============c重新上线商品出现异常了============={}", msg);
+			if (msg.equals("添加商品规格信息出错")) {
+				goodsOnlineRo.setResult(GoodsOnlineDic.ADD_GOODS_SPEC_ERROR);
+				goodsOnlineRo.setMsg(msg);
 			} else if (msg.equals("商品规格不能为空")) {
-				resultMap.put("msg", "商品规格不能为空");
-				resultMap.put("result", -5);
+				goodsOnlineRo.setResult(GoodsOnlineDic.GOODS_SPEC_NOT_NULL);
+				goodsOnlineRo.setMsg(msg);
 			} else if (msg.equals("添加商品主图出错")) {
-				resultMap.put("msg", "添加商品主图出错");
-				resultMap.put("result", -6);
+				goodsOnlineRo.setResult(GoodsOnlineDic.ADD_GOODS_QSMM_ERROR);
+				goodsOnlineRo.setMsg(msg);
 			} else if (msg.equals("添加商品轮播图出错")) {
-				resultMap.put("msg", "添加商品轮播图出错");
-				resultMap.put("result", -7);
+				goodsOnlineRo.setResult(GoodsOnlineDic.ADD_GOODS_CAROUSEL_ERROR);
+				goodsOnlineRo.setMsg(msg);
 			} else {
-				resultMap.put("msg", "重新上线失败");
-				resultMap.put("result", -8);
+				goodsOnlineRo.setResult(GoodsOnlineDic.ERROR);
+				goodsOnlineRo.setMsg("重新上线失败");
 			}
 		} finally {
-			return resultMap;
+			return goodsOnlineRo;
 		}
 	}
 

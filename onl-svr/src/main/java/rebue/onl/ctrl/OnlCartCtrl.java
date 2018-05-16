@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rebue.onl.mo.OnlCartMo;
 import rebue.onl.svc.OnlCartSvc;
 import java.util.List;
+
+import rebue.onl.ro.AddCartRo;
 import rebue.onl.ro.OnlCartRo;
 
 @RestController
@@ -26,8 +27,7 @@ public class OnlCartCtrl {
 	/**
 	 * @mbg.generated
 	 */
-	private final static Logger _log = LoggerFactory
-			.getLogger(OnlCartCtrl.class);
+	private final static Logger _log = LoggerFactory.getLogger(OnlCartCtrl.class);
 
 	/**
 	 * @mbg.generated
@@ -87,9 +87,9 @@ public class OnlCartCtrl {
 	 * @date 2018年3月29日 下午2:27:03
 	 */
 	@PostMapping("/onl/cart")
-	Map<String, Object> add(OnlCartMo vo) throws Exception {
+	AddCartRo addCart(OnlCartMo vo) throws Exception {
 		_log.info("加入购物车的参数为：" + vo.toString());
-		return svc.addEx(vo);
+		return svc.addCart(vo);
 	}
 
 	/**

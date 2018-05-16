@@ -4,17 +4,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import rebue.onl.dic.AddCartDic;
 import rebue.onl.mapper.OnlCartMapper;
 import rebue.onl.mo.OnlCartMo;
 import rebue.onl.svc.OnlCartSvc;
 
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import rebue.onl.ro.AddCartRo;
 import rebue.onl.ro.OnlCartRo;
 
 @Service
@@ -30,16 +32,11 @@ import rebue.onl.ro.OnlCartRo;
  * </pre>
  */
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-public class OnlCartSvcImpl
-		extends
-			MybatisBaseSvcImpl<OnlCartMo, java.lang.Long, OnlCartMapper>
-		implements
-			OnlCartSvc {
+public class OnlCartSvcImpl extends MybatisBaseSvcImpl<OnlCartMo, java.lang.Long, OnlCartMapper> implements OnlCartSvc {
 
 	/**
 	 */
-	private final static Logger _log = LoggerFactory
-			.getLogger(OnlCartSvcImpl.class);
+	private final static Logger _log = LoggerFactory.getLogger(OnlCartSvcImpl.class);
 
 	/**
 	 * @mbg.generated
@@ -68,10 +65,10 @@ public class OnlCartSvcImpl
 	 */
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public Map<String, Object> addEx(OnlCartMo mo) {
+	public AddCartRo addCart(OnlCartMo mo) {
 		List<OnlCartMo> list = _mapper.selectSelective(mo);
 		_log.info("查询购物车的返回值为：{}", String.valueOf(list));
-		Map<String, Object> resultMap = new HashMap<>();
+		AddCartRo addCartRo = new AddCartRo();
 		Date joinTime = new Date();
 		mo.setJoinTime(joinTime);
 		int result = 0;
@@ -82,12 +79,12 @@ public class OnlCartSvcImpl
 			_log.info("加入购物车的返回值为：{}", result);
 			if (result < 1) {
 				_log.error("用户编号为：{}，加入购物车失败", mo.getUserId());
-				resultMap.put("msg", "加入购物车失败");
-				resultMap.put("result", result);
+				addCartRo.setResult(AddCartDic.ERROR);
+				addCartRo.setMsg("加入购物车失败");
 			} else {
 				_log.info("用户编号为：{}，加入购物车成功", mo.getUserId());
-				resultMap.put("msg", "加入购物车成功");
-				resultMap.put("result", 1);
+				addCartRo.setResult(AddCartDic.SUCCESS);
+				addCartRo.setMsg("加入购物车成功");
 			}
 		} else {
 			mo.setId(list.get(0).getId());
@@ -97,17 +94,18 @@ public class OnlCartSvcImpl
 			_log.info("用户修改购物数量的返回值为：{}", result);
 			if (result < 1) {
 				_log.error("用户编号为：{}，加入购物车失败", mo.getUserId());
-				resultMap.put("msg", "加入购物车失败");
-				resultMap.put("result", result);
+				addCartRo.setResult(AddCartDic.ERROR);
+				addCartRo.setMsg("加入购物车失败");
+
 			} else {
 				_log.info("用户编号为：{}，加入购物车成功", mo.getUserId());
-				resultMap.put("msg", "加入购物车成功");
-				resultMap.put("result", 1);
+				addCartRo.setResult(AddCartDic.SUCCESS);
+				addCartRo.setMsg("加入购物车成功");
 			}
 		}
 		int cartCount = _mapper.selectCartCountByUserId(mo);
-		resultMap.put("cartCount", cartCount);
-		return resultMap;
+		addCartRo.setCartCount(cartCount);
+		return addCartRo;
 	}
 
 	/**

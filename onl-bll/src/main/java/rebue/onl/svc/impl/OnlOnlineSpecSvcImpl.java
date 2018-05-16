@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import rebue.onl.dic.ModifyOnlineSpecInfoDic;
 import rebue.onl.mapper.OnlOnlineSpecMapper;
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.svc.OnlOnlineSpecSvc;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.svc.OnlCartSvc;
 import rebue.onl.svc.OnlOnlineSvc;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import rebue.onl.ro.DeleteCartAndModifyInventoryRo;
+import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 
 @Service
@@ -179,7 +182,7 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 	}
 
 	/**
-	 * 查询和修改上线规格信息
+	 * 修改上线规格信息
 	 * Title: resultMap
 	 * Description: 
 	 * @param mo
@@ -188,12 +191,16 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 	 */
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public Map<String, Object> updateSpenInfo(List<Map<String, Object>> specList) {
+	public ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(List<Map<String, Object>> specList) {
 		_log.info("查询和修改上线规格信息的参数为：{}", String.valueOf(specList));
+		ModifyOnlineSpecInfoRo modifyOnlineSpecInfoRo = new ModifyOnlineSpecInfoRo();
 		if (specList.size() == 0) {
 			_log.info("查询和修改上线规格信息的时候出现参数有误");
-			throw new RuntimeException("参数有误");
+			modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.PARAMETER_IS_WRONG);
+			modifyOnlineSpecInfoRo.setMsg("参数有误");
+			return modifyOnlineSpecInfoRo;
 		}
+		
 		for (int i = 0; i < specList.size(); i++) {
 			OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
 			onlineSpecMo.setOnlineId(Long.parseLong(String.valueOf(specList.get(i).get("onlineId"))));
@@ -204,7 +211,9 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 			_log.info("获取上线规格信息的返回值为：{}", String.valueOf(onlineSpecInfoRoList));
 			if (onlineSpecInfoRoList.size() == 0) {
 				_log.error("查询和修改上线规格信息时出现没有该规格信息");
-				throw new RuntimeException(specList.get(i).get("specName") + "没有该规格信息");
+				modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.ON_SPEC_INFO);
+				modifyOnlineSpecInfoRo.setMsg(specList.get(i).get("specName") + "没有该规格信息");
+				return modifyOnlineSpecInfoRo;
 			}
 			// 修改后的上线数量
 			int updateStockCount = onlineSpecInfoRoList.get(0).getSaleCount() + Integer.parseInt(String.valueOf(specList.get(i).get("buyCount")));
@@ -217,9 +226,8 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 				throw new RuntimeException("修改上线数量出错");
 			}
 		}
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("result", 1);
-		resultMap.put("msg", "修改成功");
-		return resultMap;
+		modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.SUCCESS);
+		modifyOnlineSpecInfoRo.setMsg("修改成功");
+		return modifyOnlineSpecInfoRo;
 	}
 }

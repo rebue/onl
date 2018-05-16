@@ -4,6 +4,8 @@ import rebue.robotech.svc.MybatisBaseSvc;
 import rebue.onl.mo.OnlCartMo;
 import java.util.List;
 import java.util.Map;
+
+import rebue.onl.ro.AddCartRo;
 import rebue.onl.ro.OnlCartRo;
 
 public interface OnlCartSvc extends MybatisBaseSvc<OnlCartMo, java.lang.Long> {
@@ -33,7 +35,7 @@ public interface OnlCartSvc extends MybatisBaseSvc<OnlCartMo, java.lang.Long> {
 	 * @return
 	 * @date 2018年3月30日 上午10:03:22
 	 */
-	Map<String, Object> addEx(OnlCartMo mo);
+	AddCartRo addCart(OnlCartMo mo);
 
 	/**
 	 * 获取购物车数量 Title: selectCartCount Description:

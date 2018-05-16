@@ -4,16 +4,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import rebue.onl.dic.GoodsOnlineDic;
 import rebue.onl.mapper.OnlOnlineMapper;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.svc.OnlOnlineSvc;
-
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -27,6 +26,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import rebue.onl.mo.OnlOnlinePicMo;
 import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.ro.GoodsOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 import rebue.onl.svc.OnlOnlinePicSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
@@ -44,16 +44,12 @@ import rebue.onl.svc.OnlOnlineSpecSvc;
  * </pre>
  */
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-public class OnlOnlineSvcImpl
-		extends
-			MybatisBaseSvcImpl<OnlOnlineMo, java.lang.Long, OnlOnlineMapper>
-		implements
-			OnlOnlineSvc {
+public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.Long, OnlOnlineMapper>
+		implements OnlOnlineSvc {
 
 	/**
 	 */
-	private final static Logger _log = LoggerFactory
-			.getLogger(OnlOnlineSvcImpl.class);
+	private final static Logger _log = LoggerFactory.getLogger(OnlOnlineSvcImpl.class);
 	/**
 	 */
 	@Resource
@@ -87,30 +83,30 @@ public class OnlOnlineSvcImpl
 	 * @throws JsonMappingException
 	 * @throws JsonParseException
 	 */
-	@SuppressWarnings({"unchecked"})
+	@SuppressWarnings({ "unchecked" })
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public Map<String, Object> addEx(String onlineInfo) throws JsonParseException, JsonMappingException, IOException {
+	public GoodsOnlineRo goodsOnline(String onlineInfo) throws JsonParseException, JsonMappingException, IOException {
 		JsonParser jsonParser = JsonParserFactory.getJsonParser();
 		Map<String, Object> onlineMap = jsonParser.parseMap(onlineInfo);
 		_log.info("商品上线信息为：{}", onlineMap);
-		Map<String, Object> map = new HashMap<String, Object>();
+		GoodsOnlineRo goodsOnlineRo = new GoodsOnlineRo();
 		long onlineId = _idWorker.getId();
 		Date date = new Date();
 		OnlOnlineMo oom = new OnlOnlineMo();
 		String onlineTitle = String.valueOf(onlineMap.get("onlineTitle"));
 		String onlineDetail = String.valueOf(onlineMap.get("onlineDetail"));
-		if (onlineTitle == null || onlineTitle.equals("null")
-				|| onlineTitle.equals("")) {
-			map.put("result", -1);
-			map.put("msg", "上线标题不能为空");
-			return map;
+		if (onlineTitle == null || onlineTitle.equals("null") || onlineTitle.equals("")) {
+			_log.error("商品上线时出现上线标题为空");
+			goodsOnlineRo.setResult(GoodsOnlineDic.ONLINE_TITLE_NOT_NULL);
+			goodsOnlineRo.setMsg("上线标题不能为空");
+			return goodsOnlineRo;
 		}
-		if (onlineDetail == null || onlineDetail.equals("")
-				|| onlineDetail.equals("null")) {
-			map.put("result", -2);
-			map.put("msg", "上线详情不能为空");
-			return map;
+		if (onlineDetail == null || onlineDetail.equals("") || onlineDetail.equals("null")) {
+			_log.error("商品上线时出现上线详情为空");
+			goodsOnlineRo.setResult(GoodsOnlineDic.ONLINE_DETAIL_NOT_NULL);
+			goodsOnlineRo.setMsg("上线详情不能为空");
+			return goodsOnlineRo;
 		}
 		oom.setId(onlineId);
 		oom.setOnlineTitle(onlineTitle);
@@ -125,39 +121,34 @@ public class OnlOnlineSvcImpl
 		boolean existOnlineResult = _mapper.existOnlineByProduceId(oom);
 		_log.info("判断产品是否已上线的返回值为：{}", existOnlineResult);
 		if (existOnlineResult) {
-			_log.error("该商品已上线");
-			map.put("result", -3);
-			map.put("msg", "该商品已上线");
-			return map;
+			_log.error("商品上线时出现商品已上线");
+			goodsOnlineRo.setResult(GoodsOnlineDic.GOODS_ALREADY_ONLINE);
+			goodsOnlineRo.setMsg("该商品已上线");
+			return goodsOnlineRo;
 		}
 		_log.info("添加商品上线信息的参数为：{}", oom.toString());
 		int addOnlineGoodsResult = add(oom);
 		_log.info("添加商品上线信息的返回值为：{}", addOnlineGoodsResult);
 		if (addOnlineGoodsResult < 1) {
 			_log.error("添加商品上线信息出错，返回值为：{}", addOnlineGoodsResult);
-			throw new RuntimeException("添加商品上线信息出错");
+			goodsOnlineRo.setResult(GoodsOnlineDic.ADD_GOODS_ONLINE_ERROR);
+			goodsOnlineRo.setMsg("添加商品上线信息出错");
+			return goodsOnlineRo;
 		}
 		ObjectMapper mapper = new ObjectMapper();
 		String str = mapper.writeValueAsString(onlineMap.get("specs"));
 		_log.info("将商品规格信息转为json字符串：{}", str);
-		JavaType javaType = mapper.getTypeFactory().constructParametricType(
-				ArrayList.class, Map.class);
-		List<Map<String, Object>> list = (List<Map<String, Object>>) mapper
-				.readValue(str, javaType);
+		JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, Map.class);
+		List<Map<String, Object>> list = (List<Map<String, Object>>) mapper.readValue(str, javaType);
 		_log.info("商品规格信息为：{}", list.toString());
 		if (list.size() != 0) {
 			for (int i = 0; i < list.size(); i++) {
 				OnlOnlineSpecMo oosm = new OnlOnlineSpecMo();
-				String onlineSpec = String
-						.valueOf(list.get(i).get("goodsSpec"));
-				int saleCount = Integer.parseInt(String.valueOf(list.get(i)
-						.get("saleCount")));
-				BigDecimal salePrice = new BigDecimal(String.valueOf(list
-						.get(i).get("goodsPrice")));
-				BigDecimal cashbackAmount = new BigDecimal(String.valueOf(list
-						.get(i).get("cashbackAmount")));
-				int seqNo = Integer.parseInt(String.valueOf(list.get(i).get(
-						"seqNo")));
+				String onlineSpec = String.valueOf(list.get(i).get("goodsSpec"));
+				int saleCount = Integer.parseInt(String.valueOf(list.get(i).get("saleCount")));
+				BigDecimal salePrice = new BigDecimal(String.valueOf(list.get(i).get("goodsPrice")));
+				BigDecimal cashbackAmount = new BigDecimal(String.valueOf(list.get(i).get("cashbackAmount")));
+				int seqNo = Integer.parseInt(String.valueOf(list.get(i).get("seqNo")));
 				String saleUnit = String.valueOf(list.get(i).get("saleUnit"));
 				long specId = _idWorker.getId();
 				oosm.setId(specId);
@@ -184,7 +175,8 @@ public class OnlOnlineSvcImpl
 		oopm.setId(_idWorker.getId());
 		oopm.setOnlineId(onlineId);
 		oopm.setPicPath(String.valueOf(onlineMap.get("goodsQsmm")));
-		oopm.setPicType((byte) 1);;
+		oopm.setPicType((byte) 1);
+		;
 		_log.info("添加商品主图的参数为：{}", oopm.toString());
 		int addQsmmResult = onlOnlinePicSvc.add(oopm);
 		_log.info("添加商品主图的返回值为：{}", addQsmmResult);
@@ -192,8 +184,7 @@ public class OnlOnlineSvcImpl
 			_log.error("添加商品主图出错，返回值为：{}", addQsmmResult);
 			throw new RuntimeException("添加商品主图出错");
 		}
-		String[] carouselPics = String.valueOf(onlineMap.get("faceImg")).split(
-				",");
+		String[] carouselPics = String.valueOf(onlineMap.get("faceImg")).split(",");
 		for (int i = 0; i < carouselPics.length; i++) {
 			oopm = new OnlOnlinePicMo();
 			oopm.setId(_idWorker.getId());
@@ -208,9 +199,9 @@ public class OnlOnlineSvcImpl
 				throw new RuntimeException("添加商品轮播图出错");
 			}
 		}
-		map.put("msg", "发布成功");
-		map.put("result", 1);
-		return map;
+		goodsOnlineRo.setResult(GoodsOnlineDic.SUCCESS);
+		goodsOnlineRo.setMsg("发布成功");
+		return goodsOnlineRo;
 	}
 
 	/**
@@ -228,8 +219,8 @@ public class OnlOnlineSvcImpl
 	 * 重新上线 2018年4月3日11:35:18
 	 */
 	@Override
-	public Map<String, Object> anewOnline(String onlineInfo) throws IOException {
-		return onlOnlineSvc.addEx(onlineInfo);
+	public GoodsOnlineRo anewOnline(String onlineInfo) throws IOException {
+		return onlOnlineSvc.goodsOnline(onlineInfo);
 	}
 
 }

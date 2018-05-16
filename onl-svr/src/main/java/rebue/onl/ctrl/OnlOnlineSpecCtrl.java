@@ -14,16 +14,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import rebue.onl.dic.ModifyOnlineSpecInfoDic;
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.svc.OnlOnlineSpecSvc;
+
 import com.github.pagehelper.PageInfo;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import java.io.IOException;
 import java.util.List;
+
+import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 
 @RestController
@@ -31,8 +34,7 @@ public class OnlOnlineSpecCtrl {
 	/**
 	 * @mbg.generated
 	 */
-	private final static Logger _log = LoggerFactory
-			.getLogger(OnlOnlineSpecCtrl.class);
+	private final static Logger _log = LoggerFactory.getLogger(OnlOnlineSpecCtrl.class);
 
 	/**
 	 * @mbg.generated
@@ -61,11 +63,9 @@ public class OnlOnlineSpecCtrl {
 	 * @mbg.generated
 	 */
 	@GetMapping("/onl/onlinespec")
-	PageInfo<OnlOnlineSpecMo> list(OnlOnlineSpecMo qo,
-			@RequestParam("pageNum") int pageNum,
+	PageInfo<OnlOnlineSpecMo> list(OnlOnlineSpecMo qo, @RequestParam("pageNum") int pageNum,
 			@RequestParam("pageSize") int pageSize) {
-		_log.info("list OnlOnlineSpecMo:" + qo + ", pageNum = " + pageNum
-				+ ", pageSize = " + pageSize);
+		_log.info("list OnlOnlineSpecMo:" + qo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
 
 		if (pageSize > 50) {
 			String msg = "pageSize不能大于50";
@@ -130,38 +130,30 @@ public class OnlOnlineSpecCtrl {
 			return resultMap;
 		}
 	}
-	
+
 	/**
-	 * 查询并修改规格信息
-	 * Title: updateSpenInfo
-	 * Description: 
+	 * 查询并修改规格信息 Title: updateSpenInfo Description:
+	 * 
 	 * @param specList
 	 * @return
 	 * @date 2018年4月23日 下午6:17:55
 	 */
 	@PostMapping(value = "/onl/onlinespec/selectandupdate")
-	@ResponseBody
-	Map<String, Object> updateSpenInfo(List<Map<String, Object>> specList) {
+	ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(@RequestBody List<Map<String, Object>> specList) {
 		_log.info("查询和修改上线规格信息为：{}", String.valueOf(specList));
-		Map<String, Object> resultMap = new HashMap<String, Object>();
 		try {
-			return svc.updateSpenInfo(specList);
+			return svc.modifyOnlineSpecInfo(specList);
 		} catch (Exception e) {
+			ModifyOnlineSpecInfoRo modifyOnlineSpecInfoRo = new ModifyOnlineSpecInfoRo();
 			String msg = e.getMessage();
-			if (msg.equals("参数有误")) {
-				resultMap.put("result", -1);
-				resultMap.put("msg", msg);
-			} else if (msg.contains("没有该规格信息")) {
-				resultMap.put("result", -2);
-				resultMap.put("msg", msg);
-			} else if (msg.equals("修改上线数量出错")) {
-				resultMap.put("result", -3);
-				resultMap.put("msg", msg);
+			if (msg.equals("修改上线数量出错")) {
+				modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.MODIFY_ONLINE_COUNT_ERROR);
+				modifyOnlineSpecInfoRo.setMsg(msg);
 			} else {
-				resultMap.put("result", -3);
-				resultMap.put("msg", "修改失败");
+				modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.ERROR);
+				modifyOnlineSpecInfoRo.setMsg("修改失败");
 			}
-			return resultMap;
+			return modifyOnlineSpecInfoRo;
 		}
 	}
 
