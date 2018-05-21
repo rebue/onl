@@ -43,12 +43,12 @@ import rebue.onl.ro.OnlOnlineSpecInfoRo;
  * </pre>
  */
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, java.lang.Long, OnlOnlineSpecMapper> implements OnlOnlineSpecSvc {
+public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, java.lang.Long, OnlOnlineSpecMapper>
+		implements OnlOnlineSpecSvc {
 
 	/**
 	 */
-	private final static Logger _log = LoggerFactory
-			.getLogger(OnlOnlineSpecSvcImpl.class);
+	private final static Logger _log = LoggerFactory.getLogger(OnlOnlineSpecSvcImpl.class);
 	/**
 	 */
 	@Resource
@@ -113,12 +113,11 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public Map<String, Object> deleteCartAndModifyInventory(
-			String cartAndSpecInfo) throws JsonParseException,
-			JsonMappingException, IOException {
+	public Map<String, Object> deleteCartAndModifyInventory(String cartAndSpecInfo)
+			throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
-		JavaType javaType = mapper.getTypeFactory().constructParametricType(
-				ArrayList.class, DeleteCartAndModifyInventoryRo.class);
+		JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class,
+				DeleteCartAndModifyInventoryRo.class);
 		List<DeleteCartAndModifyInventoryRo> list = (List<DeleteCartAndModifyInventoryRo>) mapper
 				.readValue(cartAndSpecInfo, javaType);
 		_log.info("删除购物车和修改库存的参数为：{}", String.valueOf(list));
@@ -131,7 +130,7 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 			OnlOnlineMo onlineMo = new OnlOnlineMo();
 			onlineMo.setId(onlineId);
 			onlineMo.setOnlineState((byte) 1);
-			_log.info("查询商品是否已上线的参数为：{}", onlineMo.toString());
+			_log.info("查询商品是否已上线的参数为：{}", onlineMo);
 			boolean existOnlineResult = onlOnlineSvc.existSelective(onlineMo);
 			_log.info("查询商品是否已上线的返回值为：{}", existOnlineResult);
 			if (!existOnlineResult) {
@@ -146,9 +145,8 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 			OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
 			onlineSpecMo.setOnlineId(onlineId);
 			onlineSpecMo.setOnlineSpec(onlineSpec);
-			_log.info("查询上线规格信息的参数为：{}", onlineSpecMo.toString());
-			List<OnlOnlineSpecMo> onlineSpecList = _mapper
-					.selectSelective(onlineSpecMo);
+			_log.info("查询上线规格信息的参数为：{}", onlineSpecMo);
+			List<OnlOnlineSpecMo> onlineSpecList = _mapper.selectSelective(onlineSpecMo);
 			_log.info("查询上线规格信息的返回值为：{}", String.valueOf(onlineSpecList));
 			if (onlineSpecList.size() == 0) {
 				_log.error("规格编号为：{}，扣减上线数量失败", onlineSpec);
@@ -161,17 +159,17 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 				throw new RuntimeException(onlineSpec + "库存不足");
 			}
 			onlineSpecMo.setSaleCount(updateCount);
-			_log.info("扣减上线数量的参数为：{}", onlineSpecMo.toString());
+			_log.info("扣减上线数量的参数为：{}", onlineSpecMo);
 			int updateCountResult = _mapper.updateSelective(onlineSpecMo);
 			_log.info("扣减上线数量的返回值为{}", updateCountResult);
-			if (updateCountResult < 1) {
+			if (updateCountResult != 1) {
 				_log.error("规格编号为：{}，扣减上线数量失败", onlineSpec);
 				throw new RuntimeException(onlineSpec + "扣减上线数量失败");
 			}
 			_log.info("删除购物车的参数为：{}", cartId);
 			int deleteCartResult = onlCartSvc.del(cartId);
 			_log.info("删除购物车的返回值为：{}", deleteCartResult);
-			if (deleteCartResult < 1) {
+			if (deleteCartResult != 1) {
 				_log.error("购物车编号为：{}，删除购物车失败", cartId);
 				throw new RuntimeException("删除购物车失败");
 			}
@@ -182,9 +180,8 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 	}
 
 	/**
-	 * 修改上线规格信息
-	 * Title: resultMap
-	 * Description: 
+	 * 修改上线规格信息 Title: resultMap Description:
+	 * 
 	 * @param mo
 	 * @return
 	 * @date 2018年4月23日 下午5:46:50
@@ -200,12 +197,12 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 			modifyOnlineSpecInfoRo.setMsg("参数有误");
 			return modifyOnlineSpecInfoRo;
 		}
-		
+
 		for (int i = 0; i < specList.size(); i++) {
 			OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
 			onlineSpecMo.setOnlineId(Long.parseLong(String.valueOf(specList.get(i).get("onlineId"))));
 			onlineSpecMo.setOnlineSpec(String.valueOf(specList.get(i).get("specName")));
-			_log.info("获取上线规格信息的参数为：{}", onlineSpecMo.toString());
+			_log.info("获取上线规格信息的参数为：{}", onlineSpecMo);
 			// 获取上线规格信息
 			List<OnlOnlineSpecInfoRo> onlineSpecInfoRoList = _mapper.selectOnlineSpecInfo(onlineSpecMo);
 			_log.info("获取上线规格信息的返回值为：{}", String.valueOf(onlineSpecInfoRoList));
@@ -216,9 +213,10 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 				return modifyOnlineSpecInfoRo;
 			}
 			// 修改后的上线数量
-			int updateStockCount = onlineSpecInfoRoList.get(0).getSaleCount() + Integer.parseInt(String.valueOf(specList.get(i).get("buyCount")));
+			int updateStockCount = onlineSpecInfoRoList.get(0).getSaleCount()
+					+ Integer.parseInt(String.valueOf(specList.get(i).get("buyCount")));
 			onlineSpecMo.setSaleCount(updateStockCount);
-			_log.info("修改上线数量的参数为：{}", onlineSpecMo.toString());
+			_log.info("修改上线数量的参数为：{}", onlineSpecMo);
 			int updateResult = _mapper.updateSelective(onlineSpecMo);
 			_log.info("修改上线数量的返回值为：{}", updateResult);
 			if (updateResult < 0) {

@@ -88,7 +88,7 @@ public class OnlCartCtrl {
 	 */
 	@PostMapping("/onl/cart")
 	AddCartRo addCart(OnlCartMo vo) throws Exception {
-		_log.info("加入购物车的参数为：" + vo.toString());
+		_log.info("加入购物车的参数为：" + vo);
 		return svc.addCart(vo);
 	}
 
@@ -101,7 +101,7 @@ public class OnlCartCtrl {
 	 */
 	@DeleteMapping(value = "/onl/cart")
 	Map<String, Object> del(OnlCartMo vo) {
-		_log.info("删除购物车的参数为：" + vo.toString());
+		_log.info("删除购物车的参数为：" + vo);
 		int result = svc.deleteByUserIdAndCartId(vo);
 		_log.info("删除购物车的返回值为：{}", result);
 		Map<String, Object> resultMap = new HashMap<>();
@@ -126,7 +126,7 @@ public class OnlCartCtrl {
 	 */
 	@GetMapping("/onl/cart/count")
 	int Cartcount(OnlCartMo qo) {
-		_log.info("查询购物车的参数为：{}", qo.toString());
+		_log.info("查询购物车的参数为：{}", qo);
 		return svc.selectCartCount(qo);
 	}
 

@@ -119,7 +119,7 @@ public class OnlOnlineCtrl {
 	 */
 	@PutMapping("/onl/online")
 	Map<String, Object> modify(OnlOnlineMo vo) throws Exception {
-		_log.info("开始商品下线，商品下线的参数为：" + vo.toString());
+		_log.info("开始商品下线，商品下线的参数为：" + vo);
 		int result = svc.modify(vo);
 		Map<String, Object> resultMap = new HashMap<>();
 		if (result < 1) {
@@ -208,7 +208,7 @@ public class OnlOnlineCtrl {
 		OnlOnlineMo qo = new OnlOnlineMo();
 		qo.setId(id);
 		qo.setOnlineState(onlineState);
-		_log.info("查询是否已上线的参数为：{}", qo.toString());
+		_log.info("查询是否已上线的参数为：{}", qo);
 		boolean result = svc.existSelective(qo);
 		_log.info("查询是否已上线的返回值为：{}", result);
 		return result;

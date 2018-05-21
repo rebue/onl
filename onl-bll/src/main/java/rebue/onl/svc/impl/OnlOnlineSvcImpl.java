@@ -126,7 +126,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			goodsOnlineRo.setMsg("该商品已上线");
 			return goodsOnlineRo;
 		}
-		_log.info("添加商品上线信息的参数为：{}", oom.toString());
+		_log.info("添加商品上线信息的参数为：{}", oom);
 		int addOnlineGoodsResult = add(oom);
 		_log.info("添加商品上线信息的返回值为：{}", addOnlineGoodsResult);
 		if (addOnlineGoodsResult < 1) {
@@ -159,7 +159,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 				oosm.setSaleUnit(saleUnit);
 				oosm.setSeqNo(seqNo);
 				oosm.setCashbackAmount(cashbackAmount);
-				_log.info("添加上线商品规格信息的参数为：{}", oosm.toString());
+				_log.info("添加上线商品规格信息的参数为：{}", oosm);
 				int addSpecResult = onlOnlineSpecSvc.add(oosm);
 				_log.info("添加上线商品规格信息的返回值为：{}", addSpecResult);
 				if (addSpecResult < 1) {
@@ -177,7 +177,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		oopm.setPicPath(String.valueOf(onlineMap.get("goodsQsmm")));
 		oopm.setPicType((byte) 1);
 		;
-		_log.info("添加商品主图的参数为：{}", oopm.toString());
+		_log.info("添加商品主图的参数为：{}", oopm);
 		int addQsmmResult = onlOnlinePicSvc.add(oopm);
 		_log.info("添加商品主图的返回值为：{}", addQsmmResult);
 		if (addQsmmResult < 1) {
@@ -191,7 +191,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			oopm.setOnlineId(onlineId);
 			oopm.setPicPath(carouselPics[i]);
 			oopm.setPicType((byte) 0);
-			_log.info("添加商品轮播图的参数为：{}", oopm.toString());
+			_log.info("添加商品轮播图的参数为：{}", oopm);
 			int addCarouselPicResult = onlOnlinePicSvc.add(oopm);
 			_log.info("添加商品轮播图的返回值为：{}", addCarouselPicResult);
 			if (addCarouselPicResult < 1) {

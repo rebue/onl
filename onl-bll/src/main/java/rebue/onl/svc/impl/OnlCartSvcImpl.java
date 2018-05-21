@@ -74,7 +74,7 @@ public class OnlCartSvcImpl extends MybatisBaseSvcImpl<OnlCartMo, java.lang.Long
 		int result = 0;
 		if (list.size() == 0) {
 			mo.setId(_idWorker.getId());
-			_log.info("加入购物车的参数为：{}", mo.toString());
+			_log.info("加入购物车的参数为：{}", mo);
 			result = _mapper.insertSelective(mo);
 			_log.info("加入购物车的返回值为：{}", result);
 			if (result < 1) {
@@ -89,7 +89,7 @@ public class OnlCartSvcImpl extends MybatisBaseSvcImpl<OnlCartMo, java.lang.Long
 		} else {
 			mo.setId(list.get(0).getId());
 			mo.setCartCount(mo.getCartCount() + list.get(0).getCartCount());
-			_log.info("修改购物车数量的参数为：{}", mo.toString());
+			_log.info("修改购物车数量的参数为：{}", mo);
 			result = _mapper.updateByCondition(mo);
 			_log.info("用户修改购物数量的返回值为：{}", result);
 			if (result < 1) {
@@ -126,7 +126,7 @@ public class OnlCartSvcImpl extends MybatisBaseSvcImpl<OnlCartMo, java.lang.Long
 	 */
 	@Override
 	public List<OnlCartRo> selectCartList(OnlCartMo mo) {
-		_log.info("获取购物车列表的参数为：{}", mo.toString());
+		_log.info("获取购物车列表的参数为：{}", mo);
 		return _mapper.selectCartList(mo);
 	}
 
