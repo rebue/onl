@@ -232,7 +232,7 @@
   </select>
   
   <!-- 获取上线商品列表信息 -->
-  <select id="selectOnlineGoodsList" parameterType="java.util.Map" resultMap="OnlineGoodsInfoResultMap">
+  <select id="selectOnlineGoodsList" parameterType="rebue.onl.to.OnlineGoodsListTo" resultMap="OnlineGoodsInfoResultMap">
   	SELECT oo.ID, oo.ONLINE_TITLE, oopc.PIC_PATH, oos.ONLINE_SPEC, oos.SALE_PRICE, oos.CASHBACK_AMOUNT, oos.ID AS SPEC_ID, oo.ONLINE_DETAIL
 	FROM ONL_ONLINE oo
 	LEFT JOIN ONL_ONLINE_SPEC oos ON oos.ONLINE_ID = oo.ID
@@ -245,6 +245,9 @@
 	<if test="id != null and id != '' ">
 		AND oo.ID = #{id,jdbcType=BIGINT}
 	</if>
+	<if test="onlineTitle != null and onlineTitle != ''">
+        AND oo.ONLINE_TITLE LIKE '%${onlineTitle}%'
+     </if>
 	<if test="id == null or id == '' ">
 		order by ${sortname} ${sortOrder} LIMIT ${start}, ${size}
 	</if>

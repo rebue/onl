@@ -4,8 +4,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.robotech.mapper.MybatisBaseMapper;
-import java.util.Map;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
+import rebue.onl.to.OnlineGoodsListTo;
 
 @Mapper
 public interface OnlOnlineMapper extends MybatisBaseMapper<OnlOnlineMo, Long> {
@@ -95,7 +95,7 @@ public interface OnlOnlineMapper extends MybatisBaseMapper<OnlOnlineMo, Long> {
 	 * @return
 	 * @date 2018年3月29日 下午5:39:41
 	 */
-	List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(Map<String, Object> map);
+	List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(OnlineGoodsListTo to);
 
 	/**
 	 * 判断产品是否已上线 Title: existOnlineByProduceId Description:

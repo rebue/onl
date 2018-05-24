@@ -4,13 +4,13 @@ import rebue.robotech.svc.MybatisBaseSvc;
 import rebue.onl.mo.OnlOnlineMo;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import rebue.onl.ro.GoodsOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
+import rebue.onl.to.OnlineGoodsListTo;
 
 public interface OnlOnlineSvc extends MybatisBaseSvc<OnlOnlineMo, java.lang.Long> {
 
@@ -32,7 +32,7 @@ public interface OnlOnlineSvc extends MybatisBaseSvc<OnlOnlineMo, java.lang.Long
 	 * @return
 	 * @date 2018年3月29日 下午5:40:42
 	 */
-	List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(Map<String, Object> map);
+	List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(OnlineGoodsListTo to);
 
 	/**
 	 * 重新上线 Title: anewOnline Description:

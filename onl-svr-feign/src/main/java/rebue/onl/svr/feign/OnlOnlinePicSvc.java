@@ -29,7 +29,7 @@ public interface OnlOnlinePicSvc {
 	 * @return
 	 * @date 2018年4月1日 下午2:48:16
 	 */
-	@GetMapping(value = "/onl/onlinepic")
+	@GetMapping(value = "/onl/onlinepic", produces = "application/json;charset=UTF-8")
 	List<OnlOnlinePicMo> list(@RequestParam("onlineId") Long onlineId, @RequestParam("picType") Byte picType);
 }
   

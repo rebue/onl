@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import rebue.onl.dic.GoodsOnlineDic;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.svc.OnlOnlineSvc;
+import rebue.onl.to.OnlineGoodsListTo;
 
 import com.github.pagehelper.PageInfo;
 import java.io.IOException;
@@ -142,11 +143,11 @@ public class OnlOnlineCtrl {
 	 */
 	@SuppressWarnings("finally")
 	@GetMapping("/onl/online/list")
-	List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(@RequestParam Map<String, Object> map) {
-		_log.info("获取上线商品列表的参数为：{}", String.valueOf(map));
+	List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(OnlineGoodsListTo to) {
+		_log.info("获取上线商品列表的参数为：{}", to);
 		List<OnlOnlineGoodsInfoRo> list = new ArrayList<>();
 		try {
-			list = svc.selectOnlineGoodsList(map);
+			list = svc.selectOnlineGoodsList(to);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

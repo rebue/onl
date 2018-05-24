@@ -23,8 +23,7 @@ public class OnlOnlinePicCtrl {
 	/**
 	 * @mbg.generated
 	 */
-	private final static Logger _log = LoggerFactory
-			.getLogger(OnlOnlinePicCtrl.class);
+	private final static Logger _log = LoggerFactory.getLogger(OnlOnlinePicCtrl.class);
 
 	/**
 	 * @mbg.generated

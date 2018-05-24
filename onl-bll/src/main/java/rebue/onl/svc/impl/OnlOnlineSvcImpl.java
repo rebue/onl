@@ -8,6 +8,7 @@ import rebue.onl.dic.GoodsOnlineDic;
 import rebue.onl.mapper.OnlOnlineMapper;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.svc.OnlOnlineSvc;
+import rebue.onl.to.OnlineGoodsListTo;
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -208,11 +209,11 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 	 * 获取上线商品列表 2018年3月29日17:41:26
 	 */
 	@Override
-	public List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(Map<String, Object> map) {
+	public List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(OnlineGoodsListTo to) {
 		_log.info("==================================================================================================");
-		_log.info("最新版本获取上线列表的参数为：", String.valueOf(map));
+		_log.info("最新版本获取上线列表的参数为：", to);
 		_log.info("==================================================================================================");
-		return _mapper.selectOnlineGoodsList(map);
+		return _mapper.selectOnlineGoodsList(to);
 	}
 
 	/**
