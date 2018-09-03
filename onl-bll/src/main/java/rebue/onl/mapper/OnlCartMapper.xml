@@ -238,7 +238,7 @@
   
   <!-- 获取购物车列表  -->
   <select id="selectCartList" parameterType="rebue.onl.mo.OnlCartMo" resultType="rebue.onl.ro.OnlCartRo">
-  	SELECT oc.ID, oc.ONLINE_ID, oo.ONLINE_TITLE, oc.ONLINE_SPEC_ID, oo.PRODUCE_ID, oos.ONLINE_SPEC, oos.SALE_PRICE, oos.CASHBACK_AMOUNT, oc.CART_COUNT, oop.PIC_PATH
+  	SELECT oc.ID, oc.ONLINE_ID, oo.ONLINE_TITLE, oc.ONLINE_SPEC_ID, oo.PRODUCT_ID, oos.ONLINE_SPEC, oos.SALE_PRICE, oos.CASHBACK_AMOUNT, oc.CART_COUNT, oop.PIC_PATH
 	FROM ONL_CART oc
 	LEFT JOIN ONL_ONLINE oo ON oc.ONLINE_ID=oo.ID
 	LEFT JOIN ONL_ONLINE_SPEC oos ON oc.ONLINE_SPEC_ID=oos.ID

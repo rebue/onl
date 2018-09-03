@@ -24,8 +24,19 @@ public class OnlineGoodsListTo {
 	/** 起始条数 **/
 	private int start;
 
-	/** 没页条数 **/
+	/** 每页条数 **/
 	private int size;
+	
+	/** 板块类型 **/
+	private int subjectType;
+
+	public int getSubjectType() {
+		return subjectType;
+	}
+
+	public void setSubjectType(int subjectType) {
+		this.subjectType = subjectType;
+	}
 
 	public long getId() {
 		return id;
@@ -78,7 +89,8 @@ public class OnlineGoodsListTo {
 	@Override
 	public String toString() {
 		return "OnlineGoodsListTo [id=" + id + ", onlineTitle=" + onlineTitle + ", sortname=" + sortname
-				+ ", sortOrder=" + sortOrder + ", start=" + start + ", size=" + size + "]";
+				+ ", sortOrder=" + sortOrder + ", start=" + start + ", size=" + size + ", subjectType=" + subjectType
+				+ "]";
 	}
 
 }

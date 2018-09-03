@@ -271,6 +271,9 @@
 	<if test="onlineTitle != null and onlineTitle != ''">
         AND oo.ONLINE_TITLE LIKE '%${onlineTitle}%'
      </if>
+     <if test="subjectType != null and subjectType != ''">
+        AND oo.SUBJECT_TYPE = '${subjectType}'
+     </if>
 	<if test="id == null or id == '' ">
 		order by ${sortname} ${sortOrder} LIMIT ${start}, ${size}
 	</if>
