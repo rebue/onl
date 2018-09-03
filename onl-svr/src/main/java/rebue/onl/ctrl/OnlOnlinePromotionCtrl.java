@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rebue.onl.mo.OnlOnlinePromotionMo;
+import rebue.onl.ro.OnlOnlinePromotionRo;
 import rebue.onl.svc.OnlOnlinePromotionSvc;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
@@ -26,8 +27,7 @@ public class OnlOnlinePromotionCtrl {
 	/**
 	 * @mbg.generated
 	 */
-	private final static Logger _log = LoggerFactory
-			.getLogger(OnlOnlinePromotionCtrl.class);
+	private final static Logger _log = LoggerFactory.getLogger(OnlOnlinePromotionCtrl.class);
 
 	/**
 	 * @mbg.generated
@@ -56,11 +56,9 @@ public class OnlOnlinePromotionCtrl {
 	 * @mbg.generated
 	 */
 	@GetMapping("/onl/onlinepromotion")
-	PageInfo<OnlOnlinePromotionMo> list(OnlOnlinePromotionMo qo,
-			@RequestParam("pageNum") int pageNum,
+	PageInfo<OnlOnlinePromotionMo> list(OnlOnlinePromotionMo qo, @RequestParam("pageNum") int pageNum,
 			@RequestParam("pageSize") int pageSize) {
-		_log.info("list OnlOnlinePromotionMo:" + qo + ", pageNum = " + pageNum
-				+ ", pageSize = " + pageSize);
+		_log.info("list OnlOnlinePromotionMo:" + qo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
 
 		if (pageSize > 50) {
 			String msg = "pageSize不能大于50";
@@ -126,27 +124,27 @@ public class OnlOnlinePromotionCtrl {
 	 * @return
 	 * @date 2018年3月28日 下午4:29:55
 	 */
-	@DeleteMapping("/onl/onlinepromotion/{onlineId}")
-	Map<String, Object> del(@PathVariable("onlineId") java.lang.Long onlineId) {
+	@DeleteMapping("/onl/onlinepromotion")
+	OnlOnlinePromotionRo del(@RequestParam("onlineId") java.lang.Long onlineId) {
 		_log.info("开始删除上线商品推广，删除上线商品推广的参数为：" + onlineId);
-		Map<String, Object> resultMap = new HashMap<>();
+		OnlOnlinePromotionRo ro = new OnlOnlinePromotionRo();
 		if (onlineId != 0) {
 			int result = svc.del(onlineId);
 			if (result < 1) {
 				_log.error("推广上线商品编号为：{}，删除上线商品推广失败", onlineId);
-				resultMap.put("msg", "删除失败");
-				resultMap.put("result", result);
+				ro.setResult((byte) -1);
+				ro.setMsg("取消失败");
 			} else {
 				_log.info("推广上线商品编号为：{}，删除上线商品推广成功", onlineId);
-				resultMap.put("msg", "删除成功");
-				resultMap.put("result", result);
+				ro.setResult((byte) 1);
+				ro.setMsg("取消成功");
 			}
 		} else {
 			_log.error("推广上线商品不存在，删除上线商品推广失败", onlineId);
-			resultMap.put("msg", "上线推广商品不存在");
-			resultMap.put("result", -12);
+			ro.setResult((byte) -12);
+			ro.setMsg("上线推广商品不存在");
 		}
-		return resultMap;
+		return ro;
 	}
 
 	/**

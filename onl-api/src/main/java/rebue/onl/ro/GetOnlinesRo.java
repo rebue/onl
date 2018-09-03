@@ -14,7 +14,7 @@ public class GetOnlinesRo {
 	/**
 	 * 上线信息
 	 */
-	private OnlOnlineRo record;
+	private OnlinesRo record;
 
 	public Byte getResult() {
 		return result;
@@ -24,11 +24,11 @@ public class GetOnlinesRo {
 		this.result = result;
 	}
 
-	public OnlOnlineRo getRecord() {
+	public OnlinesRo getRecord() {
 		return record;
 	}
 
-	public void setRecord(OnlOnlineRo record) {
+	public void setRecord(OnlinesRo record) {
 		this.record = record;
 	}
 

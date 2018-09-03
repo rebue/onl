@@ -1,6 +1,5 @@
 package rebue.onl.ctrl;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
 
 import rebue.onl.dic.AddOnlineDic;
@@ -35,6 +33,7 @@ import rebue.onl.ro.GetOnlinesRo;
 import rebue.onl.ro.GoodsOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 import rebue.onl.ro.OnlOnlineRo;
+import rebue.onl.ro.OnlinesRo;
 import rebue.onl.svc.OnlOnlinePicSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
@@ -193,20 +192,20 @@ public class OnlOnlineCtrl {
 	 * @date 2018年3月28日 下午3:14:23
 	 */
 	@PutMapping("/onl/online")
-	Map<String, Object> modify(OnlOnlineMo vo) throws Exception {
+	OnlOnlineRo modify(OnlOnlineMo vo) throws Exception {
 		_log.info("开始商品下线，商品下线的参数为：" + vo);
 		int result = svc.modify(vo);
-		Map<String, Object> resultMap = new HashMap<>();
+		OnlOnlineRo ro = new OnlOnlineRo();
 		if (result < 1) {
-			resultMap.put("msg", "下线失败");
-			resultMap.put("result", result);
+			ro.setResult((byte) -1);
+			ro.setMsg("下线失败");
 			_log.error("上线编号：{}，下线失败", vo.getId());
 		} else {
-			resultMap.put("msg", "下线成功");
-			resultMap.put("result", result);
+			ro.setResult((byte) 1);
+			ro.setMsg("下线成功");
 			_log.info("上线编号：{}，下线成功!", vo.getId());
 		}
-		return resultMap;
+		return ro;
 	}
 
 	/**
@@ -226,46 +225,6 @@ public class OnlOnlineCtrl {
 			e.printStackTrace();
 		} finally {
 			return list;
-		}
-	}
-
-	/**
-	 * 重新上线 Title: anewOnline Description:
-	 * 
-	 * @param onlineInfo
-	 * @return
-	 * @throws JsonProcessingException
-	 * @throws IOException
-	 * @date 2018年4月3日 上午11:37:45
-	 */
-	@SuppressWarnings("finally")
-	@PostMapping("/onl/online/anewonline")
-	GoodsOnlineRo anewOnline(@RequestParam("onlineInfo") String onlineInfo)
-			throws JsonProcessingException, IOException {
-		GoodsOnlineRo goodsOnlineRo = new GoodsOnlineRo();
-		try {
-			goodsOnlineRo = svc.anewOnline(onlineInfo);
-		} catch (RuntimeException e) {
-			String msg = e.getMessage();
-			_log.error("===============c重新上线商品出现异常了============={}", msg);
-			if (msg.equals("添加商品规格信息出错")) {
-				goodsOnlineRo.setResult(GoodsOnlineDic.ADD_GOODS_SPEC_ERROR);
-				goodsOnlineRo.setMsg(msg);
-			} else if (msg.equals("商品规格不能为空")) {
-				goodsOnlineRo.setResult(GoodsOnlineDic.GOODS_SPEC_NOT_NULL);
-				goodsOnlineRo.setMsg(msg);
-			} else if (msg.equals("添加商品主图出错")) {
-				goodsOnlineRo.setResult(GoodsOnlineDic.ADD_GOODS_QSMM_ERROR);
-				goodsOnlineRo.setMsg(msg);
-			} else if (msg.equals("添加商品轮播图出错")) {
-				goodsOnlineRo.setResult(GoodsOnlineDic.ADD_GOODS_CAROUSEL_ERROR);
-				goodsOnlineRo.setMsg(msg);
-			} else {
-				goodsOnlineRo.setResult(GoodsOnlineDic.ERROR);
-				goodsOnlineRo.setMsg("重新上线失败");
-			}
-		} finally {
-			return goodsOnlineRo;
 		}
 	}
 
@@ -299,7 +258,7 @@ public class OnlOnlineCtrl {
 		_log.info("根据上线id获取上线信息的参数为：{}", id);
 		GetOnlinesRo onlinesRo = new GetOnlinesRo();
 		// 获取上线信息
-		OnlOnlineRo onlOnlineRo = dozerMapper.map(svc.listByPrimaryKey(id), OnlOnlineRo.class);
+		OnlinesRo onlOnlineRo = dozerMapper.map(svc.listByPrimaryKey(id), OnlinesRo.class);
 		// 获取规格信息
 		OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
 		onlineSpecMo.setOnlineId(id);
