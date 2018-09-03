@@ -4,18 +4,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import rebue.onl.dic.AddCartDic;
 import rebue.onl.mapper.OnlCartMapper;
 import rebue.onl.mo.OnlCartMo;
 import rebue.onl.svc.OnlCartSvc;
 
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
+import rebue.onl.dic.AddCartDic;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import rebue.onl.ro.AddCartRo;
 import rebue.onl.ro.OnlCartRo;
 
@@ -32,11 +31,16 @@ import rebue.onl.ro.OnlCartRo;
  * </pre>
  */
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-public class OnlCartSvcImpl extends MybatisBaseSvcImpl<OnlCartMo, java.lang.Long, OnlCartMapper> implements OnlCartSvc {
+public class OnlCartSvcImpl
+		extends
+			MybatisBaseSvcImpl<OnlCartMo, java.lang.Long, OnlCartMapper>
+		implements
+			OnlCartSvc {
 
 	/**
 	 */
-	private final static Logger _log = LoggerFactory.getLogger(OnlCartSvcImpl.class);
+	private final static Logger _log = LoggerFactory
+			.getLogger(OnlCartSvcImpl.class);
 
 	/**
 	 * @mbg.generated
@@ -96,7 +100,6 @@ public class OnlCartSvcImpl extends MybatisBaseSvcImpl<OnlCartMo, java.lang.Long
 				_log.error("用户编号为：{}，加入购物车失败", mo.getUserId());
 				addCartRo.setResult(AddCartDic.ERROR);
 				addCartRo.setMsg("加入购物车失败");
-
 			} else {
 				_log.info("用户编号为：{}，加入购物车成功", mo.getUserId());
 				addCartRo.setResult(AddCartDic.SUCCESS);

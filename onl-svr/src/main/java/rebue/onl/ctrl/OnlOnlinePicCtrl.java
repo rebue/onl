@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rebue.onl.mo.OnlOnlinePicMo;
 import rebue.onl.svc.OnlOnlinePicSvc;
+import com.github.pagehelper.PageInfo;
 import java.util.List;
 
 @RestController
@@ -23,7 +25,8 @@ public class OnlOnlinePicCtrl {
 	/**
 	 * @mbg.generated
 	 */
-	private final static Logger _log = LoggerFactory.getLogger(OnlOnlinePicCtrl.class);
+	private final static Logger _log = LoggerFactory
+			.getLogger(OnlOnlinePicCtrl.class);
 
 	/**
 	 * @mbg.generated

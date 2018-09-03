@@ -56,8 +56,11 @@ public class OnlOnlinePromotionCtrl {
 	 * @mbg.generated
 	 */
 	@GetMapping("/onl/onlinepromotion")
-	PageInfo<OnlOnlinePromotionMo> list(OnlOnlinePromotionMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
-		_log.info("list OnlOnlinePromotionMo:" + qo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
+	PageInfo<OnlOnlinePromotionMo> list(OnlOnlinePromotionMo qo,
+			@RequestParam("pageNum") int pageNum,
+			@RequestParam("pageSize") int pageSize) {
+		_log.info("list OnlOnlinePromotionMo:" + qo + ", pageNum = " + pageNum
+				+ ", pageSize = " + pageSize);
 
 		if (pageSize > 50) {
 			String msg = "pageSize不能大于50";

@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/4/3 9:08:47                             */
+/* Created on:     2018/8/31 12:35:02                           */
 /*==============================================================*/
 
 
@@ -38,10 +38,11 @@ create table ONL_ONLINE
    ID                   bigint not null comment '上线ID',
    ONLINE_TITLE         varchar(300) not null comment '上线标题',
    ONLINE_DETAIL        varchar(2000) comment '上线描述',
-   ONLINE_STATE         tinyint not null comment '上线状态（0：下线，1：上线  ）',
    OP_ID                bigint not null comment '操作人ID',
+   ONLINE_STATE         tinyint not null comment '上线状态（0：下线，1：上线  ）',
    ONLINE_TIME          datetime not null comment '上线时间',
-   PRODUCE_ID           bigint not null comment '产品ID,上一次上线的产品ID',
+   PRODUCT_ID           bigint not null comment '产品ID,上一次上线的产品ID',
+   SUBJECT_TYPE         tinyint not null default 0 comment '板块类型（0：普通，1：全返）',
    primary key (ID)
 );
 
@@ -84,6 +85,7 @@ create table ONL_ONLINE_SPEC
    ONLINE_SPEC          varchar(200) not null comment '上线规格',
    CASHBACK_AMOUNT      decimal(20,4) not null comment '返现金额',
    SALE_PRICE           decimal(20,4) not null comment '销售价格',
+   COMMISSION_AMOUNT    decimal(20,4) comment '返佣金金额',
    SALE_UNIT            varchar(50) comment '销售单位',
    SALE_COUNT           int not null comment '销售数量',
    SEQ_NO               int not null comment '排序号',
@@ -91,4 +93,19 @@ create table ONL_ONLINE_SPEC
 );
 
 alter table ONL_ONLINE_SPEC comment '上线规格';
+
+alter table ONL_CART add constraint FK_Relationship_7 foreign key (ONLINE_SPEC_ID)
+      references ONL_ONLINE_SPEC (ID) on delete restrict on update restrict;
+
+alter table ONL_CART add constraint FK_Relationship_8 foreign key (ONLINE_ID)
+      references ONL_ONLINE (ID) on delete restrict on update restrict;
+
+alter table ONL_ONLINE_PIC add constraint FK_Relationship_4 foreign key (ONLINE_ID)
+      references ONL_ONLINE (ID) on delete restrict on update restrict;
+
+alter table ONL_ONLINE_PROMOTION add constraint FK_Relationship_5 foreign key (ONLINE_ID)
+      references ONL_ONLINE (ID) on delete restrict on update restrict;
+
+alter table ONL_ONLINE_SPEC add constraint FK_Relationship_2 foreign key (ONLINE_ID)
+      references ONL_ONLINE (ID) on delete restrict on update restrict;
 

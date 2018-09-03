@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import rebue.onl.mo.OnlCartMo;
 import rebue.onl.svc.OnlCartSvc;
 import java.util.List;
-
 import rebue.onl.ro.AddCartRo;
 import rebue.onl.ro.OnlCartRo;
 
@@ -27,10 +26,11 @@ public class OnlCartCtrl {
 	/**
 	 * @mbg.generated
 	 */
-	private final static Logger _log = LoggerFactory.getLogger(OnlCartCtrl.class);
+	private final static Logger _log = LoggerFactory
+			.getLogger(OnlCartCtrl.class);
 
 	/**
-	 * @mbg.generated
+	 * @mbg.overrideByMethodName
 	 */
 	@Resource
 	private OnlCartSvc svc;
@@ -38,7 +38,7 @@ public class OnlCartCtrl {
 	/**
 	 * 修改购物车
 	 * 
-	 * @mbg.generated
+	 * @mbg.overrideByMethodName
 	 */
 	@PutMapping("/onl/cart")
 	Map<String, Object> modify(OnlCartMo vo) throws Exception {
@@ -53,7 +53,7 @@ public class OnlCartCtrl {
 	/**
 	 * 删除购物车
 	 * 
-	 * @mbg.generated
+	 * @mbg.overrideByMethodName
 	 */
 	@DeleteMapping("/onl/cart/{id}")
 	Map<String, Object> del(@PathVariable("id") java.lang.Long id) {
@@ -68,7 +68,7 @@ public class OnlCartCtrl {
 	/**
 	 * 获取单个购物车
 	 * 
-	 * @mbg.generated
+	 * @mbg.overrideByMethodName
 	 */
 	@GetMapping("/onl/cart/{id}")
 	OnlCartMo get(@PathVariable("id") java.lang.Long id) {

@@ -12,20 +12,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import rebue.onl.dic.ModifyOnlineSpecInfoDic;
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.svc.OnlOnlineSpecSvc;
-
 import com.github.pagehelper.PageInfo;
+import org.springframework.web.bind.annotation.RequestBody;
+import rebue.onl.dic.ModifyOnlineSpecInfoDic;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import java.io.IOException;
 import java.util.List;
-
 import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 
@@ -34,13 +32,30 @@ public class OnlOnlineSpecCtrl {
 	/**
 	 * @mbg.generated
 	 */
-	private final static Logger _log = LoggerFactory.getLogger(OnlOnlineSpecCtrl.class);
+	private final static Logger _log = LoggerFactory
+			.getLogger(OnlOnlineSpecCtrl.class);
 
 	/**
 	 * @mbg.generated
 	 */
 	@Resource
 	private OnlOnlineSpecSvc svc;
+
+	/**
+	 * 添加上线规格
+	 * 
+	 * @mbg.generated
+	 */
+	@PostMapping("/onl/onlinespec")
+	Map<String, Object> add(OnlOnlineSpecMo vo) throws Exception {
+		_log.info("add OnlOnlineSpecMo:" + vo);
+		svc.add(vo);
+		Map<String, Object> result = new HashMap<>();
+		result.put("success", true);
+		result.put("id", vo.getId());
+		_log.info("add OnlOnlineSpecMo success!");
+		return result;
+	}
 
 	/**
 	 * 删除上线规格
@@ -63,9 +78,11 @@ public class OnlOnlineSpecCtrl {
 	 * @mbg.generated
 	 */
 	@GetMapping("/onl/onlinespec")
-	PageInfo<OnlOnlineSpecMo> list(OnlOnlineSpecMo qo, @RequestParam("pageNum") int pageNum,
+	PageInfo<OnlOnlineSpecMo> list(OnlOnlineSpecMo qo,
+			@RequestParam("pageNum") int pageNum,
 			@RequestParam("pageSize") int pageSize) {
-		_log.info("list OnlOnlineSpecMo:" + qo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
+		_log.info("list OnlOnlineSpecMo:" + qo + ", pageNum = " + pageNum
+				+ ", pageSize = " + pageSize);
 
 		if (pageSize > 50) {
 			String msg = "pageSize不能大于50";
@@ -139,7 +156,8 @@ public class OnlOnlineSpecCtrl {
 	 * @date 2018年4月23日 下午6:17:55
 	 */
 	@PostMapping(value = "/onl/onlinespec/selectandupdate")
-	ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(@RequestBody List<Map<String, Object>> specList) {
+	ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(
+			@RequestBody List<Map<String, Object>> specList) {
 		_log.info("查询和修改上线规格信息为：{}", String.valueOf(specList));
 		try {
 			return svc.modifyOnlineSpecInfo(specList);
@@ -147,7 +165,8 @@ public class OnlOnlineSpecCtrl {
 			ModifyOnlineSpecInfoRo modifyOnlineSpecInfoRo = new ModifyOnlineSpecInfoRo();
 			String msg = e.getMessage();
 			if (msg.equals("修改上线数量出错")) {
-				modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.MODIFY_ONLINE_COUNT_ERROR);
+				modifyOnlineSpecInfoRo
+						.setResult(ModifyOnlineSpecInfoDic.MODIFY_ONLINE_COUNT_ERROR);
 				modifyOnlineSpecInfoRo.setMsg(msg);
 			} else {
 				modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.ERROR);
@@ -167,7 +186,8 @@ public class OnlOnlineSpecCtrl {
 	 * @date 2018年4月11日 下午5:52:30
 	 */
 	@PostMapping(value = "/onl/onlinespec/deleteandupdate")
-	Map<String, Object> deleteCartAndUpdateOnlineCount(@RequestParam("cartAndSpecInfo") String cartAndSpecInfo)
+	Map<String, Object> deleteCartAndUpdateOnlineCount(
+			@RequestParam("cartAndSpecInfo") String cartAndSpecInfo)
 			throws JsonParseException, JsonMappingException, IOException {
 		_log.info("删除购物车和修改上线数量的参数为：", cartAndSpecInfo);
 		Map<String, Object> resultMap = new HashMap<String, Object>();

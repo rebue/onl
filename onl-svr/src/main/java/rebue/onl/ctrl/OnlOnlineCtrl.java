@@ -1,33 +1,45 @@
 package rebue.onl.ctrl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.pagehelper.PageInfo;
+
+import rebue.onl.dic.AddOnlineDic;
 import rebue.onl.dic.GoodsOnlineDic;
 import rebue.onl.mo.OnlOnlineMo;
-import rebue.onl.svc.OnlOnlineSvc;
-import rebue.onl.to.OnlineGoodsListTo;
-
-import com.github.pagehelper.PageInfo;
-import java.io.IOException;
-import java.util.List;
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.fasterxml.jackson.core.JsonProcessingException;
-
+import rebue.onl.mo.OnlOnlinePicMo;
+import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.ro.AddOnlineRo;
+import rebue.onl.ro.GetOnlinesRo;
 import rebue.onl.ro.GoodsOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
+import rebue.onl.ro.OnlOnlineRo;
+import rebue.onl.svc.OnlOnlinePicSvc;
+import rebue.onl.svc.OnlOnlineSpecSvc;
+import rebue.onl.svc.OnlOnlineSvc;
+import rebue.onl.to.AddOnlineTo;
+import rebue.onl.to.OnlineGoodsListTo;
 
 @RestController
 public class OnlOnlineCtrl {
@@ -39,6 +51,46 @@ public class OnlOnlineCtrl {
 	 */
 	@Resource
 	private OnlOnlineSvc svc;
+
+	@Resource
+	private OnlOnlineSpecSvc onlineSpecSvc;
+
+	@Resource
+	private OnlOnlinePicSvc onlinePicSvc;
+
+	@Resource
+	private Mapper dozerMapper;
+
+	/**
+	 * 添加上线信息
+	 * 
+	 * @mbg.generated
+	 */
+	// @PostMapping("/onl/online")
+	Map<String, Object> add(OnlOnlineMo vo) throws Exception {
+		_log.info("add OnlOnlineMo:" + vo);
+		svc.add(vo);
+		Map<String, Object> result = new HashMap<>();
+		result.put("success", true);
+		result.put("id", vo.getId());
+		_log.info("add OnlOnlineMo success!");
+		return result;
+	}
+
+	/**
+	 * 删除上线信息
+	 * 
+	 * @mbg.generated
+	 */
+	@DeleteMapping("/onl/online/{id}")
+	Map<String, Object> del(@PathVariable("id") java.lang.Long id) {
+		_log.info("save OnlOnlineMo:" + id);
+		svc.del(id);
+		Map<String, Object> result = new HashMap<>();
+		result.put("success", true);
+		_log.info("delete OnlOnlineMo success!");
+		return result;
+	}
 
 	/**
 	 * 获取单个上线信息
@@ -55,9 +107,31 @@ public class OnlOnlineCtrl {
 
 	/**
 	 * 添加上线信息
+	 * 
+	 * @mbg.overrideByMethodName
+	 */
+	@PostMapping("/onl/online")
+	AddOnlineRo add(@RequestBody AddOnlineTo to, HttpServletRequest request) throws Exception {
+		// 获取当前登录用户id
+		// Long loginId = JwtUtils.getJwtUserIdInCookie(request);
+		to.setOpId(Long.parseLong("121231212"));
+		_log.info("添加上线信息的参数为：{}", to);
+		try {
+			return svc.addOnline(to);
+		} catch (RuntimeException e) {
+			String msg = e.getMessage();
+
+			AddOnlineRo ro = new AddOnlineRo();
+			ro.setMsg(msg);
+			ro.setResult(AddOnlineDic.ERROR);
+			return ro;
+		}
+	}
+
+	/**
+	 * 添加上线信息
 	 */
 	@SuppressWarnings("finally")
-	@PostMapping("/onl/online")
 	GoodsOnlineRo goodsOnline(@RequestParam("onlineInfo") String onlineInfo) {
 		_log.info("开始发布商品，发布商品的参数为：" + onlineInfo);
 		GoodsOnlineRo goodsOnlineRo = new GoodsOnlineRo();
@@ -153,7 +227,6 @@ public class OnlOnlineCtrl {
 		} finally {
 			return list;
 		}
-
 	}
 
 	/**
@@ -215,4 +288,29 @@ public class OnlOnlineCtrl {
 		return result;
 	}
 
+	/**
+	 * 根据id获取上线信息、规格信息、图片信息
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/onl/online/getonlines")
+	GetOnlinesRo getOnlines(@RequestParam("id") Long id) {
+		_log.info("根据上线id获取上线信息的参数为：{}", id);
+		GetOnlinesRo onlinesRo = new GetOnlinesRo();
+		// 获取上线信息
+		OnlOnlineRo onlOnlineRo = dozerMapper.map(svc.listByPrimaryKey(id), OnlOnlineRo.class);
+		// 获取规格信息
+		OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
+		onlineSpecMo.setOnlineId(id);
+		onlOnlineRo.setOnlineSpecList(onlineSpecSvc.list(onlineSpecMo));
+		// 获取图片信息
+		OnlOnlinePicMo onlinePicMo = new OnlOnlinePicMo();
+		onlinePicMo.setOnlineId(id);
+		onlOnlineRo.setOnlinePicList(onlinePicSvc.list(onlinePicMo));
+
+		onlinesRo.setRecord(onlOnlineRo);
+		onlinesRo.setResult((byte) 1);
+		return onlinesRo;
+	}
 }

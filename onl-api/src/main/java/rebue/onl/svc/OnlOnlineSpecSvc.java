@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-
 import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 
@@ -56,13 +55,13 @@ public interface OnlOnlineSpecSvc
 			throws JsonParseException, JsonMappingException, IOException;
 
 	/**
-	 * 修改上线规格信息
-	 * Title: resultMap
-	 * Description: 
+	 * 修改上线规格信息 Title: resultMap Description:
+	 * 
 	 * @param mo
 	 * @return
 	 * @date 2018年4月23日 下午5:46:50
 	 */
-	ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(List<Map<String, Object>> specList);
+	ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(
+			List<Map<String, Object>> specList);
 
 }
