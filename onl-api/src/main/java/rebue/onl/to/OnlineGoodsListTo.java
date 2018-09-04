@@ -29,6 +29,28 @@ public class OnlineGoodsListTo {
 	
 	/** 板块类型 **/
 	private int subjectType;
+	
+	/** 最低价 **/
+	private int lowPrice;
+	
+	/** 最高价 **/
+	private int hignPrice;
+
+	public int getLowPrice() {
+		return lowPrice;
+	}
+
+	public void setLowPrice(int lowPrice) {
+		this.lowPrice = lowPrice;
+	}
+
+	public int getHignPrice() {
+		return hignPrice;
+	}
+
+	public void setHignPrice(int hignPrice) {
+		this.hignPrice = hignPrice;
+	}
 
 	public int getSubjectType() {
 		return subjectType;
@@ -90,7 +112,7 @@ public class OnlineGoodsListTo {
 	public String toString() {
 		return "OnlineGoodsListTo [id=" + id + ", onlineTitle=" + onlineTitle + ", sortname=" + sortname
 				+ ", sortOrder=" + sortOrder + ", start=" + start + ", size=" + size + ", subjectType=" + subjectType
-				+ "]";
+				+ ", lowPrice=" + lowPrice + ", hignPrice=" + hignPrice + "]";
 	}
 
 }

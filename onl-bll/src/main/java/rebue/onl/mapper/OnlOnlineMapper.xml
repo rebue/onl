@@ -274,6 +274,12 @@
      <if test="subjectType != null and subjectType != ''">
         AND oo.SUBJECT_TYPE = '${subjectType}'
      </if>
+     <if test="lowPrice != null and lowPrice != '' and lowPrice != '0'">
+        AND oos.SALE_PRICE > '${lowPrice}'
+     </if>
+      <if test="hignPrice != null and hignPrice != '' and hignPrice != '0'">
+        AND oos.SALE_PRICE &lt; '${hignPrice}'
+      </if>
 	<if test="id == null or id == '' ">
 		order by ${sortname} ${sortOrder} LIMIT ${start}, ${size}
 	</if>
