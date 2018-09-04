@@ -32,35 +32,35 @@ public class OnlineGoodsListTo {
 	private int size;
 	
 	/** 板块类型 **/
-	private int subjectType;
-	
+	private Integer subjectType;
+
 	/** 最低价 **/
-	private int lowPrice;
+	private Integer lowPrice;
 	
 	/** 最高价 **/
-	private int hignPrice;
+	private Integer hignPrice;
 
-	public int getLowPrice() {
+	public Integer getLowPrice() {
 		return lowPrice;
 	}
 
-	public void setLowPrice(int lowPrice) {
+	public void setLowPrice(Integer lowPrice) {
 		this.lowPrice = lowPrice;
 	}
 
-	public int getHignPrice() {
+	public Integer getHignPrice() {
 		return hignPrice;
 	}
 
-	public void setHignPrice(int hignPrice) {
+	public void setHignPrice(Integer hignPrice) {
 		this.hignPrice = hignPrice;
 	}
 
-	public int getSubjectType() {
+	public Integer getSubjectType() {
 		return subjectType;
 	}
 
-	public void setSubjectType(int subjectType) {
+	public void setSubjectType(Integer subjectType) {
 		this.subjectType = subjectType;
 	}
 

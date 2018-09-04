@@ -271,7 +271,7 @@
 	<if test="onlineTitle != null and onlineTitle != ''">
         AND oo.ONLINE_TITLE LIKE '%${onlineTitle}%'
      </if>
-     <if test="subjectType != null and subjectType != ''">
+     <if test="subjectType != null">
         AND oo.SUBJECT_TYPE = '${subjectType}'
      </if>
      <if test="lowPrice != null and lowPrice != '' and lowPrice != '0'">
