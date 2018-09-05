@@ -1,16 +1,14 @@
 package rebue.onl.svc.impl;
 
+import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import rebue.onl.mapper.OnlOnlinePromotionMapper;
 import rebue.onl.mo.OnlOnlinePromotionMo;
 import rebue.onl.svc.OnlOnlinePromotionSvc;
-
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
-import java.util.List;
-import java.util.Map;
 
 @Service
 /**
@@ -25,31 +23,26 @@ import java.util.Map;
  * </pre>
  */
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-public class OnlOnlinePromotionSvcImpl
-		extends
-			MybatisBaseSvcImpl<OnlOnlinePromotionMo, java.lang.Long, OnlOnlinePromotionMapper>
-		implements
-			OnlOnlinePromotionSvc {
+public class OnlOnlinePromotionSvcImpl extends MybatisBaseSvcImpl<OnlOnlinePromotionMo, java.lang.Long, OnlOnlinePromotionMapper> implements OnlOnlinePromotionSvc {
 
-	/**
-	 * @mbg.generated
-	 */
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public int add(OnlOnlinePromotionMo mo) {
-		// 如果id为空那么自动生成分布式id
-		if (mo.getId() == null || mo.getId() == 0) {
-			mo.setId(_idWorker.getId());
-		}
-		return super.add(mo);
-	}
+    /**
+     * @mbg.generated
+     */
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public int add(OnlOnlinePromotionMo mo) {
+        // 如果id为空那么自动生成分布式id
+        if (mo.getId() == null || mo.getId() == 0) {
+            mo.setId(_idWorker.getId());
+        }
+        return super.add(mo);
+    }
 
-	/**
-	 * 获取推广上线商品列表 2018年3月29日11:41:30
-	 */
-	@Override
-	public List<Map<String, Object>> promotionOnlineGoodsList() {
-		return _mapper.promotionOnlineGoodsList();
-	}
-
+    /**
+     *  获取推广上线商品列表 2018年3月29日11:41:30
+     */
+    @Override
+    public List<Map<String, Object>> promotionOnlineGoodsList() {
+        return _mapper.promotionOnlineGoodsList();
+    }
 }

@@ -10,7 +10,6 @@
 
 	<groupId>com.github.rebue.onl</groupId>
 	<artifactId>onl</artifactId>
-	<version>1.0.0</version>
 	<packaging>pom</packaging>
 	<description>商品上线</description>
 
@@ -27,12 +26,12 @@
 			<dependency>
 				<groupId>com.github.rebue.onl</groupId>
 				<artifactId>onl-api</artifactId>
-				<version>1.0.0</version>
+				<version>1.0.8</version>
 			</dependency>
 			<dependency>
 				<groupId>com.github.rebue.onl</groupId>
 				<artifactId>onl-bll</artifactId>
-				<version>1.0.0</version>
+				<version>1.0.8</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
