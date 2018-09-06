@@ -52,6 +52,20 @@ public class OnlOnlineGoodsInfoRo {
 	 * 上线详情
 	 */
 	private String onlineDetail;
+	
+	/**
+	 * 商品类型
+	 */
+	
+	private Byte subjectType; 
+
+	public Byte getSubjectType() {
+		return subjectType;
+	}
+
+	public void setSubjectType(Byte subjectType) {
+		this.subjectType = subjectType;
+	}
 
 	public OnlOnlineGoodsInfoRo() {
 		super();
