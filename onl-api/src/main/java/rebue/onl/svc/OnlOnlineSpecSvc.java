@@ -8,6 +8,8 @@ import java.util.Map;
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
+import rebue.onl.to.AppendOnlineSpecCountTo;
+import rebue.robotech.ro.Ro;
 import rebue.robotech.svc.MybatisBaseSvc;
 
 public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.lang.Long> {
@@ -59,4 +61,14 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
      *  @date 2018年4月23日 下午5:46:50
      */
     ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(List<Map<String, Object>> specList);
+    
+    /**
+     * 追加上线数量
+     * @param to
+     * @return
+     * @throws IOException 
+     * @throws JsonMappingException 
+     * @throws JsonParseException 
+     */
+	Ro append(AppendOnlineSpecCountTo to) throws JsonParseException, JsonMappingException, IOException;
 }

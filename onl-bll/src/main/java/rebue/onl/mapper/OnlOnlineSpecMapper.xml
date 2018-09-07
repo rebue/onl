@@ -342,4 +342,10 @@
 	LEFT JOIN ONL_ONLINE oo ON ons.ONLINE_ID=oo.ID
 	WHERE oo.ONLINE_STATE=1 AND ons.ONLINE_SPEC = #{onlineSpec,jdbcType=VARCHAR} AND ons.ONLINE_ID = #{onlineId,jdbcType=BIGINT}
   </select>
+  
+  <!-- 追加上线数量 -->
+  <update id="appendOnlineCount" parameterType="rebue.onl.to.AppendOnlineSpecCountTo">
+  	update ONL_ONLINE_SPEC set ONLINE_TOTAL=ONLINE_TOTAL + #{appendCount,jdbcType=INTEGER}, SALE_COUNT=SALE_COUNT + #{appendCount,jdbcType=INTEGER} 
+  	where ID=#{onlineSpecId,jdbcType=BIGINT} and ONLINE_ID=#{onlineId,jdbcType=BIGINT} and ONLINE_TOTAL=#{onlineTotal,jdbcType=INTEGER}
+  </update>
 </mapper>

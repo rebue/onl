@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.DeleteCartAndModifyInventoryRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
+import rebue.onl.to.AppendOnlineSpecCountTo;
 import rebue.robotech.mapper.MybatisBaseMapper;
 
 @Mapper
@@ -86,4 +87,10 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
      *  @date 2018年4月11日 下午5:02:30
      */
     boolean selectSpecExistOnline(DeleteCartAndModifyInventoryRo record);
+    
+    /**
+     * 追加上线数量
+     * @return
+     */
+    int appendOnlineCount(AppendOnlineSpecCountTo record);
 }

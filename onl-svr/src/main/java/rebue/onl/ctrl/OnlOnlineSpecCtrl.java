@@ -23,6 +23,8 @@ import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.svc.OnlOnlineSpecSvc;
+import rebue.onl.to.AppendOnlineSpecCountTo;
+import rebue.robotech.ro.Ro;
 
 @RestController
 public class OnlOnlineSpecCtrl {
@@ -207,5 +209,20 @@ public class OnlOnlineSpecCtrl {
         }
         _log.info("删除购物车和修改上线数量的返回值为：{}", String.valueOf(resultMap));
         return resultMap;
+    }
+    
+    /**
+     * 追加上线数量
+     * @param to
+     * @return
+     * @throws IOException 
+     * @throws JsonMappingException 
+     * @throws JsonParseException 
+     */
+    @PutMapping("/onl/onlinespec/append")
+    Ro append(@RequestBody AppendOnlineSpecCountTo to) throws JsonParseException, JsonMappingException, IOException {
+    	_log.info("追加上线数量的参数为：{}", to);
+    	to.setOpId(12345678L);
+    	return svc.append(to);
     }
 }
