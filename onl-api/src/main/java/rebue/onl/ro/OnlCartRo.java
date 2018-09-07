@@ -60,6 +60,19 @@ public class OnlCartRo {
 	 * 产品Id
 	 */
 	private Long produceId;
+	
+	/**
+	 * 产品类型
+	 */
+	private Byte subjectType;
+
+	public Byte getSubjectType() {
+		return subjectType;
+	}
+
+	public void setSubjectType(Byte subjectType) {
+		this.subjectType = subjectType;
+	}
 
 	public OnlCartRo() {
 		super();
@@ -164,7 +177,9 @@ public class OnlCartRo {
 	public String toString() {
 		return "OnlCartRo [id=" + id + ", onlineId=" + onlineId + ", onlineTitle=" + onlineTitle + ", onlineSpecId="
 				+ onlineSpecId + ", onlineSpec=" + onlineSpec + ", cashbackAmount=" + cashbackAmount + ", salePrice="
-				+ salePrice + ", cartCount=" + cartCount + ", picPath=" + picPath + ", produceId=" + produceId + "]";
+				+ salePrice + ", cartCount=" + cartCount + ", picPath=" + picPath + ", produceId=" + produceId
+				+ ", subjectType=" + subjectType + "]";
 	}
+
 
 }
