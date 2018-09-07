@@ -1,14 +1,11 @@
 package rebue.onl.svc.impl;
 
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import rebue.onl.mapper.OnlOnlineSpecOpLogMapper;
 import rebue.onl.mo.OnlOnlineSpecOpLogMo;
 import rebue.onl.svc.OnlOnlineSpecOpLogSvc;
-
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
 
 @Service
@@ -38,5 +35,4 @@ public class OnlOnlineSpecOpLogSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecO
         }
         return super.add(mo);
     }
-
 }

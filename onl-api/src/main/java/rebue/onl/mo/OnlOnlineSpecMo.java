@@ -88,13 +88,22 @@ public class OnlOnlineSpecMo implements Serializable {
     private Integer seqNo;
 
     /**
-     *    返佣金金额
+     *    返现佣金金额
      *
-     *    数据库字段: ONL_ONLINE_SPEC.COMMISSION_AMOUNT
+     *    数据库字段: ONL_ONLINE_SPEC.CASHBACK_COMMISSION_AMOUNT
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private BigDecimal commissionAmount;
+    private BigDecimal cashbackCommissionAmount;
+
+    /**
+     *    上线总数
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.ONLINE_TOTAL
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Integer onlineTotal;
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -278,25 +287,47 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
-     *    返佣金金额
+     *    返现佣金金额
      *
-     *    数据库字段: ONL_ONLINE_SPEC.COMMISSION_AMOUNT
+     *    数据库字段: ONL_ONLINE_SPEC.CASHBACK_COMMISSION_AMOUNT
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public BigDecimal getCommissionAmount() {
-        return commissionAmount;
+    public BigDecimal getCashbackCommissionAmount() {
+        return cashbackCommissionAmount;
     }
 
     /**
-     *    返佣金金额
+     *    返现佣金金额
      *
-     *    数据库字段: ONL_ONLINE_SPEC.COMMISSION_AMOUNT
+     *    数据库字段: ONL_ONLINE_SPEC.CASHBACK_COMMISSION_AMOUNT
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setCommissionAmount(BigDecimal commissionAmount) {
-        this.commissionAmount = commissionAmount;
+    public void setCashbackCommissionAmount(BigDecimal cashbackCommissionAmount) {
+        this.cashbackCommissionAmount = cashbackCommissionAmount;
+    }
+
+    /**
+     *    上线总数
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.ONLINE_TOTAL
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Integer getOnlineTotal() {
+        return onlineTotal;
+    }
+
+    /**
+     *    上线总数
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.ONLINE_TOTAL
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setOnlineTotal(Integer onlineTotal) {
+        this.onlineTotal = onlineTotal;
     }
 
     /**
@@ -316,7 +347,8 @@ public class OnlOnlineSpecMo implements Serializable {
         sb.append(", saleUnit=").append(saleUnit);
         sb.append(", saleCount=").append(saleCount);
         sb.append(", seqNo=").append(seqNo);
-        sb.append(", commissionAmount=").append(commissionAmount);
+        sb.append(", cashbackCommissionAmount=").append(cashbackCommissionAmount);
+        sb.append(", onlineTotal=").append(onlineTotal);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

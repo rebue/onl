@@ -54,6 +54,20 @@ public class OnlOnlineSpecCtrl {
     }
 
     /**
+     * 修改上线规格
+     * @mbg.generated
+     */
+    @PutMapping("/onl/onlinespec")
+    Map<String, Object> modify(OnlOnlineSpecMo vo) throws Exception {
+        _log.info("modify OnlOnlineSpecMo:" + vo);
+        svc.modify(vo);
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        _log.info("modify OnlOnlineSpecMo success!");
+        return result;
+    }
+
+    /**
      * 删除上线规格
      * @mbg.generated
      */
