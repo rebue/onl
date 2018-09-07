@@ -121,11 +121,12 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             }
             onlineSpecMo.setCashbackAmount(cashbackAmount);
             onlineSpecMo.setSalePrice(to.getOnlineSpecs().get(i).getSalePrice());
-            if (to.getOnlineSpecs().get(i).getCommissionAmount() != null) {
-                onlineSpecMo.setCommissionAmount(to.getOnlineSpecs().get(i).getCommissionAmount());
+            if (to.getOnlineSpecs().get(i).getCashbackCommissionAmount() != null) {
+                onlineSpecMo.setCashbackCommissionAmount(to.getOnlineSpecs().get(i).getCashbackCommissionAmount());
             }
             onlineSpecMo.setSaleUnit(to.getOnlineSpecs().get(i).getSaleUnit());
             onlineSpecMo.setSaleCount(to.getOnlineSpecs().get(i).getSaleCount());
+            onlineSpecMo.setOnlineTotal(to.getOnlineSpecs().get(i).getSaleCount());
             onlineSpecMo.setSeqNo(i);
             _log.info("添加上线信息添加上线规格信息的参数为：{}", onlineSpecMo);
             int addOnlineSpecResult = onlOnlineSpecSvc.add(onlineSpecMo);

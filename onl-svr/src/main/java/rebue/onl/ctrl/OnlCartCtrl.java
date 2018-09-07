@@ -1,6 +1,5 @@
 package rebue.onl.ctrl;
 
-import com.github.pagehelper.PageInfo;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,38 +25,6 @@ public class OnlCartCtrl {
      * @mbg.generated
      */
     private static final Logger _log = LoggerFactory.getLogger(OnlCartCtrl.class);
-
-    /**
-     * 添加购物车
-     * @mbg.generated
-     */
-    @PostMapping("/onl/cart")
-    Map<String, Object> add(OnlCartMo vo) throws Exception {
-        _log.info("add OnlCartMo:" + vo);
-        svc.add(vo);
-        Map<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        result.put("id", vo.getId());
-        _log.info("add OnlCartMo success!");
-        return result;
-    }
-
-    /**
-     * 查询购物车
-     * @mbg.generated
-     */
-    @GetMapping("/onl/cart")
-    PageInfo<OnlCartMo> list(OnlCartMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
-        _log.info("list OnlCartMo:" + qo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
-        if (pageSize > 50) {
-            String msg = "pageSize不能大于50";
-            _log.error(msg);
-            throw new IllegalArgumentException(msg);
-        }
-        PageInfo<OnlCartMo> result = svc.list(qo, pageNum, pageSize);
-        _log.info("result: " + result);
-        return result;
-    }
 
     /**
      *  @mbg.overrideByMethodName

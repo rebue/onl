@@ -1,6 +1,5 @@
 package rebue.onl.ctrl;
 
-import com.github.pagehelper.PageInfo;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import rebue.onl.mo.OnlOnlinePicMo;
 import rebue.onl.svc.OnlOnlinePicSvc;
@@ -71,23 +69,6 @@ public class OnlOnlinePicCtrl {
         Map<String, Object> result = new HashMap<>();
         result.put("success", true);
         _log.info("delete OnlOnlinePicMo success!");
-        return result;
-    }
-
-    /**
-     * 查询上线图片
-     * @mbg.generated
-     */
-    @GetMapping("/onl/onlinepic")
-    PageInfo<OnlOnlinePicMo> list(OnlOnlinePicMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
-        _log.info("list OnlOnlinePicMo:" + qo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
-        if (pageSize > 50) {
-            String msg = "pageSize不能大于50";
-            _log.error(msg);
-            throw new IllegalArgumentException(msg);
-        }
-        PageInfo<OnlOnlinePicMo> result = svc.list(qo, pageNum, pageSize);
-        _log.info("result: " + result);
         return result;
     }
 
