@@ -235,12 +235,3 @@
 	WHERE oc.USER_ID = #{userId,jdbcType=BIGINT} ORDER BY oc.JOIN_TIME ASC
   </select>
 </mapper>
-
-
-
-
-
-
-
-
-

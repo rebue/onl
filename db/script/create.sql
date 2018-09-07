@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/9/5 15:40:09                            */
+/* Created on:     2018/9/7 9:57:04                             */
 /*==============================================================*/
 
 
@@ -85,10 +85,11 @@ create table ONL_ONLINE_SPEC
    ID                   bigint not null comment '上线规格ID',
    ONLINE_ID            bigint not null comment '上线ID',
    ONLINE_SPEC          varchar(200) not null comment '上线规格',
-   CASHBACK_AMOUNT      decimal(20,4) not null comment '返现金额',
    SALE_PRICE           decimal(20,4) not null comment '销售价格',
-   COMMISSION_AMOUNT    decimal(20,4) comment '返佣金金额',
+   CASHBACK_AMOUNT      decimal(20,4) not null comment '返现金额',
+   CASHBACK_COMMISSION_AMOUNT decimal(20,4) comment '返现佣金金额',
    SALE_UNIT            varchar(50) comment '销售单位',
+   ONLINE_TOTAL         int not null comment '上线总数',
    SALE_COUNT           int not null comment '销售数量',
    SEQ_NO               int not null comment '排序号',
    primary key (ID)

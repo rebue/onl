@@ -1,3 +1,7 @@
+--2018年9月7日09:57:29修改ONL_ONLINE_SPEC返佣金额字段（COMMISSION_AMOUNT）改为返现佣金金额(CASHBACK_COMMISSION_AMOUNT)
+--在ONL_ONLINE_SPEC新加字段：上线总数（ONLINE_TOTAL）
+alter table onl.ONL_ONLINE_SPEC change COMMISSION_AMOUNT CASHBACK_COMMISSION_AMOUNT decimal(20,4) comment '返现佣金金额';
+alter table onl.ONL_ONLINE_SPEC add ONLINE_TOTAL int not null comment '上线总数';
 --2018年9月5日15:41:53新加表
 /*==============================================================*/
 /* Table: ONL_ONLINE_SPEC_OP_LOG                                */
