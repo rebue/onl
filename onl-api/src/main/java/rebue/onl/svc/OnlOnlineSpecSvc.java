@@ -12,6 +12,11 @@ import rebue.onl.to.AppendOnlineSpecCountTo;
 import rebue.robotech.ro.Ro;
 import rebue.robotech.svc.MybatisBaseSvc;
 
+/**
+ * 上线规格
+ *
+ * @mbg.generated 自动生成的注释，如需修改本注释，请删除本行
+ */
 public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.lang.Long> {
 
     /**
@@ -61,14 +66,14 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
      *  @date 2018年4月23日 下午5:46:50
      */
     ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(List<Map<String, Object>> specList);
-    
+
     /**
      * 追加上线数量
      * @param to
      * @return
-     * @throws IOException 
-     * @throws JsonMappingException 
-     * @throws JsonParseException 
+     * @throws IOException
+     * @throws JsonMappingException
+     * @throws JsonParseException
      */
-	Ro append(AppendOnlineSpecCountTo to) throws JsonParseException, JsonMappingException, IOException;
+    Ro append(AppendOnlineSpecCountTo to) throws JsonParseException, JsonMappingException, IOException;
 }

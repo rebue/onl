@@ -5,6 +5,11 @@ import java.util.Map;
 import rebue.onl.mo.OnlOnlinePromotionMo;
 import rebue.robotech.svc.MybatisBaseSvc;
 
+/**
+ * 上线推广
+ *
+ * @mbg.generated 自动生成的注释，如需修改本注释，请删除本行
+ */
 public interface OnlOnlinePromotionSvc extends MybatisBaseSvc<OnlOnlinePromotionMo, java.lang.Long> {
 
     /**

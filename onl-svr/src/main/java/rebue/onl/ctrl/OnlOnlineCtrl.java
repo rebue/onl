@@ -1,24 +1,25 @@
 package rebue.onl.ctrl;
 
-import com.github.pagehelper.PageInfo;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.github.pagehelper.PageInfo;
+
 import rebue.onl.dic.AddOnlineDic;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.mo.OnlOnlinePicMo;
@@ -33,58 +34,77 @@ import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
 import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlineGoodsListTo;
+import rebue.robotech.dic.ResultDic;
+import rebue.robotech.ro.Ro;
 
+/**
+ * 上线信息
+ *
+ * @mbg.removeField _uniqueFilesName
+ */
 @RestController
 public class OnlOnlineCtrl {
 
     /**
      * 删除上线信息
-     * @mbg.generated
+     *
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @DeleteMapping("/onl/online/{id}")
-    Map<String, Object> del(@PathVariable("id") java.lang.Long id) {
+    @DeleteMapping("/onl/online")
+    Ro del(@RequestParam("id") java.lang.Long id) {
         _log.info("save OnlOnlineMo:" + id);
-        svc.del(id);
-        Map<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        _log.info("delete OnlOnlineMo success!");
-        return result;
+        int result = svc.del(id);
+        Ro ro = new Ro();
+        if (result == 1) {
+            String msg = "删除成功";
+            _log.info("{}: id-{}", msg, id);
+            ro.setMsg(msg);
+            ro.setResult(ResultDic.SUCCESS);
+            return ro;
+        } else {
+            String msg = "删除失败，找不到该记录";
+            _log.error("{}: id-{}", msg, id);
+            ro.setMsg(msg);
+            ro.setResult(ResultDic.FAIL);
+            return ro;
+        }
     }
 
     /**
      * 获取单个上线信息
-     * @mbg.generated
+     *
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @GetMapping("/onl/online/{id}")
-    OnlOnlineMo get(@PathVariable("id") java.lang.Long id) {
+    @GetMapping("/onl/online/getbyid")
+    OnlOnlineMo getById(@RequestParam("id") java.lang.Long id) {
         _log.info("get OnlOnlineMo by id: " + id);
-        OnlOnlineMo result = svc.getById(id);
-        _log.info("get: " + result);
-        return result;
+        return svc.getById(id);
     }
 
     /**
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     private static final Logger _log = LoggerFactory.getLogger(OnlOnlineCtrl.class);
 
     /**
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Resource
-    private OnlOnlineSvc svc;
+    private OnlOnlineSvc        svc;
 
     @Resource
-    private OnlOnlineSpecSvc onlineSpecSvc;
+    private OnlOnlineSpecSvc    onlineSpecSvc;
 
     @Resource
-    private OnlOnlinePicSvc onlinePicSvc;
+    private OnlOnlinePicSvc     onlinePicSvc;
 
     @Resource
-    private Mapper dozerMapper;
+    private Mapper              dozerMapper;
 
     /**
-     *  添加上线信息
+     * 添加上线信息
      *
-     *  @mbg.overrideByMethodName
+     * @mbg.overrideByMethodName
      */
     @PostMapping("/onl/online")
     AddOnlineRo add(@RequestBody AddOnlineTo to, HttpServletRequest request) throws Exception {
@@ -104,13 +124,13 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     *  根据条件分页查询商品上线信息 Title: list Description:
+     * 根据条件分页查询商品上线信息 Title: list Description:
      *
-     *  @param qo
-     *  @param pageNum
-     *  @param pageSize
-     *  @return
-     *  @date 2018年3月28日 下午3:06:09
+     * @param qo
+     * @param pageNum
+     * @param pageSize
+     * @return
+     * @date 2018年3月28日 下午3:06:09
      */
     @GetMapping("/onl/online")
     PageInfo<OnlOnlineMo> list(OnlOnlineMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
@@ -126,12 +146,12 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     *  商品下线 Title: modify Description:
+     * 商品下线 Title: modify Description:
      *
-     *  @param vo
-     *  @return
-     *  @throws Exception
-     *  @date 2018年3月28日 下午3:14:23
+     * @param vo
+     * @return
+     * @throws Exception
+     * @date 2018年3月28日 下午3:14:23
      */
     @PutMapping("/onl/online")
     OnlOnlineRo modify(OnlOnlineMo vo) throws Exception {
@@ -151,10 +171,10 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     *  获取上线商品列表 Title: selectOnlineGoodsList Description:
+     * 获取上线商品列表 Title: selectOnlineGoodsList Description:
      *
-     *  @return
-     *  @date 2018年3月29日 下午5:42:46
+     * @return
+     * @date 2018年3月29日 下午5:42:46
      */
     @SuppressWarnings("finally")
     @GetMapping("/onl/online/list")
@@ -171,11 +191,11 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     *  查询是否已上线 Title: existSelective Description:
+     * 查询是否已上线 Title: existSelective Description:
      *
-     *  @param qo
-     *  @return
-     *  @date 2018年4月10日 下午4:06:26
+     * @param qo
+     * @return
+     * @date 2018年4月10日 下午4:06:26
      */
     @GetMapping(value = "/onl/online/exist")
     @ResponseBody
@@ -190,10 +210,10 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     *  根据id获取上线信息、规格信息、图片信息
+     * 根据id获取上线信息、规格信息、图片信息
      *
-     *  @param id
-     *  @return
+     * @param id
+     * @return
      */
     @GetMapping("/onl/online/getonlines")
     GetOnlinesRo getOnlines(@RequestParam("id") Long id) {

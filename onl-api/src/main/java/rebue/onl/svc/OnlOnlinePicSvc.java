@@ -4,6 +4,11 @@ import java.util.List;
 import rebue.onl.mo.OnlOnlinePicMo;
 import rebue.robotech.svc.MybatisBaseSvc;
 
+/**
+ * 上线图片
+ *
+ * @mbg.generated 自动生成的注释，如需修改本注释，请删除本行
+ */
 public interface OnlOnlinePicSvc extends MybatisBaseSvc<OnlOnlinePicMo, java.lang.Long> {
 
     /**

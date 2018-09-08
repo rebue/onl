@@ -2,15 +2,16 @@ package rebue.onl.ctrl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,62 +20,101 @@ import org.springframework.web.bind.annotation.RestController;
 import rebue.onl.mo.OnlOnlinePromotionMo;
 import rebue.onl.ro.OnlOnlinePromotionRo;
 import rebue.onl.svc.OnlOnlinePromotionSvc;
+import rebue.robotech.dic.ResultDic;
+import rebue.robotech.ro.Ro;
 
+/**
+ * 上线推广
+ *
+ * @mbg.generated 自动生成的注释，如需修改本注释，请删除本行
+ */
 @RestController
 public class OnlOnlinePromotionCtrl {
 
     /**
-     * @mbg.generated
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     private static final Logger _log = LoggerFactory.getLogger(OnlOnlinePromotionCtrl.class);
 
     /**
-     * @mbg.generated
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Resource
     private OnlOnlinePromotionSvc svc;
 
     /**
+     * 有唯一约束的字段名称
+     *
+     * @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private String _uniqueFilesName = "某字段内容";
+
+    /**
      * 修改上线推广
-     * @mbg.generated
+     *
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     @PutMapping("/onl/onlinepromotion")
-    Map<String, Object> modify(OnlOnlinePromotionMo vo) throws Exception {
-        _log.info("modify OnlOnlinePromotionMo:" + vo);
-        svc.modify(vo);
-        Map<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        _log.info("modify OnlOnlinePromotionMo success!");
-        return result;
+    Ro modify(@RequestBody OnlOnlinePromotionMo mo) throws Exception {
+        _log.info("modify OnlOnlinePromotionMo:" + mo);
+        Ro ro = new Ro();
+        try {
+            if (svc.modify(mo) == 1) {
+                String msg = "修改成功";
+                _log.info("{}: mo-{}", msg, mo);
+                ro.setMsg(msg);
+                ro.setResult(ResultDic.SUCCESS);
+                return ro;
+            } else {
+                String msg = "修改失败";
+                _log.error("{}: mo-{}", msg, mo);
+                ro.setMsg(msg);
+                ro.setResult(ResultDic.FAIL);
+                return ro;
+            }
+        } catch (DuplicateKeyException e) {
+            String msg = "修改失败，" + _uniqueFilesName + "已存在，不允许出现重复";
+            _log.error("{}: mo-{}", msg, mo);
+            ro.setMsg(msg);
+            ro.setResult(ResultDic.FAIL);
+            return ro;
+        } catch (RuntimeException e) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String msg = "修改失败，出现运行时异常(" + sdf.format(new Date()) + ")";
+            _log.error("{}: mo-{}", msg, mo);
+            ro.setMsg(msg);
+            ro.setResult(ResultDic.FAIL);
+            return ro;
+        }
     }
 
     /**
      * 查询上线推广
-     * @mbg.generated
+     *
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     @GetMapping("/onl/onlinepromotion")
-    PageInfo<OnlOnlinePromotionMo> list(OnlOnlinePromotionMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
-        _log.info("list OnlOnlinePromotionMo:" + qo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
+    PageInfo<OnlOnlinePromotionMo> list(OnlOnlinePromotionMo mo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+        _log.info("list OnlOnlinePromotionMo:" + mo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
         if (pageSize > 50) {
             String msg = "pageSize不能大于50";
             _log.error(msg);
             throw new IllegalArgumentException(msg);
         }
-        PageInfo<OnlOnlinePromotionMo> result = svc.list(qo, pageNum, pageSize);
+        PageInfo<OnlOnlinePromotionMo> result = svc.list(mo, pageNum, pageSize);
         _log.info("result: " + result);
         return result;
     }
 
     /**
      * 获取单个上线推广
-     * @mbg.generated
+     *
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @GetMapping("/onl/onlinepromotion/{id}")
-    OnlOnlinePromotionMo get(@PathVariable("id") java.lang.Long id) {
+    @GetMapping("/onl/onlinepromotion/getbyid")
+    OnlOnlinePromotionMo getById(@RequestParam("id") java.lang.Long id) {
         _log.info("get OnlOnlinePromotionMo by id: " + id);
-        OnlOnlinePromotionMo result = svc.getById(id);
-        _log.info("get: " + result);
-        return result;
+        return svc.getById(id);
     }
 
     /**

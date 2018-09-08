@@ -3,7 +3,9 @@ package rebue.onl.ctrl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,29 +15,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import rebue.onl.mo.OnlCartMo;
 import rebue.onl.ro.AddCartRo;
 import rebue.onl.ro.OnlCartRo;
 import rebue.onl.svc.OnlCartSvc;
 
+/**
+ * 购物车
+ *
+ * @mbg.removeField _uniqueFilesName
+ */
 @RestController
 public class OnlCartCtrl {
 
     /**
-     * @mbg.generated
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     private static final Logger _log = LoggerFactory.getLogger(OnlCartCtrl.class);
 
     /**
-     *  @mbg.overrideByMethodName
+     * 获取单个购物车
+     *
+     * @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    @GetMapping("/onl/cart/getbyid")
+    OnlCartMo getById(@RequestParam("id") java.lang.Long id) {
+        _log.info("get OnlCartMo by id: " + id);
+        return svc.getById(id);
+    }
+
+    /**
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Resource
     private OnlCartSvc svc;
 
     /**
-     *  修改购物车
-     *
-     *  @mbg.overrideByMethodName
+     * 修改购物车
      */
     @PutMapping("/onl/cart")
     Map<String, Object> modify(OnlCartMo vo) throws Exception {
@@ -48,9 +65,9 @@ public class OnlCartCtrl {
     }
 
     /**
-     *  删除购物车
+     * 删除购物车
      *
-     *  @mbg.overrideByMethodName
+     * @mbg.overrideByMethodName
      */
     @DeleteMapping("/onl/cart/{id}")
     Map<String, Object> del(@PathVariable("id") java.lang.Long id) {
@@ -63,9 +80,9 @@ public class OnlCartCtrl {
     }
 
     /**
-     *  获取单个购物车
+     * 获取单个购物车
      *
-     *  @mbg.overrideByMethodName
+     * @mbg.overrideByMethodName
      */
     @GetMapping("/onl/cart/{id}")
     OnlCartMo get(@PathVariable("id") java.lang.Long id) {
@@ -76,25 +93,20 @@ public class OnlCartCtrl {
     }
 
     /**
-     *  添加购物车 Title: add Description:
-     *
-     *  @param vo
-     *  @return
-     *  @throws Exception
-     *  @date 2018年3月29日 下午2:27:03
+     * 添加购物车 Title: add Description:
      */
     @PostMapping("/onl/cart")
-    AddCartRo addCart(OnlCartMo vo) throws Exception {
+    AddCartRo add(OnlCartMo vo) throws Exception {
         _log.info("加入购物车的参数为：" + vo);
         return svc.addCart(vo);
     }
 
     /**
-     *  删除购物车 Title: del Description:
+     * 删除购物车 Title: del Description:
      *
-     *  @param id
-     *  @return
-     *  @date 2018年3月29日 下午2:54:51
+     * @param id
+     * @return
+     * @date 2018年3月29日 下午2:54:51
      */
     @DeleteMapping(value = "/onl/cart")
     Map<String, Object> del(OnlCartMo vo) {
@@ -115,11 +127,11 @@ public class OnlCartCtrl {
     }
 
     /**
-     *  查询购物车数量 Title: Cartcount Description:
+     * 查询购物车数量 Title: Cartcount Description:
      *
-     *  @param qo
-     *  @return
-     *  @date 2018年3月30日 上午10:52:33
+     * @param qo
+     * @return
+     * @date 2018年3月30日 上午10:52:33
      */
     @GetMapping("/onl/cart/count")
     int Cartcount(OnlCartMo qo) {
@@ -128,23 +140,22 @@ public class OnlCartCtrl {
     }
 
     /**
-     *  获取购物车列表 Title: selectCartList Description:
-     *
-     *  @param qo
-     *  @return
-     *  @date 2018年3月30日 下午1:56:38
+     * 获取购物车列表 Title: selectCartList Description:
+     * 
+     * @mbg.overrideByMethodName
+     * 
      */
     @GetMapping("/onl/cart")
-    List<OnlCartRo> selectCartList(OnlCartMo qo) {
+    List<OnlCartRo> list(OnlCartMo qo) {
         return svc.selectCartList(qo);
     }
 
     /**
-     *  批量删除购物车 Title: deleteByUserIdAndCartIds Description:
+     * 批量删除购物车 Title: deleteByUserIdAndCartIds Description:
      *
-     *  @param map
-     *  @return
-     *  @date 2018年4月3日 下午3:30:20
+     * @param map
+     * @return
+     * @date 2018年4月3日 下午3:30:20
      */
     @DeleteMapping("/onl/cart/deletes")
     int deleteByUserIdAndCartIds(@RequestParam Map<String, Object> map) {

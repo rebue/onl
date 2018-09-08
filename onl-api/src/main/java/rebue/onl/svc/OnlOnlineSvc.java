@@ -8,6 +8,11 @@ import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlineGoodsListTo;
 import rebue.robotech.svc.MybatisBaseSvc;
 
+/**
+ * 上线信息
+ *
+ * @mbg.generated 自动生成的注释，如需修改本注释，请删除本行
+ */
 public interface OnlOnlineSvc extends MybatisBaseSvc<OnlOnlineMo, java.lang.Long> {
 
     /**

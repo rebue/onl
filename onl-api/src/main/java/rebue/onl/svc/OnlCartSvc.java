@@ -7,6 +7,11 @@ import rebue.onl.ro.AddCartRo;
 import rebue.onl.ro.OnlCartRo;
 import rebue.robotech.svc.MybatisBaseSvc;
 
+/**
+ * 购物车
+ *
+ * @mbg.generated 自动生成的注释，如需修改本注释，请删除本行
+ */
 public interface OnlCartSvc extends MybatisBaseSvc<OnlCartMo, java.lang.Long> {
 
     /**
