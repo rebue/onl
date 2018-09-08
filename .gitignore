@@ -2,5 +2,10 @@
 .project
 target
 .settings
-*.log
-*.error
+logs
+.DS_Store
+*.pdb
+*.ldb
+*.gz
+*.log.gz
+*.class
