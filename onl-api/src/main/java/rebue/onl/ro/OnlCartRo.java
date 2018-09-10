@@ -59,7 +59,7 @@ public class OnlCartRo {
 	/**
 	 * 产品Id
 	 */
-	private Long produceId;
+	private Long productId;
 	
 	/**
 	 * 产品类型
@@ -90,7 +90,7 @@ public class OnlCartRo {
 		this.salePrice = salePrice;
 		this.cartCount = cartCount;
 		this.picPath = picPath;
-		this.produceId = produceId;
+		this.productId = produceId;
 	}
 
 	public long getId() {
@@ -165,19 +165,19 @@ public class OnlCartRo {
 		this.picPath = picPath;
 	}
 
-	public Long getProduceId() {
-		return produceId;
+	public Long getProductId() {
+		return productId;
 	}
 
-	public void setProduceId(Long produceId) {
-		this.produceId = produceId;
+	public void setProductId(Long produceId) {
+		this.productId = produceId;
 	}
 
 	@Override
 	public String toString() {
 		return "OnlCartRo [id=" + id + ", onlineId=" + onlineId + ", onlineTitle=" + onlineTitle + ", onlineSpecId="
 				+ onlineSpecId + ", onlineSpec=" + onlineSpec + ", cashbackAmount=" + cashbackAmount + ", salePrice="
-				+ salePrice + ", cartCount=" + cartCount + ", picPath=" + picPath + ", produceId=" + produceId
+				+ salePrice + ", cartCount=" + cartCount + ", picPath=" + picPath + ", produceId=" + productId
 				+ ", subjectType=" + subjectType + "]";
 	}
 
