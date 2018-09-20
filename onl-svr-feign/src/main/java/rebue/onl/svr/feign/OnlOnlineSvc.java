@@ -3,6 +3,8 @@ package rebue.onl.svr.feign;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import rebue.onl.mo.OnlOnlineMo;
 import rebue.sbs.feign.FeignConfig;
 
 /**
@@ -24,4 +26,12 @@ public interface OnlOnlineSvc {
 	 */
 	@GetMapping(value = "/onl/online/exist")
 	Boolean existSelective(@RequestParam("id") Long id, @RequestParam("onlineState") Byte onlineState);
+
+	/**
+	 * 根据上线ID查找上线商品上线信息
+	 */
+
+	@GetMapping("/onl/online/getbyid")
+	OnlOnlineMo getById(@RequestParam("id") Long id);
+
 }
