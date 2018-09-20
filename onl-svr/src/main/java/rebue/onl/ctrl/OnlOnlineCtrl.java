@@ -36,6 +36,7 @@ import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlineGoodsListTo;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
+import rebue.wheel.turing.JwtUtils;
 
 /**
  * 上线信息
@@ -107,10 +108,10 @@ public class OnlOnlineCtrl {
      * @mbg.overrideByMethodName
      */
     @PostMapping("/onl/online")
-    AddOnlineRo add(@RequestBody AddOnlineTo to, HttpServletRequest request) throws Exception {
+    AddOnlineRo add(@RequestBody AddOnlineTo to, HttpServletRequest req) throws Exception {
         // 获取当前登录用户id
-        // Long loginId = JwtUtils.getJwtUserIdInCookie(request);
-        to.setOpId(Long.parseLong("121231212"));
+        Long currentUserId = JwtUtils.getJwtUserIdInCookie(req);
+        to.setOpId(currentUserId);
         _log.info("添加上线信息的参数为：{}", to);
         try {
             return svc.addOnline(to);
