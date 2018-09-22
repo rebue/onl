@@ -57,4 +57,9 @@ public interface OnlOnlineSpecOpLogMapper extends MybatisBaseMapper<OnlOnlineSpe
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     boolean existSelective(OnlOnlineSpecOpLogMo record);
+
+    /**
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    int countSelective(OnlOnlineSpecOpLogMo record);
 }

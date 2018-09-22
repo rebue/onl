@@ -57,4 +57,9 @@ public interface OnlOnlinePicMapper extends MybatisBaseMapper<OnlOnlinePicMo, Lo
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     boolean existSelective(OnlOnlinePicMo record);
+
+    /**
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    int countSelective(OnlOnlinePicMo record);
 }

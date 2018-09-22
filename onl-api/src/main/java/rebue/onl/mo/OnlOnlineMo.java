@@ -27,6 +27,15 @@ public class OnlOnlineMo implements Serializable {
     private Long id;
 
     /**
+     *    板块类型（0：普通，1：全返）
+     *
+     *    数据库字段: ONL_ONLINE.SUBJECT_TYPE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Byte subjectType;
+
+    /**
      *    上线标题
      *
      *    数据库字段: ONL_ONLINE.ONLINE_TITLE
@@ -36,20 +45,13 @@ public class OnlOnlineMo implements Serializable {
     private String onlineTitle;
 
     /**
+     *    上线描述
+     *
      *    数据库字段: ONL_ONLINE.ONLINE_DETAIL
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private String onlineDetail;
-
-    /**
-     *    上线状态（0：下线，1：上线  ）
-     *
-     *    数据库字段: ONL_ONLINE.ONLINE_STATE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Byte onlineState;
 
     /**
      *    操作人ID
@@ -59,6 +61,15 @@ public class OnlOnlineMo implements Serializable {
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private Long opId;
+
+    /**
+     *    上线状态（0：下线，1：上线  ）
+     *
+     *    数据库字段: ONL_ONLINE.ONLINE_STATE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Byte onlineState;
 
     /**
      *    上线时间
@@ -79,15 +90,6 @@ public class OnlOnlineMo implements Serializable {
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private Long productId;
-
-    /**
-     *    板块类型（0：普通，1：全返）
-     *
-     *    数据库字段: ONL_ONLINE.SUBJECT_TYPE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Byte subjectType;
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -117,6 +119,28 @@ public class OnlOnlineMo implements Serializable {
     }
 
     /**
+     *    板块类型（0：普通，1：全返）
+     *
+     *    数据库字段: ONL_ONLINE.SUBJECT_TYPE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Byte getSubjectType() {
+        return subjectType;
+    }
+
+    /**
+     *    板块类型（0：普通，1：全返）
+     *
+     *    数据库字段: ONL_ONLINE.SUBJECT_TYPE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setSubjectType(Byte subjectType) {
+        this.subjectType = subjectType;
+    }
+
+    /**
      *    上线标题
      *
      *    数据库字段: ONL_ONLINE.ONLINE_TITLE
@@ -139,6 +163,8 @@ public class OnlOnlineMo implements Serializable {
     }
 
     /**
+     *    上线描述
+     *
      *    数据库字段: ONL_ONLINE.ONLINE_DETAIL
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -148,34 +174,14 @@ public class OnlOnlineMo implements Serializable {
     }
 
     /**
+     *    上线描述
+     *
      *    数据库字段: ONL_ONLINE.ONLINE_DETAIL
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     public void setOnlineDetail(String onlineDetail) {
         this.onlineDetail = onlineDetail;
-    }
-
-    /**
-     *    上线状态（0：下线，1：上线  ）
-     *
-     *    数据库字段: ONL_ONLINE.ONLINE_STATE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Byte getOnlineState() {
-        return onlineState;
-    }
-
-    /**
-     *    上线状态（0：下线，1：上线  ）
-     *
-     *    数据库字段: ONL_ONLINE.ONLINE_STATE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setOnlineState(Byte onlineState) {
-        this.onlineState = onlineState;
     }
 
     /**
@@ -198,6 +204,28 @@ public class OnlOnlineMo implements Serializable {
      */
     public void setOpId(Long opId) {
         this.opId = opId;
+    }
+
+    /**
+     *    上线状态（0：下线，1：上线  ）
+     *
+     *    数据库字段: ONL_ONLINE.ONLINE_STATE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Byte getOnlineState() {
+        return onlineState;
+    }
+
+    /**
+     *    上线状态（0：下线，1：上线  ）
+     *
+     *    数据库字段: ONL_ONLINE.ONLINE_STATE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setOnlineState(Byte onlineState) {
+        this.onlineState = onlineState;
     }
 
     /**
@@ -242,28 +270,6 @@ public class OnlOnlineMo implements Serializable {
      */
     public void setProductId(Long productId) {
         this.productId = productId;
-    }
-
-    /**
-     *    板块类型（0：普通，1：全返）
-     *
-     *    数据库字段: ONL_ONLINE.SUBJECT_TYPE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Byte getSubjectType() {
-        return subjectType;
-    }
-
-    /**
-     *    板块类型（0：普通，1：全返）
-     *
-     *    数据库字段: ONL_ONLINE.SUBJECT_TYPE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setSubjectType(Byte subjectType) {
-        this.subjectType = subjectType;
     }
 
     /**

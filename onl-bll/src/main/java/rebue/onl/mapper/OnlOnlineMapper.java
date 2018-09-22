@@ -61,6 +61,11 @@ public interface OnlOnlineMapper extends MybatisBaseMapper<OnlOnlineMo, Long> {
     boolean existSelective(OnlOnlineMo record);
 
     /**
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    int countSelective(OnlOnlineMo record);
+
+    /**
      *  获取上线商品列表 Title: selectOnlineGoodsList Description:
      *
      *  @return

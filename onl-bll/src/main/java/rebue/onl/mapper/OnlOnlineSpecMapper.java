@@ -62,6 +62,11 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
     boolean existSelective(OnlOnlineSpecMo record);
 
     /**
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    int countSelective(OnlOnlineSpecMo record);
+
+    /**
      *  获取上线规格信息 Title: selectOnlineSpecInfoByOnlineId Description:
      *
      *  @param record

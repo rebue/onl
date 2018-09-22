@@ -3,12 +3,15 @@ package rebue.onl.svc.impl;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import rebue.onl.dic.AddOnlineDic;
 import rebue.onl.mapper.OnlOnlineMapper;
 import rebue.onl.mo.OnlOnlineMo;
@@ -62,30 +65,31 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
     /**
      */
     @Resource
-    private OnlOnlineSpecSvc onlOnlineSpecSvc;
+    private OnlOnlineSpecSvc    onlOnlineSpecSvc;
 
     /**
      */
     @Resource
-    private OnlOnlinePicSvc onlOnlinePicSvc;
+    private OnlOnlinePicSvc     onlOnlinePicSvc;
 
     /**
      */
     @Resource
-    private OnlOnlineSvc onlOnlineSvc;
+    private OnlOnlineSvc        onlOnlineSvc;
 
     /**
-     *  添加上线信息
+     * 添加上线信息
      *
-     *  @param to
-     *  @return
+     * @param to
+     * @return
      */
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public AddOnlineRo addOnline(AddOnlineTo to) {
         _log.info("添加上线信息的参数为：{}", to);
         AddOnlineRo ro = new AddOnlineRo();
-        if (to.getOnlineName() == null || to.getOnlineName().equals("") || to.getGoodsQsmm() == null || to.getGoodsQsmm().equals("") || to.getOnlineSpecs().size() == 0 || to.getSlideshow().size() == 0) {
+        if (to.getOnlineName() == null || to.getOnlineName().equals("") || to.getGoodsQsmm() == null || to.getGoodsQsmm().equals("") || to.getOnlineSpecs().size() == 0
+                || to.getSlideshow().size() == 0) {
             ro.setResult(AddOnlineDic.PARAMETER_ERROR);
             ro.setMsg("参数错误");
             return ro;
@@ -125,8 +129,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             }
             onlineSpecMo.setCashbackAmount(cashbackAmount);
             onlineSpecMo.setSalePrice(to.getOnlineSpecs().get(i).getSalePrice());
-            if (to.getOnlineSpecs().get(i).getCashbackCommissionAmount() != null) {
-                onlineSpecMo.setCashbackCommissionAmount(to.getOnlineSpecs().get(i).getCashbackCommissionAmount());
+            if (to.getOnlineSpecs().get(i).getCommissionAmount() != null) {
+                onlineSpecMo.setCommissionAmount(to.getOnlineSpecs().get(i).getCommissionAmount());
             }
             onlineSpecMo.setSaleUnit(to.getOnlineSpecs().get(i).getSaleUnit());
             onlineSpecMo.setSaleCount(to.getOnlineSpecs().get(i).getSaleCount());
@@ -177,7 +181,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
     }
 
     /**
-     *  获取上线商品列表 2018年3月29日17:41:26
+     * 获取上线商品列表 2018年3月29日17:41:26
      */
     @Override
     public List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(OnlineGoodsListTo to) {
@@ -188,10 +192,10 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
     }
 
     /**
-     *  根据id查询上线信息
+     * 根据id查询上线信息
      *
-     *  @param id
-     *  @return
+     * @param id
+     * @return
      */
     @Override
     public OnlOnlineMo listByPrimaryKey(Long id) {

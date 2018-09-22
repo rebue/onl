@@ -60,6 +60,11 @@ public interface OnlOnlinePromotionMapper extends MybatisBaseMapper<OnlOnlinePro
     boolean existSelective(OnlOnlinePromotionMo record);
 
     /**
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    int countSelective(OnlOnlinePromotionMo record);
+
+    /**
      *  获取推广上线数据信息 Title: promotionOnlineGoodsList Description:
      *
      *  @return

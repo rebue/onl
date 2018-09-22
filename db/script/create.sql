@@ -6,21 +6,22 @@
 
 drop table if exists ONL_CART;
 
-drop table if exists ONL_ONLINE;
-
-drop table if exists ONL_ONLINE_LOG;
-
 drop table if exists ONL_ONLINE_PIC;
 
 drop table if exists ONL_ONLINE_PIC_LOG;
 
 drop table if exists ONL_ONLINE_PROMOTION;
 
-drop table if exists ONL_ONLINE_SPEC;
+drop table if exists ONL_ONLINE_SPEC_OP_LOG;
 
 drop table if exists ONL_ONLINE_SPEC_LOG;
 
-drop table if exists ONL_ONLINE_SPEC_OP_LOG;
+drop table if exists ONL_ONLINE_SPEC;
+
+drop table if exists ONL_ONLINE_LOG;
+
+drop table if exists ONL_ONLINE;
+
 
 /*==============================================================*/
 /* Table: ONL_CART                                              */

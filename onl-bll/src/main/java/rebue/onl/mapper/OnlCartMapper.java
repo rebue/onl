@@ -61,6 +61,11 @@ public interface OnlCartMapper extends MybatisBaseMapper<OnlCartMo, Long> {
     boolean existSelective(OnlCartMo record);
 
     /**
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    int countSelective(OnlCartMo record);
+
+    /**
      *  根据用户编号和购物车编号删除购物车 Title: deleteByUserIdAndCartId Description:
      *
      *  @param record

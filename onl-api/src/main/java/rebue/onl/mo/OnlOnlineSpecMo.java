@@ -43,15 +43,6 @@ public class OnlOnlineSpecMo implements Serializable {
     private String onlineSpec;
 
     /**
-     *    返现金额
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.CASHBACK_AMOUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private BigDecimal cashbackAmount;
-
-    /**
      *    销售价格
      *
      *    数据库字段: ONL_ONLINE_SPEC.SALE_PRICE
@@ -61,6 +52,24 @@ public class OnlOnlineSpecMo implements Serializable {
     private BigDecimal salePrice;
 
     /**
+     *    返现金额
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.CASHBACK_AMOUNT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private BigDecimal cashbackAmount;
+
+    /**
+     *    返佣金额
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.COMMISSION_AMOUNT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private BigDecimal commissionAmount;
+
+    /**
      *    销售单位
      *
      *    数据库字段: ONL_ONLINE_SPEC.SALE_UNIT
@@ -68,6 +77,15 @@ public class OnlOnlineSpecMo implements Serializable {
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private String saleUnit;
+
+    /**
+     *    上线总数
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.ONLINE_TOTAL
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Integer onlineTotal;
 
     /**
      *    销售数量
@@ -86,24 +104,6 @@ public class OnlOnlineSpecMo implements Serializable {
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private Integer seqNo;
-
-    /**
-     *    返现佣金金额
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.CASHBACK_COMMISSION_AMOUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private BigDecimal cashbackCommissionAmount;
-
-    /**
-     *    上线总数
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.ONLINE_TOTAL
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Integer onlineTotal;
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -177,28 +177,6 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
-     *    返现金额
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.CASHBACK_AMOUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public BigDecimal getCashbackAmount() {
-        return cashbackAmount;
-    }
-
-    /**
-     *    返现金额
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.CASHBACK_AMOUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setCashbackAmount(BigDecimal cashbackAmount) {
-        this.cashbackAmount = cashbackAmount;
-    }
-
-    /**
      *    销售价格
      *
      *    数据库字段: ONL_ONLINE_SPEC.SALE_PRICE
@@ -221,6 +199,50 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
+     *    返现金额
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.CASHBACK_AMOUNT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public BigDecimal getCashbackAmount() {
+        return cashbackAmount;
+    }
+
+    /**
+     *    返现金额
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.CASHBACK_AMOUNT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setCashbackAmount(BigDecimal cashbackAmount) {
+        this.cashbackAmount = cashbackAmount;
+    }
+
+    /**
+     *    返佣金额
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.COMMISSION_AMOUNT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public BigDecimal getCommissionAmount() {
+        return commissionAmount;
+    }
+
+    /**
+     *    返佣金额
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.COMMISSION_AMOUNT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setCommissionAmount(BigDecimal commissionAmount) {
+        this.commissionAmount = commissionAmount;
+    }
+
+    /**
      *    销售单位
      *
      *    数据库字段: ONL_ONLINE_SPEC.SALE_UNIT
@@ -240,6 +262,28 @@ public class OnlOnlineSpecMo implements Serializable {
      */
     public void setSaleUnit(String saleUnit) {
         this.saleUnit = saleUnit;
+    }
+
+    /**
+     *    上线总数
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.ONLINE_TOTAL
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Integer getOnlineTotal() {
+        return onlineTotal;
+    }
+
+    /**
+     *    上线总数
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.ONLINE_TOTAL
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setOnlineTotal(Integer onlineTotal) {
+        this.onlineTotal = onlineTotal;
     }
 
     /**
@@ -287,50 +331,6 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
-     *    返现佣金金额
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.CASHBACK_COMMISSION_AMOUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public BigDecimal getCashbackCommissionAmount() {
-        return cashbackCommissionAmount;
-    }
-
-    /**
-     *    返现佣金金额
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.CASHBACK_COMMISSION_AMOUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setCashbackCommissionAmount(BigDecimal cashbackCommissionAmount) {
-        this.cashbackCommissionAmount = cashbackCommissionAmount;
-    }
-
-    /**
-     *    上线总数
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.ONLINE_TOTAL
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Integer getOnlineTotal() {
-        return onlineTotal;
-    }
-
-    /**
-     *    上线总数
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.ONLINE_TOTAL
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setOnlineTotal(Integer onlineTotal) {
-        this.onlineTotal = onlineTotal;
-    }
-
-    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Override
@@ -342,13 +342,13 @@ public class OnlOnlineSpecMo implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", onlineId=").append(onlineId);
         sb.append(", onlineSpec=").append(onlineSpec);
-        sb.append(", cashbackAmount=").append(cashbackAmount);
         sb.append(", salePrice=").append(salePrice);
+        sb.append(", cashbackAmount=").append(cashbackAmount);
+        sb.append(", commissionAmount=").append(commissionAmount);
         sb.append(", saleUnit=").append(saleUnit);
+        sb.append(", onlineTotal=").append(onlineTotal);
         sb.append(", saleCount=").append(saleCount);
         sb.append(", seqNo=").append(seqNo);
-        sb.append(", cashbackCommissionAmount=").append(cashbackCommissionAmount);
-        sb.append(", onlineTotal=").append(onlineTotal);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
