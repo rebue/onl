@@ -2,6 +2,8 @@ package rebue.onl.svc;
 
 import java.util.List;
 import java.util.Map;
+
+import rebue.onl.dic.PromotionTypeDic;
 import rebue.onl.mo.OnlOnlinePromotionMo;
 import rebue.robotech.svc.MybatisBaseSvc;
 
@@ -13,10 +15,11 @@ import rebue.robotech.svc.MybatisBaseSvc;
 public interface OnlOnlinePromotionSvc extends MybatisBaseSvc<OnlOnlinePromotionMo, java.lang.Long> {
 
     /**
-     *  获取推广上线数据信息 Title: promotionOnlineGoodsList Description:
-     *
-     *  @return
-     *  @date 2018年3月29日 上午11:38:23
+     * 获取上线的推广活动列表
+     * 
+     * @param promotionType
+     *            {@link PromotionTypeDic}
+     *            推广类型（1-每日热门）
      */
-    List<Map<String, Object>> promotionOnlineGoodsList();
+    List<Map<String, Object>> listOnlinePromotion(PromotionTypeDic promotionType);
 }

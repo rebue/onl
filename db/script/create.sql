@@ -1,10 +1,14 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/9/8 16:59:05                            */
+/* Created on:     2018/9/23 15:38:48                           */
 /*==============================================================*/
 
 
 drop table if exists ONL_CART;
+
+drop table if exists ONL_ONLINE;
+
+drop table if exists ONL_ONLINE_LOG;
 
 drop table if exists ONL_ONLINE_PIC;
 
@@ -12,16 +16,11 @@ drop table if exists ONL_ONLINE_PIC_LOG;
 
 drop table if exists ONL_ONLINE_PROMOTION;
 
-drop table if exists ONL_ONLINE_SPEC_OP_LOG;
+drop table if exists ONL_ONLINE_SPEC;
 
 drop table if exists ONL_ONLINE_SPEC_LOG;
 
-drop table if exists ONL_ONLINE_SPEC;
-
-drop table if exists ONL_ONLINE_LOG;
-
-drop table if exists ONL_ONLINE;
-
+drop table if exists ONL_ONLINE_SPEC_OP_LOG;
 
 /*==============================================================*/
 /* Table: ONL_CART                                              */
@@ -111,7 +110,7 @@ create table ONL_ONLINE_PROMOTION
 (
    ID                   bigint not null comment '上线推广ID',
    ONLINE_ID            bigint not null comment '上线ID',
-   PROMOTION_TYPE       tinyint not null comment '推广类型',
+   PROMOTION_TYPE       tinyint not null comment '推广类型(1-每日热门)',
    primary key (ID)
 );
 

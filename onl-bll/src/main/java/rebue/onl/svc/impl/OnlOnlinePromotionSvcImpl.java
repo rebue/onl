@@ -2,11 +2,14 @@ package rebue.onl.svc.impl;
 
 import java.util.List;
 import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import rebue.onl.dic.PromotionTypeDic;
 import rebue.onl.mapper.OnlOnlinePromotionMapper;
 import rebue.onl.mo.OnlOnlinePromotionMo;
 import rebue.onl.svc.OnlOnlinePromotionSvc;
@@ -50,10 +53,15 @@ public class OnlOnlinePromotionSvcImpl extends MybatisBaseSvcImpl<OnlOnlinePromo
     }
 
     /**
-     *  获取推广上线商品列表 2018年3月29日11:41:30
+     * 获取上线的推广活动列表
+     * 
+     * @param promotionType
+     *            {@link PromotionTypeDic}
+     *            推广类型（1-每日热门）
      */
     @Override
-    public List<Map<String, Object>> promotionOnlineGoodsList() {
-        return _mapper.promotionOnlineGoodsList();
+    public List<Map<String, Object>> listOnlinePromotion(PromotionTypeDic promotionType) {
+        _log.info("查询推广上线商品列表: promotionType={}", promotionType);
+        return _mapper.listOnlinePromotion((byte) promotionType.getCode());
     }
 }

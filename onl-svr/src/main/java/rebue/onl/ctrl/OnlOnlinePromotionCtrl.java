@@ -1,12 +1,12 @@
 package rebue.onl.ctrl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.pagehelper.PageInfo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.github.pagehelper.PageInfo;
+
+import rebue.onl.dic.PromotionTypeDic;
 import rebue.onl.mo.OnlOnlinePromotionMo;
 import rebue.onl.ro.OnlOnlinePromotionRo;
 import rebue.onl.svc.OnlOnlinePromotionSvc;
@@ -34,7 +38,7 @@ public class OnlOnlinePromotionCtrl {
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private static final Logger _log = LoggerFactory.getLogger(OnlOnlinePromotionCtrl.class);
+    private static final Logger   _log             = LoggerFactory.getLogger(OnlOnlinePromotionCtrl.class);
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
@@ -47,7 +51,7 @@ public class OnlOnlinePromotionCtrl {
      *
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private String _uniqueFilesName = "某字段内容";
+    private String                _uniqueFilesName = "某字段内容";
 
     /**
      * 修改上线推广
@@ -118,12 +122,12 @@ public class OnlOnlinePromotionCtrl {
     }
 
     /**
-     *  添加上线推广 Title: add Description:
+     * 添加上线推广 Title: add Description:
      *
-     *  @param vo
-     *  @return
-     *  @throws Exception
-     *  @date 2018年3月28日 下午4:30:00
+     * @param vo
+     * @return
+     * @throws Exception
+     * @date 2018年3月28日 下午4:30:00
      */
     @PostMapping("/onl/onlinepromotion")
     OnlOnlinePromotionRo add(@RequestBody OnlOnlinePromotionMo vo) throws Exception {
@@ -151,11 +155,11 @@ public class OnlOnlinePromotionCtrl {
     }
 
     /**
-     *  删除上线推广 Title: del Description:
+     * 删除上线推广 Title: del Description:
      *
-     *  @param id
-     *  @return
-     *  @date 2018年3月28日 下午4:29:55
+     * @param id
+     * @return
+     * @date 2018年3月28日 下午4:29:55
      */
     @DeleteMapping("/onl/onlinepromotion")
     OnlOnlinePromotionRo del(@RequestParam("onlineId") java.lang.Long onlineId) {
@@ -181,11 +185,11 @@ public class OnlOnlinePromotionCtrl {
     }
 
     /**
-     *  查询上线推广是否存在 Title: existSelective Description:
+     * 查询上线推广是否存在 Title: existSelective Description:
      *
-     *  @param vo
-     *  @return
-     *  @date 2018年3月28日 下午5:37:01
+     * @param vo
+     * @return
+     * @date 2018年3月28日 下午5:37:01
      */
     @GetMapping("/onl/onlinepromotion/exist")
     boolean existSelective(OnlOnlinePromotionMo vo) {
@@ -193,14 +197,15 @@ public class OnlOnlinePromotionCtrl {
     }
 
     /**
-     *  查询推广上线商品列表 Title: list Description:
-     *
-     *  @return
-     *  @throws JsonProcessingException
-     *  @date 2018年3月29日 上午11:44:12
+     * 获取上线的推广活动列表
+     * 
+     * @param promotionType
+     *            {@link PromotionTypeDic}
+     *            推广类型（1-每日热门）
      */
     @GetMapping("/onl/onlinepromotion/list")
-    List<Map<String, Object>> list() throws JsonProcessingException {
-        return svc.promotionOnlineGoodsList();
+    List<Map<String, Object>> listOnlinePromotion(@RequestParam("promotionType") PromotionTypeDic promotionType) {
+        _log.info("listOnlinePromotion: promotionType={}", promotionType);
+        return svc.listOnlinePromotion(promotionType);
     }
 }
