@@ -3,9 +3,7 @@ package rebue.onl.ctrl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import rebue.onl.mo.OnlCartMo;
 import rebue.onl.ro.AddCartRo;
 import rebue.onl.ro.OnlCartRo;
@@ -35,6 +32,12 @@ public class OnlCartCtrl {
     private static final Logger _log = LoggerFactory.getLogger(OnlCartCtrl.class);
 
     /**
+     * @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    @Resource
+    private OnlCartSvc svc;
+
+    /**
      * 获取单个购物车
      *
      * @mbg.generated 自动生成，如需修改，请删除本行
@@ -44,12 +47,6 @@ public class OnlCartCtrl {
         _log.info("get OnlCartMo by id: " + id);
         return svc.getById(id);
     }
-
-    /**
-     * @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    @Resource
-    private OnlCartSvc svc;
 
     /**
      * 修改购物车
@@ -141,9 +138,8 @@ public class OnlCartCtrl {
 
     /**
      * 获取购物车列表 Title: selectCartList Description:
-     * 
+     *
      * @mbg.overrideByMethodName
-     * 
      */
     @GetMapping("/onl/cart")
     List<OnlCartRo> list(OnlCartMo qo) {

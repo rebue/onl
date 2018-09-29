@@ -1,12 +1,11 @@
 package rebue.onl.ctrl;
 
+import com.github.pagehelper.PageInfo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
@@ -17,9 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.github.pagehelper.PageInfo;
-
 import rebue.onl.dic.PromotionTypeDic;
 import rebue.onl.mo.OnlOnlinePromotionMo;
 import rebue.onl.ro.OnlOnlinePromotionRo;
@@ -38,7 +34,7 @@ public class OnlOnlinePromotionCtrl {
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private static final Logger   _log             = LoggerFactory.getLogger(OnlOnlinePromotionCtrl.class);
+    private static final Logger _log = LoggerFactory.getLogger(OnlOnlinePromotionCtrl.class);
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
@@ -51,7 +47,7 @@ public class OnlOnlinePromotionCtrl {
      *
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private String                _uniqueFilesName = "某字段内容";
+    private String _uniqueFilesName = "某字段内容";
 
     /**
      * 修改上线推广
@@ -60,7 +56,7 @@ public class OnlOnlinePromotionCtrl {
      */
     @PutMapping("/onl/onlinepromotion")
     Ro modify(@RequestBody OnlOnlinePromotionMo mo) throws Exception {
-        _log.info("modify OnlOnlinePromotionMo:" + mo);
+        _log.info("modify OnlOnlinePromotionMo: {}", mo);
         Ro ro = new Ro();
         try {
             if (svc.modify(mo) == 1) {
@@ -78,7 +74,7 @@ public class OnlOnlinePromotionCtrl {
             }
         } catch (DuplicateKeyException e) {
             String msg = "修改失败，" + _uniqueFilesName + "已存在，不允许出现重复";
-            _log.error("{}: mo-{}", msg, mo);
+            _log.error(msg + ": mo=" + mo, e);
             ro.setMsg(msg);
             ro.setResult(ResultDic.FAIL);
             return ro;
@@ -98,7 +94,11 @@ public class OnlOnlinePromotionCtrl {
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
     @GetMapping("/onl/onlinepromotion")
-    PageInfo<OnlOnlinePromotionMo> list(OnlOnlinePromotionMo mo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+    PageInfo<OnlOnlinePromotionMo> list(OnlOnlinePromotionMo mo, @RequestParam(value = "pageNum", required = false) Integer pageNum, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+        if (pageNum == null)
+            pageNum = 1;
+        if (pageSize == null)
+            pageSize = 5;
         _log.info("list OnlOnlinePromotionMo:" + mo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
         if (pageSize > 50) {
             String msg = "pageSize不能大于50";
@@ -198,7 +198,7 @@ public class OnlOnlinePromotionCtrl {
 
     /**
      * 获取上线的推广活动列表
-     * 
+     *
      * @param promotionType
      *            {@link PromotionTypeDic}
      *            推广类型（1-每日热门）

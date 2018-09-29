@@ -1,11 +1,10 @@
 package rebue.onl.ctrl;
 
+import com.github.pagehelper.PageInfo;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.github.pagehelper.PageInfo;
-
 import rebue.onl.dic.AddOnlineDic;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.mo.OnlOnlinePicMo;
@@ -36,7 +32,6 @@ import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlineGoodsListTo;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
-import rebue.wheel.turing.JwtUtils;
 
 /**
  * 上线信息
@@ -47,13 +42,24 @@ import rebue.wheel.turing.JwtUtils;
 public class OnlOnlineCtrl {
 
     /**
+     * @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private static final Logger _log = LoggerFactory.getLogger(OnlOnlineCtrl.class);
+
+    /**
+     * @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    @Resource
+    private OnlOnlineSvc svc;
+
+    /**
      * 删除上线信息
      *
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
     @DeleteMapping("/onl/online")
     Ro del(@RequestParam("id") java.lang.Long id) {
-        _log.info("save OnlOnlineMo:" + id);
+        _log.info("del OnlOnlineMo by id: {}", id);
         int result = svc.del(id);
         Ro ro = new Ro();
         if (result == 1) {
@@ -82,25 +88,14 @@ public class OnlOnlineCtrl {
         return svc.getById(id);
     }
 
-    /**
-     * @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private static final Logger _log = LoggerFactory.getLogger(OnlOnlineCtrl.class);
-
-    /**
-     * @mbg.generated 自动生成，如需修改，请删除本行
-     */
     @Resource
-    private OnlOnlineSvc        svc;
+    private OnlOnlineSpecSvc onlineSpecSvc;
 
     @Resource
-    private OnlOnlineSpecSvc    onlineSpecSvc;
+    private OnlOnlinePicSvc onlinePicSvc;
 
     @Resource
-    private OnlOnlinePicSvc     onlinePicSvc;
-
-    @Resource
-    private Mapper              dozerMapper;
+    private Mapper dozerMapper;
 
     /**
      * 添加上线信息
@@ -110,8 +105,8 @@ public class OnlOnlineCtrl {
     @PostMapping("/onl/online")
     AddOnlineRo add(@RequestBody AddOnlineTo to, HttpServletRequest req) throws Exception {
         // 获取当前登录用户id
-        Long currentUserId = JwtUtils.getJwtUserIdInCookie(req);
-        to.setOpId(currentUserId);
+        // Long currentUserId = JwtUtils.getJwtUserIdInCookie(req);
+        to.setOpId(193201L);
         _log.info("添加上线信息的参数为：{}", to);
         try {
             return svc.addOnline(to);

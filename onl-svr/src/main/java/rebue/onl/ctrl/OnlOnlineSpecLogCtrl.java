@@ -1,12 +1,9 @@
-package ${modulePackage}.ctrl;
+package rebue.onl.ctrl;
 
+import com.github.pagehelper.PageInfo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-
 import javax.annotation.Resource;
-
-import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
@@ -17,32 +14,29 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.github.pagehelper.PageInfo;
-
-import ${moClassFullName};
-import ${modulePackage}.svc.${entityName}Svc;
-
+import rebue.onl.mo.OnlOnlineSpecLogMo;
+import rebue.onl.svc.OnlOnlineSpecLogSvc;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
 
 /**
- * ${table.remarks}
+ * 上线规格日志
  *
  * @mbg.generated 自动生成的注释，如需修改本注释，请删除本行
  */
 @RestController
-public class ${entityName}Ctrl {
+public class OnlOnlineSpecLogCtrl {
+
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private final static Logger _log = LoggerFactory.getLogger(${entityName}Ctrl.class);
+    private static final Logger _log = LoggerFactory.getLogger(OnlOnlineSpecLogCtrl.class);
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Resource
-    private ${entityName}Svc svc;
+    private OnlOnlineSpecLogSvc svc;
 
     /**
      * 有唯一约束的字段名称
@@ -52,13 +46,13 @@ public class ${entityName}Ctrl {
     private String _uniqueFilesName = "某字段内容";
 
     /**
-     * 添加${entityTitle}
+     * 添加上线规格日志
      *
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @PostMapping("/${strutil.toLowerCase(entityNamePrefix)}/${strutil.toLowerCase(entitySimpleName)}")
-    Ro add(@RequestBody ${moClassShortName} mo) throws Exception {
-        _log.info("add ${moClassShortName}: {}", mo);
+    @PostMapping("/onl/onlinespeclog")
+    Ro add(@RequestBody OnlOnlineSpecLogMo mo) throws Exception {
+        _log.info("add OnlOnlineSpecLogMo: {}", mo);
         Ro ro = new Ro();
         try {
             int result = svc.add(mo);
@@ -92,13 +86,13 @@ public class ${entityName}Ctrl {
     }
 
     /**
-     * 修改${entityTitle}
+     * 修改上线规格日志
      *
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @PutMapping("/${strutil.toLowerCase(entityNamePrefix)}/${strutil.toLowerCase(entitySimpleName)}")
-    Ro modify(@RequestBody ${moClassShortName} mo) throws Exception {
-        _log.info("modify ${moClassShortName}: {}", mo);
+    @PutMapping("/onl/onlinespeclog")
+    Ro modify(@RequestBody OnlOnlineSpecLogMo mo) throws Exception {
+        _log.info("modify OnlOnlineSpecLogMo: {}", mo);
         Ro ro = new Ro();
         try {
             if (svc.modify(mo) == 1) {
@@ -131,41 +125,14 @@ public class ${entityName}Ctrl {
     }
 
     /**
-     * 删除${entityTitle}
-     * 
+     * 删除上线规格日志
+     *
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @DeleteMapping("/${strutil.toLowerCase(entityNamePrefix)}/${strutil.toLowerCase(entitySimpleName)}")
-    Ro del(<&
-        for(id in ids){
-            if(!idLP.first) {
-                print(', ');
-            }
-            print('@RequestParam("');
-            print(id.key);
-            print('") ');
-            print(id.value);
-            print(' ');
-            print(id.key);
-        }
-    &>) {
-        _log.info("del ${moClassShortName} by id: {}", <&
-            for(id in ids){
-                if(!idLP.first) {
-                    print(', ');
-                }
-                print(id.key);
-            }
-        &>);
-        int result = svc.del(<&
-            for(id in ids){
-                if(!idLP.first) {
-                    print(', ');
-                }
-                print(id.key);
-            }
-        &>);
-
+    @DeleteMapping("/onl/onlinespeclog")
+    Ro del(@RequestParam("id") java.lang.Long id) {
+        _log.info("del OnlOnlineSpecLogMo by id: {}", id);
+        int result = svc.del(id);
         Ro ro = new Ro();
         if (result == 1) {
             String msg = "删除成功";
@@ -183,48 +150,35 @@ public class ${entityName}Ctrl {
     }
 
     /**
-     * 查询${entityTitle}
-     * 
+     * 查询上线规格日志
+     *
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @GetMapping("/${strutil.toLowerCase(entityNamePrefix)}/${strutil.toLowerCase(entitySimpleName)}")
-    PageInfo<${moClassShortName}> list(${moClassShortName} mo, @RequestParam(value = "pageNum", required = false) Integer pageNum, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+    @GetMapping("/onl/onlinespeclog")
+    PageInfo<OnlOnlineSpecLogMo> list(OnlOnlineSpecLogMo mo, @RequestParam(value = "pageNum", required = false) Integer pageNum, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
         if (pageNum == null)
             pageNum = 1;
         if (pageSize == null)
             pageSize = 5;
-        _log.info("list ${moClassShortName}:" + mo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
+        _log.info("list OnlOnlineSpecLogMo:" + mo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
         if (pageSize > 50) {
             String msg = "pageSize不能大于50";
             _log.error(msg);
             throw new IllegalArgumentException(msg);
         }
-        PageInfo<${moClassShortName}> result = svc.list(mo, pageNum, pageSize);
+        PageInfo<OnlOnlineSpecLogMo> result = svc.list(mo, pageNum, pageSize);
         _log.info("result: " + result);
         return result;
     }
 
     /**
-     * 获取单个${entityTitle}
-     * 
+     * 获取单个上线规格日志
+     *
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @GetMapping("/${strutil.toLowerCase(entityNamePrefix)}/${strutil.toLowerCase(entitySimpleName)}/getbyid")
-    ${entityName}Mo getById(<&
-        for(id in ids){
-            if(!idLP.first) {
-                print(', ');
-            }
-            print('@RequestParam("');
-            print(id.key);
-            print('") ');
-            print(id.value);
-            print(' ');
-            print(id.key);
-        }
-    &>) {
-        _log.info("get ${moClassShortName} by id: " + id);
+    @GetMapping("/onl/onlinespeclog/getbyid")
+    OnlOnlineSpecLogMo getById(@RequestParam("id") java.lang.Long id) {
+        _log.info("get OnlOnlineSpecLogMo by id: " + id);
         return svc.getById(id);
     }
-
 }

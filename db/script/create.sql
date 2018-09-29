@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/9/23 15:38:48                           */
+/* Created on:     2018/9/29 16:28:11                           */
 /*==============================================================*/
 
 
@@ -19,8 +19,6 @@ drop table if exists ONL_ONLINE_PROMOTION;
 drop table if exists ONL_ONLINE_SPEC;
 
 drop table if exists ONL_ONLINE_SPEC_LOG;
-
-drop table if exists ONL_ONLINE_SPEC_OP_LOG;
 
 /*==============================================================*/
 /* Table: ONL_CART                                              */
@@ -151,28 +149,12 @@ create table ONL_ONLINE_SPEC_LOG
    SALE_UNIT            varchar(50) comment '销售单位',
    ONLINE_TOTAL         int not null comment '上线总数',
    SALE_COUNT           int not null comment '销售数量',
+   CURRENT_ONLINE_COUNT int not null comment '当前上线数量（每次追加的数量）',
    SEQ_NO               int not null comment '排序号',
    primary key (ID)
 );
 
 alter table ONL_ONLINE_SPEC_LOG comment '上线规格日志';
-
-/*==============================================================*/
-/* Table: ONL_ONLINE_SPEC_OP_LOG                                */
-/*==============================================================*/
-create table ONL_ONLINE_SPEC_OP_LOG
-(
-   ID                   bigint not null comment '操作日志id',
-   ONLINE_ID            bigint not null comment '上线ID',
-   ONLINE_SPEC_ID       bigint not null comment '上线规格ID',
-   OP_ID                bigint not null comment '操作人id',
-   OP_CONTENT           varchar(100) not null comment '操作内容',
-   OP_TIME              datetime not null comment '操作时间',
-   primary key (ID)
-);
-
-alter table ONL_ONLINE_SPEC_OP_LOG comment '上线规格操作日志信息
-记录上线规格份数的调整情况（日志）';
 
 alter table ONL_CART add constraint FK_Relationship_7 foreign key (ONLINE_SPEC_ID)
       references ONL_ONLINE_SPEC (ID) on delete restrict on update restrict;
@@ -203,10 +185,4 @@ alter table ONL_ONLINE_SPEC_LOG add constraint FK_Relationship_11 foreign key (O
 
 alter table ONL_ONLINE_SPEC_LOG add constraint FK_Relationship_12 foreign key (ONLINE_ID)
       references ONL_ONLINE (ID) on delete restrict on update restrict;
-
-alter table ONL_ONLINE_SPEC_OP_LOG add constraint FK_Relationship_6 foreign key (ONLINE_ID)
-      references ONL_ONLINE (ID) on delete restrict on update restrict;
-
-alter table ONL_ONLINE_SPEC_OP_LOG add constraint FK_Relationship_9 foreign key (ONLINE_SPEC_ID)
-      references ONL_ONLINE_SPEC (ID) on delete restrict on update restrict;
 

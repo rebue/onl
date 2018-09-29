@@ -6,11 +6,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,17 +19,12 @@ import rebue.onl.dic.ModifyOnlineSpecInfoDic;
 import rebue.onl.mapper.OnlOnlineSpecMapper;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.mo.OnlOnlineSpecMo;
-import rebue.onl.mo.OnlOnlineSpecOpLogMo;
 import rebue.onl.ro.DeleteCartAndModifyInventoryRo;
 import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.svc.OnlCartSvc;
-import rebue.onl.svc.OnlOnlineSpecOpLogSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
-import rebue.onl.to.AppendOnlineSpecCountTo;
-import rebue.robotech.dic.ResultDic;
-import rebue.robotech.ro.Ro;
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
 
 /**
@@ -79,9 +72,6 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
      */
     @Resource
     private OnlCartSvc onlCartSvc;
-
-    @Resource
-    private OnlOnlineSpecOpLogSvc onlOnlineSpecOpLogSvc;
 
     /**
      *  根据商品规格编号查询商品规格信息 2018年3月29日14:28:59
@@ -162,7 +152,7 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
                 throw new RuntimeException("扣减上线数量失败");
             }
             int onlineCount = onlineSpecList.get(0).getSaleCount();
-            int updateCount = onlineCount - buyCount;
+            int updateCount = onlineCount + buyCount;
             if (updateCount < 0) {
                 _log.error("规格编号为：{}，库存不足", onlineSpec);
                 throw new RuntimeException(onlineSpec + "库存不足");
@@ -232,63 +222,5 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
         modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.SUCCESS);
         modifyOnlineSpecInfoRo.setMsg("修改成功");
         return modifyOnlineSpecInfoRo;
-    }
-
-    /**
-     *  追击追加上线数量
-     *
-     *  @throws IOException
-     *  @throws JsonMappingException
-     *  @throws JsonParseException
-     */
-    @SuppressWarnings("rawtypes")
-    @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public Ro append(AppendOnlineSpecCountTo to) throws JsonParseException, JsonMappingException, IOException {
-        _log.info("追加上线数量的请求参数为：{}", to);
-        Ro ro = new Ro();
-        if (to.getOnlineId() == 0 || to.getAppends().size() == 0) {
-            _log.info("追加上线数量时发现参数不全");
-            ro.setResult(ResultDic.FAIL);
-            ro.setMsg("参数不正确");
-            return ro;
-        }
-        ObjectMapper mapper = new ObjectMapper();
-        for (Entry<String, Object> vo : to.getAppends().entrySet()) {
-            System.out.println(mapper.writeValueAsString(vo.getValue()));
-            Map map = mapper.readValue(mapper.writeValueAsString(vo.getValue()), Map.class);
-            int appendCount = Integer.parseInt(map.get("appendCount").toString());
-            if (appendCount != 0 && appendCount > 0) {
-                AppendOnlineSpecCountTo appendOnlineSpecCountRo = new AppendOnlineSpecCountTo();
-                appendOnlineSpecCountRo.setOnlineId(to.getOnlineId());
-                appendOnlineSpecCountRo.setOnlineSpecId(Long.parseLong(vo.getKey()));
-                appendOnlineSpecCountRo.setOnlineTotal(Integer.parseInt(map.get("alreadyOnlineCount").toString()));
-                appendOnlineSpecCountRo.setAppendCount(appendCount);
-                _log.info("追加上线数量的参数为：{}", appendOnlineSpecCountRo);
-                int appendOnlineCountResult = _mapper.appendOnlineCount(appendOnlineSpecCountRo);
-                _log.info("追加上线数量的返回值为：{}", appendOnlineCountResult);
-                if (appendOnlineCountResult != 1) {
-                    _log.info("追加上线数量时出现错误，上线id为：{}", to.getOnlineId());
-                    throw new RuntimeException("追加上线数量出错");
-                }
-                OnlOnlineSpecOpLogMo onlineSpecOpLogMo = new OnlOnlineSpecOpLogMo();
-                onlineSpecOpLogMo.setOnlineId(to.getOnlineId());
-                onlineSpecOpLogMo.setOnlineSpecId(Long.parseLong(vo.getKey()));
-                onlineSpecOpLogMo.setOpContent("追加上线数量");
-                onlineSpecOpLogMo.setOpId(to.getOpId());
-                onlineSpecOpLogMo.setOpTime(new Date());
-                _log.info("追加上线数量添加操作日志的参数为：{}", onlineSpecOpLogMo);
-                int addOpLogResult = onlOnlineSpecOpLogSvc.add(onlineSpecOpLogMo);
-                _log.info("追加上线数量添加操作日志的返回值为：{}", addOpLogResult);
-                if (addOpLogResult != 1) {
-                    _log.error("追加上线数量添加操作日志时出错，上线id为：{}", to.getOnlineId());
-                    throw new RuntimeException("添加操作日志出错");
-                }
-            }
-        }
-        _log.info("追加上线数量成功，上线id为：{}", to.getOnlineId());
-        ro.setResult(ResultDic.SUCCESS);
-        ro.setMsg("追加成功");
-        return ro;
     }
 }

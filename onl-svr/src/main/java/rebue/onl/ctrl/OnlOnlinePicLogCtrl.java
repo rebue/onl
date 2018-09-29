@@ -14,30 +14,29 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import rebue.onl.mo.OnlOnlineSpecOpLogMo;
-import rebue.onl.svc.OnlOnlineSpecOpLogSvc;
+import rebue.onl.mo.OnlOnlinePicLogMo;
+import rebue.onl.svc.OnlOnlinePicLogSvc;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
 
 /**
- *  上线规格操作日志信息
- * 记录上线规格份数的调整情况（日志）
+ * 上线图片日志
  *
- *  @mbg.generated 自动生成的注释，如需修改本注释，请删除本行
+ * @mbg.generated 自动生成的注释，如需修改本注释，请删除本行
  */
 @RestController
-public class OnlOnlineSpecOpLogCtrl {
+public class OnlOnlinePicLogCtrl {
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private static final Logger _log = LoggerFactory.getLogger(OnlOnlineSpecOpLogCtrl.class);
+    private static final Logger _log = LoggerFactory.getLogger(OnlOnlinePicLogCtrl.class);
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Resource
-    private OnlOnlineSpecOpLogSvc svc;
+    private OnlOnlinePicLogSvc svc;
 
     /**
      * 有唯一约束的字段名称
@@ -47,13 +46,13 @@ public class OnlOnlineSpecOpLogCtrl {
     private String _uniqueFilesName = "某字段内容";
 
     /**
-     * 添加上线规格操作日志信息
+     * 添加上线图片日志
      *
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @PostMapping("/onl/onlinespecoplog")
-    Ro add(@RequestBody OnlOnlineSpecOpLogMo mo) throws Exception {
-        _log.info("add OnlOnlineSpecOpLogMo:" + mo);
+    @PostMapping("/onl/onlinepiclog")
+    Ro add(@RequestBody OnlOnlinePicLogMo mo) throws Exception {
+        _log.info("add OnlOnlinePicLogMo: {}", mo);
         Ro ro = new Ro();
         try {
             int result = svc.add(mo);
@@ -78,8 +77,8 @@ public class OnlOnlineSpecOpLogCtrl {
             return ro;
         } catch (RuntimeException e) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String msg = "修改失败，出现运行时异常(" + sdf.format(new Date()) + ")";
-            _log.error("{}: mo-{}", msg, mo);
+            String msg = "添加失败，出现运行时异常(" + sdf.format(new Date()) + ")";
+            _log.error(msg + ": mo=" + mo, e);
             ro.setMsg(msg);
             ro.setResult(ResultDic.FAIL);
             return ro;
@@ -87,13 +86,13 @@ public class OnlOnlineSpecOpLogCtrl {
     }
 
     /**
-     * 修改上线规格操作日志信息
+     * 修改上线图片日志
      *
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @PutMapping("/onl/onlinespecoplog")
-    Ro modify(@RequestBody OnlOnlineSpecOpLogMo mo) throws Exception {
-        _log.info("modify OnlOnlineSpecOpLogMo:" + mo);
+    @PutMapping("/onl/onlinepiclog")
+    Ro modify(@RequestBody OnlOnlinePicLogMo mo) throws Exception {
+        _log.info("modify OnlOnlinePicLogMo: {}", mo);
         Ro ro = new Ro();
         try {
             if (svc.modify(mo) == 1) {
@@ -111,7 +110,7 @@ public class OnlOnlineSpecOpLogCtrl {
             }
         } catch (DuplicateKeyException e) {
             String msg = "修改失败，" + _uniqueFilesName + "已存在，不允许出现重复";
-            _log.error("{}: mo-{}", msg, mo);
+            _log.error(msg + ": mo=" + mo, e);
             ro.setMsg(msg);
             ro.setResult(ResultDic.FAIL);
             return ro;
@@ -126,13 +125,13 @@ public class OnlOnlineSpecOpLogCtrl {
     }
 
     /**
-     * 删除上线规格操作日志信息
+     * 删除上线图片日志
      *
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @DeleteMapping("/onl/onlinespecoplog")
+    @DeleteMapping("/onl/onlinepiclog")
     Ro del(@RequestParam("id") java.lang.Long id) {
-        _log.info("save OnlOnlineSpecOpLogMo:" + id);
+        _log.info("del OnlOnlinePicLogMo by id: {}", id);
         int result = svc.del(id);
         Ro ro = new Ro();
         if (result == 1) {
@@ -151,31 +150,35 @@ public class OnlOnlineSpecOpLogCtrl {
     }
 
     /**
-     * 查询上线规格操作日志信息
+     * 查询上线图片日志
      *
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @GetMapping("/onl/onlinespecoplog")
-    PageInfo<OnlOnlineSpecOpLogMo> list(OnlOnlineSpecOpLogMo mo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
-        _log.info("list OnlOnlineSpecOpLogMo:" + mo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
+    @GetMapping("/onl/onlinepiclog")
+    PageInfo<OnlOnlinePicLogMo> list(OnlOnlinePicLogMo mo, @RequestParam(value = "pageNum", required = false) Integer pageNum, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+        if (pageNum == null)
+            pageNum = 1;
+        if (pageSize == null)
+            pageSize = 5;
+        _log.info("list OnlOnlinePicLogMo:" + mo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
         if (pageSize > 50) {
             String msg = "pageSize不能大于50";
             _log.error(msg);
             throw new IllegalArgumentException(msg);
         }
-        PageInfo<OnlOnlineSpecOpLogMo> result = svc.list(mo, pageNum, pageSize);
+        PageInfo<OnlOnlinePicLogMo> result = svc.list(mo, pageNum, pageSize);
         _log.info("result: " + result);
         return result;
     }
 
     /**
-     * 获取单个上线规格操作日志信息
+     * 获取单个上线图片日志
      *
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @GetMapping("/onl/onlinespecoplog/getbyid")
-    OnlOnlineSpecOpLogMo getById(@RequestParam("id") java.lang.Long id) {
-        _log.info("get OnlOnlineSpecOpLogMo by id: " + id);
+    @GetMapping("/onl/onlinepiclog/getbyid")
+    OnlOnlinePicLogMo getById(@RequestParam("id") java.lang.Long id) {
+        _log.info("get OnlOnlinePicLogMo by id: " + id);
         return svc.getById(id);
     }
 }

@@ -1,14 +1,15 @@
 package rebue.onl.ctrl;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.github.pagehelper.PageInfo;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
@@ -19,17 +20,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.github.pagehelper.PageInfo;
-
 import rebue.onl.dic.ModifyOnlineSpecInfoDic;
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.svc.OnlOnlineSpecSvc;
-import rebue.onl.to.AppendOnlineSpecCountTo;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
 
@@ -44,20 +39,20 @@ public class OnlOnlineSpecCtrl {
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private static final Logger _log             = LoggerFactory.getLogger(OnlOnlineSpecCtrl.class);
+    private static final Logger _log = LoggerFactory.getLogger(OnlOnlineSpecCtrl.class);
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Resource
-    private OnlOnlineSpecSvc    svc;
+    private OnlOnlineSpecSvc svc;
 
     /**
      * 有唯一约束的字段名称
      *
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private String              _uniqueFilesName = "某字段内容";
+    private String _uniqueFilesName = "某字段内容";
 
     /**
      * 添加上线规格
@@ -66,7 +61,7 @@ public class OnlOnlineSpecCtrl {
      */
     @PostMapping("/onl/onlinespec")
     Ro add(@RequestBody OnlOnlineSpecMo mo) throws Exception {
-        _log.info("add OnlOnlineSpecMo:" + mo);
+        _log.info("add OnlOnlineSpecMo: {}", mo);
         Ro ro = new Ro();
         try {
             int result = svc.add(mo);
@@ -91,8 +86,8 @@ public class OnlOnlineSpecCtrl {
             return ro;
         } catch (RuntimeException e) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String msg = "修改失败，出现运行时异常(" + sdf.format(new Date()) + ")";
-            _log.error("{}: mo-{}", msg, mo);
+            String msg = "添加失败，出现运行时异常(" + sdf.format(new Date()) + ")";
+            _log.error(msg + ": mo=" + mo, e);
             ro.setMsg(msg);
             ro.setResult(ResultDic.FAIL);
             return ro;
@@ -106,7 +101,7 @@ public class OnlOnlineSpecCtrl {
      */
     @DeleteMapping("/onl/onlinespec")
     Ro del(@RequestParam("id") java.lang.Long id) {
-        _log.info("save OnlOnlineSpecMo:" + id);
+        _log.info("del OnlOnlineSpecMo by id: {}", id);
         int result = svc.del(id);
         Ro ro = new Ro();
         if (result == 1) {
@@ -130,7 +125,11 @@ public class OnlOnlineSpecCtrl {
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
     @GetMapping("/onl/onlinespec")
-    PageInfo<OnlOnlineSpecMo> list(OnlOnlineSpecMo mo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+    PageInfo<OnlOnlineSpecMo> list(OnlOnlineSpecMo mo, @RequestParam(value = "pageNum", required = false) Integer pageNum, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+        if (pageNum == null)
+            pageNum = 1;
+        if (pageSize == null)
+            pageSize = 5;
         _log.info("list OnlOnlineSpecMo:" + mo + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
         if (pageSize > 50) {
             String msg = "pageSize不能大于50";
@@ -260,21 +259,5 @@ public class OnlOnlineSpecCtrl {
         }
         _log.info("删除购物车和修改上线数量的返回值为：{}", String.valueOf(resultMap));
         return resultMap;
-    }
-
-    /**
-     * 追加上线数量
-     * 
-     * @param to
-     * @return
-     * @throws IOException
-     * @throws JsonMappingException
-     * @throws JsonParseException
-     */
-    @PutMapping("/onl/onlinespec/append")
-    Ro append(@RequestBody AppendOnlineSpecCountTo to) throws JsonParseException, JsonMappingException, IOException {
-        _log.info("追加上线数量的参数为：{}", to);
-        to.setOpId(12345678L);
-        return svc.append(to);
     }
 }
