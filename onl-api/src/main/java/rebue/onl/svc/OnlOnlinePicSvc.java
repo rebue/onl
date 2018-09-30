@@ -15,4 +15,12 @@ public interface OnlOnlinePicSvc extends MybatisBaseSvc<OnlOnlinePicMo, java.lan
      *  获取已上线商品轮播图 2018年4月1日14:51:33
      */
     List<OnlOnlinePicMo> list(OnlOnlinePicMo mo);
+
+    /**
+     *  根据上线id删除上线图片
+     *
+     *  @param onlineId
+     *  @return
+     */
+    int deleteByOnlineId(Long onlineId);
 }

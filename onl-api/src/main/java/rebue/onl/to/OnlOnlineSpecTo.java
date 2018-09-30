@@ -99,11 +99,19 @@ public class OnlOnlineSpecTo {
 	 * @mbg.generated 自动生成，如需修改，请删除本行
 	 */
 	private Integer seqNo;
-	
+
 	/**
 	 * 购买数量
 	 */
 	private Integer buyCount;
-	
-//	private 
+
+	/**
+	 * 当前上线数量（每次追加的数量）
+	 */
+	private Integer currentOnlineCount;
+
+	/**
+	 * 已上线总数
+	 */
+	private Integer alreadyOnlineTotal;
 }

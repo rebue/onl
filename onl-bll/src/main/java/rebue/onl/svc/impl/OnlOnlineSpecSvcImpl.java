@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
+import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.svc.OnlCartSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
+import rebue.onl.to.OnlOnlineSpecTo;
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
 
 /**
@@ -72,6 +74,9 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
      */
     @Resource
     private OnlCartSvc onlCartSvc;
+
+    @Resource
+    private Mapper dozerMapper;
 
     /**
      *  根据商品规格编号查询商品规格信息 2018年3月29日14:28:59
@@ -152,14 +157,15 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
                 throw new RuntimeException("扣减上线数量失败");
             }
             int onlineCount = onlineSpecList.get(0).getSaleCount();
-            int updateCount = onlineCount + buyCount;
+            int updateCount = onlineSpecList.get(0).getOnlineTotal() - onlineCount + buyCount;
             if (updateCount < 0) {
                 _log.error("规格编号为：{}，库存不足", onlineSpec);
                 throw new RuntimeException(onlineSpec + "库存不足");
             }
-            onlineSpecMo.setSaleCount(updateCount);
-            _log.info("扣减上线数量的参数为：{}", onlineSpecMo);
-            int updateCountResult = _mapper.updateSelective(onlineSpecMo);
+            OnlOnlineSpecTo onlineSpecTo = dozerMapper.map(onlineSpecMo, OnlOnlineSpecTo.class);
+            onlineSpecTo.setBuyCount(buyCount);
+            _log.info("扣减上线数量的参数为：{}", onlineSpecTo);
+            int updateCountResult = _mapper.updateSaleCount(onlineSpecTo);
             _log.info("扣减上线数量的返回值为{}", updateCountResult);
             if (updateCountResult != 1) {
                 _log.error("规格编号为：{}，扣减上线数量失败", onlineSpec);
@@ -222,5 +228,31 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
         modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.SUCCESS);
         modifyOnlineSpecInfoRo.setMsg("修改成功");
         return modifyOnlineSpecInfoRo;
+    }
+
+    /**
+     *  修改上线规格信息
+     *
+     *  @param to
+     *  @return
+     */
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public int updateOnlineSpec(OnlOnlineSpecTo to) {
+        _log.info("修改上线规格的参数为：{}", to);
+        return _mapper.updateOnlineSpec(to);
+    }
+
+    /**
+     *  根据规格id批量删除规格信息
+     *
+     *  @param ids
+     *  @return
+     */
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public int batchDeleteByIds(String ids, Long onlineId) {
+        _log.info("根据规格id批量删除规格信息的参数为：{}, onlineId", ids);
+        return _mapper.batchDeleteByIds(ids, onlineId);
     }
 }

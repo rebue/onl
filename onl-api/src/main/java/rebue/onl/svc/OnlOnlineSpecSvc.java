@@ -8,6 +8,7 @@ import java.util.Map;
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
+import rebue.onl.to.OnlOnlineSpecTo;
 import rebue.robotech.svc.MybatisBaseSvc;
 
 /**
@@ -64,4 +65,20 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
      *  @date 2018年4月23日 下午5:46:50
      */
     ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(List<Map<String, Object>> specList);
+
+    /**
+     *  修改上线规格信息
+     *
+     *  @param to
+     *  @return
+     */
+    int updateOnlineSpec(OnlOnlineSpecTo to);
+
+    /**
+     *  根据规格id批量删除规格信息
+     *
+     *  @param ids
+     *  @return
+     */
+    int batchDeleteByIds(String ids, Long onlineId);
 }

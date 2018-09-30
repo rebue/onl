@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import lombok.Data;
-import rebue.onl.mo.OnlOnlineSpecMo;
 
 /**
  * 添加上线信息参数
@@ -38,7 +37,7 @@ public class AddOnlineTo {
 	/**
 	 * 商品规格信息
 	 */
-	private List<OnlOnlineSpecMo> onlineSpecs;
+	private List<OnlOnlineSpecTo> onlineSpecs;
 
 	/**
 	 * 商品主图

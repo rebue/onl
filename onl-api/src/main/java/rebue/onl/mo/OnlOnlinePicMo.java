@@ -51,6 +51,15 @@ public class OnlOnlinePicMo implements Serializable {
     private String picPath;
 
     /**
+     *    上线图片ID
+     *
+     *    数据库字段: ONL_ONLINE_PIC.ONLINE_PIC_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long onlinePicId;
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private static final long serialVersionUID = 1L;
@@ -144,6 +153,28 @@ public class OnlOnlinePicMo implements Serializable {
     }
 
     /**
+     *    上线图片ID
+     *
+     *    数据库字段: ONL_ONLINE_PIC.ONLINE_PIC_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Long getOnlinePicId() {
+        return onlinePicId;
+    }
+
+    /**
+     *    上线图片ID
+     *
+     *    数据库字段: ONL_ONLINE_PIC.ONLINE_PIC_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setOnlinePicId(Long onlinePicId) {
+        this.onlinePicId = onlinePicId;
+    }
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Override
@@ -156,6 +187,7 @@ public class OnlOnlinePicMo implements Serializable {
         sb.append(", onlineId=").append(onlineId);
         sb.append(", picType=").append(picType);
         sb.append(", picPath=").append(picPath);
+        sb.append(", onlinePicId=").append(onlinePicId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

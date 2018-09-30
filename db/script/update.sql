@@ -1,3 +1,5 @@
+--2018年9月30日09:54:05在ONL_ONLINE_PIC_LOG中新加上线图片ID（ONLINE_PIC_ID）
+alter table onl.ONL_ONLINE_PIC_LOG add ONLINE_PIC_ID  bigint not null comment '上线图片ID';
 --2018年9月29日16:24:10在ONL_ONLINE_SPEC_LOG中新加'当前上线数量（CURRENT_ONLINE_COUNT）
 alter table onl.ONL_ONLINE_SPEC_LOG add CURRENT_ONLINE_COUNT int not null comment '当前上线数量（每次追加的数量）';
 --2018年9月28日09:38:40新添：

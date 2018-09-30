@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/9/29 16:28:11                           */
+/* Created on:     2018/9/30 9:53:12                            */
 /*==============================================================*/
 
 
@@ -94,6 +94,7 @@ create table ONL_ONLINE_PIC_LOG
    ID                   bigint not null comment '上线图片日志ID',
    ONLINE_LOG_ID        bigint not null comment '上线日志ID',
    ONLINE_ID            bigint not null comment '上线ID',
+   ONLINE_PIC_ID        bigint not null comment '上线图片ID',
    PIC_TYPE             tinyint not null comment '图片类型',
    PIC_PATH             varchar(800) not null comment '图片路径',
    primary key (ID)
@@ -173,6 +174,9 @@ alter table ONL_ONLINE_PIC_LOG add constraint FK_Relationship_13 foreign key (ON
 
 alter table ONL_ONLINE_PIC_LOG add constraint FK_Relationship_14 foreign key (ONLINE_LOG_ID)
       references ONL_ONLINE_LOG (ID) on delete restrict on update restrict;
+
+alter table ONL_ONLINE_PIC_LOG add constraint FK_Relationship_15 foreign key (ONLINE_PIC_ID)
+      references ONL_ONLINE_PIC (ID) on delete restrict on update restrict;
 
 alter table ONL_ONLINE_PROMOTION add constraint FK_Relationship_5 foreign key (ONLINE_ID)
       references ONL_ONLINE (ID) on delete restrict on update restrict;

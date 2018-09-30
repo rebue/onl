@@ -55,4 +55,16 @@ public class OnlOnlinePicSvcImpl extends MybatisBaseSvcImpl<OnlOnlinePicMo, java
     public List<OnlOnlinePicMo> list(OnlOnlinePicMo mo) {
         return _mapper.selectSelective(mo);
     }
+
+    /**
+     *  根据上线id删除上线图片
+     *
+     *  @param onlineId
+     *  @return
+     */
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public int deleteByOnlineId(Long onlineId) {
+        return _mapper.deleteByOnlineId(onlineId);
+    }
 }

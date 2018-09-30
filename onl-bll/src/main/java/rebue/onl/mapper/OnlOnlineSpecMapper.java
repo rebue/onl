@@ -1,11 +1,15 @@
 package rebue.onl.mapper;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.DeleteCartAndModifyInventoryRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.to.AppendOnlineSpecCountTo;
+import rebue.onl.to.OnlOnlineSpecTo;
 import rebue.robotech.mapper.MybatisBaseMapper;
 
 @Mapper
@@ -94,8 +98,35 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
     boolean selectSpecExistOnline(DeleteCartAndModifyInventoryRo record);
 
     /**
-     * 追加上线数量
-     * @return
+     *  追加上线数量
+     *
+     *  @return
      */
     int appendOnlineCount(AppendOnlineSpecCountTo record);
+
+    /**
+     *  修改销售数量
+     *
+     *  @param to
+     *  @return
+     */
+    @Update("update ONL_ONLINE_SPEC set SALE_COUNT=SALE_COUNT + #{buyCount,jdbcType=INTEGER} where ONLINE_ID=#{onlineId,jdbcType=BIGINT} and ONLINE_SPEC=#{onlineSpec,jdbcType=VARCHAR} and SALE_COUNT=#{saleCount,jdbcType=INTEGER}")
+    int updateSaleCount(OnlOnlineSpecTo to);
+
+    /**
+     *  修改上线规格信息
+     *
+     *  @param to
+     *  @return
+     */
+    int updateOnlineSpec(OnlOnlineSpecTo to);
+
+    /**
+     *  根据规格id批量删除规格信息
+     *
+     *  @param ids
+     *  @return
+     */
+    @Delete("delete from ONL_ONLINE_SPEC where ID not in(${ids}) and ONLINE_ID=${onlineId}")
+    int batchDeleteByIds(@Param("ids") String ids, @Param("onlineId") Long onlineId);
 }
