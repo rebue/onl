@@ -1,3 +1,5 @@
+--2018年9月30日14:37:05 ONL_ONLINE_SPEC_LOG去除上线总数（ONLINE_TOTAL）
+alter table onl.ONL_ONLINE_SPEC_LOG drop column ONLINE_TOTAL;
 --2018年9月30日11:19:16	ONL_ONLINE_SPEC去除上线总数（ONLINE_TOTAL），新加当前上线数量（每次追加的数量）CURRENT_ONLINE_COUNT
 alter table onl.ONL_ONLINE_SPEC add CURRENT_ONLINE_COUNT int not null comment '当前上线数量（每次追加的数量）';
 alter table onl.ONL_ONLINE_SPEC drop column ONLINE_TOTAL;

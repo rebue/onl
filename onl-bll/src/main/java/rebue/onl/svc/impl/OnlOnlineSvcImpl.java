@@ -333,7 +333,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             return ro;
         }
         // 修改上线信息结束
-        
         // 上线日志id
         Long onlineLogId = _idWorker.getId();
         // 添加上线日志信息开始
@@ -354,7 +353,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             throw new RuntimeException("添加上线日志信息出错");
         }
         // 添加上线日志信息结束
-        
         // 用于存放未删除的规格id
         StringBuilder onlineSpecIds = new StringBuilder();
         for (int i = 0; i < to.getOnlineSpecs().size(); i++) {
@@ -395,7 +393,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                 }
             }
             // 修改或添加上线规格结束
-            
             // 添加上线规格日志开始
             OnlOnlineSpecLogMo onlineSpecLogMo = dozerMapper.map(onlineSpecTo, OnlOnlineSpecLogMo.class);
             onlineSpecLogMo.setOnlineLogId(onlineLogId);
@@ -415,7 +412,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlOnlineSpecSvc.batchDeleteByIds(onlineSpecIds.toString().substring(0, onlineSpecIds.toString().length() - 1), to.getOnlineId());
         }
         // 删除上线规格结束
-        
         // 根据上线id删除上线图片开始
         _log.info("重新上线删除上线图片的参数为：{}", to.getOnlineId());
         int deleteByOnlineIdResult = onlOnlinePicSvc.deleteByOnlineId(to.getOnlineId());
@@ -425,7 +421,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             throw new RuntimeException("删除上线图片失败");
         }
         // 根据上线id删除上线图片结束
-        
         // 上线图片id
         Long onlinePicId = _idWorker.getId();
         // 添加上线主图开始
@@ -442,7 +437,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             throw new RuntimeException("添加上线主图出错");
         }
         // 添加上线主图结束
-        
         // 添加上线主图日志开始
         OnlOnlinePicLogMo onlinePicLogMo = new OnlOnlinePicLogMo();
         onlinePicLogMo.setOnlineLogId(onlineLogId);
@@ -473,7 +467,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                 throw new RuntimeException("添加商品轮播图出错");
             }
             // 添加商品轮播图结束
-            
             // 添加上线图片日志开始
             onlinePicLogMo = new OnlOnlinePicLogMo();
             onlinePicLogMo.setOnlineLogId(onlineLogId);

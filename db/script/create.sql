@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/9/30 11:23:27                           */
+/* Created on:     2018/9/30 14:36:41                           */
 /*==============================================================*/
 
 
@@ -148,7 +148,6 @@ create table ONL_ONLINE_SPEC_LOG
    CASHBACK_AMOUNT      decimal(20,4) not null comment '返现金额',
    COMMISSION_AMOUNT    decimal(20,4) comment '返佣金额',
    SALE_UNIT            varchar(50) comment '销售单位',
-   ONLINE_TOTAL         int not null comment '上线总数',
    SALE_COUNT           int not null comment '销售数量',
    CURRENT_ONLINE_COUNT int not null comment '当前上线数量（每次追加的数量）',
    SEQ_NO               int not null comment '排序号',

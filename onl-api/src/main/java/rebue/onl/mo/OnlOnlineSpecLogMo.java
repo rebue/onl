@@ -88,15 +88,6 @@ public class OnlOnlineSpecLogMo implements Serializable {
     private String saleUnit;
 
     /**
-     *    上线总数
-     *
-     *    数据库字段: ONL_ONLINE_SPEC_LOG.ONLINE_TOTAL
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Integer onlineTotal;
-
-    /**
      *    销售数量
      *
      *    数据库字段: ONL_ONLINE_SPEC_LOG.SALE_COUNT
@@ -106,15 +97,6 @@ public class OnlOnlineSpecLogMo implements Serializable {
     private Integer saleCount;
 
     /**
-     *    排序号
-     *
-     *    数据库字段: ONL_ONLINE_SPEC_LOG.SEQ_NO
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Integer seqNo;
-
-    /**
      *    当前上线数量（每次追加的数量）
      *
      *    数据库字段: ONL_ONLINE_SPEC_LOG.CURRENT_ONLINE_COUNT
@@ -122,6 +104,15 @@ public class OnlOnlineSpecLogMo implements Serializable {
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private Integer currentOnlineCount;
+
+    /**
+     *    排序号
+     *
+     *    数据库字段: ONL_ONLINE_SPEC_LOG.SEQ_NO
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Integer seqNo;
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -305,28 +296,6 @@ public class OnlOnlineSpecLogMo implements Serializable {
     }
 
     /**
-     *    上线总数
-     *
-     *    数据库字段: ONL_ONLINE_SPEC_LOG.ONLINE_TOTAL
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Integer getOnlineTotal() {
-        return onlineTotal;
-    }
-
-    /**
-     *    上线总数
-     *
-     *    数据库字段: ONL_ONLINE_SPEC_LOG.ONLINE_TOTAL
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setOnlineTotal(Integer onlineTotal) {
-        this.onlineTotal = onlineTotal;
-    }
-
-    /**
      *    销售数量
      *
      *    数据库字段: ONL_ONLINE_SPEC_LOG.SALE_COUNT
@@ -346,28 +315,6 @@ public class OnlOnlineSpecLogMo implements Serializable {
      */
     public void setSaleCount(Integer saleCount) {
         this.saleCount = saleCount;
-    }
-
-    /**
-     *    排序号
-     *
-     *    数据库字段: ONL_ONLINE_SPEC_LOG.SEQ_NO
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Integer getSeqNo() {
-        return seqNo;
-    }
-
-    /**
-     *    排序号
-     *
-     *    数据库字段: ONL_ONLINE_SPEC_LOG.SEQ_NO
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setSeqNo(Integer seqNo) {
-        this.seqNo = seqNo;
     }
 
     /**
@@ -393,6 +340,28 @@ public class OnlOnlineSpecLogMo implements Serializable {
     }
 
     /**
+     *    排序号
+     *
+     *    数据库字段: ONL_ONLINE_SPEC_LOG.SEQ_NO
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Integer getSeqNo() {
+        return seqNo;
+    }
+
+    /**
+     *    排序号
+     *
+     *    数据库字段: ONL_ONLINE_SPEC_LOG.SEQ_NO
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setSeqNo(Integer seqNo) {
+        this.seqNo = seqNo;
+    }
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Override
@@ -409,10 +378,9 @@ public class OnlOnlineSpecLogMo implements Serializable {
         sb.append(", cashbackAmount=").append(cashbackAmount);
         sb.append(", commissionAmount=").append(commissionAmount);
         sb.append(", saleUnit=").append(saleUnit);
-        sb.append(", onlineTotal=").append(onlineTotal);
         sb.append(", saleCount=").append(saleCount);
-        sb.append(", seqNo=").append(seqNo);
         sb.append(", currentOnlineCount=").append(currentOnlineCount);
+        sb.append(", seqNo=").append(seqNo);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

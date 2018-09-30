@@ -33,7 +33,7 @@ public class OnlOnlinePromotionMo implements Serializable {
     private Long onlineId;
 
     /**
-     *    推广类型
+     *    推广类型(1-每日热门)
      *
      *    数据库字段: ONL_ONLINE_PROMOTION.PROMOTION_TYPE
      *
@@ -91,7 +91,7 @@ public class OnlOnlinePromotionMo implements Serializable {
     }
 
     /**
-     *    推广类型
+     *    推广类型(1-每日热门)
      *
      *    数据库字段: ONL_ONLINE_PROMOTION.PROMOTION_TYPE
      *
@@ -102,7 +102,7 @@ public class OnlOnlinePromotionMo implements Serializable {
     }
 
     /**
-     *    推广类型
+     *    推广类型(1-每日热门)
      *
      *    数据库字段: ONL_ONLINE_PROMOTION.PROMOTION_TYPE
      *

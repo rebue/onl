@@ -33,7 +33,7 @@ public class OnlOnlinePicMo implements Serializable {
     private Long onlineId;
 
     /**
-     *    图片类型
+     *    图片类型(1：主图  0：轮播图)
      *
      *    数据库字段: ONL_ONLINE_PIC.PIC_TYPE
      *
@@ -100,7 +100,7 @@ public class OnlOnlinePicMo implements Serializable {
     }
 
     /**
-     *    图片类型
+     *    图片类型(1：主图  0：轮播图)
      *
      *    数据库字段: ONL_ONLINE_PIC.PIC_TYPE
      *
@@ -111,7 +111,7 @@ public class OnlOnlinePicMo implements Serializable {
     }
 
     /**
-     *    图片类型
+     *    图片类型(1：主图  0：轮播图)
      *
      *    数据库字段: ONL_ONLINE_PIC.PIC_TYPE
      *

@@ -79,6 +79,15 @@ public class OnlOnlineSpecMo implements Serializable {
     private String saleUnit;
 
     /**
+     *    当前上线数量（每次追加的数量）
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.CURRENT_ONLINE_COUNT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Integer currentOnlineCount;
+
+    /**
      *    销售数量
      *
      *    数据库字段: ONL_ONLINE_SPEC.SALE_COUNT
@@ -95,15 +104,6 @@ public class OnlOnlineSpecMo implements Serializable {
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private Integer seqNo;
-
-    /**
-     *    当前上线数量（每次追加的数量）
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.CURRENT_ONLINE_COUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Integer currentOnlineCount;
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -265,6 +265,28 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
+     *    当前上线数量（每次追加的数量）
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.CURRENT_ONLINE_COUNT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Integer getCurrentOnlineCount() {
+        return currentOnlineCount;
+    }
+
+    /**
+     *    当前上线数量（每次追加的数量）
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.CURRENT_ONLINE_COUNT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setCurrentOnlineCount(Integer currentOnlineCount) {
+        this.currentOnlineCount = currentOnlineCount;
+    }
+
+    /**
      *    销售数量
      *
      *    数据库字段: ONL_ONLINE_SPEC.SALE_COUNT
@@ -309,28 +331,6 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
-     *    当前上线数量（每次追加的数量）
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.CURRENT_ONLINE_COUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Integer getCurrentOnlineCount() {
-        return currentOnlineCount;
-    }
-
-    /**
-     *    当前上线数量（每次追加的数量）
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.CURRENT_ONLINE_COUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setCurrentOnlineCount(Integer currentOnlineCount) {
-        this.currentOnlineCount = currentOnlineCount;
-    }
-
-    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Override
@@ -346,9 +346,9 @@ public class OnlOnlineSpecMo implements Serializable {
         sb.append(", cashbackAmount=").append(cashbackAmount);
         sb.append(", commissionAmount=").append(commissionAmount);
         sb.append(", saleUnit=").append(saleUnit);
+        sb.append(", currentOnlineCount=").append(currentOnlineCount);
         sb.append(", saleCount=").append(saleCount);
         sb.append(", seqNo=").append(seqNo);
-        sb.append(", currentOnlineCount=").append(currentOnlineCount);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
