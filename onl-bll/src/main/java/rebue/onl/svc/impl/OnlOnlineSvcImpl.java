@@ -417,6 +417,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         // 根据上线id删除上线图片结束
         // 添加上线主图开始
         OnlOnlinePicMo onlinePicMo = new OnlOnlinePicMo();
+        onlinePicMo.setOnlineId(to.getOnlineId());
         // 添加上线主图结束
         return ro;
     }
