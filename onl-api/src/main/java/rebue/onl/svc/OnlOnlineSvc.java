@@ -4,6 +4,7 @@ import java.util.List;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.ro.AddOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
+import rebue.onl.ro.ReOnlineRo;
 import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlineGoodsListTo;
 import rebue.robotech.svc.MybatisBaseSvc;
@@ -38,4 +39,12 @@ public interface OnlOnlineSvc extends MybatisBaseSvc<OnlOnlineMo, java.lang.Long
      *  @return
      */
     OnlOnlineMo listByPrimaryKey(Long id);
+
+    /**
+     *  重新上线
+     *
+     *  @param to
+     *  @return
+     */
+    ReOnlineRo reOnline(AddOnlineTo to);
 }

@@ -157,7 +157,7 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
                 throw new RuntimeException("扣减上线数量失败");
             }
             int onlineCount = onlineSpecList.get(0).getSaleCount();
-            int updateCount = onlineSpecList.get(0).getOnlineTotal() - onlineCount + buyCount;
+            int updateCount = onlineSpecList.get(0).getCurrentOnlineCount() - onlineCount + buyCount;
             if (updateCount < 0) {
                 _log.error("规格编号为：{}，库存不足", onlineSpec);
                 throw new RuntimeException(onlineSpec + "库存不足");

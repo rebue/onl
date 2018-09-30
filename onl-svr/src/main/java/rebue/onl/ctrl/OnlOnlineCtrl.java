@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import rebue.onl.dic.AddOnlineDic;
+import rebue.onl.dic.ReOnlineDic;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.mo.OnlOnlinePicMo;
 import rebue.onl.mo.OnlOnlineSpecMo;
@@ -25,6 +26,7 @@ import rebue.onl.ro.GetOnlinesRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 import rebue.onl.ro.OnlOnlineRo;
 import rebue.onl.ro.OnlinesRo;
+import rebue.onl.ro.ReOnlineRo;
 import rebue.onl.svc.OnlOnlinePicSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
@@ -98,9 +100,9 @@ public class OnlOnlineCtrl {
     private Mapper dozerMapper;
 
     /**
-     * 添加上线信息
+     *  添加上线信息
      *
-     * @mbg.overrideByMethodName
+     *  @mbg.overrideByMethodName
      */
     @PostMapping("/onl/online")
     AddOnlineRo add(@RequestBody AddOnlineTo to, HttpServletRequest req) throws Exception {
@@ -120,13 +122,13 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     * 根据条件分页查询商品上线信息 Title: list Description:
+     *  根据条件分页查询商品上线信息 Title: list Description:
      *
-     * @param qo
-     * @param pageNum
-     * @param pageSize
-     * @return
-     * @date 2018年3月28日 下午3:06:09
+     *  @param qo
+     *  @param pageNum
+     *  @param pageSize
+     *  @return
+     *  @date 2018年3月28日 下午3:06:09
      */
     @GetMapping("/onl/online")
     PageInfo<OnlOnlineMo> list(OnlOnlineMo qo, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
@@ -142,12 +144,12 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     * 商品下线 Title: modify Description:
+     *  商品下线 Title: modify Description:
      *
-     * @param vo
-     * @return
-     * @throws Exception
-     * @date 2018年3月28日 下午3:14:23
+     *  @param vo
+     *  @return
+     *  @throws Exception
+     *  @date 2018年3月28日 下午3:14:23
      */
     @PutMapping("/onl/online")
     OnlOnlineRo modify(OnlOnlineMo vo) throws Exception {
@@ -167,10 +169,10 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     * 获取上线商品列表 Title: selectOnlineGoodsList Description:
+     *  获取上线商品列表 Title: selectOnlineGoodsList Description:
      *
-     * @return
-     * @date 2018年3月29日 下午5:42:46
+     *  @return
+     *  @date 2018年3月29日 下午5:42:46
      */
     @SuppressWarnings("finally")
     @GetMapping("/onl/online/list")
@@ -187,11 +189,11 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     * 查询是否已上线 Title: existSelective Description:
+     *  查询是否已上线 Title: existSelective Description:
      *
-     * @param qo
-     * @return
-     * @date 2018年4月10日 下午4:06:26
+     *  @param qo
+     *  @return
+     *  @date 2018年4月10日 下午4:06:26
      */
     @GetMapping(value = "/onl/online/exist")
     @ResponseBody
@@ -206,10 +208,10 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     * 根据id获取上线信息、规格信息、图片信息
+     *  根据id获取上线信息、规格信息、图片信息
      *
-     * @param id
-     * @return
+     *  @param id
+     *  @return
      */
     @GetMapping("/onl/online/getonlines")
     GetOnlinesRo getOnlines(@RequestParam("id") Long id) {
@@ -228,5 +230,29 @@ public class OnlOnlineCtrl {
         onlinesRo.setRecord(onlOnlineRo);
         onlinesRo.setResult((byte) 1);
         return onlinesRo;
+    }
+
+    /**
+     *  重新上线
+     *
+     *  @param to
+     *  @param req
+     *  @return
+     */
+    @PutMapping("/onl/online/reonline")
+    ReOnlineRo reOnline(@RequestBody AddOnlineTo to, HttpServletRequest req) {
+        // 获取当前登录用户id
+        // Long currentUserId = JwtUtils.getJwtUserIdInCookie(req);
+        to.setOpId(193201L);
+        _log.info("添加上线信息的参数为：{}", to);
+        try {
+            return svc.reOnline(to);
+        } catch (RuntimeException e) {
+            String msg = e.getMessage();
+            ReOnlineRo ro = new ReOnlineRo();
+            ro.setMsg(msg);
+            ro.setResult(ReOnlineDic.ERROR);
+            return ro;
+        }
     }
 }

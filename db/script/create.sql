@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/9/30 9:53:12                            */
+/* Created on:     2018/9/30 11:23:27                           */
 /*==============================================================*/
 
 
@@ -79,7 +79,7 @@ create table ONL_ONLINE_PIC
 (
    ID                   bigint not null comment '上线图片ID',
    ONLINE_ID            bigint not null comment '上线ID',
-   PIC_TYPE             tinyint not null comment '图片类型',
+   PIC_TYPE             tinyint not null comment '图片类型(1：主图  0：轮播图)',
    PIC_PATH             varchar(800) not null comment '图片路径',
    primary key (ID)
 );
@@ -127,7 +127,7 @@ create table ONL_ONLINE_SPEC
    CASHBACK_AMOUNT      decimal(20,4) not null comment '返现金额',
    COMMISSION_AMOUNT    decimal(20,4) comment '返佣金额',
    SALE_UNIT            varchar(50) comment '销售单位',
-   ONLINE_TOTAL         int not null comment '上线总数',
+   CURRENT_ONLINE_COUNT int not null comment '当前上线数量（每次追加的数量）',
    SALE_COUNT           int not null comment '销售数量',
    SEQ_NO               int not null comment '排序号',
    primary key (ID)

@@ -171,9 +171,9 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                 onlineSpecMo.setCommissionAmount(to.getOnlineSpecs().get(i).getCommissionAmount());
             }
             onlineSpecMo.setSaleUnit(to.getOnlineSpecs().get(i).getSaleUnit());
-            onlineSpecMo.setSaleCount(to.getOnlineSpecs().get(i).getSaleCount());
-            onlineSpecMo.setOnlineTotal(to.getOnlineSpecs().get(i).getSaleCount());
+            onlineSpecMo.setSaleCount(0);
             onlineSpecMo.setSeqNo(i);
+            onlineSpecMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
             _log.info("添加上线信息添加上线规格信息的参数为：{}", onlineSpecMo);
             int addOnlineSpecResult = onlOnlineSpecSvc.add(onlineSpecMo);
             _log.info("添加上线信息添加上线规格信息的返回值为：{}", addOnlineSpecResult);
@@ -193,7 +193,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                 onlineSpecLogMo.setCommissionAmount(to.getOnlineSpecs().get(i).getCommissionAmount());
             }
             onlineSpecLogMo.setSaleUnit(to.getOnlineSpecs().get(i).getSaleUnit());
-            onlineSpecLogMo.setOnlineTotal(to.getOnlineSpecs().get(i).getSaleCount());
             onlineSpecLogMo.setSaleCount(to.getOnlineSpecs().get(i).getSaleCount());
             onlineSpecLogMo.setSeqNo(i);
             _log.info("添加上线信息添加上线规格日志信息的参数为：{}", onlineSpecLogMo);
@@ -206,8 +205,10 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         // 添加上线规格日志信息结束
         }
         // 添加商品主图开始
+        // 上线图片id
+        Long onlinePicId = _idWorker.getId();
         OnlOnlinePicMo qsmmPicMo = new OnlOnlinePicMo();
-        qsmmPicMo.setId(_idWorker.getId());
+        qsmmPicMo.setId(onlinePicId);
         qsmmPicMo.setOnlineId(onlineId);
         qsmmPicMo.setPicPath(to.getGoodsQsmm());
         qsmmPicMo.setPicType((byte) 1);
@@ -223,6 +224,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         OnlOnlinePicLogMo onlinePicLogMo = new OnlOnlinePicLogMo();
         onlinePicLogMo.setOnlineLogId(onlineLogId);
         onlinePicLogMo.setOnlineId(onlineId);
+        onlinePicLogMo.setOnlinePicId(onlinePicId);
         onlinePicLogMo.setPicType((byte) 1);
         onlinePicLogMo.setPicPath(to.getGoodsQsmm());
         _log.info("添加上线信息添加上线主图日志的参数为：{}", onlinePicLogMo);
@@ -233,9 +235,11 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             throw new RuntimeException("添加上线主图日志出错");
         }
         for (int j = 0; j < to.getSlideshow().size(); j++) {
+            // 轮播图id
+            Long picId = _idWorker.getId();
             // 添加商品轮播图开始
             OnlOnlinePicMo picMo = new OnlOnlinePicMo();
-            picMo.setId(_idWorker.getId());
+            picMo.setId(picId);
             picMo.setOnlineId(onlineId);
             picMo.setPicPath(String.valueOf(to.getSlideshow().get(j).get("slideshow")));
             picMo.setPicType((byte) 0);
@@ -251,6 +255,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlinePicLogMo = new OnlOnlinePicLogMo();
             onlinePicLogMo.setOnlineLogId(onlineLogId);
             onlinePicLogMo.setOnlineId(onlineId);
+            onlinePicLogMo.setOnlinePicId(picId);
             onlinePicLogMo.setPicType((byte) 0);
             onlinePicLogMo.setPicPath(String.valueOf(to.getSlideshow().get(j).get("slideshow")));
             _log.info("添加上线信息添加上线轮播图日志的参数为：{}", onlinePicLogMo);
@@ -296,6 +301,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
      *  @param to
      *  @return
      */
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public ReOnlineRo reOnline(AddOnlineTo to) {
         _log.info("重新上线的请求参数为：{}", to);
         ReOnlineRo ro = new ReOnlineRo();
@@ -326,6 +333,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             return ro;
         }
         // 修改上线信息结束
+        
         // 上线日志id
         Long onlineLogId = _idWorker.getId();
         // 添加上线日志信息开始
@@ -346,6 +354,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             throw new RuntimeException("添加上线日志信息出错");
         }
         // 添加上线日志信息结束
+        
         // 用于存放未删除的规格id
         StringBuilder onlineSpecIds = new StringBuilder();
         for (int i = 0; i < to.getOnlineSpecs().size(); i++) {
@@ -358,14 +367,14 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlineSpecTo.setCommissionAmount(to.getOnlineSpecs().get(i).getCommissionAmount());
             onlineSpecTo.setSaleUnit(to.getOnlineSpecs().get(i).getSaleUnit());
             onlineSpecTo.setSeqNo(i);
-            onlineSpecTo.setSaleCount(to.getOnlineSpecs().get(i).getSaleCount());
+            onlineSpecTo.setSaleCount(0);
+            onlineSpecTo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
             Long onlineSpecId = _idWorker.getId();
             // 如果规格id的长度大于13位的话说明该规格属于已上线的规格
             if (to.getOnlineSpecs().get(i).getId().toString().length() > 13) {
                 onlineSpecId = to.getOnlineSpecs().get(i).getId();
                 onlineSpecIds.append(onlineSpecId + ",");
                 onlineSpecTo.setId(onlineSpecId);
-                onlineSpecTo.setOnlineTotal(to.getOnlineSpecs().get(i).getOnlineTotal() + to.getOnlineSpecs().get(i).getCurrentOnlineCount());
                 onlineSpecTo.setAlreadyOnlineTotal(to.getOnlineSpecs().get(i).getOnlineTotal());
                 _log.info("重新上线修改上线规格信息的参数为：{}", onlineSpecTo);
                 int updateOnlineSpecResult = onlOnlineSpecSvc.updateOnlineSpec(onlineSpecTo);
@@ -376,7 +385,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                 }
             } else {
                 onlineSpecTo.setId(onlineSpecId);
-                onlineSpecTo.setOnlineTotal(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
                 OnlOnlineSpecMo onlineSpecMo = dozerMapper.map(onlineSpecTo, OnlOnlineSpecMo.class);
                 _log.info("重新上线添加上线规格信息的参数为：{}", onlineSpecMo);
                 int addOnlineSpecResult = onlOnlineSpecSvc.add(onlineSpecMo);
@@ -387,6 +395,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                 }
             }
             // 修改或添加上线规格结束
+            
             // 添加上线规格日志开始
             OnlOnlineSpecLogMo onlineSpecLogMo = dozerMapper.map(onlineSpecTo, OnlOnlineSpecLogMo.class);
             onlineSpecLogMo.setOnlineLogId(onlineLogId);
@@ -406,6 +415,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlOnlineSpecSvc.batchDeleteByIds(onlineSpecIds.toString().substring(0, onlineSpecIds.toString().length() - 1), to.getOnlineId());
         }
         // 删除上线规格结束
+        
         // 根据上线id删除上线图片开始
         _log.info("重新上线删除上线图片的参数为：{}", to.getOnlineId());
         int deleteByOnlineIdResult = onlOnlinePicSvc.deleteByOnlineId(to.getOnlineId());
@@ -415,10 +425,74 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             throw new RuntimeException("删除上线图片失败");
         }
         // 根据上线id删除上线图片结束
+        
+        // 上线图片id
+        Long onlinePicId = _idWorker.getId();
         // 添加上线主图开始
         OnlOnlinePicMo onlinePicMo = new OnlOnlinePicMo();
+        onlinePicMo.setId(onlinePicId);
         onlinePicMo.setOnlineId(to.getOnlineId());
+        onlinePicMo.setPicType((byte) 1);
+        onlinePicMo.setPicPath(to.getGoodsQsmm());
+        _log.info("重新上线 添加上线主图的参数为：{}", onlinePicMo);
+        int addOnlinePicResult = onlOnlinePicSvc.add(onlinePicMo);
+        _log.info("重新上线添加上线主图的返回值为：{}", addOnlinePicResult);
+        if (addOnlinePicResult != 1) {
+            _log.error("重新上线添加上线主图出错，上线id为：{}", to.getOnlineId());
+            throw new RuntimeException("添加上线主图出错");
+        }
         // 添加上线主图结束
+        
+        // 添加上线主图日志开始
+        OnlOnlinePicLogMo onlinePicLogMo = new OnlOnlinePicLogMo();
+        onlinePicLogMo.setOnlineLogId(onlineLogId);
+        onlinePicLogMo.setOnlineId(to.getOnlineId());
+        onlinePicLogMo.setOnlinePicId(onlinePicId);
+        onlinePicLogMo.setPicType((byte) 1);
+        onlinePicLogMo.setPicPath(to.getGoodsQsmm());
+        _log.info("重新上线添加上线图片日志的参数为：{}", onlinePicLogMo);
+        int addOnlinePicLogResult = onlOnlinePicLogSvc.add(onlinePicLogMo);
+        if (addOnlinePicLogResult != 1) {
+            _log.error("重新上线添加上线图片日志出错，上线id为：{}", to.getOnlineId());
+            throw new RuntimeException("添加上线主图日志出错");
+        }
+        for (int j = 0; j < to.getSlideshow().size(); j++) {
+            // 轮播图id
+            Long picId = _idWorker.getId();
+            // 添加商品轮播图开始
+            OnlOnlinePicMo picMo = new OnlOnlinePicMo();
+            picMo.setId(picId);
+            picMo.setOnlineId(to.getOnlineId());
+            picMo.setPicPath(String.valueOf(to.getSlideshow().get(j).get("slideshow")));
+            picMo.setPicType((byte) 0);
+            _log.info("添加上线信息添加商品轮播图的参数为：{}", picMo);
+            int addPicResult = onlOnlinePicSvc.add(picMo);
+            _log.info("添加上线信息添加商品轮播图的返回值为：{}", addPicResult);
+            if (addPicResult != 1) {
+                _log.error("添加上线商信息添加商品轮播图出错，上线id为：{}", to.getOnlineId());
+                throw new RuntimeException("添加商品轮播图出错");
+            }
+            // 添加商品轮播图结束
+            
+            // 添加上线图片日志开始
+            onlinePicLogMo = new OnlOnlinePicLogMo();
+            onlinePicLogMo.setOnlineLogId(onlineLogId);
+            onlinePicLogMo.setOnlineId(to.getOnlineId());
+            onlinePicLogMo.setOnlinePicId(picId);
+            onlinePicLogMo.setPicType((byte) 0);
+            onlinePicLogMo.setPicPath(String.valueOf(to.getSlideshow().get(j).get("slideshow")));
+            _log.info("添加上线信息添加上线轮播图日志的参数为：{}", onlinePicLogMo);
+            int addPicLogResult = onlOnlinePicLogSvc.add(onlinePicLogMo);
+            _log.info("添加上线信息添加上线轮播图日志的返回值为：{}", addPicLogResult);
+            if (addPicLogResult != 1) {
+                _log.error("添加上线信息添加上线轮播图日志出错，上线id为：{}", to.getOnlineId());
+                throw new RuntimeException("添加上线轮播图日志出错");
+            }
+        // 添加上线图片日志结束
+        }
+        _log.info("重新上线成功，上线id为：{}", to.getOnlineId());
+        ro.setResult(ReOnlineDic.SUCCESS);
+        ro.setMsg("重新上线成功");
         return ro;
     }
 }
