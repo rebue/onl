@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/9/30 14:36:41                           */
+/* Created on:     2018/9/30 15:41:29                           */
 /*==============================================================*/
 
 
@@ -94,7 +94,6 @@ create table ONL_ONLINE_PIC_LOG
    ID                   bigint not null comment '上线图片日志ID',
    ONLINE_LOG_ID        bigint not null comment '上线日志ID',
    ONLINE_ID            bigint not null comment '上线ID',
-   ONLINE_PIC_ID        bigint not null comment '上线图片ID',
    PIC_TYPE             tinyint not null comment '图片类型',
    PIC_PATH             varchar(800) not null comment '图片路径',
    primary key (ID)
@@ -148,7 +147,6 @@ create table ONL_ONLINE_SPEC_LOG
    CASHBACK_AMOUNT      decimal(20,4) not null comment '返现金额',
    COMMISSION_AMOUNT    decimal(20,4) comment '返佣金额',
    SALE_UNIT            varchar(50) comment '销售单位',
-   SALE_COUNT           int not null comment '销售数量',
    CURRENT_ONLINE_COUNT int not null comment '当前上线数量（每次追加的数量）',
    SEQ_NO               int not null comment '排序号',
    primary key (ID)
@@ -173,9 +171,6 @@ alter table ONL_ONLINE_PIC_LOG add constraint FK_Relationship_13 foreign key (ON
 
 alter table ONL_ONLINE_PIC_LOG add constraint FK_Relationship_14 foreign key (ONLINE_LOG_ID)
       references ONL_ONLINE_LOG (ID) on delete restrict on update restrict;
-
-alter table ONL_ONLINE_PIC_LOG add constraint FK_Relationship_15 foreign key (ONLINE_PIC_ID)
-      references ONL_ONLINE_PIC (ID) on delete restrict on update restrict;
 
 alter table ONL_ONLINE_PROMOTION add constraint FK_Relationship_5 foreign key (ONLINE_ID)
       references ONL_ONLINE (ID) on delete restrict on update restrict;

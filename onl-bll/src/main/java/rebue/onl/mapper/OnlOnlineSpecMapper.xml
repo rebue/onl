@@ -380,24 +380,18 @@
 	WHERE oo.ONLINE_STATE=1 AND ons.ONLINE_SPEC = #{onlineSpec,jdbcType=VARCHAR} AND ons.ONLINE_ID = #{onlineId,jdbcType=BIGINT}
   </select>
   
-  <!-- 追加上线数量 -->
-  <update id="appendOnlineCount" parameterType="rebue.onl.to.AppendOnlineSpecCountTo">
-  	update ONL_ONLINE_SPEC set ONLINE_TOTAL=ONLINE_TOTAL + #{appendCount,jdbcType=INTEGER}, SALE_COUNT=SALE_COUNT + #{appendCount,jdbcType=INTEGER} 
-  	where ID=#{onlineSpecId,jdbcType=BIGINT} and ONLINE_ID=#{onlineId,jdbcType=BIGINT} and ONLINE_TOTAL=#{onlineTotal,jdbcType=INTEGER}
-  </update>
-  
   <!-- 修改上线规格信息 -->
   <update id="updateOnlineSpec" parameterType="rebue.onl.to.OnlOnlineSpecTo">
   	update ONL_ONLINE_SPEC
-   	set ONLINE_ID 			= #{onlineId,jdbcType=BIGINT},
-      	ONLINE_SPEC 		= #{onlineSpec,jdbcType=VARCHAR},
-      	SALE_PRICE 			= #{salePrice,jdbcType=DECIMAL},
-      	CASHBACK_AMOUNT 	= #{cashbackAmount,jdbcType=DECIMAL},
-      	COMMISSION_AMOUNT 	= #{commissionAmount,jdbcType=DECIMAL},
-      	SALE_UNIT			= #{saleUnit,jdbcType=VARCHAR},
-      	ONLINE_TOTAL 		= #{onlineTotal,jdbcType=INTEGER},
-      	SALE_COUNT 			= #{saleCount,jdbcType=INTEGER},
-      	SEQ_NO 				= #{seqNo,jdbcType=INTEGER}
-    where ID = #{id,jdbcType=BIGINT} and ONLINE_TOTAL = #{alreadyOnlineTotal,jdbcType=INTEGER}
+   	set ONLINE_ID 				= #{onlineId,jdbcType=BIGINT},
+      	ONLINE_SPEC 			= #{onlineSpec,jdbcType=VARCHAR},
+      	SALE_PRICE 				= #{salePrice,jdbcType=DECIMAL},
+      	CASHBACK_AMOUNT 		= #{cashbackAmount,jdbcType=DECIMAL},
+      	COMMISSION_AMOUNT 		= #{commissionAmount,jdbcType=DECIMAL},
+      	SALE_UNIT				= #{saleUnit,jdbcType=VARCHAR},
+      	CURRENT_ONLINE_COUNT 	= #{currentOnlineCount,jdbcType=INTEGER},
+      	SALE_COUNT 				= #{saleCount,jdbcType=INTEGER},
+      	SEQ_NO 					= #{seqNo,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

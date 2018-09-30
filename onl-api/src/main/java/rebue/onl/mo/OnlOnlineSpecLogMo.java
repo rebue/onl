@@ -88,15 +88,6 @@ public class OnlOnlineSpecLogMo implements Serializable {
     private String saleUnit;
 
     /**
-     *    销售数量
-     *
-     *    数据库字段: ONL_ONLINE_SPEC_LOG.SALE_COUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Integer saleCount;
-
-    /**
      *    当前上线数量（每次追加的数量）
      *
      *    数据库字段: ONL_ONLINE_SPEC_LOG.CURRENT_ONLINE_COUNT
@@ -296,28 +287,6 @@ public class OnlOnlineSpecLogMo implements Serializable {
     }
 
     /**
-     *    销售数量
-     *
-     *    数据库字段: ONL_ONLINE_SPEC_LOG.SALE_COUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Integer getSaleCount() {
-        return saleCount;
-    }
-
-    /**
-     *    销售数量
-     *
-     *    数据库字段: ONL_ONLINE_SPEC_LOG.SALE_COUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setSaleCount(Integer saleCount) {
-        this.saleCount = saleCount;
-    }
-
-    /**
      *    当前上线数量（每次追加的数量）
      *
      *    数据库字段: ONL_ONLINE_SPEC_LOG.CURRENT_ONLINE_COUNT
@@ -378,7 +347,6 @@ public class OnlOnlineSpecLogMo implements Serializable {
         sb.append(", cashbackAmount=").append(cashbackAmount);
         sb.append(", commissionAmount=").append(commissionAmount);
         sb.append(", saleUnit=").append(saleUnit);
-        sb.append(", saleCount=").append(saleCount);
         sb.append(", currentOnlineCount=").append(currentOnlineCount);
         sb.append(", seqNo=").append(seqNo);
         sb.append(", serialVersionUID=").append(serialVersionUID);

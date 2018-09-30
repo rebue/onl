@@ -192,11 +192,16 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             if (to.getOnlineSpecs().get(i).getCommissionAmount() != null) {
                 onlineSpecLogMo.setCommissionAmount(to.getOnlineSpecs().get(i).getCommissionAmount());
             }
+            onlineSpecLogMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
             onlineSpecLogMo.setSaleUnit(to.getOnlineSpecs().get(i).getSaleUnit());
-            onlineSpecLogMo.setSaleCount(to.getOnlineSpecs().get(i).getSaleCount());
             onlineSpecLogMo.setSeqNo(i);
             _log.info("添加上线信息添加上线规格日志信息的参数为：{}", onlineSpecLogMo);
-            int addOnlineSpecLogResult = oOnlOnlineSpecLogSvc.add(onlineSpecLogMo);
+            int addOnlineSpecLogResult = 0;
+            try {
+                addOnlineSpecLogResult = oOnlOnlineSpecLogSvc.add(onlineSpecLogMo);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             _log.info("添加上线信息添加上线规格日志信息的返回值为：{}", addOnlineSpecLogResult);
             if (addOnlineSpecLogResult != 1) {
                 _log.error("添加上线信息添加上线规格日志信息出错：操作人id为：{}", to.getOpId());
@@ -224,7 +229,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         OnlOnlinePicLogMo onlinePicLogMo = new OnlOnlinePicLogMo();
         onlinePicLogMo.setOnlineLogId(onlineLogId);
         onlinePicLogMo.setOnlineId(onlineId);
-        onlinePicLogMo.setOnlinePicId(onlinePicId);
         onlinePicLogMo.setPicType((byte) 1);
         onlinePicLogMo.setPicPath(to.getGoodsQsmm());
         _log.info("添加上线信息添加上线主图日志的参数为：{}", onlinePicLogMo);
@@ -255,7 +259,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlinePicLogMo = new OnlOnlinePicLogMo();
             onlinePicLogMo.setOnlineLogId(onlineLogId);
             onlinePicLogMo.setOnlineId(onlineId);
-            onlinePicLogMo.setOnlinePicId(picId);
             onlinePicLogMo.setPicType((byte) 0);
             onlinePicLogMo.setPicPath(String.valueOf(to.getSlideshow().get(j).get("slideshow")));
             _log.info("添加上线信息添加上线轮播图日志的参数为：{}", onlinePicLogMo);
@@ -371,7 +374,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             // 如果规格id的长度大于13位的话说明该规格属于已上线的规格
             if (to.getOnlineSpecs().get(i).getId().toString().length() > 13) {
                 onlineSpecId = to.getOnlineSpecs().get(i).getId();
-                onlineSpecIds.append(onlineSpecId + ",");
                 onlineSpecTo.setId(onlineSpecId);
                 onlineSpecTo.setAlreadyOnlineTotal(to.getOnlineSpecs().get(i).getOnlineTotal());
                 _log.info("重新上线修改上线规格信息的参数为：{}", onlineSpecTo);
@@ -392,9 +394,11 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                     throw new RuntimeException("添加上线规格出错");
                 }
             }
+            onlineSpecIds.append(onlineSpecId + ",");
             // 修改或添加上线规格结束
             // 添加上线规格日志开始
             OnlOnlineSpecLogMo onlineSpecLogMo = dozerMapper.map(onlineSpecTo, OnlOnlineSpecLogMo.class);
+            onlineSpecLogMo.setId(_idWorker.getId());
             onlineSpecLogMo.setOnlineLogId(onlineLogId);
             onlineSpecLogMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
             _log.info("重新上线添加上线规格日志信息的参数为：{}", onlineSpecLogMo);
@@ -414,7 +418,12 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         // 删除上线规格结束
         // 根据上线id删除上线图片开始
         _log.info("重新上线删除上线图片的参数为：{}", to.getOnlineId());
-        int deleteByOnlineIdResult = onlOnlinePicSvc.deleteByOnlineId(to.getOnlineId());
+        int deleteByOnlineIdResult = 0;
+        try {
+            deleteByOnlineIdResult = onlOnlinePicSvc.deleteByOnlineId(to.getOnlineId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         _log.info("重新上线删除上线图片的返回值为：{}", deleteByOnlineIdResult);
         if (deleteByOnlineIdResult < 1) {
             _log.error("重新上线删除上线图片出错，上线id为：{}", to.getOnlineId());
@@ -441,7 +450,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         OnlOnlinePicLogMo onlinePicLogMo = new OnlOnlinePicLogMo();
         onlinePicLogMo.setOnlineLogId(onlineLogId);
         onlinePicLogMo.setOnlineId(to.getOnlineId());
-        onlinePicLogMo.setOnlinePicId(onlinePicId);
         onlinePicLogMo.setPicType((byte) 1);
         onlinePicLogMo.setPicPath(to.getGoodsQsmm());
         _log.info("重新上线添加上线图片日志的参数为：{}", onlinePicLogMo);
@@ -471,7 +479,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlinePicLogMo = new OnlOnlinePicLogMo();
             onlinePicLogMo.setOnlineLogId(onlineLogId);
             onlinePicLogMo.setOnlineId(to.getOnlineId());
-            onlinePicLogMo.setOnlinePicId(picId);
             onlinePicLogMo.setPicType((byte) 0);
             onlinePicLogMo.setPicPath(String.valueOf(to.getSlideshow().get(j).get("slideshow")));
             _log.info("添加上线信息添加上线轮播图日志的参数为：{}", onlinePicLogMo);
