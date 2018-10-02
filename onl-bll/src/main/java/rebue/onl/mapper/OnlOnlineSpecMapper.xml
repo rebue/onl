@@ -322,13 +322,14 @@
   	<result column="ONLINE_SPEC" jdbcType="VARCHAR" property="onlineSpec" />
   	<result column="SALE_PRICE" jdbcType="DECIMAL" property="salePrice" />
   	<result column="CASHBACK_AMOUNT" jdbcType="DECIMAL" property="cashbackAmount" />
+  	<result column="CURRENT_ONLINE_COUNT" jdbcType="INTEGER" property="currentOnlineCount" />
   	<result column="PIC_PATH" jdbcType="VARCHAR" property="picPath" />
   	<result column="SALE_COUNT" jdbcType="BIGINT" property="saleCount" />
   </resultMap>
   
   <!-- 获取上线规格详情信息 -->
   <select id="selectOnlineSpecInfo" parameterType="rebue.onl.mo.OnlOnlineSpecMo" resultMap="OnlineSpecInfoResultMap">
-  	SELECT oos.ID, oos.ONLINE_SPEC, oos.SALE_PRICE, oos.CASHBACK_AMOUNT, oos.SALE_COUNT, oop.PIC_PATH 
+  	SELECT oos.ID, oos.ONLINE_SPEC, oos.SALE_PRICE, oos.CASHBACK_AMOUNT, oos.CURRENT_ONLINE_COUNT, oos.SALE_COUNT, oop.PIC_PATH 
   	FROM ONL_ONLINE_SPEC oos
 	LEFT JOIN ONL_ONLINE_PIC oop ON oos.ONLINE_ID=oop.ONLINE_ID AND oop.PIC_TYPE=1 
 	WHERE

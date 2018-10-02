@@ -111,7 +111,7 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
      *  @return
      */
     @Update("update ONL_ONLINE_SPEC set SALE_COUNT=SALE_COUNT + #{buyCount,jdbcType=INTEGER} where ONLINE_ID=#{onlineId,jdbcType=BIGINT} and ONLINE_SPEC=#{onlineSpec,jdbcType=VARCHAR} and SALE_COUNT=#{saleCount,jdbcType=INTEGER}")
-    int updateSaleCount(OnlOnlineSpecTo to);
+    int updateSaleCount(@Param("buyCount") Integer buyCount, @Param("onlineId") Long onlineId, @Param("onlineSpec") String onlineSpec, @Param("saleCount") Integer saleCount);
 
     /**
      *  修改上线规格信息

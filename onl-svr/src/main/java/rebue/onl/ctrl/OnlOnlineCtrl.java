@@ -1,6 +1,8 @@
 package rebue.onl.ctrl;
 
 import com.github.pagehelper.PageInfo;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
@@ -34,6 +36,7 @@ import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlineGoodsListTo;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
+import rebue.wheel.turing.JwtUtils;
 
 /**
  * 上线信息
@@ -107,7 +110,7 @@ public class OnlOnlineCtrl {
     @PostMapping("/onl/online")
     AddOnlineRo add(@RequestBody AddOnlineTo to, HttpServletRequest req) throws Exception {
         // 获取当前登录用户id
-        // Long currentUserId = JwtUtils.getJwtUserIdInCookie(req);
+    	// Long currentUserId = JwtUtils.getJwtUserIdInCookie(req);
         to.setOpId(193201L);
         _log.info("添加上线信息的参数为：{}", to);
         try {
@@ -238,11 +241,13 @@ public class OnlOnlineCtrl {
      *  @param to
      *  @param req
      *  @return
+     * @throws ParseException 
+     * @throws NumberFormatException 
      */
     @PutMapping("/onl/online/reonline")
-    ReOnlineRo reOnline(@RequestBody AddOnlineTo to, HttpServletRequest req) {
+    ReOnlineRo reOnline(@RequestBody AddOnlineTo to, HttpServletRequest req) throws NumberFormatException, ParseException {
         // 获取当前登录用户id
-        // Long currentUserId = JwtUtils.getJwtUserIdInCookie(req);
+//         Long currentUserId = JwtUtils.getJwtUserIdInCookie(req);
         to.setOpId(193201L);
         _log.info("添加上线信息的参数为：{}", to);
         try {

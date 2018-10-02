@@ -165,7 +165,7 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
             OnlOnlineSpecTo onlineSpecTo = dozerMapper.map(onlineSpecMo, OnlOnlineSpecTo.class);
             onlineSpecTo.setBuyCount(buyCount);
             _log.info("扣减上线数量的参数为：{}", onlineSpecTo);
-            int updateCountResult = _mapper.updateSaleCount(onlineSpecTo);
+            int updateCountResult = _mapper.updateSaleCount(buyCount, onlineId, onlineSpec, onlineCount);
             _log.info("扣减上线数量的返回值为{}", updateCountResult);
             if (updateCountResult != 1) {
                 _log.error("规格编号为：{}，扣减上线数量失败", onlineSpec);
