@@ -161,15 +161,14 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlineSpecMo.setId(_idWorker.getId());
             onlineSpecMo.setOnlineId(onlineId);
             onlineSpecMo.setOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec());
-            BigDecimal cashbackAmount = new BigDecimal("0");
-            if (to.getSubjectType() == 0) {
-                cashbackAmount = to.getOnlineSpecs().get(i).getCashbackAmount();
-            }
+            BigDecimal amount = new BigDecimal("0");
+            // 返现金额（如果版块类型为普通商品（0）则为输入的返现金额，否则为0）
+            BigDecimal cashbackAmount = to.getSubjectType() == 0 ? to.getOnlineSpecs().get(i).getCashbackAmount() : amount;
             onlineSpecMo.setCashbackAmount(cashbackAmount);
             onlineSpecMo.setSalePrice(to.getOnlineSpecs().get(i).getSalePrice());
-            if (to.getOnlineSpecs().get(i).getCommissionAmount() != null) {
-                onlineSpecMo.setCommissionAmount(to.getOnlineSpecs().get(i).getCommissionAmount());
-            }
+            // 返佣金额（如果版块类型为普通商品（0）则返佣金额为0，否则等于销售金额）
+            BigDecimal commissionAmount = to.getSubjectType() == 0 ? amount : to.getOnlineSpecs().get(i).getSalePrice();
+            onlineSpecMo.setCommissionAmount(commissionAmount);
             onlineSpecMo.setSaleUnit(to.getOnlineSpecs().get(i).getSaleUnit());
             onlineSpecMo.setSaleCount(0);
             onlineSpecMo.setSeqNo(i);
@@ -189,9 +188,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlineSpecLogMo.setOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec());
             onlineSpecLogMo.setSalePrice(to.getOnlineSpecs().get(i).getSalePrice());
             onlineSpecLogMo.setCashbackAmount(cashbackAmount);
-            if (to.getOnlineSpecs().get(i).getCommissionAmount() != null) {
-                onlineSpecLogMo.setCommissionAmount(to.getOnlineSpecs().get(i).getCommissionAmount());
-            }
+            onlineSpecLogMo.setCommissionAmount(commissionAmount);
             onlineSpecLogMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
             onlineSpecLogMo.setSaleUnit(to.getOnlineSpecs().get(i).getSaleUnit());
             onlineSpecLogMo.setSeqNo(i);
@@ -359,17 +356,22 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         // 用于存放未删除的规格id
         StringBuilder onlineSpecIds = new StringBuilder();
         for (int i = 0; i < to.getOnlineSpecs().size(); i++) {
+        	BigDecimal amount = new BigDecimal("0");
+        	// 返佣金额： 如果版块类型为普通商品则返佣金额为0，否则返佣金额等于销售金额
+        	BigDecimal commissionAmount = to.getSubjectType() == 0 ? amount : to.getOnlineSpecs().get(i).getSalePrice();
+        	// 返现金额： 如果版块类型为全返商品则等于输入的数量， 否则等于0
+        	BigDecimal cashbackAmount = to.getSubjectType() == 0 ? to.getOnlineSpecs().get(i).getCashbackAmount() : amount;
             // 修改或添加上线规格开始
             OnlOnlineSpecTo onlineSpecTo = new OnlOnlineSpecTo();
             onlineSpecTo.setOnlineId(to.getOnlineId());
             onlineSpecTo.setOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec());
             onlineSpecTo.setSalePrice(to.getOnlineSpecs().get(i).getSalePrice());
-            onlineSpecTo.setCashbackAmount(to.getOnlineSpecs().get(i).getCashbackAmount());
-            onlineSpecTo.setCommissionAmount(to.getOnlineSpecs().get(i).getCommissionAmount());
+            onlineSpecTo.setCommissionAmount(commissionAmount);
             onlineSpecTo.setSaleUnit(to.getOnlineSpecs().get(i).getSaleUnit());
             onlineSpecTo.setSeqNo(i);
             onlineSpecTo.setSaleCount(0);
             onlineSpecTo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
+            onlineSpecTo.setCashbackAmount(cashbackAmount);
             Long onlineSpecId = _idWorker.getId();
             // 如果规格id的长度大于13位的话说明该规格属于已上线的规格
             if (to.getOnlineSpecs().get(i).getId().toString().length() > 13) {
