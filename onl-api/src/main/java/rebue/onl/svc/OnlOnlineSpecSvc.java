@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.ro.DeleteCartAndModifyInventoryRo;
 import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
+import rebue.onl.to.DeleteCartAndModifyInventoryTo;
 import rebue.onl.to.OnlOnlineSpecTo;
 import rebue.robotech.svc.MybatisBaseSvc;
 
@@ -55,7 +57,7 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
      *  @throws JsonParseException
      *  @date 2018年4月11日 下午5:25:52
      */
-    Map<String, Object> deleteCartAndModifyInventory(String cartAndSpecInfo) throws JsonParseException, JsonMappingException, IOException;
+    DeleteCartAndModifyInventoryRo deleteCartAndModifyInventory(List<DeleteCartAndModifyInventoryTo> list) throws JsonParseException, JsonMappingException, IOException;
 
     /**
      *  修改上线规格信息 Title: resultMap Description:

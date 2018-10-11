@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import rebue.onl.ro.DeleteCartAndModifyInventoryRo;
 import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
+import rebue.onl.to.DeleteCartAndModifyInventoryTo;
 import rebue.sbs.feign.FeignConfig;
 
 /**  
@@ -53,7 +56,7 @@ public interface OnlOnlineSpecSvc {
 	 * @date 2018年4月11日 下午5:52:30
 	 */
 	@PostMapping(value = "/onl/onlinespec/deleteandupdate")
-	Map<String, Object> deleteCartAndUpdateOnlineCount(@RequestParam("cartAndSpecInfo") String cartAndSpecInfo);
+	DeleteCartAndModifyInventoryRo deleteCartAndUpdateOnlineCount(@RequestBody List<DeleteCartAndModifyInventoryTo> list);
 }
   
 

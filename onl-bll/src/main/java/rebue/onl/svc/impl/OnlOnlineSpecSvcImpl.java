@@ -1,12 +1,8 @@
 package rebue.onl.svc.impl;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -26,6 +22,7 @@ import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.svc.OnlCartSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
+import rebue.onl.to.DeleteCartAndModifyInventoryTo;
 import rebue.onl.to.OnlOnlineSpecTo;
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
 
@@ -78,6 +75,9 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
     @Resource
     private Mapper dozerMapper;
 
+    @Resource
+    private OnlOnlineSpecSvc onlOnlineSpecSvc;
+    
     /**
      *  根据商品规格编号查询商品规格信息 2018年3月29日14:28:59
      */
@@ -117,15 +117,11 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
      *  @throws JsonParseException
      *  @date 2018年4月11日 下午4:47:53
      */
-    @SuppressWarnings("unchecked")
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public Map<String, Object> deleteCartAndModifyInventory(String cartAndSpecInfo) throws JsonParseException, JsonMappingException, IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, DeleteCartAndModifyInventoryRo.class);
-        List<DeleteCartAndModifyInventoryRo> list = (List<DeleteCartAndModifyInventoryRo>) mapper.readValue(cartAndSpecInfo, javaType);
+    public DeleteCartAndModifyInventoryRo deleteCartAndModifyInventory(List<DeleteCartAndModifyInventoryTo> list) throws JsonParseException, JsonMappingException, IOException {
         _log.info("删除购物车和修改库存的参数为：{}", String.valueOf(list));
-        Map<String, Object> resultMap = new HashMap<String, Object>();
+        DeleteCartAndModifyInventoryRo ro = new DeleteCartAndModifyInventoryRo();
         for (int i = 0; i < list.size(); i++) {
             String onlineSpec = list.get(i).getOnlineSpec();
             long onlineId = list.get(i).getOnlineId();
@@ -150,23 +146,21 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
             onlineSpecMo.setOnlineId(onlineId);
             onlineSpecMo.setOnlineSpec(onlineSpec);
             _log.info("查询上线规格信息的参数为：{}", onlineSpecMo);
-            List<OnlOnlineSpecMo> onlineSpecList = _mapper.selectSelective(onlineSpecMo);
-            _log.info("查询上线规格信息的返回值为：{}", String.valueOf(onlineSpecList));
-            if (onlineSpecList.size() == 0) {
-                _log.error("规格编号为：{}，扣减上线数量失败", onlineSpec);
-                throw new RuntimeException("扣减上线数量失败");
+            OnlOnlineSpecMo onlineSpecRo = onlOnlineSpecSvc.getOne(onlineSpecMo);
+            _log.info("查询上线规格信息的返回值为：{}", onlineSpecRo);
+            if (onlineSpecRo == null) {
+                _log.error("删除购物车和修改库存数量查询上线规格时出现没有该规格， 规格名称为：{}", onlineSpec);
+                throw new RuntimeException("没有该商品规格");
             }
-            int onlineCount = onlineSpecList.get(0).getSaleCount();
+            int saleCount = onlineSpecRo.getSaleCount();
             // 库存数量 = 已上线数量 - 销售数量 - 购买数量
-            int updateCount = onlineSpecList.get(0).getCurrentOnlineCount() - onlineCount - buyCount;
+            int updateCount = onlineSpecRo.getCurrentOnlineCount() - saleCount - buyCount;
             if (updateCount < 0) {
                 _log.error("规格编号为：{}，库存不足", onlineSpec);
                 throw new RuntimeException(onlineSpec + "库存不足");
             }
-            OnlOnlineSpecTo onlineSpecTo = dozerMapper.map(onlineSpecMo, OnlOnlineSpecTo.class);
-            onlineSpecTo.setBuyCount(buyCount);
-            _log.info("扣减上线数量的参数为：{}", onlineSpecTo);
-            int updateCountResult = _mapper.updateSaleCount(buyCount, onlineId, onlineSpec, onlineCount);
+            _log.info("扣减上线数量的参数为：buyCount==={}, onlineId==={}, onlineSpec==={}, saleCount==={}", buyCount, onlineId, onlineSpec, saleCount);
+            int updateCountResult = _mapper.updateSaleCount(buyCount, onlineId, onlineSpec, saleCount);
             _log.info("扣减上线数量的返回值为{}", updateCountResult);
             if (updateCountResult != 1) {
                 _log.error("规格编号为：{}，扣减上线数量失败", onlineSpec);
@@ -180,9 +174,9 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
                 throw new RuntimeException("删除购物车失败");
             }
         }
-        resultMap.put("result", 1);
-        resultMap.put("msg", "删除购物车和修改库存成功");
-        return resultMap;
+        ro.setResult(1);
+        ro.setMsg("删除购物车和修改库存成功");
+        return ro;
     }
 
     /**

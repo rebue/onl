@@ -6,9 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 import rebue.onl.mo.OnlOnlineSpecMo;
-import rebue.onl.ro.DeleteCartAndModifyInventoryRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.to.AppendOnlineSpecCountTo;
+import rebue.onl.to.DeleteCartAndModifyInventoryTo;
 import rebue.onl.to.OnlOnlineSpecTo;
 import rebue.robotech.mapper.MybatisBaseMapper;
 
@@ -95,7 +95,7 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
      *  @return
      *  @date 2018年4月11日 下午5:02:30
      */
-    boolean selectSpecExistOnline(DeleteCartAndModifyInventoryRo record);
+    boolean selectSpecExistOnline(DeleteCartAndModifyInventoryTo record);
 
     /**
      *  追加上线数量
@@ -110,7 +110,7 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
      *  @param to
      *  @return
      */
-    @Update("update ONL_ONLINE_SPEC set SALE_COUNT=SALE_COUNT + #{buyCount,jdbcType=INTEGER} where ONLINE_ID=#{onlineId,jdbcType=BIGINT} and ONLINE_SPEC=#{onlineSpec,jdbcType=VARCHAR} and SALE_COUNT=#{saleCount,jdbcType=INTEGER}")
+    @Update("update ONL_ONLINE_SPEC set SALE_COUNT=SALE_COUNT + ${buyCount} where ONLINE_ID=#{onlineId,jdbcType=BIGINT} and ONLINE_SPEC=#{onlineSpec,jdbcType=VARCHAR} and SALE_COUNT=#{saleCount,jdbcType=INTEGER}")
     int updateSaleCount(@Param("buyCount") Integer buyCount, @Param("onlineId") Long onlineId, @Param("onlineSpec") String onlineSpec, @Param("saleCount") Integer saleCount);
 
     /**
