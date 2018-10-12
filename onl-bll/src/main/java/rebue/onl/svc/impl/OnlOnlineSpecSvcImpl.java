@@ -250,4 +250,16 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
         _log.info("根据规格id批量删除规格信息的参数为：{}, onlineId", ids);
         return _mapper.batchDeleteByIds(ids, onlineId);
     }
+    
+    /**
+     * 判断商品规格是否存在
+     * @param onlineSpec
+     * @return
+     */
+    @Override
+    public Boolean existOnlineSpec(String onlineSpec) {
+    	OnlOnlineSpecMo specMo = new OnlOnlineSpecMo();
+    	specMo.setOnlineSpec(onlineSpec);
+    	return onlOnlineSpecSvc.existSelective(specMo);
+    }
 }

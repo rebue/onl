@@ -83,4 +83,11 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
      *  @return
      */
     int batchDeleteByIds(String ids, Long onlineId);
+
+    /**
+     * 判断商品规格是否存在
+     * @param onlineSpec
+     * @return
+     */
+	Boolean existOnlineSpec(String onlineSpec);
 }

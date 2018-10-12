@@ -158,9 +158,15 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         for (int i = 0; i < to.getOnlineSpecs().size(); i++) {
             // 添加上线规格信息开始
             OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
+            _log.info("添加上线信息查询上线规格名称是否存在的参数为：{}", to.getOnlineSpecs().get(i).getOnlineSpec());
+            boolean existSelectiveResult = onlOnlineSpecSvc.existOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec());
+            _log.info("添加上线信息查询上线规格名称是否存在的返回值为：{}", existSelectiveResult);
+            if (existSelectiveResult) {
+            	_log.error("添加上线信息查询上线规格名称是否存在时发现该商品名称已存在，商品名称为：{}", to.getOnlineSpecs().get(i).getOnlineSpec());
+				throw new RuntimeException("规格名称为：" + to.getOnlineSpecs().get(i).getOnlineSpec() + "已存在");
+			}
             onlineSpecMo.setId(_idWorker.getId());
             onlineSpecMo.setOnlineId(onlineId);
-            onlineSpecMo.setOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec());
             BigDecimal amount = new BigDecimal("0");
             // 返现金额（如果版块类型为普通商品（0）则为输入的返现金额，否则为0）
             BigDecimal cashbackAmount = to.getSubjectType() == 0 ? to.getOnlineSpecs().get(i).getCashbackAmount() : amount;
@@ -386,6 +392,13 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                     throw new RuntimeException("修改上线规格出错");
                 }
             } else {
+                _log.info("添加上线信息查询上线规格名称是否存在的参数为：{}", to.getOnlineSpecs().get(i).getOnlineSpec());
+                boolean existSelectiveResult = onlOnlineSpecSvc.existOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec());
+                _log.info("添加上线信息查询上线规格名称是否存在的返回值为：{}", existSelectiveResult);
+                if (existSelectiveResult) {
+                	_log.error("添加上线信息查询上线规格名称是否存在时发现该商品名称已存在，商品名称为：{}", to.getOnlineSpecs().get(i).getOnlineSpec());
+    				throw new RuntimeException("规格名称为：" + to.getOnlineSpecs().get(i).getOnlineSpec() + "已存在");
+    			}
                 onlineSpecTo.setId(onlineSpecId);
                 OnlOnlineSpecMo onlineSpecMo = dozerMapper.map(onlineSpecTo, OnlOnlineSpecMo.class);
                 _log.info("重新上线添加上线规格信息的参数为：{}", onlineSpecMo);
