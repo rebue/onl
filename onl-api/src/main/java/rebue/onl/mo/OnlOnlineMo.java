@@ -92,6 +92,15 @@ public class OnlOnlineMo implements Serializable {
     private Long productId;
 
     /**
+     *    伙伴ID
+     *
+     *    数据库字段: ONL_ONLINE.PARTNER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long partnerId;
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private static final long serialVersionUID = 1L;
@@ -270,6 +279,28 @@ public class OnlOnlineMo implements Serializable {
      */
     public void setProductId(Long productId) {
         this.productId = productId;
+    }
+
+    /**
+     *    伙伴ID
+     *
+     *    数据库字段: ONL_ONLINE.PARTNER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Long getPartnerId() {
+        return partnerId;
+    }
+
+    /**
+     *    伙伴ID
+     *
+     *    数据库字段: ONL_ONLINE.PARTNER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setPartnerId(Long partnerId) {
+        this.partnerId = partnerId;
     }
 
     /**

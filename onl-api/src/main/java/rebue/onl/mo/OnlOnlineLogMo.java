@@ -92,6 +92,15 @@ public class OnlOnlineLogMo implements Serializable {
     private Long productId;
 
     /**
+     *    伙伴ID
+     *
+     *    数据库字段: ONL_ONLINE_LOG.PARTNER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long partnerId;
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private static final long serialVersionUID = 1L;
@@ -273,6 +282,28 @@ public class OnlOnlineLogMo implements Serializable {
     }
 
     /**
+     *    伙伴ID
+     *
+     *    数据库字段: ONL_ONLINE_LOG.PARTNER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Long getPartnerId() {
+        return partnerId;
+    }
+
+    /**
+     *    伙伴ID
+     *
+     *    数据库字段: ONL_ONLINE_LOG.PARTNER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setPartnerId(Long partnerId) {
+        this.partnerId = partnerId;
+    }
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Override
@@ -289,6 +320,7 @@ public class OnlOnlineLogMo implements Serializable {
         sb.append(", onlineTitle=").append(onlineTitle);
         sb.append(", onlineDetail=").append(onlineDetail);
         sb.append(", productId=").append(productId);
+        sb.append(", partnerId=").append(partnerId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

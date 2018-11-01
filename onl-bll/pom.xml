@@ -17,6 +17,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.github.rebue.prm</groupId>
+			<artifactId>prm-svr-feign</artifactId>
+			<version>1.0.9</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.github.rebue.robotech</groupId>
 			<artifactId>robotech-bll</artifactId>
 		</dependency>

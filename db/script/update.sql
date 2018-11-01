@@ -1,5 +1,6 @@
 --2018年11月1日10:20:15 ONL_ONLINE添加伙伴id
 alter table onl.ONL_ONLINE add PARTNER_ID           bigint not null comment '伙伴ID';
+alter table onl.ONL_ONLINE_LOG add PARTNER_ID           bigint not null comment '伙伴ID';
 --2018年9月30日15:42:16 ONL_ONLINE_PIC_LOG去除上线图片（ONL_ONLINE_PIC）关联
 alter table onl.ONL_ONLINE_PIC_LOG drop column ONLINE_PIC_ID;
 ALTER TABLE `onl`.`ONL_ONLINE_SPEC_LOG` DROP FOREIGN KEY `FK_Relationship_15`;

@@ -23,6 +23,11 @@ public class AddOnlineTo {
 	 * 上线id
 	 */
 	private Long onlineId;
+	
+	/**
+	 * 伙伴id
+	 */
+	private Long partnerId;
 
 	/**
 	 * 上线商品名称
