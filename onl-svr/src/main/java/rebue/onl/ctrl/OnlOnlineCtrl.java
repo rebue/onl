@@ -110,8 +110,8 @@ public class OnlOnlineCtrl {
 	@PostMapping("/onl/online")
 	AddOnlineRo add(@RequestBody AddOnlineTo to, HttpServletRequest req) throws Exception {
 		// 获取当前登录用户id
-		Long currentUserId = JwtUtils.getJwtUserIdInCookie(req);
-		to.setOpId(currentUserId);
+//		Long currentUserId = JwtUtils.getJwtUserIdInCookie(req);
+		to.setOpId(193201L);
 		_log.info("添加上线信息的参数为：{}", to);
 		try {
 			return svc.addOnline(to);
@@ -247,8 +247,8 @@ public class OnlOnlineCtrl {
 	ReOnlineRo reOnline(@RequestBody AddOnlineTo to, HttpServletRequest req)
 			throws NumberFormatException, ParseException {
 		// 获取当前登录用户id
-		Long currentUserId = JwtUtils.getJwtUserIdInCookie(req);
-		to.setOpId(currentUserId);
+//		Long currentUserId = JwtUtils.getJwtUserIdInCookie(req);
+		to.setOpId(193201L);
 		_log.info("添加上线信息的参数为：{}", to);
 		try {
 			return svc.reOnline(to);

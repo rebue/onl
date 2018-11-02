@@ -28,17 +28,24 @@ public class OnlCartTest {
 	 * @throws IOException 
 	 * @date 2018年3月29日 下午2:31:37
 	 */
-	/*@Test
+	@Test
 	public void addCartTest() throws IOException {
 		String url = hostUrl + "/onl/cart";
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("onlineId", 454092105233596416L);
-		map.put("onlineSpecId", 454092107804704770L);
+		/*map.put("onlineId", 522191372711755776L);
+		map.put("onlineSpecId", 533180675591897100L);
 		map.put("userId", 451273803712954379L);
 		map.put("cartCount", 1);
 		String result = OkhttpUtils.postByFormParams(url, map);
+		System.out.println(result);*/
+		map = new HashMap<String, Object>();
+		map.put("onlineId", 533179911800750080L);
+		map.put("onlineSpecId", 533179913663021058L);
+		map.put("userId", 451273803712954379L);
+		map.put("cartCount", 2);
+		String result = OkhttpUtils.postByFormParams(url, map);
 		System.out.println(result);
-	}*/
+	}
 	
 	/**
 	 * 根据购物车编号删除购物车
@@ -47,7 +54,7 @@ public class OnlCartTest {
 	 * @throws IOException 
 	 * @date 2018年3月29日 下午2:52:58
 	 */
-	@Test
+	/*@Test
 	public void deleteCartTest() throws IOException {
 		String url = hostUrl + "/onl/cart";
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -56,7 +63,7 @@ public class OnlCartTest {
 		System.out.println(map.toString());
 		String result = OkhttpUtils.deleteByFormParams(url, map);
 		System.out.println(result);
-	}
+	}*/
 	
 	/*@Test
 	public void selectCartListTest() throws IOException {

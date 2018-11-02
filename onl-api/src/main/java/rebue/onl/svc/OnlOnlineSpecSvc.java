@@ -89,5 +89,5 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
      * @param onlineSpec
      * @return
      */
-	Boolean existOnlineSpec(String onlineSpec);
+    Boolean existOnlineSpec(String onlineSpec);
 }

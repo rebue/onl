@@ -231,7 +231,7 @@ public class OnlOnlineSpecCtrl {
         try {
             return svc.deleteCartAndModifyInventory(list);
         } catch (RuntimeException e) {
-        	DeleteCartAndModifyInventoryRo ro = new DeleteCartAndModifyInventoryRo();
+            DeleteCartAndModifyInventoryRo ro = new DeleteCartAndModifyInventoryRo();
             String msg = e.getMessage();
             ro.setMsg(msg);
             if (msg.contains("未上线")) {

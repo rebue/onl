@@ -45,6 +45,15 @@ public class OnlOnlineSpecTo {
 	 * @mbg.generated 自动生成，如需修改，请删除本行
 	 */
 	private BigDecimal salePrice;
+	
+	/**
+     *    成本价格
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.COST_PRICE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private BigDecimal costPrice;
 
 	/**
 	 * 返现金额

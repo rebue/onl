@@ -106,6 +106,15 @@ public class OnlOnlineSpecMo implements Serializable {
     private Integer seqNo;
 
     /**
+     *    成本价格
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.COST_PRICE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private BigDecimal costPrice;
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private static final long serialVersionUID = 1L;
@@ -331,6 +340,28 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
+     *    成本价格
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.COST_PRICE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public BigDecimal getCostPrice() {
+        return costPrice;
+    }
+
+    /**
+     *    成本价格
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.COST_PRICE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setCostPrice(BigDecimal costPrice) {
+        this.costPrice = costPrice;
+    }
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Override
@@ -349,6 +380,7 @@ public class OnlOnlineSpecMo implements Serializable {
         sb.append(", currentOnlineCount=").append(currentOnlineCount);
         sb.append(", saleCount=").append(saleCount);
         sb.append(", seqNo=").append(seqNo);
+        sb.append(", costPrice=").append(costPrice);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

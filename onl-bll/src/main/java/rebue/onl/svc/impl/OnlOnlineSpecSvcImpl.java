@@ -77,7 +77,7 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 
     @Resource
     private OnlOnlineSpecSvc onlOnlineSpecSvc;
-    
+
     /**
      *  根据商品规格编号查询商品规格信息 2018年3月29日14:28:59
      */
@@ -202,18 +202,19 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
             onlineSpecMo.setOnlineId(Long.parseLong(String.valueOf(specList.get(i).get("onlineId"))));
             onlineSpecMo.setOnlineSpec(String.valueOf(specList.get(i).get("specName")));
             _log.info("获取上线规格信息的参数为：{}", onlineSpecMo);
-            List<OnlOnlineSpecInfoRo> onlineSpecInfoRoList = _mapper.selectOnlineSpecInfo(onlineSpecMo);
-            _log.info("获取上线规格信息的返回值为：{}", String.valueOf(onlineSpecInfoRoList));
-            if (onlineSpecInfoRoList.size() == 0) {
+            OnlOnlineSpecMo onlOnlineSpecMo = onlOnlineSpecSvc.getOne(onlineSpecMo);
+            _log.info("获取上线规格信息的返回值为：{}", onlOnlineSpecMo);
+            if (onlOnlineSpecMo == null) {
                 _log.error("查询和修改上线规格信息时出现没有该规格信息");
                 modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.ON_SPEC_INFO);
                 modifyOnlineSpecInfoRo.setMsg(specList.get(i).get("specName") + "没有该规格信息");
                 return modifyOnlineSpecInfoRo;
             }
-            int updateStockCount = onlineSpecInfoRoList.get(0).getSaleCount() + Integer.parseInt(String.valueOf(specList.get(i).get("buyCount")));
+            // 新销售数量 = 原销售数量 - 购买数量
+            int updateStockCount = onlOnlineSpecMo.getSaleCount() - Integer.parseInt(String.valueOf(specList.get(i).get("buyCount")));
             onlineSpecMo.setSaleCount(updateStockCount);
             _log.info("修改上线数量的参数为：{}", onlineSpecMo);
-            int updateResult = _mapper.updateSelective(onlineSpecMo);
+            int updateResult = _mapper.cancelUpdateCount(Long.parseLong(String.valueOf(specList.get(i).get("onlineId"))), String.valueOf(specList.get(i).get("specName")), onlOnlineSpecMo.getSaleCount(), Integer.parseInt(String.valueOf(specList.get(i).get("buyCount"))));
             _log.info("修改上线数量的返回值为：{}", updateResult);
             if (updateResult < 0) {
                 _log.error("修改上线数量出错，返回值为：{}", updateResult);
@@ -250,16 +251,17 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
         _log.info("根据规格id批量删除规格信息的参数为：{}, onlineId", ids);
         return _mapper.batchDeleteByIds(ids, onlineId);
     }
-    
+
     /**
-     * 判断商品规格是否存在
-     * @param onlineSpec
-     * @return
+     *  判断商品规格是否存在
+     *
+     *  @param onlineSpec
+     *  @return
      */
     @Override
     public Boolean existOnlineSpec(String onlineSpec) {
-    	OnlOnlineSpecMo specMo = new OnlOnlineSpecMo();
-    	specMo.setOnlineSpec(onlineSpec);
-    	return onlOnlineSpecSvc.existSelective(specMo);
+        OnlOnlineSpecMo specMo = new OnlOnlineSpecMo();
+        specMo.setOnlineSpec(onlineSpec);
+        return onlOnlineSpecSvc.existSelective(specMo);
     }
 }

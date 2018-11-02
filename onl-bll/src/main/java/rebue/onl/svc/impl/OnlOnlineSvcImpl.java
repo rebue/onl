@@ -192,6 +192,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			onlineSpecMo.setOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec());
 			onlineSpecMo.setSaleUnit(to.getOnlineSpecs().get(i).getSaleUnit());
 			onlineSpecMo.setSaleCount(0);
+			onlineSpecMo.setCostPrice(to.getOnlineSpecs().get(i).getCostPrice());
 			onlineSpecMo.setSeqNo(i);
 			onlineSpecMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
 			_log.info("添加上线信息添加上线规格信息的参数为：{}", onlineSpecMo);
@@ -208,6 +209,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			onlineSpecLogMo.setOnlineId(onlineId);
 			onlineSpecLogMo.setOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec());
 			onlineSpecLogMo.setSalePrice(to.getOnlineSpecs().get(i).getSalePrice());
+			onlineSpecLogMo.setCostPrice(to.getOnlineSpecs().get(i).getCostPrice());
 			onlineSpecLogMo.setCashbackAmount(cashbackAmount);
 			onlineSpecLogMo.setCommissionAmount(commissionAmount);
 			onlineSpecLogMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
@@ -392,6 +394,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			onlineSpecTo.setOnlineId(to.getOnlineId());
 			onlineSpecTo.setOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec());
 			onlineSpecTo.setSalePrice(to.getOnlineSpecs().get(i).getSalePrice());
+			onlineSpecTo.setCostPrice(to.getOnlineSpecs().get(i).getCostPrice());
 			onlineSpecTo.setCommissionAmount(commissionAmount);
 			onlineSpecTo.setSaleUnit(to.getOnlineSpecs().get(i).getSaleUnit());
 			onlineSpecTo.setSeqNo(i);
