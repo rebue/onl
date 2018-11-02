@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/11/1 10:18:09                           */
+/* Created on:     2018/11/1 17:39:54                           */
 /*==============================================================*/
 
 
@@ -125,6 +125,7 @@ create table ONL_ONLINE_SPEC
    ONLINE_ID            bigint not null comment '上线ID',
    ONLINE_SPEC          varchar(200) not null comment '上线规格',
    SALE_PRICE           decimal(20,4) not null comment '销售价格',
+   COST_PRICE           decimal(20,4) comment '成本价格',
    CASHBACK_AMOUNT      decimal(20,4) not null comment '返现金额',
    COMMISSION_AMOUNT    decimal(20,4) comment '返佣金额',
    SALE_UNIT            varchar(50) comment '销售单位',
@@ -146,6 +147,7 @@ create table ONL_ONLINE_SPEC_LOG
    ONLINE_ID            bigint not null comment '上线ID',
    ONLINE_SPEC          varchar(200) not null comment '上线规格',
    SALE_PRICE           decimal(20,4) not null comment '销售价格',
+   COST_PRICE           decimal(20,4) comment '成本价格',
    CASHBACK_AMOUNT      decimal(20,4) not null comment '返现金额',
    COMMISSION_AMOUNT    decimal(20,4) comment '返佣金额',
    SALE_UNIT            varchar(50) comment '销售单位',
