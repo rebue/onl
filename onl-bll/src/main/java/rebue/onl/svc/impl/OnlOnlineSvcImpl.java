@@ -1,5 +1,7 @@
 package rebue.onl.svc.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,10 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-
 import rebue.onl.dic.AddOnlineDic;
 import rebue.onl.dic.ReOnlineDic;
 import rebue.onl.mapper.OnlOnlineMapper;
@@ -101,7 +99,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 
 	@Resource
 	private Mapper dozerMapper;
-	
+
 	@Resource
 	private PrmPartnerSvr prmPartnerSvr;
 
@@ -118,7 +116,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		AddOnlineRo ro = new AddOnlineRo();
 		if (to.getOnlineName() == null || to.getOnlineName().equals("") || to.getGoodsQsmm() == null
 				|| to.getGoodsQsmm().equals("") || to.getOnlineSpecs().size() == 0 || to.getSlideshow().size() == 0
-				|| to.getPartnerId() == null) {
+				|| to.getSupplierId() == null || to.getSupplierSettleType() == null) {
 			ro.setResult(AddOnlineDic.PARAMETER_ERROR);
 			ro.setMsg("参数错误");
 			return ro;
@@ -131,7 +129,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		OnlOnlineMo onlineMo = new OnlOnlineMo();
 		onlineMo.setId(onlineId);
 		onlineMo.setOnlineTitle(to.getOnlineName());
-		onlineMo.setPartnerId(to.getPartnerId());
+		onlineMo.setSupplierId(to.getSupplierId());
+		onlineMo.setSupplierSettleType(to.getSupplierSettleType());
 		onlineMo.setOnlineDetail(to.getOnlineDetail());
 		onlineMo.setOpId(to.getOpId());
 		onlineMo.setOnlineState((byte) 1);
@@ -152,7 +151,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		Long onlineLogId = _idWorker.getId();
 		OnlOnlineLogMo onlineLogMo = new OnlOnlineLogMo();
 		onlineLogMo.setId(onlineLogId);
-		onlineLogMo.setPartnerId(to.getPartnerId());
+		onlineLogMo.setSupplierId(to.getSupplierId());
+		onlineLogMo.setSupplierSettleType(to.getSupplierSettleType());
 		onlineLogMo.setOnlineId(onlineId);
 		onlineLogMo.setOpId(to.getOpId());
 		onlineLogMo.setOpTime(onlineTime);
@@ -331,7 +331,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		ReOnlineRo ro = new ReOnlineRo();
 		if (to.getOnlineId() == null || to.getOnlineName() == null || to.getOnlineName().equals("")
 				|| to.getGoodsQsmm() == null || to.getGoodsQsmm().equals("") || to.getOnlineSpecs().size() == 0
-				|| to.getSlideshow().size() == 0 || to.getPartnerId() == null) {
+				|| to.getSlideshow().size() == 0 || to.getSupplierId() == null || to.getSupplierSettleType() == null) {
 			ro.setResult(ReOnlineDic.PARAMETER_ERROR);
 			ro.setMsg("参数错误");
 			return ro;
@@ -341,7 +341,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		// 修改上线信息开始
 		OnlOnlineMo onlineMo = new OnlOnlineMo();
 		onlineMo.setId(to.getOnlineId());
-		onlineMo.setPartnerId(to.getPartnerId());
+		onlineMo.setSupplierId(to.getSupplierId());
+		onlineMo.setSupplierSettleType(to.getSupplierSettleType());
 		onlineMo.setSubjectType(to.getSubjectType());
 		onlineMo.setOnlineTitle(to.getOnlineName());
 		onlineMo.setOnlineDetail(to.getOnlineDetail());
@@ -364,7 +365,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		// 添加上线日志信息开始
 		OnlOnlineLogMo onlineLogMo = new OnlOnlineLogMo();
 		onlineLogMo.setId(onlineLogId);
-		onlineLogMo.setPartnerId(to.getPartnerId());
+		onlineLogMo.setSupplierId(to.getSupplierId());
+		onlineLogMo.setSupplierSettleType(to.getSupplierSettleType());
 		onlineLogMo.setOnlineId(to.getOnlineId());
 		onlineLogMo.setOpId(to.getOpId());
 		onlineLogMo.setOpTime(onlineTime);
@@ -535,9 +537,10 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		ro.setMsg("重新上线成功");
 		return ro;
 	}
-	
+
 	/**
 	 * 重写查询上线信息
+	 * 
 	 * @param ro
 	 * @param pageNum
 	 * @param pageSize
@@ -550,14 +553,17 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		PageInfo<OnlOnlineListRo> pageInfo = new PageInfo<OnlOnlineListRo>();
 		List<OnlOnlineListRo> listEx = new ArrayList<OnlOnlineListRo>();
 		OnlOnlineMo mo = dozerMapper.map(ro, OnlOnlineMo.class);
-		PageInfo<OnlOnlineMo> onlinePageInfo = PageHelper.startPage(pageNum, pageSize, orderBy).doSelectPageInfo(() -> _mapper.selectSelective(mo));
+		PageInfo<OnlOnlineMo> onlinePageInfo = PageHelper.startPage(pageNum, pageSize, orderBy)
+				.doSelectPageInfo(() -> _mapper.selectSelective(mo));
 		for (OnlOnlineMo onlOnlineMo : onlinePageInfo.getList()) {
 			OnlOnlineListRo onlineListRo = dozerMapper.map(onlOnlineMo, OnlOnlineListRo.class);
-			_log.info("重写查询上线信息查询伙伴信息的参数为：{}", onlOnlineMo.getPartnerId());
-			PrmPartnerMo partnerMo = prmPartnerSvr.getById(onlOnlineMo.getPartnerId());
-			_log.info("重写查询上线信息查询伙伴信息的返回值为：{}", partnerMo);
-			if (partnerMo != null) {
-				onlineListRo.setPartnerName(partnerMo.getPartnerName());
+			if (onlOnlineMo.getSupplierId() != null) {
+				_log.info("重写查询上线信息查询伙伴信息的参数为：{}", onlOnlineMo.getSupplierId());
+				PrmPartnerMo partnerMo = prmPartnerSvr.getById(onlOnlineMo.getSupplierId());
+				_log.info("重写查询上线信息查询伙伴信息的返回值为：{}", partnerMo);
+				if (partnerMo != null) {
+					onlineListRo.setSupplierName(partnerMo.getPartnerName());
+				}
 			}
 			listEx.add(onlineListRo);
 		}

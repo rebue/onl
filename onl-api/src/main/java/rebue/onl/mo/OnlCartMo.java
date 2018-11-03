@@ -74,6 +74,24 @@ public class OnlCartMo implements Serializable {
     private Date joinTime;
 
     /**
+     *    供应商ID
+     *
+     *    数据库字段: ONL_CART.SUPPLIER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long supplierId;
+
+    /**
+     *    供应商结算类型（1：结算到余额 2：结算到货款）
+     *
+     *    数据库字段: ONL_CART.SUPPLIER_SETTLE_TYPE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Byte supplierSettleType;
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private static final long serialVersionUID = 1L;
@@ -211,6 +229,50 @@ public class OnlCartMo implements Serializable {
     }
 
     /**
+     *    供应商ID
+     *
+     *    数据库字段: ONL_CART.SUPPLIER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Long getSupplierId() {
+        return supplierId;
+    }
+
+    /**
+     *    供应商ID
+     *
+     *    数据库字段: ONL_CART.SUPPLIER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setSupplierId(Long supplierId) {
+        this.supplierId = supplierId;
+    }
+
+    /**
+     *    供应商结算类型（1：结算到余额 2：结算到货款）
+     *
+     *    数据库字段: ONL_CART.SUPPLIER_SETTLE_TYPE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Byte getSupplierSettleType() {
+        return supplierSettleType;
+    }
+
+    /**
+     *    供应商结算类型（1：结算到余额 2：结算到货款）
+     *
+     *    数据库字段: ONL_CART.SUPPLIER_SETTLE_TYPE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setSupplierSettleType(Byte supplierSettleType) {
+        this.supplierSettleType = supplierSettleType;
+    }
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Override
@@ -225,6 +287,8 @@ public class OnlCartMo implements Serializable {
         sb.append(", userId=").append(userId);
         sb.append(", cartCount=").append(cartCount);
         sb.append(", joinTime=").append(joinTime);
+        sb.append(", supplierId=").append(supplierId);
+        sb.append(", supplierSettleType=").append(supplierSettleType);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

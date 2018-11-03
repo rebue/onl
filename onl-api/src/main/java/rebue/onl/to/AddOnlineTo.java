@@ -25,11 +25,6 @@ public class AddOnlineTo {
 	private Long onlineId;
 	
 	/**
-	 * 伙伴id
-	 */
-	private Long partnerId;
-
-	/**
 	 * 上线商品名称
 	 */
 	private String onlineName;
@@ -64,4 +59,21 @@ public class AddOnlineTo {
 	 */
 	private Long opId;
 
+	/**
+     *    供应商ID
+     *
+     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long supplierId;
+
+    /**
+     *    供应商结算类型（1：结算到余额 2：结算到货款）
+     *
+     *    数据库字段: ONL_ONLINE.SUPPLIER_SETTLE_TYPE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Byte supplierSettleType;
 }

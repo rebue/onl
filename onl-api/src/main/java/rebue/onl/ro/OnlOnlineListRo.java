@@ -12,6 +12,7 @@ import lombok.Data;
 
 /**
  * 上线信息Ro
+ * 
  * @author lbl
  *
  */
@@ -94,16 +95,25 @@ public class OnlOnlineListRo {
 	private Long productId;
 
 	/**
-	 * 伙伴ID
+	 * 供应商ID
 	 *
-	 * 数据库字段: ONL_ONLINE.PARTNER_ID
+	 * 数据库字段: ONL_ONLINE.SUPPLIER_ID
 	 *
 	 * @mbg.generated 自动生成，如需修改，请删除本行
 	 */
-	private Long partnerId;
-	
+	private Long supplierId;
+
 	/**
-	 * 伙伴名称
+	 * 供应商结算类型（1：结算到余额 2：结算到货款）
+	 *
+	 * 数据库字段: ONL_ONLINE.SUPPLIER_SETTLE_TYPE
+	 *
+	 * @mbg.generated 自动生成，如需修改，请删除本行
 	 */
-	private String partnerName;
+	private Byte supplierSettleType;
+
+	/**
+	 * 供应商名称
+	 */
+	private String supplierName;
 }

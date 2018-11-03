@@ -92,13 +92,22 @@ public class OnlOnlineLogMo implements Serializable {
     private Long productId;
 
     /**
-     *    伙伴ID
+     *    供应商ID
      *
-     *    数据库字段: ONL_ONLINE_LOG.PARTNER_ID
+     *    数据库字段: ONL_ONLINE_LOG.SUPPLIER_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private Long partnerId;
+    private Long supplierId;
+
+    /**
+     *    供应商结算类型（1：结算到余额 2：结算到货款）
+     *
+     *    数据库字段: ONL_ONLINE_LOG.SUPPLIER_SETTLE_TYPE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Byte supplierSettleType;
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -282,25 +291,47 @@ public class OnlOnlineLogMo implements Serializable {
     }
 
     /**
-     *    伙伴ID
+     *    供应商ID
      *
-     *    数据库字段: ONL_ONLINE_LOG.PARTNER_ID
+     *    数据库字段: ONL_ONLINE_LOG.SUPPLIER_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Long getPartnerId() {
-        return partnerId;
+    public Long getSupplierId() {
+        return supplierId;
     }
 
     /**
-     *    伙伴ID
+     *    供应商ID
      *
-     *    数据库字段: ONL_ONLINE_LOG.PARTNER_ID
+     *    数据库字段: ONL_ONLINE_LOG.SUPPLIER_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setPartnerId(Long partnerId) {
-        this.partnerId = partnerId;
+    public void setSupplierId(Long supplierId) {
+        this.supplierId = supplierId;
+    }
+
+    /**
+     *    供应商结算类型（1：结算到余额 2：结算到货款）
+     *
+     *    数据库字段: ONL_ONLINE_LOG.SUPPLIER_SETTLE_TYPE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Byte getSupplierSettleType() {
+        return supplierSettleType;
+    }
+
+    /**
+     *    供应商结算类型（1：结算到余额 2：结算到货款）
+     *
+     *    数据库字段: ONL_ONLINE_LOG.SUPPLIER_SETTLE_TYPE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setSupplierSettleType(Byte supplierSettleType) {
+        this.supplierSettleType = supplierSettleType;
     }
 
     /**
@@ -320,7 +351,8 @@ public class OnlOnlineLogMo implements Serializable {
         sb.append(", onlineTitle=").append(onlineTitle);
         sb.append(", onlineDetail=").append(onlineDetail);
         sb.append(", productId=").append(productId);
-        sb.append(", partnerId=").append(partnerId);
+        sb.append(", supplierId=").append(supplierId);
+        sb.append(", supplierSettleType=").append(supplierSettleType);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
