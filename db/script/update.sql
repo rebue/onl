@@ -1,12 +1,18 @@
---2018年11月1日17:36:51 
+-- 2018年11月3日09:40:41
+	-- ONL_ONLINE 添加供应商ID、供应商结算类型（1：结算到余额 2：结算到货款）
+	alter table onl.ONL_ONLINE add SUPPLIER_ID          bigint comment '供应商ID';
+	alter table onl.ONL_ONLINE add SUPPLIER_SETTLE_TYPE tinyint comment '供应商结算类型（1：结算到余额 2：结算到货款）';
+	-- ONL_ONLINE_LOG 添加供应商ID、供应商结算类型（1：结算到余额 2：结算到货款）
+	alter table onl.ONL_ONLINE_LOG add SUPPLIER_ID          bigint comment '供应商ID';
+	alter table onl.ONL_ONLINE_LOG add SUPPLIER_SETTLE_TYPE tinyint comment '供应商结算类型（1：结算到余额 2：结算到货款）';
+	-- ONL_CART 添加供应商ID、供应商结算类型（1：结算到余额 2：结算到货款）
+	alter table onl.ONL_CART add SUPPLIER_ID          bigint comment '供应商ID';
+	alter table onl.ONL_CART add SUPPLIER_SETTLE_TYPE tinyint comment '供应商结算类型（1：结算到余额 2：结算到货款）';
+-- 2018年11月1日17:36:51 
 	-- ONL_ONLINE_SPEC 添加成本价格（COST_PRICE）
 	alter table onl.ONL_ONLINE_SPEC add COST_PRICE           decimal(20,4) comment '成本价格';
 	-- ONL_ONLINE_SPEC_LOG 添加成本价格（COST_PRICE）
 	alter table onl.ONL_ONLINE_SPEC_LOG add COST_PRICE           decimal(20,4) comment '成本价格';
--- 2018年11月1日10:20:15 ONL_ONLINE添加伙伴id
-	alter table onl.ONL_ONLINE add PARTNER_ID           bigint not null comment '伙伴ID';
--- 2018年11月1日10:20:15 ONL_ONLINE_LOG添加伙伴id
-	alter table onl.ONL_ONLINE_LOG add PARTNER_ID           bigint not null comment '伙伴ID';
 -- 2018年9月30日15:42:16 ONL_ONLINE_PIC_LOG去除上线图片（ONL_ONLINE_PIC）关联
 	alter table onl.ONL_ONLINE_PIC_LOG drop column ONLINE_PIC_ID;
 	ALTER TABLE `onl`.`ONL_ONLINE_SPEC_LOG` DROP FOREIGN KEY `FK_Relationship_15`;
