@@ -1,3 +1,8 @@
+-- 2018年11月5日14:10:57
+	-- ONL_ONLINE 添加上线组织ID（ONLINE_ORG_ID）
+	alter table onl.ONL_ONLINE add ONLINE_ORG_ID        bigint not null comment '操作组织ID';
+	-- ONL_ONLINE_LOG 添加上线组织ID（ONLINE_ORG_ID）
+	alter table onl.ONL_ONLINE_LOG add ONLINE_ORG_ID        bigint not null comment '操作组织ID';
 -- 2018年11月5日11:26:12
 	-- ONL_ONLINE 去除供应商结算类型（SUPPLIER_SETTLE_TYPE）、添加押货类型（PLEDGE_TYPE）
 	alter table onl.ONL_ONLINE add PLEDGE_TYPE          tinyint comment '押货类型（1：押货 2：供应商发货）';

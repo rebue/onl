@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/11/5 11:33:35                           */
+/* Created on:     2018/11/5 14:10:20                           */
 /*==============================================================*/
 
 
@@ -50,6 +50,7 @@ create table ONL_ONLINE
    SUPPLIER_ID          bigint comment '供应商ID',
    PLEDGE_TYPE          tinyint comment '押货类型（1：押货 2：供应商发货）',
    OP_ID                bigint not null comment '操作人ID',
+   ONLINE_ORG_ID        bigint not null comment '操作组织ID',
    ONLINE_STATE         tinyint not null comment '上线状态（0：下线，1：上线  ）',
    ONLINE_TIME          datetime not null comment '上线时间',
    PRODUCT_ID           bigint not null comment '产品ID,上一次上线的产品ID',
@@ -69,6 +70,7 @@ create table ONL_ONLINE_LOG
    SUPPLIER_ID          bigint comment '供应商ID',
    PLEDGE_TYPE          tinyint comment '押货类型（1：押货 2：供应商发货）',
    OP_ID                bigint not null comment '操作人ID',
+   ONLINE_ORG_ID        bigint not null comment '操作组织ID',
    OP_TIME              datetime not null comment '操作时间',
    SUBJECT_TYPE         tinyint not null default 0 comment '板块类型（0：普通，1：全返）',
    ONLINE_TITLE         varchar(300) not null comment '上线标题',
