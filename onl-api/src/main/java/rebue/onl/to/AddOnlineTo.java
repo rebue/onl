@@ -23,7 +23,7 @@ public class AddOnlineTo {
 	 * 上线id
 	 */
 	private Long onlineId;
-	
+
 	/**
 	 * 上线商品名称
 	 */
@@ -60,20 +60,20 @@ public class AddOnlineTo {
 	private Long opId;
 
 	/**
-     *    供应商ID
-     *
-     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Long supplierId;
+	 * 供应商ID
+	 *
+	 * 数据库字段: ONL_ONLINE.SUPPLIER_ID
+	 *
+	 * @mbg.generated 自动生成，如需修改，请删除本行
+	 */
+	private Long supplierId;
 
-    /**
-     *    供应商结算类型（1：结算到余额 2：结算到货款）
-     *
-     *    数据库字段: ONL_ONLINE.SUPPLIER_SETTLE_TYPE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Byte supplierSettleType;
+	/**
+	 * 押货类型（1：押货 2：供应商发货）
+	 *
+	 * 数据库字段: ONL_ONLINE.PLEDGE_TYPE
+	 *
+	 * @mbg.generated 自动生成，如需修改，请删除本行
+	 */
+	private Byte pledgeType;
 }
