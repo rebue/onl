@@ -67,9 +67,19 @@ public enum AddOnlineDic implements EnumBase {
 	PARAMETER_ERROR(-9),
 
 	/**
+	 * 操作人不存在
+	 */
+	OP_NOT_EXIST(-10),
+	
+	/**
+	 * 操作人没有组织
+	 */
+	OP_NOT_ORG(-11),
+	
+	/**
 	 * 上线失败
 	 */
-	ERROR(-10);
+	ERROR(-12);
 
 	/**
 	 * 枚举的所有项，注意这个变量是静态单例的

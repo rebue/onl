@@ -21,6 +21,12 @@
 			<artifactId>prm-svr-feign</artifactId>
 			<version>1.0.9</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.github.rebue.suc</groupId>
+			<artifactId>suc-svr-feign</artifactId>
+			<version>1.0.8</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.github.rebue.robotech</groupId>

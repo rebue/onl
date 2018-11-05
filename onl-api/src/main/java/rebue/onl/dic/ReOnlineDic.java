@@ -53,6 +53,16 @@ public enum ReOnlineDic implements EnumBase {
 	 * 添加上线图片日志出错
 	 */
 	ADD_ONLINE_PIC_LOG_ERROR(-7),
+	
+	/**
+	 * 操作人不存在
+	 */
+	OP_NOT_EXIST(-8),
+	
+	/**
+	 * 操作人没有组织
+	 */
+	OP_NOT_ORG(-9),
 
 	/**
 	 * 重新上线失败
