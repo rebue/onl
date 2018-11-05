@@ -60,6 +60,9 @@ public class OnlOnlinePromotionSvcImpl extends MybatisBaseSvcImpl<OnlOnlinePromo
     @Override
     public List<Map<String, Object>> listOnlinePromotion(PromotionTypeDic promotionType) {
         _log.info("查询推广上线商品列表: promotionType={}", promotionType);
-        return _mapper.listOnlinePromotion((byte) promotionType.getCode());
+        List<Map<String, Object>>  result=_mapper.listOnlinePromotion((byte) promotionType.getCode());
+        _log.info("查询推广上线商品列表结果为 {}:", result);
+        return result;
+        
     }
 }

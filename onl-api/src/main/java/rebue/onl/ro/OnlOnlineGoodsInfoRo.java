@@ -11,6 +11,14 @@ package rebue.onl.ro;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import lombok.Data;
+
+
+@Data
+@JsonInclude(Include.NON_NULL)
 public class OnlOnlineGoodsInfoRo {
 
 	/**
@@ -58,101 +66,25 @@ public class OnlOnlineGoodsInfoRo {
 	 */
 	
 	private Byte subjectType; 
+	
+    /**
+     *    供应商ID
+     *
+     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
+     *
+     */
+    private Long supplierId;
 
-	public Byte getSubjectType() {
-		return subjectType;
-	}
+    /**
+     *    押货类型（1：押货 2：供应商发货）
+     *
+     *    数据库字段: ONL_ONLINE.PLEDGE_TYPE
+     *
+     */
+    private Byte pledgeType;
+    
+    
 
-	public void setSubjectType(Byte subjectType) {
-		this.subjectType = subjectType;
-	}
 
-	public OnlOnlineGoodsInfoRo() {
-		super();
-	}
-
-	public OnlOnlineGoodsInfoRo(long onlineId, String onlineTitle, String picPath, long specId, String onlineSpec,
-			BigDecimal salePrice, BigDecimal cashbackAmount, String onlineDetail) {
-		super();
-		this.onlineId = onlineId;
-		this.onlineTitle = onlineTitle;
-		this.picPath = picPath;
-		this.specId = specId;
-		this.onlineSpec = onlineSpec;
-		this.salePrice = salePrice;
-		this.cashbackAmount = cashbackAmount;
-		this.onlineDetail = onlineDetail;
-	}
-
-	public long getOnlineId() {
-		return onlineId;
-	}
-
-	public void setOnlineId(long onlineId) {
-		this.onlineId = onlineId;
-	}
-
-	public String getOnlineTitle() {
-		return onlineTitle;
-	}
-
-	public void setOnlineTitle(String onlineTitle) {
-		this.onlineTitle = onlineTitle;
-	}
-
-	public String getPicPath() {
-		return picPath;
-	}
-
-	public void setPicPath(String picPath) {
-		this.picPath = picPath;
-	}
-
-	public long getSpecId() {
-		return specId;
-	}
-
-	public void setSpecId(long specId) {
-		this.specId = specId;
-	}
-
-	public String getOnlineSpec() {
-		return onlineSpec;
-	}
-
-	public void setOnlineSpec(String onlineSpec) {
-		this.onlineSpec = onlineSpec;
-	}
-
-	public BigDecimal getSalePrice() {
-		return salePrice;
-	}
-
-	public void setSalePrice(BigDecimal salePrice) {
-		this.salePrice = salePrice;
-	}
-
-	public BigDecimal getCashbackAmount() {
-		return cashbackAmount;
-	}
-
-	public void setCashbackAmount(BigDecimal cashbackAmount) {
-		this.cashbackAmount = cashbackAmount;
-	}
-
-	public String getOnlineDetail() {
-		return onlineDetail;
-	}
-
-	public void setOnlineDetail(String onlineDetail) {
-		this.onlineDetail = onlineDetail;
-	}
-
-	@Override
-	public String toString() {
-		return "OnlOnlineGoodsInfoRo [onlineId=" + onlineId + ", onlineTitle=" + onlineTitle + ", picPath=" + picPath
-				+ ", specId=" + specId + ", onlineSpec=" + onlineSpec + ", salePrice=" + salePrice + ", cashbackAmount="
-				+ cashbackAmount + ", onlineDetail=" + onlineDetail + "]";
-	}
 
 }

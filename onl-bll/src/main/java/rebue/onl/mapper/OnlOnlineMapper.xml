@@ -330,7 +330,7 @@
   
   <!-- 获取上线商品列表信息 -->
   <select id="selectOnlineGoodsList" parameterType="rebue.onl.to.OnlineGoodsListTo" resultMap="OnlineGoodsInfoResultMap">
-  	SELECT oo.ID, oo.ONLINE_TITLE, oo.SUBJECT_TYPE,oopc.PIC_PATH, oos.ONLINE_SPEC, oos.SALE_PRICE, oos.CASHBACK_AMOUNT, oos.ID AS SPEC_ID, oo.ONLINE_DETAIL
+  	SELECT oo.ID,oo.PLEDGE_TYPE,oo.SUPPLIER_ID, oo.ONLINE_TITLE, oo.SUBJECT_TYPE,oopc.PIC_PATH, oos.ONLINE_SPEC, oos.SALE_PRICE, oos.CASHBACK_AMOUNT, oos.ID AS SPEC_ID, oo.ONLINE_DETAIL
 	FROM ONL_ONLINE oo
 	LEFT JOIN ONL_ONLINE_SPEC oos ON oos.ONLINE_ID = oo.ID
 	LEFT JOIN ONL_ONLINE_PIC oopc ON oo.ID=oopc.ONLINE_ID
