@@ -110,6 +110,15 @@ public class OnlOnlineMo implements Serializable {
     private Byte pledgeType;
 
     /**
+     *    操作组织ID
+     *
+     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long onlineOrgId;
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private static final long serialVersionUID = 1L;
@@ -332,6 +341,28 @@ public class OnlOnlineMo implements Serializable {
      */
     public void setPledgeType(Byte pledgeType) {
         this.pledgeType = pledgeType;
+    }
+
+    /**
+     *    操作组织ID
+     *
+     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Long getOnlineOrgId() {
+        return onlineOrgId;
+    }
+
+    /**
+     *    操作组织ID
+     *
+     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setOnlineOrgId(Long onlineOrgId) {
+        this.onlineOrgId = onlineOrgId;
     }
 
     /**
