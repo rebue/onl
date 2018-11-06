@@ -1,14 +1,10 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/11/5 14:10:20                           */
+/* Created on:     2018/11/6 20:43:20                           */
 /*==============================================================*/
 
 
 drop table if exists ONL_CART;
-
-drop table if exists ONL_ONLINE;
-
-drop table if exists ONL_ONLINE_LOG;
 
 drop table if exists ONL_ONLINE_PIC;
 
@@ -20,16 +16,19 @@ drop table if exists ONL_ONLINE_SPEC;
 
 drop table if exists ONL_ONLINE_SPEC_LOG;
 
+drop table if exists ONL_ONLINE_LOG;
+
+drop table if exists ONL_ONLINE;
+
 /*==============================================================*/
 /* Table: ONL_CART                                              */
 /*==============================================================*/
 create table ONL_CART
 (
    ID                   bigint not null comment '购物车ID',
-   ONLINE_SPEC_ID       bigint not null comment '上线规格ID',
    ONLINE_ID            bigint not null comment '上线ID',
+   ONLINE_SPEC_ID       bigint not null comment '上线规格ID',
    SUPPLIER_ID          bigint comment '供应商ID',
-   PLEDGE_TYPE          tinyint comment '押货类型（1：押货 2：供应商发货）',
    USER_ID              bigint not null comment '用户编号',
    CART_COUNT           int not null comment '购物车规格数量',
    JOIN_TIME            datetime not null comment '加入时间',
@@ -47,10 +46,10 @@ create table ONL_ONLINE
    SUBJECT_TYPE         tinyint not null default 0 comment '板块类型（0：普通，1：全返）',
    ONLINE_TITLE         varchar(300) not null comment '上线标题',
    ONLINE_DETAIL        varchar(2000) comment '上线描述',
+   ONLINE_ORG_ID        bigint not null comment '上线组织ID',
    SUPPLIER_ID          bigint comment '供应商ID',
-   PLEDGE_TYPE          tinyint comment '押货类型（1：押货 2：供应商发货）',
+   DELIVER_ORG_TYPE     tinyint comment '发货组织类型（1：本组织发货 2：供应商发货）',
    OP_ID                bigint not null comment '操作人ID',
-   ONLINE_ORG_ID        bigint not null comment '操作组织ID',
    ONLINE_STATE         tinyint not null comment '上线状态（0：下线，1：上线  ）',
    ONLINE_TIME          datetime not null comment '上线时间',
    PRODUCT_ID           bigint not null comment '产品ID,上一次上线的产品ID',
@@ -65,16 +64,15 @@ alter table ONL_ONLINE comment '上线信息';
 create table ONL_ONLINE_LOG
 (
    ID                   bigint not null comment '上线日志ID',
-   PARTNER_ID           bigint not null comment '伙伴ID',
    ONLINE_ID            bigint not null comment '上线ID',
-   SUPPLIER_ID          bigint comment '供应商ID',
-   PLEDGE_TYPE          tinyint comment '押货类型（1：押货 2：供应商发货）',
-   OP_ID                bigint not null comment '操作人ID',
-   ONLINE_ORG_ID        bigint not null comment '操作组织ID',
-   OP_TIME              datetime not null comment '操作时间',
    SUBJECT_TYPE         tinyint not null default 0 comment '板块类型（0：普通，1：全返）',
    ONLINE_TITLE         varchar(300) not null comment '上线标题',
    ONLINE_DETAIL        varchar(2000) comment '上线描述',
+   ONLINE_ORG_ID        bigint not null comment '上线组织ID',
+   SUPPLIER_ID          bigint comment '供应商ID',
+   DELIVER_ORG_TYPE     tinyint comment '发货组织类型（1：本组织发货 2：供应商发货）',
+   OP_ID                bigint not null comment '操作人ID',
+   OP_TIME              datetime not null comment '操作时间',
    PRODUCT_ID           bigint not null comment '产品ID,上一次上线的产品ID',
    primary key (ID)
 );

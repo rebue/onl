@@ -9,3 +9,4 @@ logs
 *.gz
 *.log.gz
 *.class
+rebel.xml

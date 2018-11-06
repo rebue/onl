@@ -54,6 +54,33 @@ public class OnlOnlineMo implements Serializable {
     private String onlineDetail;
 
     /**
+     *    上线组织ID
+     *
+     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long onlineOrgId;
+
+    /**
+     *    供应商ID
+     *
+     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long supplierId;
+
+    /**
+     *    发货组织类型（1：本组织发货 2：供应商发货）
+     *
+     *    数据库字段: ONL_ONLINE.DELIVER_ORG_TYPE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Byte deliverOrgType;
+
+    /**
      *    操作人ID
      *
      *    数据库字段: ONL_ONLINE.OP_ID
@@ -90,33 +117,6 @@ public class OnlOnlineMo implements Serializable {
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private Long productId;
-
-    /**
-     *    供应商ID
-     *
-     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Long supplierId;
-
-    /**
-     *    押货类型（1：押货 2：供应商发货）
-     *
-     *    数据库字段: ONL_ONLINE.PLEDGE_TYPE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Byte pledgeType;
-
-    /**
-     *    操作组织ID
-     *
-     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Long onlineOrgId;
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -212,6 +212,72 @@ public class OnlOnlineMo implements Serializable {
     }
 
     /**
+     *    上线组织ID
+     *
+     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Long getOnlineOrgId() {
+        return onlineOrgId;
+    }
+
+    /**
+     *    上线组织ID
+     *
+     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setOnlineOrgId(Long onlineOrgId) {
+        this.onlineOrgId = onlineOrgId;
+    }
+
+    /**
+     *    供应商ID
+     *
+     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Long getSupplierId() {
+        return supplierId;
+    }
+
+    /**
+     *    供应商ID
+     *
+     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setSupplierId(Long supplierId) {
+        this.supplierId = supplierId;
+    }
+
+    /**
+     *    发货组织类型（1：本组织发货 2：供应商发货）
+     *
+     *    数据库字段: ONL_ONLINE.DELIVER_ORG_TYPE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Byte getDeliverOrgType() {
+        return deliverOrgType;
+    }
+
+    /**
+     *    发货组织类型（1：本组织发货 2：供应商发货）
+     *
+     *    数据库字段: ONL_ONLINE.DELIVER_ORG_TYPE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setDeliverOrgType(Byte deliverOrgType) {
+        this.deliverOrgType = deliverOrgType;
+    }
+
+    /**
      *    操作人ID
      *
      *    数据库字段: ONL_ONLINE.OP_ID
@@ -297,72 +363,6 @@ public class OnlOnlineMo implements Serializable {
      */
     public void setProductId(Long productId) {
         this.productId = productId;
-    }
-
-    /**
-     *    供应商ID
-     *
-     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Long getSupplierId() {
-        return supplierId;
-    }
-
-    /**
-     *    供应商ID
-     *
-     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
-    }
-
-    /**
-     *    押货类型（1：押货 2：供应商发货）
-     *
-     *    数据库字段: ONL_ONLINE.PLEDGE_TYPE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Byte getPledgeType() {
-        return pledgeType;
-    }
-
-    /**
-     *    押货类型（1：押货 2：供应商发货）
-     *
-     *    数据库字段: ONL_ONLINE.PLEDGE_TYPE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setPledgeType(Byte pledgeType) {
-        this.pledgeType = pledgeType;
-    }
-
-    /**
-     *    操作组织ID
-     *
-     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Long getOnlineOrgId() {
-        return onlineOrgId;
-    }
-
-    /**
-     *    操作组织ID
-     *
-     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setOnlineOrgId(Long onlineOrgId) {
-        this.onlineOrgId = onlineOrgId;
     }
 
     /**

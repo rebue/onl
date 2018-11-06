@@ -1,18 +1,22 @@
+-- 2018年11月6日
+	alter table onl.ONL_ONLINE           add DELIVER_ORG_TYPE              tinyint comment '发货组织类型（1：本组织发货 2：供应商发货）';
+	alter table onl.ONL_ONLINE_LOG  add DELIVER_ORG_TYPE          tinyint comment '发货组织类型（1：本组织发货 2：供应商发货）';
+
 -- 2018年11月5日14:10:57
 	-- ONL_ONLINE 添加上线组织ID（ONLINE_ORG_ID）
-	alter table onl.ONL_ONLINE add ONLINE_ORG_ID        bigint not null comment '操作组织ID';
+	alter table onl.ONL_ONLINE add ONLINE_ORG_ID        bigint not null comment '上线组织ID';
 	-- ONL_ONLINE_LOG 添加上线组织ID（ONLINE_ORG_ID）
-	alter table onl.ONL_ONLINE_LOG add ONLINE_ORG_ID        bigint not null comment '操作组织ID';
+	alter table onl.ONL_ONLINE_LOG add ONLINE_ORG_ID        bigint not null comment '上线组织ID';
 -- 2018年11月5日11:26:12
 	-- ONL_ONLINE 去除供应商结算类型（SUPPLIER_SETTLE_TYPE）、添加押货类型（PLEDGE_TYPE）
-	alter table onl.ONL_ONLINE add PLEDGE_TYPE          tinyint comment '押货类型（1：押货 2：供应商发货）';
 	alter table onl.ONL_ONLINE drop column SUPPLIER_SETTLE_TYPE;
 	-- ONL_ONLINE_LOG 去除供应商结算类型（SUPPLIER_SETTLE_TYPE）、添加押货类型（PLEDGE_TYPE）
-	alter table onl.ONL_ONLINE_LOG add PLEDGE_TYPE          tinyint comment '押货类型（1：押货 2：供应商发货）';
 	alter table onl.ONL_ONLINE_LOG drop column SUPPLIER_SETTLE_TYPE;
 	-- ONL_CART 去除供应商结算类型（SUPPLIER_SETTLE_TYPE）、添加押货类型（PLEDGE_TYPE）
-	alter table onl.ONL_CART add PLEDGE_TYPE          tinyint comment '押货类型（1：押货 2：供应商发货）';
 	alter table onl.ONL_CART drop column SUPPLIER_SETTLE_TYPE;
+    
+    
+    
 -- 2018年11月3日09:40:41
 	-- ONL_ONLINE 添加供应商ID、供应商结算类型（1：结算到余额 2：结算到货款）
 	alter table onl.ONL_ONLINE add SUPPLIER_ID          bigint comment '供应商ID';

@@ -36,26 +36,6 @@ public class OnlOnlineLogMo implements Serializable {
     private Long onlineId;
 
     /**
-     *    操作人ID
-     *
-     *    数据库字段: ONL_ONLINE_LOG.OP_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Long opId;
-
-    /**
-     *    操作时间
-     *
-     *    数据库字段: ONL_ONLINE_LOG.OP_TIME
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date opTime;
-
-    /**
      *    板块类型（0：普通，1：全返）
      *
      *    数据库字段: ONL_ONLINE_LOG.SUBJECT_TYPE
@@ -83,13 +63,13 @@ public class OnlOnlineLogMo implements Serializable {
     private String onlineDetail;
 
     /**
-     *    产品ID,上一次上线的产品ID
+     *    上线组织ID
      *
-     *    数据库字段: ONL_ONLINE_LOG.PRODUCT_ID
+     *    数据库字段: ONL_ONLINE_LOG.ONLINE_ORG_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private Long productId;
+    private Long onlineOrgId;
 
     /**
      *    供应商ID
@@ -101,22 +81,42 @@ public class OnlOnlineLogMo implements Serializable {
     private Long supplierId;
 
     /**
-     *    押货类型（1：押货 2：供应商发货）
+     *    发货组织类型（1：本组织发货 2：供应商发货）
      *
-     *    数据库字段: ONL_ONLINE_LOG.PLEDGE_TYPE
+     *    数据库字段: ONL_ONLINE_LOG.DELIVER_ORG_TYPE
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private Byte pledgeType;
+    private Byte deliverOrgType;
 
     /**
-     *    操作组织ID
+     *    操作人ID
      *
-     *    数据库字段: ONL_ONLINE_LOG.ONLINE_ORG_ID
+     *    数据库字段: ONL_ONLINE_LOG.OP_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private Long onlineOrgId;
+    private Long opId;
+
+    /**
+     *    操作时间
+     *
+     *    数据库字段: ONL_ONLINE_LOG.OP_TIME
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date opTime;
+
+    /**
+     *    产品ID,上一次上线的产品ID
+     *
+     *    数据库字段: ONL_ONLINE_LOG.PRODUCT_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long productId;
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -165,50 +165,6 @@ public class OnlOnlineLogMo implements Serializable {
      */
     public void setOnlineId(Long onlineId) {
         this.onlineId = onlineId;
-    }
-
-    /**
-     *    操作人ID
-     *
-     *    数据库字段: ONL_ONLINE_LOG.OP_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Long getOpId() {
-        return opId;
-    }
-
-    /**
-     *    操作人ID
-     *
-     *    数据库字段: ONL_ONLINE_LOG.OP_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setOpId(Long opId) {
-        this.opId = opId;
-    }
-
-    /**
-     *    操作时间
-     *
-     *    数据库字段: ONL_ONLINE_LOG.OP_TIME
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Date getOpTime() {
-        return opTime;
-    }
-
-    /**
-     *    操作时间
-     *
-     *    数据库字段: ONL_ONLINE_LOG.OP_TIME
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setOpTime(Date opTime) {
-        this.opTime = opTime;
     }
 
     /**
@@ -278,25 +234,25 @@ public class OnlOnlineLogMo implements Serializable {
     }
 
     /**
-     *    产品ID,上一次上线的产品ID
+     *    上线组织ID
      *
-     *    数据库字段: ONL_ONLINE_LOG.PRODUCT_ID
+     *    数据库字段: ONL_ONLINE_LOG.ONLINE_ORG_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Long getProductId() {
-        return productId;
+    public Long getOnlineOrgId() {
+        return onlineOrgId;
     }
 
     /**
-     *    产品ID,上一次上线的产品ID
+     *    上线组织ID
      *
-     *    数据库字段: ONL_ONLINE_LOG.PRODUCT_ID
+     *    数据库字段: ONL_ONLINE_LOG.ONLINE_ORG_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setOnlineOrgId(Long onlineOrgId) {
+        this.onlineOrgId = onlineOrgId;
     }
 
     /**
@@ -322,47 +278,91 @@ public class OnlOnlineLogMo implements Serializable {
     }
 
     /**
-     *    押货类型（1：押货 2：供应商发货）
+     *    发货组织类型（1：本组织发货 2：供应商发货）
      *
-     *    数据库字段: ONL_ONLINE_LOG.PLEDGE_TYPE
+     *    数据库字段: ONL_ONLINE_LOG.DELIVER_ORG_TYPE
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Byte getPledgeType() {
-        return pledgeType;
+    public Byte getDeliverOrgType() {
+        return deliverOrgType;
     }
 
     /**
-     *    押货类型（1：押货 2：供应商发货）
+     *    发货组织类型（1：本组织发货 2：供应商发货）
      *
-     *    数据库字段: ONL_ONLINE_LOG.PLEDGE_TYPE
+     *    数据库字段: ONL_ONLINE_LOG.DELIVER_ORG_TYPE
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setPledgeType(Byte pledgeType) {
-        this.pledgeType = pledgeType;
+    public void setDeliverOrgType(Byte deliverOrgType) {
+        this.deliverOrgType = deliverOrgType;
     }
 
     /**
-     *    操作组织ID
+     *    操作人ID
      *
-     *    数据库字段: ONL_ONLINE_LOG.ONLINE_ORG_ID
+     *    数据库字段: ONL_ONLINE_LOG.OP_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Long getOnlineOrgId() {
-        return onlineOrgId;
+    public Long getOpId() {
+        return opId;
     }
 
     /**
-     *    操作组织ID
+     *    操作人ID
      *
-     *    数据库字段: ONL_ONLINE_LOG.ONLINE_ORG_ID
+     *    数据库字段: ONL_ONLINE_LOG.OP_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setOnlineOrgId(Long onlineOrgId) {
-        this.onlineOrgId = onlineOrgId;
+    public void setOpId(Long opId) {
+        this.opId = opId;
+    }
+
+    /**
+     *    操作时间
+     *
+     *    数据库字段: ONL_ONLINE_LOG.OP_TIME
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Date getOpTime() {
+        return opTime;
+    }
+
+    /**
+     *    操作时间
+     *
+     *    数据库字段: ONL_ONLINE_LOG.OP_TIME
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setOpTime(Date opTime) {
+        this.opTime = opTime;
+    }
+
+    /**
+     *    产品ID,上一次上线的产品ID
+     *
+     *    数据库字段: ONL_ONLINE_LOG.PRODUCT_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Long getProductId() {
+        return productId;
+    }
+
+    /**
+     *    产品ID,上一次上线的产品ID
+     *
+     *    数据库字段: ONL_ONLINE_LOG.PRODUCT_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     /**
@@ -376,15 +376,15 @@ public class OnlOnlineLogMo implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", onlineId=").append(onlineId);
-        sb.append(", opId=").append(opId);
-        sb.append(", opTime=").append(opTime);
         sb.append(", subjectType=").append(subjectType);
         sb.append(", onlineTitle=").append(onlineTitle);
         sb.append(", onlineDetail=").append(onlineDetail);
-        sb.append(", productId=").append(productId);
-        sb.append(", supplierId=").append(supplierId);
-        sb.append(", pledgeType=").append(pledgeType);
         sb.append(", onlineOrgId=").append(onlineOrgId);
+        sb.append(", supplierId=").append(supplierId);
+        sb.append(", deliverOrgType=").append(deliverOrgType);
+        sb.append(", opId=").append(opId);
+        sb.append(", opTime=").append(opTime);
+        sb.append(", productId=").append(productId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

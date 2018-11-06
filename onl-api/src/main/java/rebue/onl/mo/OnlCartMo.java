@@ -27,6 +27,15 @@ public class OnlCartMo implements Serializable {
     private Long id;
 
     /**
+     *    上线ID
+     *
+     *    数据库字段: ONL_CART.ONLINE_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long onlineId;
+
+    /**
      *    上线规格ID
      *
      *    数据库字段: ONL_CART.ONLINE_SPEC_ID
@@ -36,13 +45,13 @@ public class OnlCartMo implements Serializable {
     private Long onlineSpecId;
 
     /**
-     *    上线ID
+     *    供应商ID
      *
-     *    数据库字段: ONL_CART.ONLINE_ID
+     *    数据库字段: ONL_CART.SUPPLIER_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private Long onlineId;
+    private Long supplierId;
 
     /**
      *    用户编号
@@ -74,24 +83,6 @@ public class OnlCartMo implements Serializable {
     private Date joinTime;
 
     /**
-     *    供应商ID
-     *
-     *    数据库字段: ONL_CART.SUPPLIER_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Long supplierId;
-
-    /**
-     *    押货类型（1：押货 2：供应商发货）
-     *
-     *    数据库字段: ONL_CART.PLEDGE_TYPE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Byte pledgeType;
-
-    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private static final long serialVersionUID = 1L;
@@ -119,6 +110,28 @@ public class OnlCartMo implements Serializable {
     }
 
     /**
+     *    上线ID
+     *
+     *    数据库字段: ONL_CART.ONLINE_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Long getOnlineId() {
+        return onlineId;
+    }
+
+    /**
+     *    上线ID
+     *
+     *    数据库字段: ONL_CART.ONLINE_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setOnlineId(Long onlineId) {
+        this.onlineId = onlineId;
+    }
+
+    /**
      *    上线规格ID
      *
      *    数据库字段: ONL_CART.ONLINE_SPEC_ID
@@ -141,25 +154,25 @@ public class OnlCartMo implements Serializable {
     }
 
     /**
-     *    上线ID
+     *    供应商ID
      *
-     *    数据库字段: ONL_CART.ONLINE_ID
+     *    数据库字段: ONL_CART.SUPPLIER_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Long getOnlineId() {
-        return onlineId;
+    public Long getSupplierId() {
+        return supplierId;
     }
 
     /**
-     *    上线ID
+     *    供应商ID
      *
-     *    数据库字段: ONL_CART.ONLINE_ID
+     *    数据库字段: ONL_CART.SUPPLIER_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setOnlineId(Long onlineId) {
-        this.onlineId = onlineId;
+    public void setSupplierId(Long supplierId) {
+        this.supplierId = supplierId;
     }
 
     /**
@@ -229,50 +242,6 @@ public class OnlCartMo implements Serializable {
     }
 
     /**
-     *    供应商ID
-     *
-     *    数据库字段: ONL_CART.SUPPLIER_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Long getSupplierId() {
-        return supplierId;
-    }
-
-    /**
-     *    供应商ID
-     *
-     *    数据库字段: ONL_CART.SUPPLIER_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
-    }
-
-    /**
-     *    押货类型（1：押货 2：供应商发货）
-     *
-     *    数据库字段: ONL_CART.PLEDGE_TYPE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Byte getPledgeType() {
-        return pledgeType;
-    }
-
-    /**
-     *    押货类型（1：押货 2：供应商发货）
-     *
-     *    数据库字段: ONL_CART.PLEDGE_TYPE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setPledgeType(Byte pledgeType) {
-        this.pledgeType = pledgeType;
-    }
-
-    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Override
@@ -282,13 +251,12 @@ public class OnlCartMo implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", onlineSpecId=").append(onlineSpecId);
         sb.append(", onlineId=").append(onlineId);
+        sb.append(", onlineSpecId=").append(onlineSpecId);
+        sb.append(", supplierId=").append(supplierId);
         sb.append(", userId=").append(userId);
         sb.append(", cartCount=").append(cartCount);
         sb.append(", joinTime=").append(joinTime);
-        sb.append(", supplierId=").append(supplierId);
-        sb.append(", pledgeType=").append(pledgeType);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
