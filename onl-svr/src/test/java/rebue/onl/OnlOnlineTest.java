@@ -1,7 +1,10 @@
 package rebue.onl;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -10,6 +13,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import rebue.onl.to.AddOnlineTo;
+import rebue.onl.to.OnlOnlineSpecTo;
 import rebue.wheel.OkhttpUtils;
 
 /**
@@ -22,7 +27,7 @@ import rebue.wheel.OkhttpUtils;
  */
 public class OnlOnlineTest {
 
-	private String hostUrl = "http://localhost:9100/";
+	private String hostUrl = "http://localhost:9101/";
 	private ObjectMapper _objectMapper = new ObjectMapper();
 	
 	/**
@@ -34,14 +39,40 @@ public class OnlOnlineTest {
 	 */
 	@Test
 	public void onlineTest() throws JsonParseException, JsonMappingException, IOException {
-		String jsondata = "{\"onlineDetail\":\"测试2018年4月10日10:26:29\",\"faceImg\":\"2018/04/10/156787888008000577.jpg,2018/04/10/158206788155000574.jpg\",\"goodsQsmm\":\"2018/04/10/158560550136000048.jpg\",\"produceId\":0,\"specs\":[{\"goodsSpec\":\"规格01\",\"goodsPrice\":\"10\",\"cashbackAmount\":\"5\",\"saleCount\":\"10\",\"seqNo\":\"1\",\"saleUnit\":\"\"}],\"opId\":\"451273803712954379\"}";
-		String jsondatas = java.net.URLEncoder.encode(jsondata, "UTF-8");
-		Map map = _objectMapper.readValue(jsondata, Map.class);
-		System.out.println(String.valueOf(map));
 		String url = hostUrl + "/onl/online";
-	//	Map m = _objectMapper.readValue(OkhttpUtils.postByFormParams(url, map), Map.class);
-		Map m = _objectMapper.readValue(OkhttpUtils.post(url + "?onlineInfo=" + jsondatas), Map.class);
-		System.out.println(m.toString());
+		Map<String, Object> slideshowMap = new HashMap<>();
+		slideshowMap.put("slideshow", "slideshow=/damaiSlideshow/2018/11/08/16/06/84D0945253F8493AB2106C13F19EE92C.png");
+		List<Map<String, Object>> slideshowList = new ArrayList<>();
+		slideshowList.add(slideshowMap);
+		
+		List<OnlOnlineSpecTo> onlineSpecList = new ArrayList<>();
+		OnlOnlineSpecTo onlineSpecTo = new OnlOnlineSpecTo();
+		onlineSpecTo.setOnlineSpec("啊飒飒122");
+		onlineSpecTo.setSalePrice(new BigDecimal(123));
+		onlineSpecTo.setCostPrice(new BigDecimal(212));
+		// 返现金（板块类型为普通返现时需要加）
+//		onlineSpecTo.setCashbackAmount(new BigDecimal("121"));
+		onlineSpecTo.setSaleUnit("个");
+		onlineSpecTo.setCurrentOnlineCount(122);
+		onlineSpecList.add(onlineSpecTo);
+		
+		AddOnlineTo onlineTo = new AddOnlineTo();
+		onlineTo.setProductId(0L);
+		onlineTo.setOnlineName("阿萨飒飒啊实打实大声道21");
+		// 全返商品
+		onlineTo.setSubjectType((byte) 1);
+		// 普通返现
+//		onlineTo.setSubjectType((byte) 0);
+		onlineTo.setGoodsQsmm("/damaiQsmm/2018/11/08/16/05/AF7569B9D64B444782860951C64E67B5.png");
+		onlineTo.setOnlineDetail("<p>阿斯蒂芬噶水电费刚好是大法官好</p>");
+		onlineTo.setOpId(520469568947224576L);
+		onlineTo.setSupplierId(532812733012377601L);
+		onlineTo.setDeliverOrgId(532812849798578179L);
+		onlineTo.setOnlineSpecs(onlineSpecList);
+		onlineTo.setSlideshow(slideshowList);
+		
+		String result = OkhttpUtils.postByJsonParams(url, onlineTo);
+		System.out.println(result);
 	}
 	
 	/**

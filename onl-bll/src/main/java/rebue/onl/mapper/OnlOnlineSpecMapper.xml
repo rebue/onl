@@ -434,7 +434,9 @@
       	SALE_UNIT				= #{saleUnit,jdbcType=VARCHAR},
       	CURRENT_ONLINE_COUNT 	= #{currentOnlineCount,jdbcType=INTEGER},
       	SALE_COUNT 				= #{saleCount,jdbcType=INTEGER},
-      	SEQ_NO 					= #{seqNo,jdbcType=INTEGER}
+      	SEQ_NO 					= #{seqNo,jdbcType=INTEGER},
+      	LIMIT_COUNT 			= #{limitCount,jdbcType=INTEGER},
+      	COST_PRICE 				= #{costPrice,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

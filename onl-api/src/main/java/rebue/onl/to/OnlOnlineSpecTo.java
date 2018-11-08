@@ -45,15 +45,15 @@ public class OnlOnlineSpecTo {
 	 * @mbg.generated 自动生成，如需修改，请删除本行
 	 */
 	private BigDecimal salePrice;
-	
+
 	/**
-     *    成本价格
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.COST_PRICE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private BigDecimal costPrice;
+	 * 成本价格
+	 *
+	 * 数据库字段: ONL_ONLINE_SPEC.COST_PRICE
+	 *
+	 * @mbg.generated 自动生成，如需修改，请删除本行
+	 */
+	private BigDecimal costPrice;
 
 	/**
 	 * 返现金额
@@ -99,6 +99,15 @@ public class OnlOnlineSpecTo {
 	 * @mbg.generated 自动生成，如需修改，请删除本行
 	 */
 	private Integer saleCount;
+
+	/**
+	 * 限制购买数量(默认为0，不限制) 每个人限制购买的数量
+	 *
+	 * 数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
+	 *
+	 * @mbg.generated 自动生成，如需修改，请删除本行
+	 */
+	private Integer limitCount;
 
 	/**
 	 * 排序号

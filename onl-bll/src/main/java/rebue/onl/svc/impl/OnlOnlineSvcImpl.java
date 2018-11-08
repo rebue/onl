@@ -121,7 +121,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		AddOnlineRo ro = new AddOnlineRo();
 		if (to.getOnlineName() == null || to.getOnlineName().equals("") || to.getGoodsQsmm() == null
 				|| to.getGoodsQsmm().equals("") || to.getOnlineSpecs().size() == 0 || to.getSlideshow().size() == 0
-				|| to.getSupplierId() == null || to.getPledgeType() == null) {
+				|| to.getSupplierId() == null || to.getDeliverOrgId() == null) {
 			ro.setResult(AddOnlineDic.PARAMETER_ERROR);
 			ro.setMsg("参数错误");
 			return ro;
@@ -151,10 +151,10 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		onlineMo.setId(onlineId);
 		onlineMo.setOnlineTitle(to.getOnlineName());
 		onlineMo.setSupplierId(to.getSupplierId());
-		onlineMo.setPledgeType(to.getPledgeType());
 		onlineMo.setOnlineDetail(to.getOnlineDetail());
 		onlineMo.setOpId(to.getOpId());
 		onlineMo.setOnlineOrgId(sucUserMo.getOrgId());
+		onlineMo.setDeliverOrgId(to.getDeliverOrgId());
 		onlineMo.setOnlineState((byte) 1);
 		onlineMo.setOnlineTime(onlineTime);
 		onlineMo.setProductId(productId);
@@ -174,10 +174,10 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		OnlOnlineLogMo onlineLogMo = new OnlOnlineLogMo();
 		onlineLogMo.setId(onlineLogId);
 		onlineLogMo.setSupplierId(to.getSupplierId());
-		onlineLogMo.setPledgeType(to.getPledgeType());
 		onlineLogMo.setOnlineId(onlineId);
 		onlineLogMo.setOpId(to.getOpId());
 		onlineLogMo.setOnlineOrgId(sucUserMo.getOrgId());
+		onlineLogMo.setDeliverOrgId(to.getDeliverOrgId());
 		onlineLogMo.setOpTime(onlineTime);
 		onlineLogMo.setSubjectType((byte) to.getSubjectType());
 		onlineLogMo.setOnlineTitle(to.getOnlineName());
@@ -215,6 +215,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			onlineSpecMo.setOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec());
 			onlineSpecMo.setSaleUnit(to.getOnlineSpecs().get(i).getSaleUnit());
 			onlineSpecMo.setSaleCount(0);
+			onlineSpecMo.setLimitCount(to.getOnlineSpecs().get(i).getLimitCount());
 			onlineSpecMo.setCostPrice(to.getOnlineSpecs().get(i).getCostPrice());
 			onlineSpecMo.setSeqNo(i);
 			onlineSpecMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
@@ -236,6 +237,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			onlineSpecLogMo.setCashbackAmount(cashbackAmount);
 			onlineSpecLogMo.setCommissionAmount(commissionAmount);
 			onlineSpecLogMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
+			onlineSpecLogMo.setLimitCount(to.getOnlineSpecs().get(i).getLimitCount());
 			onlineSpecLogMo.setSaleUnit(to.getOnlineSpecs().get(i).getSaleUnit());
 			onlineSpecLogMo.setSeqNo(i);
 			_log.info("添加上线信息添加上线规格日志信息的参数为：{}", onlineSpecLogMo);
@@ -354,7 +356,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		ReOnlineRo ro = new ReOnlineRo();
 		if (to.getOnlineId() == null || to.getOnlineName() == null || to.getOnlineName().equals("")
 				|| to.getGoodsQsmm() == null || to.getGoodsQsmm().equals("") || to.getOnlineSpecs().size() == 0
-				|| to.getSlideshow().size() == 0 || to.getSupplierId() == null || to.getPledgeType() == null) {
+				|| to.getSlideshow().size() == 0 || to.getSupplierId() == null || to.getDeliverOrgId() == null) {
 			ro.setResult(ReOnlineDic.PARAMETER_ERROR);
 			ro.setMsg("参数错误");
 			return ro;
@@ -381,12 +383,12 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		OnlOnlineMo onlineMo = new OnlOnlineMo();
 		onlineMo.setId(to.getOnlineId());
 		onlineMo.setSupplierId(to.getSupplierId());
-		onlineMo.setPledgeType(to.getPledgeType());
 		onlineMo.setSubjectType(to.getSubjectType());
 		onlineMo.setOnlineTitle(to.getOnlineName());
 		onlineMo.setOnlineDetail(to.getOnlineDetail());
 		onlineMo.setOpId(to.getOpId());
 		onlineMo.setOnlineOrgId(sucUserMo.getOrgId());
+		onlineMo.setDeliverOrgId(to.getDeliverOrgId());
 		onlineMo.setOnlineState((byte) 1);
 		onlineMo.setOnlineTime(onlineTime);
 		onlineMo.setProductId(to.getProductId());
@@ -406,10 +408,10 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		OnlOnlineLogMo onlineLogMo = new OnlOnlineLogMo();
 		onlineLogMo.setId(onlineLogId);
 		onlineLogMo.setSupplierId(to.getSupplierId());
-		onlineLogMo.setPledgeType(to.getPledgeType());
 		onlineLogMo.setOnlineId(to.getOnlineId());
 		onlineLogMo.setOpId(to.getOpId());
 		onlineLogMo.setOnlineOrgId(sucUserMo.getOrgId());
+		onlineLogMo.setDeliverOrgId(to.getDeliverOrgId());
 		onlineLogMo.setOpTime(onlineTime);
 		onlineLogMo.setSubjectType(to.getSubjectType());
 		onlineLogMo.setOnlineTitle(to.getOnlineName());
@@ -442,6 +444,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			onlineSpecTo.setSaleUnit(to.getOnlineSpecs().get(i).getSaleUnit());
 			onlineSpecTo.setSeqNo(i);
 			onlineSpecTo.setSaleCount(0);
+			onlineSpecTo.setLimitCount(to.getOnlineSpecs().get(i).getLimitCount());
 			onlineSpecTo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
 			onlineSpecTo.setCashbackAmount(cashbackAmount);
 			Long onlineSpecId = _idWorker.getId();
@@ -604,6 +607,14 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 				_log.info("重写查询上线信息查询伙伴信息的返回值为：{}", partnerMo);
 				if (partnerMo != null) {
 					onlineListRo.setSupplierName(partnerMo.getPartnerName());
+				}
+			}
+			if (onlOnlineMo.getDeliverOrgId() != null) {
+				_log.info("重写查询上线信息查询伙伴信息的参数为：{}", onlOnlineMo.getDeliverOrgId());
+				PrmPartnerMo orgMo = prmPartnerSvr.getById(onlOnlineMo.getDeliverOrgId());
+				_log.info("重写查询上线信息查询伙伴信息的返回值为：{}", orgMo);
+				if (orgMo != null) {
+					onlineListRo.setDeliverOrgName(orgMo.getPartnerName());
 				}
 			}
 			listEx.add(onlineListRo);

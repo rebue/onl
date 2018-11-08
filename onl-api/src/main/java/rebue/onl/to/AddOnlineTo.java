@@ -69,11 +69,11 @@ public class AddOnlineTo {
 	private Long supplierId;
 
 	/**
-	 * 押货类型（1：押货 2：供应商发货）
+	 * 发货组织ID(默认填入上线组织ID，可变更为供应商的ID)
 	 *
-	 * 数据库字段: ONL_ONLINE.PLEDGE_TYPE
+	 * 数据库字段: ONL_ONLINE.DELIVER_ORG_ID
 	 *
 	 * @mbg.generated 自动生成，如需修改，请删除本行
 	 */
-	private Byte pledgeType;
+	private Long deliverOrgId;
 }
