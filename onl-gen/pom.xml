@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.github.rebue.onl</groupId>
 		<artifactId>onl</artifactId>
-		<version>1.0.8</version>
+		<version>1.0.9</version>
 	</parent>
 
 	<artifactId>onl-gen</artifactId>

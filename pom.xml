@@ -8,8 +8,10 @@
 		<version>1.0.8</version>
 	</parent>
 
+
 	<groupId>com.github.rebue.onl</groupId>
 	<artifactId>onl</artifactId>
+	<version>1.0.9</version>
 	<packaging>pom</packaging>
 	<description>商品上线</description>
 
@@ -26,13 +28,25 @@
 			<dependency>
 				<groupId>com.github.rebue.onl</groupId>
 				<artifactId>onl-api</artifactId>
-				<version>1.0.8</version>
+				<version>1.0.9</version>
 			</dependency>
 			<dependency>
 				<groupId>com.github.rebue.onl</groupId>
 				<artifactId>onl-bll</artifactId>
+				<version>1.0.9</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.github.rebue.prm</groupId>
+				<artifactId>prm-svr-feign</artifactId>
+				<version>1.0.9</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.rebue.suc</groupId>
+				<artifactId>suc-svr-feign</artifactId>
 				<version>1.0.8</version>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 </project>
