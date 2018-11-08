@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/11/6 20:43:20                           */
+/* Created on:     2018/11/8 10:24:00                           */
 /*==============================================================*/
 
 
@@ -12,9 +12,9 @@ drop table if exists ONL_ONLINE_PIC_LOG;
 
 drop table if exists ONL_ONLINE_PROMOTION;
 
-drop table if exists ONL_ONLINE_SPEC;
-
 drop table if exists ONL_ONLINE_SPEC_LOG;
+
+drop table if exists ONL_ONLINE_SPEC;
 
 drop table if exists ONL_ONLINE_LOG;
 
@@ -28,7 +28,6 @@ create table ONL_CART
    ID                   bigint not null comment '购物车ID',
    ONLINE_ID            bigint not null comment '上线ID',
    ONLINE_SPEC_ID       bigint not null comment '上线规格ID',
-   SUPPLIER_ID          bigint comment '供应商ID',
    USER_ID              bigint not null comment '用户编号',
    CART_COUNT           int not null comment '购物车规格数量',
    JOIN_TIME            datetime not null comment '加入时间',
@@ -48,7 +47,7 @@ create table ONL_ONLINE
    ONLINE_DETAIL        varchar(2000) comment '上线描述',
    ONLINE_ORG_ID        bigint not null comment '上线组织ID',
    SUPPLIER_ID          bigint comment '供应商ID',
-   DELIVER_ORG_TYPE     tinyint comment '发货组织类型（1：本组织发货 2：供应商发货）',
+   DELIVER_ORG_ID       bigint not null comment '发货组织ID(默认填入上线组织ID，可变更为供应商的ID)',
    OP_ID                bigint not null comment '操作人ID',
    ONLINE_STATE         tinyint not null comment '上线状态（0：下线，1：上线  ）',
    ONLINE_TIME          datetime not null comment '上线时间',
@@ -70,7 +69,7 @@ create table ONL_ONLINE_LOG
    ONLINE_DETAIL        varchar(2000) comment '上线描述',
    ONLINE_ORG_ID        bigint not null comment '上线组织ID',
    SUPPLIER_ID          bigint comment '供应商ID',
-   DELIVER_ORG_TYPE     tinyint comment '发货组织类型（1：本组织发货 2：供应商发货）',
+   DELIVER_ORG_ID       bigint comment '发货组织ID(默认填入上线组织ID，可变更为供应商的ID)',
    OP_ID                bigint not null comment '操作人ID',
    OP_TIME              datetime not null comment '操作时间',
    PRODUCT_ID           bigint not null comment '产品ID,上一次上线的产品ID',
@@ -135,6 +134,8 @@ create table ONL_ONLINE_SPEC
    COMMISSION_AMOUNT    decimal(20,4) comment '返佣金额',
    SALE_UNIT            varchar(50) comment '销售单位',
    CURRENT_ONLINE_COUNT int not null comment '当前上线数量（每次追加的数量）',
+   LIMIT_COUNT          int not null default 0 comment '限制购买数量(默认为0，不限制)
+            每个人限制购买的数量',
    SALE_COUNT           int not null comment '销售数量',
    SEQ_NO               int not null comment '排序号',
    primary key (ID)
@@ -157,6 +158,8 @@ create table ONL_ONLINE_SPEC_LOG
    COMMISSION_AMOUNT    decimal(20,4) comment '返佣金额',
    SALE_UNIT            varchar(50) comment '销售单位',
    CURRENT_ONLINE_COUNT int not null comment '当前上线数量（每次追加的数量）',
+   LIMIT_COUNT          int not null default 0 comment '限制购买数量(默认为0，不限制)
+            每个人限制购买的数量',
    SEQ_NO               int not null comment '排序号',
    primary key (ID)
 );

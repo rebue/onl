@@ -81,13 +81,13 @@ public class OnlOnlineLogMo implements Serializable {
     private Long supplierId;
 
     /**
-     *    发货组织类型（1：本组织发货 2：供应商发货）
+     *    发货组织ID(默认填入上线组织ID，可变更为供应商的ID)
      *
-     *    数据库字段: ONL_ONLINE_LOG.DELIVER_ORG_TYPE
+     *    数据库字段: ONL_ONLINE_LOG.DELIVER_ORG_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private Byte deliverOrgType;
+    private Long deliverOrgId;
 
     /**
      *    操作人ID
@@ -278,25 +278,25 @@ public class OnlOnlineLogMo implements Serializable {
     }
 
     /**
-     *    发货组织类型（1：本组织发货 2：供应商发货）
+     *    发货组织ID(默认填入上线组织ID，可变更为供应商的ID)
      *
-     *    数据库字段: ONL_ONLINE_LOG.DELIVER_ORG_TYPE
+     *    数据库字段: ONL_ONLINE_LOG.DELIVER_ORG_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Byte getDeliverOrgType() {
-        return deliverOrgType;
+    public Long getDeliverOrgId() {
+        return deliverOrgId;
     }
 
     /**
-     *    发货组织类型（1：本组织发货 2：供应商发货）
+     *    发货组织ID(默认填入上线组织ID，可变更为供应商的ID)
      *
-     *    数据库字段: ONL_ONLINE_LOG.DELIVER_ORG_TYPE
+     *    数据库字段: ONL_ONLINE_LOG.DELIVER_ORG_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setDeliverOrgType(Byte deliverOrgType) {
-        this.deliverOrgType = deliverOrgType;
+    public void setDeliverOrgId(Long deliverOrgId) {
+        this.deliverOrgId = deliverOrgId;
     }
 
     /**
@@ -381,7 +381,7 @@ public class OnlOnlineLogMo implements Serializable {
         sb.append(", onlineDetail=").append(onlineDetail);
         sb.append(", onlineOrgId=").append(onlineOrgId);
         sb.append(", supplierId=").append(supplierId);
-        sb.append(", deliverOrgType=").append(deliverOrgType);
+        sb.append(", deliverOrgId=").append(deliverOrgId);
         sb.append(", opId=").append(opId);
         sb.append(", opTime=").append(opTime);
         sb.append(", productId=").append(productId);
