@@ -52,15 +52,6 @@ public class OnlOnlineSpecMo implements Serializable {
     private BigDecimal salePrice;
 
     /**
-     *    成本价格
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.COST_PRICE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private BigDecimal costPrice;
-
-    /**
      *    返现金额
      *
      *    数据库字段: ONL_ONLINE_SPEC.CASHBACK_AMOUNT
@@ -97,16 +88,6 @@ public class OnlOnlineSpecMo implements Serializable {
     private Integer currentOnlineCount;
 
     /**
-     *    限制购买数量(默认为0，不限制)
-     *                每个人限制购买的数量
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Integer limitCount;
-
-    /**
      *    销售数量
      *
      *    数据库字段: ONL_ONLINE_SPEC.SALE_COUNT
@@ -123,6 +104,24 @@ public class OnlOnlineSpecMo implements Serializable {
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private Integer seqNo;
+
+    /**
+     *    成本价格
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.COST_PRICE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private BigDecimal costPrice;
+
+    /**
+     *    限制购买数量(默认为0，不限制)每个人限制购买的数量
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Integer limitCount;
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -218,28 +217,6 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
-     *    成本价格
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.COST_PRICE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public BigDecimal getCostPrice() {
-        return costPrice;
-    }
-
-    /**
-     *    成本价格
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.COST_PRICE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setCostPrice(BigDecimal costPrice) {
-        this.costPrice = costPrice;
-    }
-
-    /**
      *    返现金额
      *
      *    数据库字段: ONL_ONLINE_SPEC.CASHBACK_AMOUNT
@@ -328,30 +305,6 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
-     *    限制购买数量(默认为0，不限制)
-     *                每个人限制购买的数量
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Integer getLimitCount() {
-        return limitCount;
-    }
-
-    /**
-     *    限制购买数量(默认为0，不限制)
-     *                每个人限制购买的数量
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setLimitCount(Integer limitCount) {
-        this.limitCount = limitCount;
-    }
-
-    /**
      *    销售数量
      *
      *    数据库字段: ONL_ONLINE_SPEC.SALE_COUNT
@@ -396,6 +349,50 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
+     *    成本价格
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.COST_PRICE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public BigDecimal getCostPrice() {
+        return costPrice;
+    }
+
+    /**
+     *    成本价格
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.COST_PRICE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setCostPrice(BigDecimal costPrice) {
+        this.costPrice = costPrice;
+    }
+
+    /**
+     *    限制购买数量(默认为0，不限制)每个人限制购买的数量
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Integer getLimitCount() {
+        return limitCount;
+    }
+
+    /**
+     *    限制购买数量(默认为0，不限制)每个人限制购买的数量
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setLimitCount(Integer limitCount) {
+        this.limitCount = limitCount;
+    }
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Override
@@ -408,14 +405,14 @@ public class OnlOnlineSpecMo implements Serializable {
         sb.append(", onlineId=").append(onlineId);
         sb.append(", onlineSpec=").append(onlineSpec);
         sb.append(", salePrice=").append(salePrice);
-        sb.append(", costPrice=").append(costPrice);
         sb.append(", cashbackAmount=").append(cashbackAmount);
         sb.append(", commissionAmount=").append(commissionAmount);
         sb.append(", saleUnit=").append(saleUnit);
         sb.append(", currentOnlineCount=").append(currentOnlineCount);
-        sb.append(", limitCount=").append(limitCount);
         sb.append(", saleCount=").append(saleCount);
         sb.append(", seqNo=").append(seqNo);
+        sb.append(", costPrice=").append(costPrice);
+        sb.append(", limitCount=").append(limitCount);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

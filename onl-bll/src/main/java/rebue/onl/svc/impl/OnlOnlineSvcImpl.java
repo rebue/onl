@@ -38,8 +38,6 @@ import rebue.onl.to.OnlineGoodsListTo;
 import rebue.prm.mo.PrmPartnerMo;
 import rebue.prm.svr.feign.PrmPartnerSvr;
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
-import rebue.suc.mo.SucUserMo;
-import rebue.suc.svr.feign.SucUserSvc;
 
 /**
  * 上线信息
@@ -105,9 +103,6 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 	@Resource
 	private PrmPartnerSvr prmPartnerSvr;
 
-	@Resource
-	private SucUserSvc sucUserSvc;
-
 	/**
 	 * 添加上线信息
 	 *
@@ -127,25 +122,14 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			return ro;
 		}
 
-		_log.info("添加上线信息获取操作人信息的参数为：{}", to.getOpId());
-		SucUserMo sucUserMo = sucUserSvc.getById(to.getOpId());
-		_log.info("添加上线信息获取操作人信息的返回值为：{}", sucUserMo);
-		if (sucUserMo == null) {
-			ro.setResult(AddOnlineDic.OP_NOT_EXIST);
-			ro.setMsg("您未登录，请登录后再试。。。");
-			return ro;
-		}
-
-		if (sucUserMo.getOrgId() == null) {
-			ro.setResult(AddOnlineDic.OP_NOT_ORG);
-			ro.setMsg("您未加入任何组织无法上线商品，请加入组织后再试。。。");
-			return ro;
-		}
-
 		Long onlineId = _idWorker.getId();
 		Long productId = to.getProductId();
 		productId = productId == 0 ? onlineId : productId;
 		Date onlineTime = new Date();
+		
+		Long deliverOrgId = to.getDeliverOrgId();
+		deliverOrgId = deliverOrgId == 0 ? to.getOnlineOrgId() : deliverOrgId;
+		
 		// 添加上线信息开始
 		OnlOnlineMo onlineMo = new OnlOnlineMo();
 		onlineMo.setId(onlineId);
@@ -153,8 +137,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		onlineMo.setSupplierId(to.getSupplierId());
 		onlineMo.setOnlineDetail(to.getOnlineDetail());
 		onlineMo.setOpId(to.getOpId());
-		onlineMo.setOnlineOrgId(sucUserMo.getOrgId());
-		onlineMo.setDeliverOrgId(to.getDeliverOrgId());
+		onlineMo.setOnlineOrgId(to.getOnlineOrgId());
+		onlineMo.setDeliverOrgId(deliverOrgId);
 		onlineMo.setOnlineState((byte) 1);
 		onlineMo.setOnlineTime(onlineTime);
 		onlineMo.setProductId(productId);
@@ -176,8 +160,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		onlineLogMo.setSupplierId(to.getSupplierId());
 		onlineLogMo.setOnlineId(onlineId);
 		onlineLogMo.setOpId(to.getOpId());
-		onlineLogMo.setOnlineOrgId(sucUserMo.getOrgId());
-		onlineLogMo.setDeliverOrgId(to.getDeliverOrgId());
+		onlineLogMo.setOnlineOrgId(to.getOnlineOrgId());
+		onlineLogMo.setDeliverOrgId(deliverOrgId);
 		onlineLogMo.setOpTime(onlineTime);
 		onlineLogMo.setSubjectType((byte) to.getSubjectType());
 		onlineLogMo.setOnlineTitle(to.getOnlineName());
@@ -362,20 +346,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			return ro;
 		}
 		
-		_log.info("添加上线信息获取操作人信息的参数为：{}", to.getOpId());
-		SucUserMo sucUserMo = sucUserSvc.getById(to.getOpId());
-		_log.info("添加上线信息获取操作人信息的返回值为：{}", sucUserMo);
-		if (sucUserMo == null) {
-			ro.setResult(ReOnlineDic.OP_NOT_EXIST);
-			ro.setMsg("您未登录，请登录后再试。。。");
-			return ro;
-		}
-
-		if (sucUserMo.getOrgId() == null) {
-			ro.setResult(ReOnlineDic.OP_NOT_ORG);
-			ro.setMsg("您未加入任何组织无法上线商品，请加入组织后再试。。。");
-			return ro;
-		}
+		Long deliverOrgId = to.getDeliverOrgId();
+		deliverOrgId = deliverOrgId == 0 ? to.getOnlineOrgId() : deliverOrgId;
 		
 		// 上线时间
 		Date onlineTime = new Date();
@@ -387,8 +359,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		onlineMo.setOnlineTitle(to.getOnlineName());
 		onlineMo.setOnlineDetail(to.getOnlineDetail());
 		onlineMo.setOpId(to.getOpId());
-		onlineMo.setOnlineOrgId(sucUserMo.getOrgId());
-		onlineMo.setDeliverOrgId(to.getDeliverOrgId());
+		onlineMo.setOnlineOrgId(to.getOnlineOrgId());
+		onlineMo.setDeliverOrgId(deliverOrgId);
 		onlineMo.setOnlineState((byte) 1);
 		onlineMo.setOnlineTime(onlineTime);
 		onlineMo.setProductId(to.getProductId());
@@ -410,8 +382,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		onlineLogMo.setSupplierId(to.getSupplierId());
 		onlineLogMo.setOnlineId(to.getOnlineId());
 		onlineLogMo.setOpId(to.getOpId());
-		onlineLogMo.setOnlineOrgId(sucUserMo.getOrgId());
-		onlineLogMo.setDeliverOrgId(to.getDeliverOrgId());
+		onlineLogMo.setOnlineOrgId(to.getOnlineOrgId());
+		onlineLogMo.setDeliverOrgId(deliverOrgId);
 		onlineLogMo.setOpTime(onlineTime);
 		onlineLogMo.setSubjectType(to.getSubjectType());
 		onlineLogMo.setOnlineTitle(to.getOnlineName());

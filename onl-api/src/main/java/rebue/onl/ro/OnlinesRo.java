@@ -13,33 +13,57 @@ import rebue.onl.mo.OnlOnlineSpecMo;
 
 @Data
 public class OnlinesRo {
+	
+	/**
+	 * 上线id
+	 */
 	private Long id;
 
+	/**
+	 * 上线标题
+	 */
 	private String onlineTitle;
 
+	/**
+	 * 上线详情
+	 */
 	private String onlineDetail;
 
+	/**
+	 * 上线状态
+	 */
 	private Byte onlineState;
 
 	private Long opId;
+	
+	/**
+     *    发货组织ID(默认填入上线组织ID，可变更为供应商的ID)
+     *
+     *    数据库字段: ONL_ONLINE.DELIVER_ORG_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long deliverOrgId;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date onlineTime;
 
+	/**
+	 * 产品id
+	 */
 	private Long productId;
 
+	/**
+	 * 板块类型
+	 */
 	private Byte subjectType;
 	
 	/**
-	 * 押货类型（1：押货 2：供应商发货）
-	 *
-	 * 数据库字段: ONL_ONLINE.PLEDGE_TYPE
-	 *
-	 * @mbg.generated 自动生成，如需修改，请删除本行
+	 * 发货类型
 	 */
-	private Byte pledgeType;
-
+	private Byte deliveryType;
+	
 	/**
 	 * 规格信息
 	 */

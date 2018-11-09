@@ -76,4 +76,13 @@ public class AddOnlineTo {
 	 * @mbg.generated 自动生成，如需修改，请删除本行
 	 */
 	private Long deliverOrgId;
+
+	/**
+	 * 操作组织ID
+	 *
+	 * 数据库字段: ONL_ONLINE.ONLINE_ORG_ID
+	 *
+	 * @mbg.generated 自动生成，如需修改，请删除本行
+	 */
+	private Long onlineOrgId;
 }

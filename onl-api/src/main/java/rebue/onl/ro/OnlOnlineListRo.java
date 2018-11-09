@@ -117,4 +117,14 @@ public class OnlOnlineListRo {
 	 * 发货组织名称
 	 */
 	private String deliverOrgName;
+	
+	/**
+	 * 发货类型
+	 */
+	private Byte deliveryType;
+	
+	/**
+	 * 当前组织id
+	 */
+	private Long thisOrgId;
 }

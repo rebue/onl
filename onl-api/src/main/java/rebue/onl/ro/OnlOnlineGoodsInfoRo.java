@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import lombok.Data;
 
-
 @Data
 @JsonInclude(Include.NON_NULL)
 public class OnlOnlineGoodsInfoRo {
@@ -60,31 +59,19 @@ public class OnlOnlineGoodsInfoRo {
 	 * 上线详情
 	 */
 	private String onlineDetail;
-	
+
 	/**
 	 * 商品类型
 	 */
-	
-	private Byte subjectType; 
-	
-    /**
-     *    供应商ID
-     *
-     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
-     *
-     */
-    private Long supplierId;
 
-    /**
-     *    押货类型（1：押货 2：供应商发货）
-     *
-     *    数据库字段: ONL_ONLINE.PLEDGE_TYPE
-     *
-     */
-    private Byte pledgeType;
-    
-    
+	private Byte subjectType;
 
-
+	/**
+	 * 供应商ID
+	 *
+	 * 数据库字段: ONL_ONLINE.SUPPLIER_ID
+	 *
+	 */
+	private Long supplierId;
 
 }

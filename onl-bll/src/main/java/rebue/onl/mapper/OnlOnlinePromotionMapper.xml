@@ -172,7 +172,7 @@
   
   <!-- 获取上线的推广活动列表 -->
   <select id="listOnlinePromotion" resultType="java.util.Map">
-	SELECT oo.PLEDGE_TYPE as pledgeType ,oo.SUPPLIER_ID as supplierId , oop.PROMOTION_TYPE AS promotionType,oo.SUBJECT_TYPE AS subjectType, oop.ONLINE_ID AS onlineId, oo.ONLINE_TITLE AS onlineTitle, oopc.PIC_PATH AS picPath, 
+	SELECT oo.SUPPLIER_ID as supplierId , oop.PROMOTION_TYPE AS promotionType,oo.SUBJECT_TYPE AS subjectType, oop.ONLINE_ID AS onlineId, oo.ONLINE_TITLE AS onlineTitle, oopc.PIC_PATH AS picPath, 
 	oos.ONLINE_SPEC AS onlineSpec, oos.SALE_PRICE AS salePrice, oos.CASHBACK_AMOUNT AS cashbackAmount, oos.ID AS specId
 	FROM ONL_ONLINE_PROMOTION oop
 	LEFT JOIN ONL_ONLINE oo ON oop.ONLINE_ID=oo.ID 

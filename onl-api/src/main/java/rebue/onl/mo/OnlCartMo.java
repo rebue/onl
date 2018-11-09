@@ -27,15 +27,6 @@ public class OnlCartMo implements Serializable {
     private Long id;
 
     /**
-     *    上线ID
-     *
-     *    数据库字段: ONL_CART.ONLINE_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Long onlineId;
-
-    /**
      *    上线规格ID
      *
      *    数据库字段: ONL_CART.ONLINE_SPEC_ID
@@ -45,13 +36,13 @@ public class OnlCartMo implements Serializable {
     private Long onlineSpecId;
 
     /**
-     *    供应商ID
+     *    上线ID
      *
-     *    数据库字段: ONL_CART.SUPPLIER_ID
+     *    数据库字段: ONL_CART.ONLINE_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private Long supplierId;
+    private Long onlineId;
 
     /**
      *    用户编号
@@ -110,28 +101,6 @@ public class OnlCartMo implements Serializable {
     }
 
     /**
-     *    上线ID
-     *
-     *    数据库字段: ONL_CART.ONLINE_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Long getOnlineId() {
-        return onlineId;
-    }
-
-    /**
-     *    上线ID
-     *
-     *    数据库字段: ONL_CART.ONLINE_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setOnlineId(Long onlineId) {
-        this.onlineId = onlineId;
-    }
-
-    /**
      *    上线规格ID
      *
      *    数据库字段: ONL_CART.ONLINE_SPEC_ID
@@ -154,25 +123,25 @@ public class OnlCartMo implements Serializable {
     }
 
     /**
-     *    供应商ID
+     *    上线ID
      *
-     *    数据库字段: ONL_CART.SUPPLIER_ID
+     *    数据库字段: ONL_CART.ONLINE_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Long getSupplierId() {
-        return supplierId;
+    public Long getOnlineId() {
+        return onlineId;
     }
 
     /**
-     *    供应商ID
+     *    上线ID
      *
-     *    数据库字段: ONL_CART.SUPPLIER_ID
+     *    数据库字段: ONL_CART.ONLINE_ID
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
+    public void setOnlineId(Long onlineId) {
+        this.onlineId = onlineId;
     }
 
     /**
@@ -251,9 +220,8 @@ public class OnlCartMo implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", onlineId=").append(onlineId);
         sb.append(", onlineSpecId=").append(onlineSpecId);
-        sb.append(", supplierId=").append(supplierId);
+        sb.append(", onlineId=").append(onlineId);
         sb.append(", userId=").append(userId);
         sb.append(", cartCount=").append(cartCount);
         sb.append(", joinTime=").append(joinTime);

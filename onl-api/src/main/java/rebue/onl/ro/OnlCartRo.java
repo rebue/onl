@@ -78,13 +78,4 @@ public class OnlCartRo {
      */
     private Long supplierId;
 
-    /**
-     *    押货类型（1：押货 2：供应商发货）
-     *
-     *    数据库字段: ONL_CART.PLEDGE_TYPE
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Byte pledgeType;
-
 }
