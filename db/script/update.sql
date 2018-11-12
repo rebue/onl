@@ -1,52 +1,58 @@
--- 2018年11月8日
-	alter table ONL_ONLINE_SPEC              add     LIMIT_COUNT              int       not null default 0 comment '限制购买数量(默认为0，不限制)每个人限制购买的数量';
-	alter table ONL_ONLINE_SPEC_LOG    add     LIMIT_COUNT              int        not null default 0 comment '限制购买数量(默认为0，不限制)每个人限制购买的数量';
-    alter table ONL_ONLINE                         add     DELIVER_ORG_ID      bigint                                comment '发货组织ID(默认填入上线组织ID，可变更为供应商的ID)';
-    alter table ONL_ONLINE_LOG               add     DELIVER_ORG_ID      bigint                                comment '发货组织ID(默认填入上线组织ID，可变更为供应商的ID)';
+-- 2018-11-12
+alter table ONL_ONLINE_SPEC                         add     PRODUCT_SPEC_ID      bigint null          comment '产品规格ID';
+
+
+-- 2018-11-08
+alter table ONL_ONLINE_SPEC              add     LIMIT_COUNT              int       not null default 0 comment '限制购买数量(默认为0，不限制)每个人限制购买的数量';
+alter table ONL_ONLINE_SPEC_LOG    add     LIMIT_COUNT              int        not null default 0 comment '限制购买数量(默认为0，不限制)每个人限制购买的数量';
+alter table ONL_ONLINE                         add     DELIVER_ORG_ID      bigint                                comment '发货组织ID(默认填入上线组织ID，可变更为供应商的ID)';
+alter table ONL_ONLINE_LOG               add     DELIVER_ORG_ID      bigint                                comment '发货组织ID(默认填入上线组织ID，可变更为供应商的ID)';
     
--- 2018年11月6日
-	-- alter table onl.ONL_ONLINE           add DELIVER_ORG_TYPE              tinyint comment '发货组织类型（1：本组织发货 2：供应商发货）';
-	-- alter table onl.ONL_ONLINE_LOG  add DELIVER_ORG_TYPE          tinyint comment '发货组织类型（1：本组织发货 2：供应商发货）';
+-- 2018-11-06
+-- alter table onl.ONL_ONLINE           add DELIVER_ORG_TYPE              tinyint comment '发货组织类型（1：本组织发货 2：供应商发货）';
+-- alter table onl.ONL_ONLINE_LOG  add DELIVER_ORG_TYPE          tinyint comment '发货组织类型（1：本组织发货 2：供应商发货）';
     
 
--- 2018年11月5日14:10:57
-	-- ONL_ONLINE 添加上线组织ID（ONLINE_ORG_ID）
-	alter table onl.ONL_ONLINE add ONLINE_ORG_ID        bigint not null comment '上线组织ID';
-	-- ONL_ONLINE_LOG 添加上线组织ID（ONLINE_ORG_ID）
-	alter table onl.ONL_ONLINE_LOG add ONLINE_ORG_ID        bigint not null comment '上线组织ID';
+-- 2018-11-5
+-- ONL_ONLINE 添加上线组织ID（ONLINE_ORG_ID）
+alter table onl.ONL_ONLINE add ONLINE_ORG_ID        bigint not null comment '上线组织ID';
+-- ONL_ONLINE_LOG 添加上线组织ID（ONLINE_ORG_ID）
+alter table onl.ONL_ONLINE_LOG add ONLINE_ORG_ID        bigint not null comment '上线组织ID';
     
 
--- 2018年11月5日11:26:12
-	-- ONL_ONLINE 去除供应商结算类型（SUPPLIER_SETTLE_TYPE）、添加押货类型（PLEDGE_TYPE）
-	-- alter table onl.ONL_ONLINE drop column SUPPLIER_SETTLE_TYPE;
-	-- ONL_ONLINE_LOG 去除供应商结算类型（SUPPLIER_SETTLE_TYPE）、添加押货类型（PLEDGE_TYPE）
-	-- alter table onl.ONL_ONLINE_LOG drop column SUPPLIER_SETTLE_TYPE;
-	-- ONL_CART 去除供应商结算类型（SUPPLIER_SETTLE_TYPE）、添加押货类型（PLEDGE_TYPE）
-	-- alter table onl.ONL_CART drop column SUPPLIER_SETTLE_TYPE;    
+-- 2018-11-05
+-- ONL_ONLINE 去除供应商结算类型（SUPPLIER_SETTLE_TYPE）、添加押货类型（PLEDGE_TYPE）
+-- alter table onl.ONL_ONLINE drop column SUPPLIER_SETTLE_TYPE;
+-- ONL_ONLINE_LOG 去除供应商结算类型（SUPPLIER_SETTLE_TYPE）、添加押货类型（PLEDGE_TYPE）
+-- alter table onl.ONL_ONLINE_LOG drop column SUPPLIER_SETTLE_TYPE;
+-- ONL_CART 去除供应商结算类型（SUPPLIER_SETTLE_TYPE）、添加押货类型（PLEDGE_TYPE）
+-- alter table onl.ONL_CART drop column SUPPLIER_SETTLE_TYPE;    
     
     
--- 2018年11月3日09:40:41
-	-- ONL_ONLINE 添加供应商ID、供应商结算类型（1：结算到余额 2：结算到货款）
-	alter table onl.ONL_ONLINE add SUPPLIER_ID          bigint comment '供应商ID';
-	-- alter table onl.ONL_ONLINE add SUPPLIER_SETTLE_TYPE tinyint comment '供应商结算类型（1：结算到余额 2：结算到货款）';
-	-- ONL_ONLINE_LOG 添加供应商ID、供应商结算类型（1：结算到余额 2：结算到货款）
-	alter table onl.ONL_ONLINE_LOG add SUPPLIER_ID          bigint comment '供应商ID';
-	-- alter table onl.ONL_ONLINE_LOG add SUPPLIER_SETTLE_TYPE tinyint comment '供应商结算类型（1：结算到余额 2：结算到货款）';
-	-- ONL_CART 添加供应商ID、供应商结算类型（1：结算到余额 2：结算到货款）
-	-- alter table onl.ONL_CART add SUPPLIER_ID          bigint comment '供应商ID';
-	-- alter table onl.ONL_CART add SUPPLIER_SETTLE_TYPE tinyint comment '供应商结算类型（1：结算到余额 2：结算到货款）';
+-- 2018-11-03
+-- ONL_ONLINE 添加供应商ID、供应商结算类型（1：结算到余额 2：结算到货款）
+alter table onl.ONL_ONLINE add SUPPLIER_ID          bigint comment '供应商ID';
+-- alter table onl.ONL_ONLINE add SUPPLIER_SETTLE_TYPE tinyint comment '供应商结算类型（1：结算到余额 2：结算到货款）';
+-- ONL_ONLINE_LOG 添加供应商ID、供应商结算类型（1：结算到余额 2：结算到货款）
+alter table onl.ONL_ONLINE_LOG add SUPPLIER_ID          bigint comment '供应商ID';
+-- alter table onl.ONL_ONLINE_LOG add SUPPLIER_SETTLE_TYPE tinyint comment '供应商结算类型（1：结算到余额 2：结算到货款）';
+-- ONL_CART 添加供应商ID、供应商结算类型（1：结算到余额 2：结算到货款）
+-- alter table onl.ONL_CART add SUPPLIER_ID          bigint comment '供应商ID';
+-- alter table onl.ONL_CART add SUPPLIER_SETTLE_TYPE tinyint comment '供应商结算类型（1：结算到余额 2：结算到货款）';
 -- 2018年11月1日17:36:51 
-	-- ONL_ONLINE_SPEC 添加成本价格（COST_PRICE）
-	alter table onl.ONL_ONLINE_SPEC add COST_PRICE           decimal(20,4) comment '成本价格';
-	-- ONL_ONLINE_SPEC_LOG 添加成本价格（COST_PRICE）
-	alter table onl.ONL_ONLINE_SPEC_LOG add COST_PRICE           decimal(20,4) comment '成本价格';
+-- ONL_ONLINE_SPEC 添加成本价格（COST_PRICE）
+alter table onl.ONL_ONLINE_SPEC add COST_PRICE           decimal(20,4) comment '成本价格';
+-- ONL_ONLINE_SPEC_LOG 添加成本价格（COST_PRICE）
+alter table onl.ONL_ONLINE_SPEC_LOG add COST_PRICE           decimal(20,4) comment '成本价格';
+
+
+
+
 
 
     
     
 -- --------------------------------------------------------下面已更新到线上------------------------------------------------------------
-
-
 
 
 -- 2018年9月30日15:42:16 ONL_ONLINE_PIC_LOG去除上线图片（ONL_ONLINE_PIC）关联

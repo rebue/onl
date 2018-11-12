@@ -1,10 +1,14 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/11/8 10:24:00                           */
+/* Created on:     2018/11/12 15:22:08                          */
 /*==============================================================*/
 
 
 drop table if exists ONL_CART;
+
+drop table if exists ONL_ONLINE;
+
+drop table if exists ONL_ONLINE_LOG;
 
 drop table if exists ONL_ONLINE_PIC;
 
@@ -12,13 +16,9 @@ drop table if exists ONL_ONLINE_PIC_LOG;
 
 drop table if exists ONL_ONLINE_PROMOTION;
 
-drop table if exists ONL_ONLINE_SPEC_LOG;
-
 drop table if exists ONL_ONLINE_SPEC;
 
-drop table if exists ONL_ONLINE_LOG;
-
-drop table if exists ONL_ONLINE;
+drop table if exists ONL_ONLINE_SPEC_LOG;
 
 /*==============================================================*/
 /* Table: ONL_CART                                              */
@@ -127,7 +127,8 @@ create table ONL_ONLINE_SPEC
 (
    ID                   bigint not null comment '上线规格ID',
    ONLINE_ID            bigint not null comment '上线ID',
-   ONLINE_SPEC          varchar(200) not null comment '上线规格',
+   PRODUCT_SPEC_ID      bigint comment '产品规格ID',
+   ONLINE_SPEC          varchar(200) not null comment '上线规格名称',
    SALE_PRICE           decimal(20,4) not null comment '销售价格',
    COST_PRICE           decimal(20,4) comment '成本价格',
    CASHBACK_AMOUNT      decimal(20,4) not null comment '返现金额',
