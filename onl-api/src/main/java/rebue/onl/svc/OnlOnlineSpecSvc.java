@@ -1,15 +1,11 @@
 package rebue.onl.svc;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
 import rebue.onl.mo.OnlOnlineSpecMo;
-import rebue.onl.ro.DeleteCartAndModifyInventoryRo;
 import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
-import rebue.onl.to.DeleteCartAndModifyInventoryTo;
 import rebue.onl.to.OnlOnlineSpecTo;
 import rebue.robotech.svc.MybatisBaseSvc;
 
@@ -21,73 +17,51 @@ import rebue.robotech.svc.MybatisBaseSvc;
 public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.lang.Long> {
 
     /**
-     *  根据商品规格编号查询商品规格信息 Title: selectByPrimaryKey Description:
-     *
-     *  @param id
-     *  @return
-     *  @date 2018年3月29日 下午2:15:17
+     * 根据商品规格编号查询商品规格信息
      */
     OnlOnlineSpecMo selectByPrimaryKey(Long id);
 
     /**
-     *  获取上线规格信息 Title: selectOnlineSpecInfoByOnlineId Description:
-     *
-     *  @param record
-     *  @return
-     *  @date 2018年4月1日 下午4:29:31
+     * 获取上线规格信息
      */
     List<OnlOnlineSpecInfoRo> selectOnlineSpecInfo(OnlOnlineSpecMo record);
 
     /**
-     *  修改上线规格信息 Title: updateSelective Description:
-     *
-     *  @param mo
-     *  @return
-     *  @date 2018年4月10日 下午2:21:42
+     * 修改上线规格信息
      */
     int updateSelective(OnlOnlineSpecMo mo);
 
     /**
-     *  删除购物车和修改上线数量 Title: deleteCartAndModifyInventory Description:
-     *
-     *  @param ro
-     *  @return
-     *  @throws IOException
-     *  @throws JsonMappingException
-     *  @throws JsonParseException
-     *  @date 2018年4月11日 下午5:25:52
-     */
-    DeleteCartAndModifyInventoryRo deleteCartAndModifyInventory(List<DeleteCartAndModifyInventoryTo> list) throws JsonParseException, JsonMappingException, IOException;
-
-    /**
-     *  修改上线规格信息 Title: resultMap Description:
-     *
-     *  @param mo
-     *  @return
-     *  @date 2018年4月23日 下午5:46:50
+     * 修改上线规格信息
      */
     ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(List<Map<String, Object>> specList);
 
     /**
-     *  修改上线规格信息
-     *
-     *  @param to
-     *  @return
+     * 修改上线规格信息
      */
     int updateOnlineSpec(OnlOnlineSpecTo to);
 
     /**
-     *  根据规格id批量删除规格信息
-     *
-     *  @param ids
-     *  @return
+     * 根据规格id批量删除规格信息
      */
     int batchDeleteByIds(String ids, Long onlineId);
 
     /**
      * 判断商品规格是否存在
-     * @param onlineSpec
-     * @return
      */
     Boolean existOnlineSpec(String onlineSpec);
+
+    /**
+     * 更新销售数量(购买后)
+     * 新销售数量 = 原销售数量 + 购买数量
+     * 
+     * @param buyCount
+     *            购买数量
+     * @param onlineSpecId
+     *            上线规格ID
+     * @param saleCount
+     *            原销售数量
+     * @return 更新影响的行数，为0表示出现并发问题
+     */
+    int updateSaleCount(Integer buyCount, Long onlineSpecId, Integer saleCount);
 }

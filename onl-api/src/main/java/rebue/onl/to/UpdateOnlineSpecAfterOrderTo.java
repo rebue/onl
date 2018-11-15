@@ -6,16 +6,11 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.Data;
 
 /**
- * 删除购物车和修改库存
+ * 下单后更新上线规格信息的传输对象
  */
 @Data
 @JsonInclude(Include.NON_NULL)
-public class DeleteCartAndModifyInventoryTo {
-
-    /**
-     * 购物车ID
-     */
-    private Long    cartId;
+public class UpdateOnlineSpecAfterOrderTo {
 
     /**
      * 上线ID
@@ -23,13 +18,18 @@ public class DeleteCartAndModifyInventoryTo {
     private Long    onlineId;
 
     /**
-     * 上线规格
+     * 上线规格ID
      */
-    private String  onlineSpec;
+    private Long    onlineSpecId;
 
     /**
      * 购买数量
      */
     private Integer buyCount;
+
+    /**
+     * 购物车ID
+     */
+    private Long    cartId;
 
 }

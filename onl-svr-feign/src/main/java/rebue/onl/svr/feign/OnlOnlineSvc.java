@@ -2,9 +2,13 @@ package rebue.onl.svr.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import rebue.onl.mo.OnlOnlineMo;
+import rebue.onl.to.UpdateOnlineAfterOrderTo;
+import rebue.robotech.ro.Ro;
 import rebue.sbs.feign.FeignConfig;
 
 /**
@@ -17,21 +21,27 @@ import rebue.sbs.feign.FeignConfig;
 @FeignClient(name = "onl-svr", configuration = FeignConfig.class)
 public interface OnlOnlineSvc {
 
-	/**
-	 * 查询是否已上线 Title: existSelective Description:
-	 * 
-	 * @param qo
-	 * @return
-	 * @date 2018年4月10日 下午4:06:26
-	 */
-	@GetMapping(value = "/onl/online/exist")
-	Boolean existSelective(@RequestParam("id") Long id, @RequestParam("onlineState") Byte onlineState);
+    /**
+     * 查询是否已上线 Title: existSelective Description:
+     * 
+     * @param qo
+     * @return
+     * @date 2018年4月10日 下午4:06:26
+     */
+    @GetMapping(value = "/onl/online/exist")
+    Boolean existSelective(@RequestParam("id") Long id, @RequestParam("onlineState") Byte onlineState);
 
-	/**
-	 * 根据上线ID查找上线商品上线信息
-	 */
+    /**
+     * 根据上线ID查找上线商品上线信息
+     */
 
-	@GetMapping("/onl/online/getbyid")
-	OnlOnlineMo getById(@RequestParam("id") Long id);
+    @GetMapping("/onl/online/getbyid")
+    OnlOnlineMo getById(@RequestParam("id") Long id);
+
+    /**
+     * 下单后更新上线信息
+     */
+    @PutMapping(value = "/onl/online/updateonlineafterorder")
+    Ro updateOnlineAfterOrder(@RequestBody UpdateOnlineAfterOrderTo to);
 
 }

@@ -1,10 +1,12 @@
 package rebue.onl.mapper;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
+
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.to.AppendOnlineSpecCountTo;
@@ -15,57 +17,67 @@ import rebue.robotech.mapper.MybatisBaseMapper;
 public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, Long> {
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     int deleteByPrimaryKey(Long id);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     int insert(OnlOnlineSpecMo record);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     int insertSelective(OnlOnlineSpecMo record);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     OnlOnlineSpecMo selectByPrimaryKey(Long id);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     int updateByPrimaryKeySelective(OnlOnlineSpecMo record);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     int updateByPrimaryKey(OnlOnlineSpecMo record);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     List<OnlOnlineSpecMo> selectAll();
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     List<OnlOnlineSpecMo> selectSelective(OnlOnlineSpecMo record);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     boolean existByPrimaryKey(Long id);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     boolean existSelective(OnlOnlineSpecMo record);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     int countSelective(OnlOnlineSpecMo record);
 
@@ -95,14 +107,19 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
     int appendOnlineCount(AppendOnlineSpecCountTo record);
 
     /**
-     * 修改销售数量
+     * 更新销售数量(购买后)
      * 新销售数量 = 原销售数量 + 购买数量
-     *
-     * @param to
+     * 
+     * @param buyCount
+     *            购买数量
+     * @param onlineSpecId
+     *            上线规格ID
+     * @param saleCount
+     *            原销售数量
      * @return
      */
-    @Update("update ONL_ONLINE_SPEC set SALE_COUNT=SALE_COUNT + ${buyCount} where ONLINE_ID=#{onlineId,jdbcType=BIGINT} and ONLINE_SPEC=#{onlineSpec,jdbcType=VARCHAR} and SALE_COUNT=#{saleCount,jdbcType=INTEGER}")
-    int updateSaleCount(@Param("buyCount") Integer buyCount, @Param("onlineId") Long onlineId, @Param("onlineSpec") String onlineSpec, @Param("saleCount") Integer saleCount);
+    @Update("update ONL_ONLINE_SPEC set SALE_COUNT=SALE_COUNT + ${buyCount} where ID=#{onlineSpecId} and SALE_COUNT=#{saleCount}")
+    int updateSaleCount(@Param("buyCount") Integer buyCount, @Param("onlineSpecId") Long onlineSpecId, @Param("saleCount") Integer saleCount);
 
     /**
      * 取消订单修改上线销量

@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import rebue.onl.mo.OnlOnlineSpecMo;
-import rebue.onl.ro.DeleteCartAndModifyInventoryRo;
 import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
-import rebue.onl.to.DeleteCartAndModifyInventoryTo;
 import rebue.sbs.feign.FeignConfig;
 
 /**
@@ -47,9 +45,9 @@ public interface OnlOnlineSpecSvc {
     @GetMapping(value = "/onl/onlinespec/details")
     List<OnlOnlineSpecInfoRo> selectOnlineSpecInfo(@RequestParam("onlineId") Long onlineId, @RequestParam("onlineSpec") String onlineSpec);
 
-    /**
-     * 删除购物车和修改上线数量
-     */
-    @PostMapping(value = "/onl/onlinespec/deleteandupdate")
-    DeleteCartAndModifyInventoryRo deleteCartAndUpdateOnlineCount(@RequestBody List<DeleteCartAndModifyInventoryTo> list);
+//    /**
+//     * 删除购物车和修改上线数量
+//     */
+//    @PostMapping(value = "/onl/onlinespec/deleteandupdate")
+//    Ro deleteCartAndUpdateOnlineCount(@RequestBody List<UpdateOnlineAfterOrderTo> list);
 }

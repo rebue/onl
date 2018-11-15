@@ -1,7 +1,9 @@
 package rebue.onl.svc;
 
-import com.github.pagehelper.PageInfo;
 import java.util.List;
+
+import com.github.pagehelper.PageInfo;
+
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.ro.AddOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
@@ -9,6 +11,8 @@ import rebue.onl.ro.OnlOnlineListRo;
 import rebue.onl.ro.ReOnlineRo;
 import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlineGoodsListTo;
+import rebue.onl.to.UpdateOnlineAfterOrderTo;
+import rebue.robotech.ro.Ro;
 import rebue.robotech.svc.MybatisBaseSvc;
 
 /**
@@ -19,44 +23,39 @@ import rebue.robotech.svc.MybatisBaseSvc;
 public interface OnlOnlineSvc extends MybatisBaseSvc<OnlOnlineMo, java.lang.Long> {
 
     /**
-     *  获取上线商品列表 Title: selectOnlineGoodsList Description:
+     * 获取上线商品列表 Title: selectOnlineGoodsList Description:
      *
-     *  @return
-     *  @date 2018年3月29日 下午5:40:42
+     * @return
+     * @date 2018年3月29日 下午5:40:42
      */
     List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(OnlineGoodsListTo to);
 
     /**
-     *  添加上线信息
+     * 添加上线信息
      *
-     *  @param to
-     *  @return
+     * @param to
+     * @return
      */
     AddOnlineRo addOnline(AddOnlineTo to);
 
     /**
-     *  根据id查询上线信息
-     *
-     *  @param id
-     *  @return
+     * 根据id查询上线信息
      */
     OnlOnlineMo listByPrimaryKey(Long id);
 
     /**
-     *  重新上线
-     *
-     *  @param to
-     *  @return
+     * 重新上线
      */
     ReOnlineRo reOnline(AddOnlineTo to);
 
     /**
      * 重写查询上线信息
-     * @param ro
-     * @param pageNum
-     * @param pageSize
-     * @param orderBy
-     * @return
      */
     PageInfo<OnlOnlineListRo> listEx(OnlOnlineListRo ro, int pageNum, int pageSize, String orderBy);
+
+    /**
+     * 下单后更新上线信息
+     */
+    Ro updateOnlineAfterOrder(UpdateOnlineAfterOrderTo to);
+
 }
