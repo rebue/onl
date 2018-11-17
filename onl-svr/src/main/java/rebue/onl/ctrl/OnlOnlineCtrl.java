@@ -127,15 +127,14 @@ public class OnlOnlineCtrl {
             return ro;
         }
 
-        final Map<String, Object> map = JwtUtils.getJwtAdditionInCookie(req);
-        final String orgId = String.valueOf(map.get("orgId"));
+        final Long orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
 //		String orgId = String.valueOf("520874560590053376");
-        if (orgId == null || orgId.equals("") || orgId.equals("null")) {
+        if (orgId == null) {
             ro.setResult(AddOnlineDic.OP_NOT_ORG);
             ro.setMsg("您未加入任何组织无法上线商品，请加入组织后再试。。。");
             return ro;
         }
-        to.setOnlineOrgId(Long.parseLong(orgId));
+        to.setOnlineOrgId(orgId);
         _log.info("添加上线信息的参数为：{}", to);
         try {
             return svc.addOnline(to);
@@ -166,9 +165,8 @@ public class OnlOnlineCtrl {
             _log.error(msg);
             throw new IllegalArgumentException(msg);
         }
-        final Map<String, Object> map = JwtUtils.getJwtAdditionInCookie(req);
-        final String orgId = String.valueOf(map.get("orgId"));
-        ro.setThisOrgId(Long.parseLong(orgId));
+        final Long orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
+        ro.setThisOrgId(orgId);
 //		ro.setThisOrgId(520874560590053376L);
         final PageInfo<OnlOnlineListRo> result = svc.listEx(ro, pageNum, pageSize, "ONLINE_TIME DESC");
         _log.info("result: " + result);
@@ -250,13 +248,12 @@ public class OnlOnlineCtrl {
     @GetMapping("/onl/online/getonlines")
     GetOnlinesRo getOnlines(@RequestParam("id") final Long id, final HttpServletRequest req) throws NumberFormatException, ParseException {
         _log.info("根据上线id获取上线信息的参数为：{}", id);
-        final Map<String, Object> map = JwtUtils.getJwtAdditionInCookie(req);
-        final String orgId = String.valueOf(map.get("orgId"));
+        final Long orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
 //		String orgId = String.valueOf("520874560590053376");
         final GetOnlinesRo onlinesRo = new GetOnlinesRo();
         // 获取上线信息
         final OnlinesRo onlOnlineRo = dozerMapper.map(svc.listByPrimaryKey(id), OnlinesRo.class);
-        if (orgId.equals(String.valueOf(onlOnlineRo.getDeliverOrgId()))) {
+        if (orgId == onlOnlineRo.getDeliverOrgId()) {
             onlOnlineRo.setDeliveryType((byte) 0);
         } else {
             onlOnlineRo.setDeliveryType((byte) 1);
@@ -297,15 +294,14 @@ public class OnlOnlineCtrl {
             return ro;
         }
 
-        final Map<String, Object> map = JwtUtils.getJwtAdditionInCookie(req);
-        final String orgId = String.valueOf(map.get("orgId"));
+        final Long orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
 //		String orgId = String.valueOf("520874560590053376");
-        if (orgId == null || orgId.equals("") || orgId.equals("null")) {
+        if (orgId == null) {
             ro.setResult(ReOnlineDic.OP_NOT_ORG);
             ro.setMsg("您未加入任何组织无法上线商品，请加入组织后再试。。。");
             return ro;
         }
-        to.setOnlineOrgId(Long.parseLong(orgId));
+        to.setOnlineOrgId(orgId);
         _log.info("添加上线信息的参数为：{}", to);
         try {
             return svc.reOnline(to);

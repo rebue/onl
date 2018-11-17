@@ -49,7 +49,7 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
     /**
      * 判断商品规格是否存在
      */
-    Boolean existOnlineSpec(String onlineSpec);
+    Boolean existOnlineSpec(String onlineSpec, Long onlineId);
 
     /**
      * 更新销售数量(购买后)

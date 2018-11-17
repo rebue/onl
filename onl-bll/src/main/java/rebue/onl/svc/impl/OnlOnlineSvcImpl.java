@@ -190,7 +190,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             // 添加上线规格信息开始
             final OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
             _log.info("添加上线信息查询上线规格名称是否存在的参数为：{}", to.getOnlineSpecs().get(i).getOnlineSpec());
-            final boolean existSelectiveResult = onlOnlineSpecSvc.existOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec());
+            final boolean existSelectiveResult = onlOnlineSpecSvc.existOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec(), onlineId);
             _log.info("添加上线信息查询上线规格名称是否存在的返回值为：{}", existSelectiveResult);
             if (existSelectiveResult) {
                 _log.error("添加上线信息查询上线规格名称是否存在时发现该商品名称已存在，商品名称为：{}", to.getOnlineSpecs().get(i).getOnlineSpec());
@@ -442,7 +442,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                 }
             } else {
                 _log.info("添加上线信息查询上线规格名称是否存在的参数为：{}", to.getOnlineSpecs().get(i).getOnlineSpec());
-                final boolean existSelectiveResult = onlOnlineSpecSvc.existOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec());
+                final boolean existSelectiveResult = onlOnlineSpecSvc.existOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec(), to.getOnlineId());
                 _log.info("添加上线信息查询上线规格名称是否存在的返回值为：{}", existSelectiveResult);
                 if (existSelectiveResult) {
                     _log.error("添加上线信息查询上线规格名称是否存在时发现该商品名称已存在，商品名称为：{}", to.getOnlineSpecs().get(i).getOnlineSpec());

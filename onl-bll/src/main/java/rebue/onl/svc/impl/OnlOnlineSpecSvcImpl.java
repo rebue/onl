@@ -172,9 +172,10 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
      * 判断商品规格是否存在
      */
     @Override
-    public Boolean existOnlineSpec(final String onlineSpec) {
+    public Boolean existOnlineSpec(final String onlineSpec, Long onlineId) {
         final OnlOnlineSpecMo specMo = new OnlOnlineSpecMo();
         specMo.setOnlineSpec(onlineSpec);
+        specMo.setOnlineId(onlineId);
         return onlOnlineSpecSvc.existSelective(specMo);
     }
 
