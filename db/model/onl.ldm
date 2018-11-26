@@ -1025,7 +1025,7 @@ RefrUpdRule=Restrict
 RefrDelRule=Restrict
 ColnFKName=%TABLE%_PK
 ColnFKNameUse=No</a:ModelOptionsText>
-<a:RepositoryFilename>\\Vboxsvr\02\onl\db\model\onl.ldm</a:RepositoryFilename>
+<a:RepositoryFilename>%[PRJ_ROOT_DIR]%\onl.ldm</a:RepositoryFilename>
 <c:GeneratedModels>
 <o:Shortcut Id="o3">
 <a:ObjectID>233FA29F-FEB0-42E1-955A-263675023E21</a:ObjectID>
@@ -1455,7 +1455,7 @@ Shadow=0</a:DisplayPreferences>
 <o:RelationshipSymbol Id="o10">
 <a:CreationDate>1521785433</a:CreationDate>
 <a:ModificationDate>1521787988</a:ModificationDate>
-<a:Rect>((-20576,1420), (-14276,17032))</a:Rect>
+<a:Rect>((-20542,1420), (-14242,17032))</a:Rect>
 <a:ListOfPoints>((-17396,17032),(-17396,10406),(-17389,10406),(-17389,1420))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4627</a:ArrowStyle>
@@ -1478,7 +1478,7 @@ DESTINATION 0 新宋体,8,N</a:FontList>
 <o:RelationshipSymbol Id="o14">
 <a:CreationDate>1521785485</a:CreationDate>
 <a:ModificationDate>1521792913</a:ModificationDate>
-<a:Rect>((-44120,7041), (-21205,16982))</a:Rect>
+<a:Rect>((-44120,7041), (-21205,16984))</a:Rect>
 <a:ListOfPoints>((-21205,16017),(-40970,16017),(-40970,7041))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4627</a:ArrowStyle>
@@ -1546,7 +1546,7 @@ DESTINATION 0 新宋体,8,N</a:FontList>
 <o:RelationshipSymbol Id="o23">
 <a:CreationDate>1521789953</a:CreationDate>
 <a:ModificationDate>1521792913</a:ModificationDate>
-<a:Rect>((-12642,-4586), (9988,19548))</a:Rect>
+<a:Rect>((-12642,-4586), (9988,19550))</a:Rect>
 <a:ListOfPoints>((-12642,18583),(6838,18583),(6838,-4586))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4627</a:ArrowStyle>
@@ -2247,9 +2247,9 @@ LABL 0 新宋体,8,N</a:FontList>
 <a:Code>SALE_PRICE</a:Code>
 <a:CreationDate>1521785136</a:CreationDate>
 <a:Creator>admin</a:Creator>
-<a:ModificationDate>1521785150</a:ModificationDate>
-<a:Modifier>admin</a:Modifier>
-<a:Comment>销售价格</a:Comment>
+<a:ModificationDate>1542353113</a:ModificationDate>
+<a:Modifier>zbz</a:Modifier>
+<a:Comment>销售价格(单价)</a:Comment>
 <a:DataType>DC20,4</a:DataType>
 <a:Length>20</a:Length>
 <a:Precision>4</a:Precision>
