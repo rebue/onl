@@ -588,7 +588,9 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             }
             if (onlOnlineMo.getDeliverOrgId() != null) {
                 _log.info("重写查询上线信息查询伙伴信息的参数为：{}", onlOnlineMo.getDeliverOrgId());
-                final PrmPartnerMo orgMo = prmPartnerSvr.getById(onlOnlineMo.getDeliverOrgId());
+                PrmPartnerMo partnerMo = new PrmPartnerMo();
+                partnerMo.setOrgId(onlOnlineMo.getDeliverOrgId());
+                final PrmPartnerMo orgMo = prmPartnerSvr.getOne(partnerMo);
                 _log.info("重写查询上线信息查询伙伴信息的返回值为：{}", orgMo);
                 if (orgMo != null) {
                     onlineListRo.setDeliverOrgName(orgMo.getPartnerName());
