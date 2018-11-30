@@ -580,7 +580,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             final OnlOnlineListRo onlineListRo = dozerMapper.map(onlOnlineMo, OnlOnlineListRo.class);
             if (onlOnlineMo.getSupplierId() != null) {
                 _log.info("重写查询上线信息查询伙伴信息的参数为：{}", onlOnlineMo.getSupplierId());
-                final PrmPartnerMo partnerMo = prmPartnerSvr.getById(onlOnlineMo.getSupplierId());
+                final PrmPartnerMo partnerMo = prmPartnerSvr.getOneByOrgId(onlOnlineMo.getSupplierId());
                 _log.info("重写查询上线信息查询伙伴信息的返回值为：{}", partnerMo);
                 if (partnerMo != null) {
                     onlineListRo.setSupplierName(partnerMo.getPartnerName());
@@ -588,9 +588,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             }
             if (onlOnlineMo.getDeliverOrgId() != null) {
                 _log.info("重写查询上线信息查询伙伴信息的参数为：{}", onlOnlineMo.getDeliverOrgId());
-                final PrmPartnerMo partnerMo = new PrmPartnerMo();
-                partnerMo.setOrgId(onlOnlineMo.getDeliverOrgId());
-                final PrmPartnerMo orgMo = prmPartnerSvr.getOne(partnerMo);
+                final PrmPartnerMo orgMo = prmPartnerSvr.getOneByOrgId(onlOnlineMo.getDeliverOrgId());
                 _log.info("重写查询上线信息查询伙伴信息的返回值为：{}", orgMo);
                 if (orgMo != null) {
                     onlineListRo.setDeliverOrgName(orgMo.getPartnerName());
