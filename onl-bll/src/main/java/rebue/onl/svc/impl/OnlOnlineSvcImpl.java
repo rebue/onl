@@ -579,7 +579,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         for (final OnlOnlineMo onlOnlineMo : onlinePageInfo.getList()) {
             final OnlOnlineListRo onlineListRo = dozerMapper.map(onlOnlineMo, OnlOnlineListRo.class);
             if (onlOnlineMo.getSupplierId() != null) {
-                _log.info("重写查询上线信息查询伙伴信息的参数为：{}", onlOnlineMo.getSupplierId());
+                _log.info("重写查询上线信息查询伙伴信息的参数为：{}", onlOnlineMo.getSupplierId()); 
                 final PrmPartnerMo partnerMo = prmPartnerSvr.getOneByOrgId(onlOnlineMo.getSupplierId());
                 _log.info("重写查询上线信息查询伙伴信息的返回值为：{}", partnerMo);
                 if (partnerMo != null) {
