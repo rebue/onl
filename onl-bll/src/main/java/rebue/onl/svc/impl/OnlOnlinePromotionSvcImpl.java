@@ -2,6 +2,9 @@ package rebue.onl.svc.impl;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -46,6 +49,15 @@ public class OnlOnlinePromotionSvcImpl extends MybatisBaseSvcImpl<OnlOnlinePromo
         // 如果id为空那么自动生成分布式id
         if (mo.getId() == null || mo.getId() == 0) {
             mo.setId(_idWorker.getId());
+        }
+        OnlOnlinePromotionMo promotionMo = new OnlOnlinePromotionMo();
+        promotionMo.setPromotionType(mo.getPromotionType());
+        _log.info("添加上线推广根据类型查询已上线数量的参数为:{}", promotionMo);
+        int countSelective = _mapper.countSelective(promotionMo);
+        _log.info("添加上线推广根据类型查询已上线数量的返回值为:{}", countSelective);
+        if(countSelective > 12) {
+        	_log.error("添加上线推广时发现该推广类型的商品已超过限制的数量, 推广类型为:{}", mo.getPromotionType());
+        	return -1;
         }
         return super.add(mo);
     }
