@@ -58,4 +58,11 @@ public interface OnlOnlineSvc extends MybatisBaseSvc<OnlOnlineMo, java.lang.Long
      */
     Ro updateOnlineAfterOrder(UpdateOnlineAfterOrderTo to);
 
+    /**
+     * 商品下线
+     * @param mo
+     * @return
+     */
+	Ro offline(OnlOnlineMo mo);
+
 }

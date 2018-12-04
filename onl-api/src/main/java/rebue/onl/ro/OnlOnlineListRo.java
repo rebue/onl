@@ -28,6 +28,11 @@ public class OnlOnlineListRo {
 	 * @mbg.generated 自动生成，如需修改，请删除本行
 	 */
 	private Long id;
+	
+	/**
+	 * 上线id(属于推广表中的上线id)
+	 */
+	private Long onlineId;
 
 	/**
 	 * 板块类型（0：普通，1：全返）

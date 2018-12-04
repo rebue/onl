@@ -32,7 +32,6 @@ import rebue.onl.ro.AddOnlineRo;
 import rebue.onl.ro.GetOnlinesRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 import rebue.onl.ro.OnlOnlineListRo;
-import rebue.onl.ro.OnlOnlineRo;
 import rebue.onl.ro.OnlinesRo;
 import rebue.onl.ro.ReOnlineRo;
 import rebue.onl.svc.OnlOnlinePicSvc;
@@ -192,20 +191,17 @@ public class OnlOnlineCtrl {
 	 * @date 2018年3月28日 下午3:14:23
 	 */
 	@PutMapping("/onl/online")
-	OnlOnlineRo modify(final OnlOnlineMo vo) throws Exception {
+	Ro offline(final OnlOnlineMo vo) throws Exception {
 		_log.info("开始商品下线，商品下线的参数为：" + vo);
-		final int result = svc.modify(vo);
-		final OnlOnlineRo ro = new OnlOnlineRo();
-		if (result < 1) {
-			ro.setResult((byte) -1);
-			ro.setMsg("下线失败");
-			_log.error("上线编号：{}，下线失败", vo.getId());
-		} else {
-			ro.setResult((byte) 1);
-			ro.setMsg("下线成功");
-			_log.info("上线编号：{}，下线成功!", vo.getId());
+		try {
+			return svc.offline(vo);
+		} catch (Exception e) {
+			_log.error("商品下线出现异常:{}", e);
+			Ro ro = new Ro();
+			ro.setResult(ResultDic.FAIL);
+			ro.setMsg("下线出现错误");
+			return ro;
 		}
-		return ro;
 	}
 
 	/**

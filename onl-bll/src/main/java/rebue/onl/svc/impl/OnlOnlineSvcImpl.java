@@ -25,6 +25,7 @@ import rebue.onl.mo.OnlOnlineLogMo;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.mo.OnlOnlinePicLogMo;
 import rebue.onl.mo.OnlOnlinePicMo;
+import rebue.onl.mo.OnlOnlinePromotionMo;
 import rebue.onl.mo.OnlOnlineSpecLogMo;
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.AddOnlineRo;
@@ -35,6 +36,7 @@ import rebue.onl.svc.OnlCartSvc;
 import rebue.onl.svc.OnlOnlineLogSvc;
 import rebue.onl.svc.OnlOnlinePicLogSvc;
 import rebue.onl.svc.OnlOnlinePicSvc;
+import rebue.onl.svc.OnlOnlinePromotionSvc;
 import rebue.onl.svc.OnlOnlineSpecLogSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
@@ -114,6 +116,9 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 
     @Resource
     private PrmPartnerSvr       prmPartnerSvr;
+    
+    @Resource
+    private OnlOnlinePromotionSvc onlOnlinePromotionSvc;
 
     /**
      * 添加上线信息
@@ -313,6 +318,53 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         ro.setResult(AddOnlineDic.SUCCESS);
         ro.setMsg("发布成功");
         return ro;
+    }
+    
+    /**
+     * 商品下线
+     * @param mo
+     * @return
+     */
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public Ro offline(OnlOnlineMo mo) {
+    	_log.info("商品下线的参数为:{}", mo);
+    	Ro ro = new Ro();
+    	if (mo.getId() == null || mo.getOnlineState() == null) {
+			_log.error("商品下线出现参数错误,请求的参数为: {}", mo);
+			ro.setResult(ResultDic.PARAM_ERROR);
+			ro.setMsg("参数错误");
+			return ro;
+		}
+    	
+    	OnlOnlinePromotionMo onlinePromotionMo = new OnlOnlinePromotionMo();
+    	onlinePromotionMo.setOnlineId(mo.getId());
+    	_log.info("商品下线判断该商品是否已推广的参数为:{}", onlinePromotionMo);
+    	OnlOnlinePromotionMo onlOnlinePromotionMo = onlOnlinePromotionSvc.getOne(onlinePromotionMo);
+    	_log.info("商品下线判断该商品是否已推广的返回值为:{}", onlOnlinePromotionMo);
+    	if (onlOnlinePromotionMo != null) {
+			_log.info("商品下线判断该商品是否已推广时发现该商品已推广, 上线id为:{}", mo.getId());
+			_log.info("商品下线删除商品推广的参数为:{}", onlOnlinePromotionMo.getId());
+			int delPromotionResult = onlOnlinePromotionSvc.del(onlOnlinePromotionMo.getId());
+			_log.info("商品下线删除商品推广的返回值为:{}", delPromotionResult);
+			if (delPromotionResult != 1) {
+				_log.error("商品下线删除商品推广时出现错误,上线id为:{}", mo.getId());
+				ro.setResult(ResultDic.FAIL);
+				ro.setMsg("删除商品推广失败");
+				return ro;
+			}
+		}
+    	_log.info("商品下线的请求参数为:{}", mo);
+    	int updateByPrimaryKeyResullt = _mapper.updateByPrimaryKey(mo);
+    	_log.info("商品下线的返回值为:{}", updateByPrimaryKeyResullt);
+    	if (updateByPrimaryKeyResullt != 1) {
+			_log.error("商品下线出现错误,请求的参数为:{}", mo);
+			throw new RuntimeException("下线失败");
+		}
+    	_log.info("商品下线成功,请求参数为:{}", mo);
+    	ro.setResult(ResultDic.SUCCESS);
+    	ro.setMsg("下线成功");
+    	return ro;
     }
 
     /**
@@ -594,6 +646,14 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                     onlineListRo.setDeliverOrgName(orgMo.getPartnerName());
                 }
             }
+            OnlOnlinePromotionMo onlinePromotionMo = new OnlOnlinePromotionMo();
+            onlinePromotionMo.setOnlineId(onlOnlineMo.getId());
+            _log.info("重写查询上线信息查询推广信息的参数为:{}", onlinePromotionMo);
+            OnlOnlinePromotionMo onlOnlinePromotionMo = onlOnlinePromotionSvc.getOne(onlinePromotionMo);
+            _log.info("重写查询上线信息查询推广信息的返回值为:{}", onlOnlinePromotionMo);
+            if (onlOnlinePromotionMo != null) {
+            	onlineListRo.setOnlineId(onlOnlinePromotionMo.getOnlineId());
+			}
             listEx.add(onlineListRo);
         }
         pageInfo = dozerMapper.map(onlinePageInfo, PageInfo.class);
