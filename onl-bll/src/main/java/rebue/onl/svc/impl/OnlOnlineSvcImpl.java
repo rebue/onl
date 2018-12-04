@@ -344,8 +344,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
     	_log.info("商品下线判断该商品是否已推广的返回值为:{}", onlOnlinePromotionMo);
     	if (onlOnlinePromotionMo != null) {
 			_log.info("商品下线判断该商品是否已推广时发现该商品已推广, 上线id为:{}", mo.getId());
-			_log.info("商品下线删除商品推广的参数为:{}", onlOnlinePromotionMo.getId());
-			int delPromotionResult = onlOnlinePromotionSvc.del(onlOnlinePromotionMo.getId());
+			_log.info("商品下线删除商品推广的参数为:{}", mo.getId());
+			int delPromotionResult = onlOnlinePromotionSvc.del(mo.getId());
 			_log.info("商品下线删除商品推广的返回值为:{}", delPromotionResult);
 			if (delPromotionResult != 1) {
 				_log.error("商品下线删除商品推广时出现错误,上线id为:{}", mo.getId());
@@ -355,7 +355,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			}
 		}
     	_log.info("商品下线的请求参数为:{}", mo);
-    	int updateByPrimaryKeyResullt = _mapper.updateByPrimaryKey(mo);
+    	int updateByPrimaryKeyResullt = _mapper.updateByPrimaryKeySelective(mo);
     	_log.info("商品下线的返回值为:{}", updateByPrimaryKeyResullt);
     	if (updateByPrimaryKeyResullt != 1) {
 			_log.error("商品下线出现错误,请求的参数为:{}", mo);
