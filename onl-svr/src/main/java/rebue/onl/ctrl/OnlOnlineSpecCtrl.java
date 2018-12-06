@@ -26,6 +26,7 @@ import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.svc.OnlOnlineSpecSvc;
+import rebue.onl.to.ModifySaleCountByIdTo;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
 
@@ -193,28 +194,19 @@ public class OnlOnlineSpecCtrl {
     }
 
     /**
-     * 查询并修改规格信息 Title: updateSpenInfo Description:
-     *
-     * @param specList
-     * @return
-     * @date 2018年4月23日 下午6:17:55
+     * 根据上线规格id修改销售数量(减)
      */
-    @PostMapping(value = "/onl/onlinespec/selectandupdate")
-    ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(@RequestBody final List<Map<String, Object>> specList) {
-        _log.info("查询和修改上线规格信息为：{}", String.valueOf(specList));
+    @PutMapping(value = "/onl/onlinespec/modifysalecountbyid")
+    Ro modifySaleCountById(ModifySaleCountByIdTo to) {
+        _log.info("根据上线规格id修改销售数量（减）的参数为：{}", to);
         try {
-            return svc.modifyOnlineSpecInfo(specList);
+            return svc.modifySaleCountById(to);
         } catch (final Exception e) {
-            final ModifyOnlineSpecInfoRo modifyOnlineSpecInfoRo = new ModifyOnlineSpecInfoRo();
-            final String msg = e.getMessage();
-            if (msg.equals("修改上线数量出错")) {
-                modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.MODIFY_ONLINE_COUNT_ERROR);
-                modifyOnlineSpecInfoRo.setMsg(msg);
-            } else {
-                modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.ERROR);
-                modifyOnlineSpecInfoRo.setMsg("修改失败");
-            }
-            return modifyOnlineSpecInfoRo;
+        	_log.error("根据上线规格id修改销售数量（减）出现异常，{}", e);
+        	Ro ro = new Ro();
+        	ro.setResult(ResultDic.FAIL);
+        	ro.setMsg("修改失败");
+        	return ro;
         }
     }
 

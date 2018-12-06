@@ -6,7 +6,9 @@ import java.util.Map;
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
+import rebue.onl.to.ModifySaleCountByIdTo;
 import rebue.onl.to.OnlOnlineSpecTo;
+import rebue.robotech.ro.Ro;
 import rebue.robotech.svc.MybatisBaseSvc;
 
 /**
@@ -30,11 +32,6 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
      * 修改上线规格信息
      */
     int updateSelective(OnlOnlineSpecMo mo);
-
-    /**
-     * 修改上线规格信息
-     */
-    ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(List<Map<String, Object>> specList);
 
     /**
      * 修改上线规格信息
@@ -64,4 +61,9 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
      * @return 更新影响的行数，为0表示出现并发问题
      */
     int updateSaleCount(Integer buyCount, Long onlineSpecId, Integer saleCount);
+
+    /**
+     * 根据上线规格id修改销售数量(减)
+     */
+	Ro modifySaleCountById(ModifySaleCountByIdTo to);
 }

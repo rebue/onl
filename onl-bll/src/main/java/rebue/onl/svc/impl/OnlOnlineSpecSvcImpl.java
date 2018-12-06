@@ -1,8 +1,6 @@
 package rebue.onl.svc.impl;
 
 import java.util.List;
-import java.util.Map;
-
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -13,15 +11,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.dozermapper.core.Mapper;
 
-import rebue.onl.dic.ModifyOnlineSpecInfoDic;
 import rebue.onl.mapper.OnlOnlineSpecMapper;
 import rebue.onl.mo.OnlOnlineSpecMo;
-import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.svc.OnlCartSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
+import rebue.onl.to.ModifySaleCountByIdTo;
 import rebue.onl.to.OnlOnlineSpecTo;
+import rebue.robotech.dic.ResultDic;
+import rebue.robotech.ro.Ro;
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
 
 /**
@@ -106,47 +105,40 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
     }
 
     /**
-     * 修改上线规格信息 Title: resultMap Description:
+     * 根据上线规格id修改销售数量(减)
      */
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(final List<Map<String, Object>> specList) {
-        _log.info("查询和修改上线规格信息的参数为：{}", String.valueOf(specList));
-        final ModifyOnlineSpecInfoRo modifyOnlineSpecInfoRo = new ModifyOnlineSpecInfoRo();
-        if (specList.size() == 0) {
-            _log.info("查询和修改上线规格信息的时候出现参数有误");
-            modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.PARAMETER_IS_WRONG);
-            modifyOnlineSpecInfoRo.setMsg("参数有误");
-            return modifyOnlineSpecInfoRo;
-        }
-        for (int i = 0; i < specList.size(); i++) {
-            final OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
-            onlineSpecMo.setOnlineId(Long.parseLong(String.valueOf(specList.get(i).get("onlineId"))));
-            onlineSpecMo.setOnlineSpec(String.valueOf(specList.get(i).get("specName")));
-            _log.info("获取上线规格信息的参数为：{}", onlineSpecMo);
-            final OnlOnlineSpecMo onlOnlineSpecMo = onlOnlineSpecSvc.getOne(onlineSpecMo);
-            _log.info("获取上线规格信息的返回值为：{}", onlOnlineSpecMo);
-            if (onlOnlineSpecMo == null) {
-                _log.error("查询和修改上线规格信息时出现没有该规格信息");
-                modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.ON_SPEC_INFO);
-                modifyOnlineSpecInfoRo.setMsg(specList.get(i).get("specName") + "没有该规格信息");
-                return modifyOnlineSpecInfoRo;
-            }
-            // 新销售数量 = 原销售数量 - 购买数量
-            final int updateStockCount = onlOnlineSpecMo.getSaleCount() - Integer.parseInt(String.valueOf(specList.get(i).get("buyCount")));
-            onlineSpecMo.setSaleCount(updateStockCount);
-            _log.info("修改上线数量的参数为：{}", onlineSpecMo);
-            final int updateResult = _mapper.cancelUpdateCount(Long.parseLong(String.valueOf(specList.get(i).get("onlineId"))), String.valueOf(specList.get(i).get("specName")),
-                    onlOnlineSpecMo.getSaleCount(), Integer.parseInt(String.valueOf(specList.get(i).get("buyCount"))));
-            _log.info("修改上线数量的返回值为：{}", updateResult);
-            if (updateResult < 0) {
-                _log.error("修改上线数量出错，返回值为：{}", updateResult);
-                throw new RuntimeException("修改上线数量出错");
-            }
-        }
-        modifyOnlineSpecInfoRo.setResult(ModifyOnlineSpecInfoDic.SUCCESS);
-        modifyOnlineSpecInfoRo.setMsg("修改成功");
-        return modifyOnlineSpecInfoRo;
+    public Ro modifySaleCountById(ModifySaleCountByIdTo to) {
+        _log.info("根据上线规格id修改销售数量的参数为：{}", to);
+        Ro ro = new Ro();
+        if (to.getId() == null || to.getBuyCount() == null) {
+			_log.error("根据上线规格id修改销售数量出现参数错误，请求的参数为：{}", to);
+			ro.setResult(ResultDic.PARAM_ERROR);
+			ro.setMsg("参数错误");
+			return ro;
+		}
+        
+        _log.info("根据上线规格id修改销售数量查询规格信息的参数为：{}", to.getId());
+        OnlOnlineSpecMo onlineSpecMo = onlOnlineSpecSvc.getById(to.getId());
+        _log.info("根据上线规格id修改销售数量查询规格信息的返回值为：{}", onlineSpecMo);
+        if (onlineSpecMo == null) {
+        	_log.error("根据上线规格id修改销售数量时发现没有该规格信息，上线规格id为：{}", to.getId());
+			ro.setResult(ResultDic.FAIL);
+			ro.setMsg("该上线规格不存在");
+			return ro;
+		}
+        _log.info("根据上线规格id修改销售数量的参数为：{}", to);
+        int updateSaleCountBySubtractResult = _mapper.updateSaleCountBySubtract(to.getId(), to.getBuyCount());
+        _log.info("根据上线规格id修改销售数量的返回值为：{}", updateSaleCountBySubtractResult);
+        if (updateSaleCountBySubtractResult != 1) {
+			ro.setResult(ResultDic.FAIL);
+			ro.setMsg("修改失败");
+			return ro;
+		}
+        ro.setResult(ResultDic.SUCCESS);
+        ro.setMsg("修改成功");
+        return ro;
     }
 
     /**

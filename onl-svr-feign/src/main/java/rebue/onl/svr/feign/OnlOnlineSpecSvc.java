@@ -6,12 +6,15 @@ import java.util.Map;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
+import rebue.onl.to.ModifySaleCountByIdTo;
+import rebue.robotech.ro.Ro;
 import rebue.sbs.feign.FeignConfig;
 
 /**
@@ -34,10 +37,10 @@ public interface OnlOnlineSpecSvc {
     OnlOnlineSpecMo getById(@RequestParam("id") Long id);
 
     /**
-     * 查询并修改上线规格信息
+     * 根据上线规格id修改销售数量(减)
      */
-    @PostMapping(value = "/onl/onlinespec/selectandupdate")
-    ModifyOnlineSpecInfoRo modifyOnlineSpecInfo(@RequestBody List<Map<String, Object>> specList);
+    @PutMapping(value = "/onl/onlinespec/modifysalecountbyid")
+    Ro modifySaleCountById(@RequestParam("id") Long id, @RequestParam("buyCount") Integer buyCount);
 
     /**
      * 获取上线规格信息 Title: selectOnlineSpecInfoByOnlineId Description:
