@@ -147,3 +147,15 @@ alter table onl.ONL_ONLINE_SPEC_LOG add COST_PRICE           decimal(20,4) comme
 	alter table onl.ONL_ONLINE_SPEC add COMMISSION_AMOUNT decimal(20,4) comment '返佣金金额';
 -- 1.0.8 在onl_online表中新加板块类型
 	alter table onl.ONL_ONLINE add SUBJECT_TYPE tinyint default 0 comment '板块类型（0：普通，1：全返）';
+	
+	
+------------------------------------------以上已更新到线上----------------------------------------
+alter table onl.ONL_ONLINE_SPEC add BUY_POINT            decimal(18,4) comment '购买积分';
+alter table onl.ONL_ONLINE_SPEC_LOG add BUY_POINT            decimal(18,4) comment '购买积分';
+
+
+
+	
+
+	
+	
