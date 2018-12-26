@@ -1,12 +1,10 @@
 package rebue.onl.mapper;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
-
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.to.AppendOnlineSpecCountTo;
@@ -17,67 +15,57 @@ import rebue.robotech.mapper.MybatisBaseMapper;
 public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, Long> {
 
     /**
-     * @mbg.generated 自动生成，如需修改，请删除本行
+     *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @Override
     int deleteByPrimaryKey(Long id);
 
     /**
-     * @mbg.generated 自动生成，如需修改，请删除本行
+     *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @Override
     int insert(OnlOnlineSpecMo record);
 
     /**
-     * @mbg.generated 自动生成，如需修改，请删除本行
+     *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @Override
     int insertSelective(OnlOnlineSpecMo record);
 
     /**
-     * @mbg.generated 自动生成，如需修改，请删除本行
+     *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @Override
     OnlOnlineSpecMo selectByPrimaryKey(Long id);
 
     /**
-     * @mbg.generated 自动生成，如需修改，请删除本行
+     *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @Override
     int updateByPrimaryKeySelective(OnlOnlineSpecMo record);
 
     /**
-     * @mbg.generated 自动生成，如需修改，请删除本行
+     *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @Override
     int updateByPrimaryKey(OnlOnlineSpecMo record);
 
     /**
-     * @mbg.generated 自动生成，如需修改，请删除本行
+     *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @Override
     List<OnlOnlineSpecMo> selectAll();
 
     /**
-     * @mbg.generated 自动生成，如需修改，请删除本行
+     *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @Override
     List<OnlOnlineSpecMo> selectSelective(OnlOnlineSpecMo record);
 
     /**
-     * @mbg.generated 自动生成，如需修改，请删除本行
+     *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @Override
     boolean existByPrimaryKey(Long id);
 
     /**
-     * @mbg.generated 自动生成，如需修改，请删除本行
+     *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    @Override
     boolean existSelective(OnlOnlineSpecMo record);
 
     /**
-     * @mbg.generated 自动生成，如需修改，请删除本行
+     *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     int countSelective(OnlOnlineSpecMo record);
 
@@ -109,7 +97,7 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
     /**
      * 更新销售数量(购买后)
      * 新销售数量 = 原销售数量 + 购买数量
-     * 
+     *
      * @param buyCount
      *            购买数量
      * @param onlineSpecId
