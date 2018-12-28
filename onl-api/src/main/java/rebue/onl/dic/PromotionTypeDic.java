@@ -25,7 +25,7 @@ public enum PromotionTypeDic implements EnumBase {
     // 初始化map，保存枚举的所有项到map中以方便通过code查找
     static {
         valueMap = new HashMap<>();
-        for (EnumBase item : values()) {
+        for (final EnumBase item : values()) {
             valueMap.put(item.getCode(), item);
         }
     }
@@ -35,8 +35,8 @@ public enum PromotionTypeDic implements EnumBase {
      * 否则jackson将调用默认的反序列化方法，而不会调用本方法
      */
     @JsonCreator
-    public static PromotionTypeDic getItem(int code) {
-        EnumBase result = valueMap.get(code);
+    public static PromotionTypeDic getItem(final int code) {
+        final EnumBase result = valueMap.get(code);
         if (result == null) {
             throw new IllegalArgumentException("输入的code" + code + "不在枚举的取值范围内");
         }
@@ -48,7 +48,7 @@ public enum PromotionTypeDic implements EnumBase {
     /**
      * 构造器，传入code
      */
-    PromotionTypeDic(int code) {
+    PromotionTypeDic(final int code) {
         this.code = code;
     }
 
@@ -59,4 +59,10 @@ public enum PromotionTypeDic implements EnumBase {
     public int getCode() {
         return code;
     }
+
+    @Override
+    public String getName() {
+        return name();
+    }
+
 }
