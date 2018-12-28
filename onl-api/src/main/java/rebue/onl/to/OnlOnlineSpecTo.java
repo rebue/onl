@@ -132,9 +132,14 @@ public class OnlOnlineSpecTo {
 	 * 已上线总数
 	 */
 	private Integer alreadyOnlineTotal;
-	
+
 	/**
 	 * 购买积分
 	 */
 	private BigDecimal buyPoint;
+
+	/**
+	 * 首单积分
+	 */
+	private BigDecimal firstBuyPont;
 }

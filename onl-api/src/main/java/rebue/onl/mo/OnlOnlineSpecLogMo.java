@@ -116,7 +116,7 @@ public class OnlOnlineSpecLogMo implements Serializable {
 
     /**
      *    限制购买数量(默认为0，不限制)
-     *            每个人限制购买的数量
+     *                每个人限制购买的数量
      *
      *    数据库字段: ONL_ONLINE_SPEC_LOG.LIMIT_COUNT
      *
@@ -132,6 +132,15 @@ public class OnlOnlineSpecLogMo implements Serializable {
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private Integer seqNo;
+
+    /**
+     *    首单积分
+     *
+     *    数据库字段: ONL_ONLINE_SPEC_LOG.FIRST_BUY_PONT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private BigDecimal firstBuyPont;
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -382,7 +391,7 @@ public class OnlOnlineSpecLogMo implements Serializable {
 
     /**
      *    限制购买数量(默认为0，不限制)
-     *            每个人限制购买的数量
+     *                每个人限制购买的数量
      *
      *    数据库字段: ONL_ONLINE_SPEC_LOG.LIMIT_COUNT
      *
@@ -394,7 +403,7 @@ public class OnlOnlineSpecLogMo implements Serializable {
 
     /**
      *    限制购买数量(默认为0，不限制)
-     *            每个人限制购买的数量
+     *                每个人限制购买的数量
      *
      *    数据库字段: ONL_ONLINE_SPEC_LOG.LIMIT_COUNT
      *
@@ -427,6 +436,28 @@ public class OnlOnlineSpecLogMo implements Serializable {
     }
 
     /**
+     *    首单积分
+     *
+     *    数据库字段: ONL_ONLINE_SPEC_LOG.FIRST_BUY_PONT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public BigDecimal getFirstBuyPont() {
+        return firstBuyPont;
+    }
+
+    /**
+     *    首单积分
+     *
+     *    数据库字段: ONL_ONLINE_SPEC_LOG.FIRST_BUY_PONT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setFirstBuyPont(BigDecimal firstBuyPont) {
+        this.firstBuyPont = firstBuyPont;
+    }
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Override
@@ -448,6 +479,7 @@ public class OnlOnlineSpecLogMo implements Serializable {
         sb.append(", currentOnlineCount=").append(currentOnlineCount);
         sb.append(", limitCount=").append(limitCount);
         sb.append(", seqNo=").append(seqNo);
+        sb.append(", firstBuyPont=").append(firstBuyPont);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

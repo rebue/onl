@@ -212,8 +212,12 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			BigDecimal costPrice = to.getOnlineSpecs().get(i).getCostPrice();
 
 			_log.info("添加上线计算积分的参数为：销售价格={}，成本价格={}", salePrice, costPrice);
-			BigDecimal commissionPoints = PntPointsAlgorithmUtils.commissionPoints(salePrice, costPrice);
-			_log.info("添加上线计算积分的返回值为：{}", commissionPoints);
+			BigDecimal point = PntPointsAlgorithmUtils.commissionPoints(salePrice, costPrice);
+			_log.info("添加上线计算积分的返回值为：{}", point);
+			
+			_log.info("添加上线计算首单积分的参数为：销售价格={}", salePrice);
+			BigDecimal firstOrderPoint = PntPointsAlgorithmUtils.firstOrderPoints(salePrice);
+			_log.info("添加上线计算首单积分的返回值为：{}", firstOrderPoint);
 
 			onlineSpecMo.setId(_idWorker.getId());
 			onlineSpecMo.setOnlineId(onlineId);
@@ -231,7 +235,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			onlineSpecMo.setSaleCount(0);
 			onlineSpecMo.setLimitCount(to.getOnlineSpecs().get(i).getLimitCount());
 			onlineSpecMo.setCostPrice(costPrice);
-			onlineSpecMo.setBuyPoint(commissionPoints);
+			onlineSpecMo.setBuyPoint(point);
+			onlineSpecMo.setFirstBuyPont(firstOrderPoint);
 			onlineSpecMo.setSeqNo(i);
 			onlineSpecMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
 			_log.info("添加上线信息添加上线规格信息的参数为：{}", onlineSpecMo);
@@ -249,7 +254,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			onlineSpecLogMo.setOnlineSpec(to.getOnlineSpecs().get(i).getOnlineSpec());
 			onlineSpecLogMo.setSalePrice(salePrice);
 			onlineSpecLogMo.setCostPrice(costPrice);
-			onlineSpecLogMo.setBuyPoint(commissionPoints);
+			onlineSpecLogMo.setBuyPoint(point);
+			onlineSpecLogMo.setFirstBuyPont(firstOrderPoint);
 			onlineSpecLogMo.setCashbackAmount(cashbackAmount);
 			onlineSpecLogMo.setCommissionAmount(commissionAmount);
 			onlineSpecLogMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
@@ -489,6 +495,11 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			_log.info("重新上线计算积分的参数为：销售价格={}，成本价格={}", salePrice, costPrice);
 			BigDecimal commissionPoints = PntPointsAlgorithmUtils.commissionPoints(salePrice, costPrice);
 			_log.info("重新上线计算积分的返回值为：{}", commissionPoints);
+			
+			_log.info("添加上线计算首单积分的参数为：销售价格={}", salePrice);
+			BigDecimal firstOrderPoint = PntPointsAlgorithmUtils.firstOrderPoints(salePrice);
+			_log.info("添加上线计算首单积分的返回值为：{}", firstOrderPoint);
+			
 			// 返佣金额： 如果版块类型为普通商品则返佣金额为0，否则返佣金额等于销售金额
 			final BigDecimal commissionAmount = to.getSubjectType() == 0 ? amount : salePrice;
 			// 返现金额： 如果版块类型为全返商品则等于输入的数量， 否则等于0
@@ -507,6 +518,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			onlineSpecTo.setLimitCount(to.getOnlineSpecs().get(i).getLimitCount());
 			onlineSpecTo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
 			onlineSpecTo.setBuyPoint(commissionPoints);
+			onlineSpecTo.setFirstBuyPont(firstOrderPoint);
 			onlineSpecTo.setCashbackAmount(cashbackAmount);
 			Long onlineSpecId = _idWorker.getId();
 			// 如果规格id的长度大于13位的话说明该规格属于已上线的规格
