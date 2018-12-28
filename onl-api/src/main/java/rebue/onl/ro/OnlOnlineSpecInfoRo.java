@@ -33,7 +33,7 @@ public class OnlOnlineSpecInfoRo {
 	 * 上线返现金额
 	 */
 	private BigDecimal cashbackAmount;
-	
+
 	/**
 	 * 本次上线数量
 	 */
@@ -49,4 +49,13 @@ public class OnlOnlineSpecInfoRo {
 	 */
 	private int saleCount;
 
+	/**
+	 * 购买积分
+	 */
+	private BigDecimal buyPoint;
+
+	/**
+	 * 首单积分
+	 */
+	private BigDecimal firstBuyPont;
 }
