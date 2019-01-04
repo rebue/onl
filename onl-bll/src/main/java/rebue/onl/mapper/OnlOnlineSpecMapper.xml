@@ -500,7 +500,7 @@
 		LIMIT_COUNT 			= #{limitCount,jdbcType=INTEGER},
 		COST_PRICE 				= #{costPrice,jdbcType=DECIMAL},
 		BUY_POINT 				= #{buyPoint,jdbcType=DECIMAL},
-		FIRST_BUY_PONT = #{firstBuyPont,jdbcType=DECIMAL}
+		FIRST_BUY_POINT = #{firstBuyPoint,jdbcType=DECIMAL}
 		where ID 				= #{id,jdbcType=BIGINT}
 	</update>
 </mapper>
