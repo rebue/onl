@@ -20,7 +20,7 @@
     <result column="LIMIT_COUNT" jdbcType="INTEGER" property="limitCount" />
     <result column="SALE_COUNT" jdbcType="INTEGER" property="saleCount" />
     <result column="SEQ_NO" jdbcType="INTEGER" property="seqNo" />
-    <result column="FIRST_BUY_PONT" jdbcType="DECIMAL" property="firstBuyPont" />
+    <result column="FIRST_BUY_POINT" jdbcType="DECIMAL" property="firstBuyPoint" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
@@ -29,7 +29,7 @@
     -->
     ID, ONLINE_ID, PRODUCT_SPEC_ID, ONLINE_SPEC, SALE_PRICE, COST_PRICE, CASHBACK_AMOUNT, 
     COMMISSION_AMOUNT, BUY_POINT, SALE_UNIT, CURRENT_ONLINE_COUNT, LIMIT_COUNT, SALE_COUNT, 
-    SEQ_NO, FIRST_BUY_PONT
+    SEQ_NO, FIRST_BUY_POINT
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--
@@ -58,13 +58,13 @@
       ONLINE_SPEC, SALE_PRICE, COST_PRICE, 
       CASHBACK_AMOUNT, COMMISSION_AMOUNT, BUY_POINT, 
       SALE_UNIT, CURRENT_ONLINE_COUNT, LIMIT_COUNT, 
-      SALE_COUNT, SEQ_NO, FIRST_BUY_PONT
+      SALE_COUNT, SEQ_NO, FIRST_BUY_POINT
       )
     values (#{id,jdbcType=BIGINT}, #{onlineId,jdbcType=BIGINT}, #{productSpecId,jdbcType=BIGINT}, 
       #{onlineSpec,jdbcType=VARCHAR}, #{salePrice,jdbcType=DECIMAL}, #{costPrice,jdbcType=DECIMAL}, 
       #{cashbackAmount,jdbcType=DECIMAL}, #{commissionAmount,jdbcType=DECIMAL}, #{buyPoint,jdbcType=DECIMAL}, 
       #{saleUnit,jdbcType=VARCHAR}, #{currentOnlineCount,jdbcType=INTEGER}, #{limitCount,jdbcType=INTEGER}, 
-      #{saleCount,jdbcType=INTEGER}, #{seqNo,jdbcType=INTEGER}, #{firstBuyPont,jdbcType=DECIMAL}
+      #{saleCount,jdbcType=INTEGER}, #{seqNo,jdbcType=INTEGER}, #{firstBuyPoint,jdbcType=DECIMAL}
       )
   </insert>
   <insert id="insertSelective" parameterType="rebue.onl.mo.OnlOnlineSpecMo">
@@ -116,8 +116,8 @@
       <if test="seqNo != null">
         SEQ_NO,
       </if>
-      <if test="firstBuyPont != null">
-        FIRST_BUY_PONT,
+      <if test="firstBuyPoint != null">
+        FIRST_BUY_POINT,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -163,8 +163,8 @@
       <if test="seqNo != null">
         #{seqNo,jdbcType=INTEGER},
       </if>
-      <if test="firstBuyPont != null">
-        #{firstBuyPont,jdbcType=DECIMAL},
+      <if test="firstBuyPoint != null">
+        #{firstBuyPoint,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -214,8 +214,8 @@
       <if test="seqNo != null">
         SEQ_NO = #{seqNo,jdbcType=INTEGER},
       </if>
-      <if test="firstBuyPont != null">
-        FIRST_BUY_PONT = #{firstBuyPont,jdbcType=DECIMAL},
+      <if test="firstBuyPoint != null">
+        FIRST_BUY_POINT = #{firstBuyPoint,jdbcType=DECIMAL},
       </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
@@ -239,7 +239,7 @@
       LIMIT_COUNT = #{limitCount,jdbcType=INTEGER},
       SALE_COUNT = #{saleCount,jdbcType=INTEGER},
       SEQ_NO = #{seqNo,jdbcType=INTEGER},
-      FIRST_BUY_PONT = #{firstBuyPont,jdbcType=DECIMAL}
+      FIRST_BUY_POINT = #{firstBuyPoint,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectAll" resultMap="BaseResultMap">
@@ -249,7 +249,7 @@
     -->
     select ID, ONLINE_ID, PRODUCT_SPEC_ID, ONLINE_SPEC, SALE_PRICE, COST_PRICE, CASHBACK_AMOUNT, 
     COMMISSION_AMOUNT, BUY_POINT, SALE_UNIT, CURRENT_ONLINE_COUNT, LIMIT_COUNT, SALE_COUNT, 
-    SEQ_NO, FIRST_BUY_PONT
+    SEQ_NO, FIRST_BUY_POINT
     from ONL_ONLINE_SPEC
   </select>
   <select id="selectSelective" parameterType="rebue.onl.mo.OnlOnlineSpecMo" resultMap="BaseResultMap">
@@ -300,8 +300,8 @@
       <if test="seqNo != null">
         and SEQ_NO = #{seqNo,jdbcType=INTEGER}
       </if>
-      <if test="firstBuyPont != null">
-        and FIRST_BUY_PONT = #{firstBuyPont,jdbcType=DECIMAL}
+      <if test="firstBuyPoint != null">
+        and FIRST_BUY_POINT = #{firstBuyPoint,jdbcType=DECIMAL}
       </if>
     </where>
   </select>
@@ -364,8 +364,8 @@
       <if test="seqNo != null and seqNo != ''">
         and SEQ_NO = #{seqNo,jdbcType=INTEGER}
       </if>
-      <if test="firstBuyPont != null and firstBuyPont != ''">
-        and FIRST_BUY_PONT = #{firstBuyPont,jdbcType=DECIMAL}
+      <if test="firstBuyPoint != null and firstBuyPoint != ''">
+        and FIRST_BUY_POINT = #{firstBuyPoint,jdbcType=DECIMAL}
       </if>
     </where>
   </select>
@@ -416,8 +416,8 @@
       <if test="seqNo != null">
         and SEQ_NO = #{seqNo,jdbcType=INTEGER}
       </if>
-      <if test="firstBuyPont != null">
-        and FIRST_BUY_PONT = #{firstBuyPont,jdbcType=DECIMAL}
+      <if test="firstBuyPoint != null">
+        and FIRST_BUY_POINT = #{firstBuyPoint,jdbcType=DECIMAL}
       </if>
     </where>
   </select>
@@ -438,7 +438,7 @@
 	<!-- 获取上线规格详情信息 -->
 	<select id="selectOnlineSpecInfo" parameterType="rebue.onl.mo.OnlOnlineSpecMo" resultMap="OnlineSpecInfoResultMap">
 		SELECT oos.ID, oos.ONLINE_SPEC, oos.SALE_PRICE, oos.CASHBACK_AMOUNT, oos.CURRENT_ONLINE_COUNT, 
-		oos.SALE_COUNT, oop.PIC_PATH, oos.BUY_POINT, oos.FIRST_BUY_PONT
+		oos.SALE_COUNT, oop.PIC_PATH, oos.BUY_POINT, oos.FIRST_BUY_POINT
 		FROM ONL_ONLINE_SPEC oos
 		LEFT JOIN ONL_ONLINE_PIC oop ON
 		oos.ONLINE_ID=oop.ONLINE_ID AND oop.PIC_TYPE=1

@@ -236,7 +236,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			onlineSpecMo.setLimitCount(to.getOnlineSpecs().get(i).getLimitCount());
 			onlineSpecMo.setCostPrice(costPrice);
 			onlineSpecMo.setBuyPoint(point);
-			onlineSpecMo.setFirstBuyPont(firstOrderPoint);
+			onlineSpecMo.setFirstBuyPoint(firstOrderPoint);
 			onlineSpecMo.setSeqNo(i);
 			onlineSpecMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
 			_log.info("添加上线信息添加上线规格信息的参数为：{}", onlineSpecMo);
@@ -255,7 +255,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			onlineSpecLogMo.setSalePrice(salePrice);
 			onlineSpecLogMo.setCostPrice(costPrice);
 			onlineSpecLogMo.setBuyPoint(point);
-			onlineSpecLogMo.setFirstBuyPont(firstOrderPoint);
+			onlineSpecLogMo.setFirstBuyPoint(firstOrderPoint);
 			onlineSpecLogMo.setCashbackAmount(cashbackAmount);
 			onlineSpecLogMo.setCommissionAmount(commissionAmount);
 			onlineSpecLogMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
@@ -518,7 +518,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			onlineSpecTo.setLimitCount(to.getOnlineSpecs().get(i).getLimitCount());
 			onlineSpecTo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
 			onlineSpecTo.setBuyPoint(commissionPoints);
-			onlineSpecTo.setFirstBuyPont(firstOrderPoint);
+			onlineSpecTo.setFirstBuyPoint(firstOrderPoint);
 			onlineSpecTo.setCashbackAmount(cashbackAmount);
 			Long onlineSpecId = _idWorker.getId();
 			// 如果规格id的长度大于13位的话说明该规格属于已上线的规格

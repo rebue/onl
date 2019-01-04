@@ -145,11 +145,11 @@ public class OnlOnlineSpecMo implements Serializable {
     /**
      *    首单积分
      *
-     *    数据库字段: ONL_ONLINE_SPEC.FIRST_BUY_PONT
+     *    数据库字段: ONL_ONLINE_SPEC.FIRST_BUY_POINT
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private BigDecimal firstBuyPont;
+    private BigDecimal firstBuyPoint;
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -469,23 +469,23 @@ public class OnlOnlineSpecMo implements Serializable {
     /**
      *    首单积分
      *
-     *    数据库字段: ONL_ONLINE_SPEC.FIRST_BUY_PONT
+     *    数据库字段: ONL_ONLINE_SPEC.FIRST_BUY_POINT
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public BigDecimal getFirstBuyPont() {
-        return firstBuyPont;
+    public BigDecimal getFirstBuyPoint() {
+        return firstBuyPoint;
     }
 
     /**
      *    首单积分
      *
-     *    数据库字段: ONL_ONLINE_SPEC.FIRST_BUY_PONT
+     *    数据库字段: ONL_ONLINE_SPEC.FIRST_BUY_POINT
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setFirstBuyPont(BigDecimal firstBuyPont) {
-        this.firstBuyPont = firstBuyPont;
+    public void setFirstBuyPoint(BigDecimal firstBuyPoint) {
+        this.firstBuyPoint = firstBuyPoint;
     }
 
     /**
@@ -511,7 +511,7 @@ public class OnlOnlineSpecMo implements Serializable {
         sb.append(", limitCount=").append(limitCount);
         sb.append(", saleCount=").append(saleCount);
         sb.append(", seqNo=").append(seqNo);
-        sb.append(", firstBuyPont=").append(firstBuyPont);
+        sb.append(", firstBuyPoint=").append(firstBuyPoint);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

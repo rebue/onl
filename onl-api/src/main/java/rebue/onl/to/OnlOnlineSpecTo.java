@@ -141,5 +141,5 @@ public class OnlOnlineSpecTo {
 	/**
 	 * 首单积分
 	 */
-	private BigDecimal firstBuyPont;
+	private BigDecimal firstBuyPoint;
 }

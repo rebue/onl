@@ -1,6 +1,7 @@
 package rebue.onl;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public class OnlCartTest {
 	 * @throws IOException 
 	 * @date 2018年3月29日 下午2:31:37
 	 */
-	@Test
+//	@Test
 	public void addCartTest() throws IOException {
 		String url = hostUrl + "/onl/cart";
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -73,6 +74,12 @@ public class OnlCartTest {
 		String result = OkhttpUtils.get(url, map);
 		System.out.println(result);
 	}*/
+	
+	@Test
+	public void test001() {
+		BigDecimal bd = BigDecimal.valueOf(11).divide(BigDecimal.valueOf(3));
+		System.out.println(bd.setScale(0, BigDecimal.ROUND_HALF_UP));
+	}
 }
   
 
