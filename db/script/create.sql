@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/12/28 11:02:40                          */
+/* Created on:     2019/1/4 9:20:47                             */
 /*==============================================================*/
 
 
@@ -134,7 +134,7 @@ create table ONL_ONLINE_SPEC
    CASHBACK_AMOUNT      decimal(20,4) not null comment '返现金额',
    COMMISSION_AMOUNT    decimal(20,4) comment '返佣金额',
    BUY_POINT            decimal(18,4) comment '购买积分',
-   FIRST_BUY_PONT       decimal(18,4) comment '首单积分',
+   FIRST_BUY_POINT      decimal(18,4) comment '首单积分',
    SALE_UNIT            varchar(50) comment '销售单位',
    CURRENT_ONLINE_COUNT int not null comment '当前上线数量（每次追加的数量）',
    LIMIT_COUNT          int not null default 0 comment '限制购买数量(默认为0，不限制)
@@ -160,7 +160,7 @@ create table ONL_ONLINE_SPEC_LOG
    CASHBACK_AMOUNT      decimal(20,4) not null comment '返现金额',
    COMMISSION_AMOUNT    decimal(20,4) comment '返佣金额',
    BUY_POINT            decimal(18,4) comment '购买积分',
-   FIRST_BUY_PONT       decimal(18,4) comment '首单积分',
+   FIRST_BUY_POINT      decimal(18,4) comment '首单积分',
    SALE_UNIT            varchar(50) comment '销售单位',
    CURRENT_ONLINE_COUNT int not null comment '当前上线数量（每次追加的数量）',
    LIMIT_COUNT          int not null default 0 comment '限制购买数量(默认为0，不限制)

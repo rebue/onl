@@ -157,6 +157,11 @@ alter table onl.ONL_ONLINE_SPEC_LOG add BUY_POINT            decimal(18,4) comme
 alter table onl.ONL_ONLINE_SPEC add FIRST_BUY_PONT       decimal(18,4) comment '首单积分';
 alter table onl.ONL_ONLINE_SPEC_LOG add FIRST_BUY_PONT       decimal(18,4) comment '首单积分';
 	
+-------------------------------------------以上已更新到线上-------------------------------------------
+alter table ONL_ONLINE_SPEC change FIRST_BUY_PONT FIRST_BUY_POINT  decimal(18,4) comment '首单积分';
+alter table ONL_ONLINE_SPEC_LOG change FIRST_BUY_PONT FIRST_BUY_POINT  decimal(18,4) comment '首单积分';
+-------------------------------------------以上已更新到线上-------------------------------------------
+
 
 	
 	
