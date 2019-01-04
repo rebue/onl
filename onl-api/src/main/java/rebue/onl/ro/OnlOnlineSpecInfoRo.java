@@ -57,5 +57,5 @@ public class OnlOnlineSpecInfoRo {
 	/**
 	 * 首单积分
 	 */
-	private BigDecimal firstBuyPont;
+	private BigDecimal firstBuyPoint;
 }

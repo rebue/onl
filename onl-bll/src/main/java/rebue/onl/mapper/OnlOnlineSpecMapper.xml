@@ -432,7 +432,7 @@
 		<result column="PIC_PATH" jdbcType="VARCHAR" property="picPath" />
 		<result column="SALE_COUNT" jdbcType="BIGINT" property="saleCount" />
 		<result column="BUY_POINT" jdbcType="DECIMAL" property="buyPoint" />
-    	<result column="FIRST_BUY_PONT" jdbcType="DECIMAL" property="firstBuyPont" />
+    	<result column="FIRST_BUY_POINT" jdbcType="DECIMAL" property="firstBuyPoint" />
 	</resultMap>
 
 	<!-- 获取上线规格详情信息 -->
