@@ -54,26 +54,17 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
         }
         return super.add(mo);
     }
-
-    /**
-     */
+    
     private static final Logger _log = LoggerFactory.getLogger(OnlOnlineSpecSvcImpl.class);
 
-    /**
-     */
     @Resource
     private OnlOnlineSvc        onlOnlineSvc;
-
-    /**
-     */
     @Resource
     private OnlCartSvc          onlCartSvc;
-
     @Resource
     private Mapper              dozerMapper;
-
     @Resource
-    private OnlOnlineSpecSvc    onlOnlineSpecSvc;
+    private OnlOnlineSpecSvc    thisSvc;
 
     /**
      * 根据商品规格编号查询商品规格信息 2018年3月29日14:28:59
@@ -120,7 +111,7 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 		}
         
         _log.info("根据上线规格id修改销售数量查询规格信息的参数为：{}", to.getId());
-        OnlOnlineSpecMo onlineSpecMo = onlOnlineSpecSvc.getById(to.getId());
+        OnlOnlineSpecMo onlineSpecMo = thisSvc.getById(to.getId());
         _log.info("根据上线规格id修改销售数量查询规格信息的返回值为：{}", onlineSpecMo);
         if (onlineSpecMo == null) {
         	_log.error("根据上线规格id修改销售数量时发现没有该规格信息，上线规格id为：{}", to.getId());
@@ -169,7 +160,7 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
         final OnlOnlineSpecMo specMo = new OnlOnlineSpecMo();
         specMo.setOnlineSpec(onlineSpec);
         specMo.setOnlineId(onlineId);
-        return onlOnlineSpecSvc.existSelective(specMo);
+        return thisSvc.existSelective(specMo);
     }
 
     /**
@@ -188,4 +179,54 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
     public int updateSaleCount(final Integer buyCount, final Long onlineSpecId, final Integer saleCount) {
         return _mapper.updateSaleCount(buyCount, onlineSpecId, saleCount);
     }
+    
+    /**
+     * 根据上线规格id修改是否已有首单
+     * @param id
+     * @param isHaveFirstOrder
+     * @return
+     */
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public Ro modifyIsHaveFirstOrderById(Long id, Boolean isHaveFirstOrder) {
+		_log.info("根据上线规格id修改是否已有首单的参数为：id-{}, isHaveFirstOrder-{}", id, isHaveFirstOrder);
+		Ro ro = new Ro();
+		if (id == null || isHaveFirstOrder == null) {
+			_log.error("根据上线规格id修改是否已有首单时出现参数为空，请求的参数为：id-{}, isHaveFirstOrder-{}", id, isHaveFirstOrder);
+			ro.setResult(ResultDic.PARAM_ERROR);
+			ro.setMsg("参数不正确");
+			return ro;
+		}
+		
+		_log.info("根据上线规格id修改是否已有首单查询上线规格信息的参数为：{}", id);
+		OnlOnlineSpecMo onlineSpecMo = thisSvc.getById(id);
+		_log.info("根据上线规格id修改是否已有首单查询上线规格信息的返回值为：{}", onlineSpecMo);
+		if (onlineSpecMo == null) {
+			_log.error("根据上线规格id修改是否已有首单查询上线规格信息时发现没有该规格信息，请求的id为：{}", id);
+			ro.setResult(ResultDic.FAIL);
+			ro.setMsg("没有发现该规格信息");
+			return ro;
+		}
+		
+		if (onlineSpecMo.getIsHaveFirstOrder() == isHaveFirstOrder) {
+			_log.info("根据上线规格id修改是否已有首单时发现需要设置的值与数据库一致，无需修改，请求的参数为：id-{}, isHaveFirstOrder-{}", id, isHaveFirstOrder);
+			ro.setResult(ResultDic.SUCCESS);
+			ro.setMsg("无需改动，立即返回");
+			return ro;
+		}
+		
+		int result = _mapper.updateIsHaveFirstOrderById(id, isHaveFirstOrder);
+		_log.info("根据上线规格id修改是否已有首单的返回值为：{}", result);
+		if (result != 1) {
+			_log.error("根据上线规格id修改是否已有首单出现错误，请求的参数为：id-{}, isHaveFirstOrder-{}", id, isHaveFirstOrder);
+			ro.setResult(ResultDic.FAIL);
+			ro.setMsg("修改出现错误");
+			return ro;
+		}
+		
+		_log.info("根据上线规格id修改是否已有首单成功，请求的参数为：id-{}, isHaveFirstOrder-{}", id, isHaveFirstOrder);
+		ro.setResult(ResultDic.SUCCESS);
+		ro.setMsg("修改成功");
+		return ro;
+	}
 }

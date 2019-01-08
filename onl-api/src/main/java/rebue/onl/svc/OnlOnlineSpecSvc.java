@@ -1,10 +1,7 @@
 package rebue.onl.svc;
 
 import java.util.List;
-import java.util.Map;
-
 import rebue.onl.mo.OnlOnlineSpecMo;
-import rebue.onl.ro.ModifyOnlineSpecInfoRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.to.ModifySaleCountByIdTo;
 import rebue.onl.to.OnlOnlineSpecTo;
@@ -66,4 +63,12 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
      * 根据上线规格id修改销售数量(减)
      */
 	Ro modifySaleCountById(ModifySaleCountByIdTo to);
+
+	/**
+	 * 根据上线规格id修改是否已有首单
+	 * @param id
+	 * @param isHaveFirstOrder
+	 * @return
+	 */
+	Ro modifyIsHaveFirstOrderById(Long id, Boolean isHaveFirstOrder);
 }

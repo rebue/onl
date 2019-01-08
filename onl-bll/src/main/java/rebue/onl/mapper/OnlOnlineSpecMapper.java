@@ -132,4 +132,13 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
      */
     @Delete("delete from ONL_ONLINE_SPEC where ID not in(${ids}) and ONLINE_ID=${onlineId}")
     int batchDeleteByIds(@Param("ids") String ids, @Param("onlineId") Long onlineId);
+    
+    /**
+     * 根据上线规格ID修改是否有首单
+     * @param id
+     * @param isHaveFirstOrder
+     * @return
+     */
+    @Update("update ONL_ONLINE_SPEC set IS_HAVE_FIRST_ORDER=#{isHaveFirstOrder,jdbcType=TINYINT} where ID=#{id,jdbcType=BIGINT}")
+    int updateIsHaveFirstOrderById(@Param("id") Long id, @Param("isHaveFirstOrder") Boolean isHaveFirstOrder);
 }
