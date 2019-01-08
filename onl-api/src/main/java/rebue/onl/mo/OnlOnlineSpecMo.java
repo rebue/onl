@@ -152,6 +152,15 @@ public class OnlOnlineSpecMo implements Serializable {
     private BigDecimal firstBuyPoint;
 
     /**
+     *    是否有首单
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.IS_HAVE_FIRST_ORDER
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Boolean isHaveFirstOrder;
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private static final long serialVersionUID = 1L;
@@ -489,6 +498,28 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
+     *    是否有首单
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.IS_HAVE_FIRST_ORDER
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Boolean getIsHaveFirstOrder() {
+        return isHaveFirstOrder;
+    }
+
+    /**
+     *    是否有首单
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.IS_HAVE_FIRST_ORDER
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setIsHaveFirstOrder(Boolean isHaveFirstOrder) {
+        this.isHaveFirstOrder = isHaveFirstOrder;
+    }
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Override
@@ -512,6 +543,7 @@ public class OnlOnlineSpecMo implements Serializable {
         sb.append(", saleCount=").append(saleCount);
         sb.append(", seqNo=").append(seqNo);
         sb.append(", firstBuyPoint=").append(firstBuyPoint);
+        sb.append(", isHaveFirstOrder=").append(isHaveFirstOrder);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

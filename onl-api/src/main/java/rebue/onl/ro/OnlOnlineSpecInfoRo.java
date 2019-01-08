@@ -58,4 +58,9 @@ public class OnlOnlineSpecInfoRo {
 	 * 首单积分
 	 */
 	private BigDecimal firstBuyPoint;
+
+	/**
+	 * 是否有首单
+	 */
+	private Boolean isHaveFirstOrder;
 }

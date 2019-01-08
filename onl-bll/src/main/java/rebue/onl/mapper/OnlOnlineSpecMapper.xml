@@ -21,6 +21,7 @@
     <result column="SALE_COUNT" jdbcType="INTEGER" property="saleCount" />
     <result column="SEQ_NO" jdbcType="INTEGER" property="seqNo" />
     <result column="FIRST_BUY_POINT" jdbcType="DECIMAL" property="firstBuyPoint" />
+    <result column="IS_HAVE_FIRST_ORDER" jdbcType="TINYINT" property="isHaveFirstOrder" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
@@ -29,7 +30,7 @@
     -->
     ID, ONLINE_ID, PRODUCT_SPEC_ID, ONLINE_SPEC, SALE_PRICE, COST_PRICE, CASHBACK_AMOUNT, 
     COMMISSION_AMOUNT, BUY_POINT, SALE_UNIT, CURRENT_ONLINE_COUNT, LIMIT_COUNT, SALE_COUNT, 
-    SEQ_NO, FIRST_BUY_POINT
+    SEQ_NO, FIRST_BUY_POINT, IS_HAVE_FIRST_ORDER
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--
@@ -58,14 +59,14 @@
       ONLINE_SPEC, SALE_PRICE, COST_PRICE, 
       CASHBACK_AMOUNT, COMMISSION_AMOUNT, BUY_POINT, 
       SALE_UNIT, CURRENT_ONLINE_COUNT, LIMIT_COUNT, 
-      SALE_COUNT, SEQ_NO, FIRST_BUY_POINT
-      )
+      SALE_COUNT, SEQ_NO, FIRST_BUY_POINT, 
+      IS_HAVE_FIRST_ORDER)
     values (#{id,jdbcType=BIGINT}, #{onlineId,jdbcType=BIGINT}, #{productSpecId,jdbcType=BIGINT}, 
       #{onlineSpec,jdbcType=VARCHAR}, #{salePrice,jdbcType=DECIMAL}, #{costPrice,jdbcType=DECIMAL}, 
       #{cashbackAmount,jdbcType=DECIMAL}, #{commissionAmount,jdbcType=DECIMAL}, #{buyPoint,jdbcType=DECIMAL}, 
       #{saleUnit,jdbcType=VARCHAR}, #{currentOnlineCount,jdbcType=INTEGER}, #{limitCount,jdbcType=INTEGER}, 
-      #{saleCount,jdbcType=INTEGER}, #{seqNo,jdbcType=INTEGER}, #{firstBuyPoint,jdbcType=DECIMAL}
-      )
+      #{saleCount,jdbcType=INTEGER}, #{seqNo,jdbcType=INTEGER}, #{firstBuyPoint,jdbcType=DECIMAL}, 
+      #{isHaveFirstOrder,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="rebue.onl.mo.OnlOnlineSpecMo">
     <!--
@@ -119,6 +120,9 @@
       <if test="firstBuyPoint != null">
         FIRST_BUY_POINT,
       </if>
+      <if test="isHaveFirstOrder != null">
+        IS_HAVE_FIRST_ORDER,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -165,6 +169,9 @@
       </if>
       <if test="firstBuyPoint != null">
         #{firstBuyPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="isHaveFirstOrder != null">
+        #{isHaveFirstOrder,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -217,6 +224,9 @@
       <if test="firstBuyPoint != null">
         FIRST_BUY_POINT = #{firstBuyPoint,jdbcType=DECIMAL},
       </if>
+      <if test="isHaveFirstOrder != null">
+        IS_HAVE_FIRST_ORDER = #{isHaveFirstOrder,jdbcType=TINYINT},
+      </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
@@ -239,7 +249,8 @@
       LIMIT_COUNT = #{limitCount,jdbcType=INTEGER},
       SALE_COUNT = #{saleCount,jdbcType=INTEGER},
       SEQ_NO = #{seqNo,jdbcType=INTEGER},
-      FIRST_BUY_POINT = #{firstBuyPoint,jdbcType=DECIMAL}
+      FIRST_BUY_POINT = #{firstBuyPoint,jdbcType=DECIMAL},
+      IS_HAVE_FIRST_ORDER = #{isHaveFirstOrder,jdbcType=TINYINT}
     where ID = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectAll" resultMap="BaseResultMap">
@@ -249,7 +260,7 @@
     -->
     select ID, ONLINE_ID, PRODUCT_SPEC_ID, ONLINE_SPEC, SALE_PRICE, COST_PRICE, CASHBACK_AMOUNT, 
     COMMISSION_AMOUNT, BUY_POINT, SALE_UNIT, CURRENT_ONLINE_COUNT, LIMIT_COUNT, SALE_COUNT, 
-    SEQ_NO, FIRST_BUY_POINT
+    SEQ_NO, FIRST_BUY_POINT, IS_HAVE_FIRST_ORDER
     from ONL_ONLINE_SPEC
   </select>
   <select id="selectSelective" parameterType="rebue.onl.mo.OnlOnlineSpecMo" resultMap="BaseResultMap">
@@ -302,6 +313,9 @@
       </if>
       <if test="firstBuyPoint != null">
         and FIRST_BUY_POINT = #{firstBuyPoint,jdbcType=DECIMAL}
+      </if>
+      <if test="isHaveFirstOrder != null">
+        and IS_HAVE_FIRST_ORDER = #{isHaveFirstOrder,jdbcType=TINYINT}
       </if>
     </where>
   </select>
@@ -367,6 +381,9 @@
       <if test="firstBuyPoint != null and firstBuyPoint != ''">
         and FIRST_BUY_POINT = #{firstBuyPoint,jdbcType=DECIMAL}
       </if>
+      <if test="isHaveFirstOrder != null">
+        and IS_HAVE_FIRST_ORDER = #{isHaveFirstOrder,jdbcType=TINYINT}
+      </if>
     </where>
   </select>
   <select id="countSelective" parameterType="rebue.onl.mo.OnlOnlineSpecMo" resultType="int">
@@ -419,6 +436,9 @@
       <if test="firstBuyPoint != null">
         and FIRST_BUY_POINT = #{firstBuyPoint,jdbcType=DECIMAL}
       </if>
+      <if test="isHaveFirstOrder != null">
+        and IS_HAVE_FIRST_ORDER = #{isHaveFirstOrder,jdbcType=TINYINT}
+      </if>
     </where>
   </select>
 
@@ -433,12 +453,13 @@
 		<result column="SALE_COUNT" jdbcType="BIGINT" property="saleCount" />
 		<result column="BUY_POINT" jdbcType="DECIMAL" property="buyPoint" />
     	<result column="FIRST_BUY_POINT" jdbcType="DECIMAL" property="firstBuyPoint" />
+    	<result column="IS_HAVE_FIRST_ORDER" jdbcType="TINYINT" property="isHaveFirstOrder" />
 	</resultMap>
 
 	<!-- 获取上线规格详情信息 -->
 	<select id="selectOnlineSpecInfo" parameterType="rebue.onl.mo.OnlOnlineSpecMo" resultMap="OnlineSpecInfoResultMap">
 		SELECT oos.ID, oos.ONLINE_SPEC, oos.SALE_PRICE, oos.CASHBACK_AMOUNT, oos.CURRENT_ONLINE_COUNT, 
-		oos.SALE_COUNT, oop.PIC_PATH, oos.BUY_POINT, oos.FIRST_BUY_POINT
+		oos.SALE_COUNT, oop.PIC_PATH, oos.BUY_POINT, oos.FIRST_BUY_POINT, oos.IS_HAVE_FIRST_ORDER
 		FROM ONL_ONLINE_SPEC oos
 		LEFT JOIN ONL_ONLINE_PIC oop ON
 		oos.ONLINE_ID=oop.ONLINE_ID AND oop.PIC_TYPE=1
