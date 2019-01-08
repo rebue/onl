@@ -162,6 +162,8 @@ alter table ONL_ONLINE_SPEC change FIRST_BUY_PONT FIRST_BUY_POINT  decimal(18,4)
 alter table ONL_ONLINE_SPEC_LOG change FIRST_BUY_PONT FIRST_BUY_POINT  decimal(18,4) comment '首单积分';
 -------------------------------------------以上已更新到线上-------------------------------------------
 
-
+alter table ONL_ONLINE_SPEC add IS_HAVE_FIRST_ORDER  bool comment '是否有首单';
+alter table ONL_ONLINE_SPEC_LOG add IS_HAVE_FIRST_ORDER  bool comment '是否有首单';
+-------------------------------------------以上已更新到线上-------------------------------------------
 	
 	

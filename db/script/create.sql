@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2019/1/4 9:20:47                             */
+/* Created on:     2019/1/8 8:48:33                             */
 /*==============================================================*/
 
 
@@ -141,6 +141,7 @@ create table ONL_ONLINE_SPEC
             每个人限制购买的数量',
    SALE_COUNT           int not null comment '销售数量',
    SEQ_NO               int not null comment '排序号',
+   IS_HAVE_FIRST_ORDER  bool comment '是否有首单',
    primary key (ID)
 );
 
@@ -166,6 +167,7 @@ create table ONL_ONLINE_SPEC_LOG
    LIMIT_COUNT          int not null default 0 comment '限制购买数量(默认为0，不限制)
             每个人限制购买的数量',
    SEQ_NO               int not null comment '排序号',
+   IS_HAVE_FIRST_ORDER  bool comment '是否有首单',
    primary key (ID)
 );
 
