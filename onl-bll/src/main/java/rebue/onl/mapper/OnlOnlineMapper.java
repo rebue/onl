@@ -8,7 +8,9 @@ import org.apache.ibatis.annotations.Update;
 
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
+import rebue.onl.ro.SupplierGoodsRo;
 import rebue.onl.to.OnlineGoodsListTo;
+import rebue.onl.to.SupplierGoodsTo;
 import rebue.robotech.mapper.MybatisBaseMapper;
 
 @Mapper
@@ -108,4 +110,13 @@ public interface OnlOnlineMapper extends MybatisBaseMapper<OnlOnlineMo, Long> {
             + "        AND a.ONLINE_STATE = 1" //
             + "        AND b.INVENTORY_COUNT = 0;")
     int autoOffline(@Param("onlineId") Long onlineId);
+    
+    
+    /**
+     * 供应商查询商品信息
+     * @param record
+     * @return
+     */
+    List<SupplierGoodsRo>  selectSupplierGoods(SupplierGoodsTo record);
+    
 }

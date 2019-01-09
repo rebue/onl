@@ -34,11 +34,13 @@ import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 import rebue.onl.ro.OnlOnlineListRo;
 import rebue.onl.ro.OnlinesRo;
 import rebue.onl.ro.ReOnlineRo;
+import rebue.onl.ro.SupplierGoodsRo;
 import rebue.onl.svc.OnlOnlinePicSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
 import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlineGoodsListTo;
+import rebue.onl.to.SupplierGoodsTo;
 import rebue.onl.to.UpdateOnlineAfterOrderTo;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
@@ -344,6 +346,24 @@ public class OnlOnlineCtrl {
 		}
 		_log.info("返回值为：{}", ro);
 		return ro;
+	}
+	
+	/**
+		供应商获取商品
+	 */
+	@GetMapping("/onl/online/supplierGoods")
+	PageInfo<SupplierGoodsRo> listSupplierGoods(final SupplierGoodsTo to, @RequestParam("pageNum") final int pageNum,
+			@RequestParam("pageSize") final int pageSize, final HttpServletRequest req)
+			throws NumberFormatException, ParseException {
+		_log.info("listSupplierGoods SupplierGoodsTo:" + to + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
+		if (pageSize > 50) {
+			final String msg = "pageSize不能大于50";
+			_log.error(msg);
+			throw new IllegalArgumentException(msg);
+		}
+
+		final PageInfo<SupplierGoodsRo> result = svc.supplierGoods(to, pageNum, pageSize);
+		return result;
 	}
 
 }

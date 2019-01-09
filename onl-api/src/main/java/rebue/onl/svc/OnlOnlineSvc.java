@@ -9,8 +9,10 @@ import rebue.onl.ro.AddOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 import rebue.onl.ro.OnlOnlineListRo;
 import rebue.onl.ro.ReOnlineRo;
+import rebue.onl.ro.SupplierGoodsRo;
 import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlineGoodsListTo;
+import rebue.onl.to.SupplierGoodsTo;
 import rebue.onl.to.UpdateOnlineAfterOrderTo;
 import rebue.robotech.ro.Ro;
 import rebue.robotech.svc.MybatisBaseSvc;
@@ -64,5 +66,12 @@ public interface OnlOnlineSvc extends MybatisBaseSvc<OnlOnlineMo, java.lang.Long
      * @return
      */
 	Ro offline(OnlOnlineMo mo);
+	
+	/**
+	 * 供应商查询商品
+	 * @param mo
+	 * @return
+	 */
+	 PageInfo<SupplierGoodsRo> supplierGoods(SupplierGoodsTo to,int pageNum, int pageSize);
 
 }

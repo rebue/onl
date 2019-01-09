@@ -380,4 +380,31 @@
   <select id="existOnlineByProduceId" parameterType="rebue.onl.mo.OnlOnlineMo" resultType="boolean">
   	SELECT COUNT(*) FROM ONL_ONLINE WHERE PRODUCE_ID=#{produceId,jdbcType=BIGINT} AND ONLINE_STATE=1
   </select>
+  
+    <select id="selectSupplierGoods" parameterType="rebue.onl.to.SupplierGoodsTo" resultType="rebue.onl.ro.SupplierGoodsRo">
+    <!-- 
+		供应商查询商品信息
+    -->
+    SELECT ID as id ,  SUBJECT_TYPE as subjectType,  ONLINE_TITLE as  onlineTitle, ONLINE_DETAIL as onlineDetail
+    , ONLINE_STATE as   onlineState , ONLINE_TIME as onlineTime
+     FROM ONL_ONLINE 
+    <where>
+    	SUPPLIER_ID=#{supplierId,jdbcType=BIGINT}
+      <if test="onlineTitle != null and onlineTitle != ''">
+        and ONLINE_TITLE LIKE '%${onlineTitle}%'
+      </if>
+      <if test="onlineState != null ">
+        and ONLINE_STATE = #{onlineState,jdbcType=TINYINT}
+      </if>
+       <if test="subjectType != null ">
+        and SUBJECT_TYPE = #{subjectType,jdbcType=TINYINT}
+      </if>
+		<if test="onlineTimeStart != null  ">
+			and ONLINE_TIME &gt;= #{onlineTimeStart,jdbcType=TIMESTAMP}
+		</if>
+		<if test="onlineTimeEnd != null ">
+			and ONLINE_TIME &lt;= #{onlineTimeEnd,jdbcType=TIMESTAMP}
+		</if>
+    </where>
+  </select>
 </mapper>

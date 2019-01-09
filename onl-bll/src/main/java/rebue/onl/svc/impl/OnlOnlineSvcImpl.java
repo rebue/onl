@@ -32,6 +32,7 @@ import rebue.onl.ro.AddOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 import rebue.onl.ro.OnlOnlineListRo;
 import rebue.onl.ro.ReOnlineRo;
+import rebue.onl.ro.SupplierGoodsRo;
 import rebue.onl.svc.OnlCartSvc;
 import rebue.onl.svc.OnlOnlineLogSvc;
 import rebue.onl.svc.OnlOnlinePicLogSvc;
@@ -43,6 +44,7 @@ import rebue.onl.svc.OnlOnlineSvc;
 import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlOnlineSpecTo;
 import rebue.onl.to.OnlineGoodsListTo;
+import rebue.onl.to.SupplierGoodsTo;
 import rebue.onl.to.UpdateOnlineAfterOrderTo;
 import rebue.onl.to.UpdateOnlineSpecAfterOrderTo;
 import rebue.pnt.util.PntPointsAlgorithmUtils;
@@ -789,5 +791,14 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		ro.setResult(ResultDic.SUCCESS);
 		ro.setMsg("更新上线信息(下单后)成功");
 		return ro;
+	}
+
+	@Override
+	public 	 PageInfo<SupplierGoodsRo> supplierGoods(SupplierGoodsTo to,int pageNum, int pageSize){
+		_log.info("供应商查询商品的参数为：SupplierGoodsTo：{}", to);
+		final PageInfo<SupplierGoodsRo> supplierGoodsRo = PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> _mapper.selectSupplierGoods(to));
+		_log.info("供应商查询商品的结果为：：supplierGoodsRo：{}", supplierGoodsRo.getList());
+
+		return supplierGoodsRo;
 	}
 }
