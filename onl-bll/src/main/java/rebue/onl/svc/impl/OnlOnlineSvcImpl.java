@@ -445,7 +445,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			try {
 				_log.info("根据上线id修改订单详情供应商和发货组织参数为：getSupplierId()-{},deliverOrgId()-{},getOnlineId()-{}",to.getSupplierId(), to.getDeliverOrgId(), to.getOnlineId());
 				int result =ordOrderDetailSvc.modifyDeliverAndSupplierByOnlineid( to.getSupplierId() , to.getDeliverOrgId(),to.getOnlineId());
-				_log.info("根据上线id修改订单详情供应商和发货组织结果为 -{} ：",result);
+				_log.info("根据上线id修改订单详情供应商和发货组织结果为 result:{} ：",result);
 
 			} catch (final RuntimeException e) {
 				_log.error("重新上线修改上线信息出现错误，上线id为：{}", to.getOnlineId());
