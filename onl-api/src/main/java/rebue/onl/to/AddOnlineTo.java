@@ -85,4 +85,10 @@ public class AddOnlineTo {
 	 * @mbg.generated 自动生成，如需修改，请删除本行
 	 */
 	private Long onlineOrgId;
+	
+	
+	/**
+	 * 是否能修改供应商，0：否，1：是，2：是，且修改该商品未结算订单的供应商和发货组织。
+	 */
+	private Byte isEditSupplier;
 }

@@ -47,6 +47,7 @@ import rebue.onl.to.OnlineGoodsListTo;
 import rebue.onl.to.SupplierGoodsTo;
 import rebue.onl.to.UpdateOnlineAfterOrderTo;
 import rebue.onl.to.UpdateOnlineSpecAfterOrderTo;
+import rebue.ord.svr.feign.OrdOrderDetailSvc;
 import rebue.pnt.util.PntPointsAlgorithmUtils;
 import rebue.prm.mo.PrmPartnerMo;
 import rebue.prm.svr.feign.PrmPartnerSvr;
@@ -123,6 +124,9 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 
 	@Resource
 	private OnlOnlinePromotionSvc onlOnlinePromotionSvc;
+	
+	@Resource
+	private  OrdOrderDetailSvc  ordOrderDetailSvc;
 
 	/**
 	 * 添加上线信息
@@ -432,6 +436,26 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			ro.setResult(ReOnlineDic.PARAMETER_ERROR);
 			ro.setMsg("参数错误");
 			return ro;
+		}
+		
+		//根据上线id修改该商品的订单供应商和发货组织IsEditSupplier：0：否，1：是，2，是且修改没有结算的订单详情供应商和发货组织。
+		if(to.getIsEditSupplier() ==2) {
+			_log.info("需要修改该商品订单详情的供应商和发货组织，IsEditSupplier-{}",to.getIsEditSupplier());
+
+			try {
+				_log.info("根据上线id修改订单详情供应商和发货组织参数为：getSupplierId()-{},deliverOrgId()-{},getOnlineId()-{}",to.getSupplierId(), to.getDeliverOrgId(), to.getOnlineId());
+				int result =ordOrderDetailSvc.modifyDeliverAndSupplierByOnlineid( to.getSupplierId() , to.getDeliverOrgId(),to.getOnlineId());
+				_log.info("根据上线id修改订单详情供应商和发货组织结果为 -{} ：",result);
+
+			} catch (final RuntimeException e) {
+				_log.error("重新上线修改上线信息出现错误，上线id为：{}", to.getOnlineId());
+				ro.setResult(ReOnlineDic.ERROR);
+				ro.setMsg("修改商品供应商发发货组织出错");
+				return ro;
+			}
+		}else {
+			_log.info("不需要修改该商品订单详情的供应商和发货组织，IsEditSupplier-{}",to.getIsEditSupplier());
+
 		}
 
 		Long deliverOrgId = to.getDeliverOrgId();
