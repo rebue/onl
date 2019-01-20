@@ -3,6 +3,9 @@ package rebue.onl.svc.impl;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,12 @@ import rebue.onl.mo.OnlCartMo;
 import rebue.onl.ro.AddCartRo;
 import rebue.onl.ro.OnlCartRo;
 import rebue.onl.svc.OnlCartSvc;
+import rebue.ord.mo.OrdGoodsBuyRelationMo;
+import rebue.ord.svr.feign.OrdGoodsBuyRelationSvc;
+import rebue.ord.svr.feign.OrdOrderSvc;
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
+import rebue.suc.mo.SucUserMo;
+import rebue.suc.svr.feign.SucUserSvc;
 
 /**
  * 购物车
@@ -47,6 +55,12 @@ public class OnlCartSvcImpl extends MybatisBaseSvcImpl<OnlCartMo, java.lang.Long
         }
         return super.add(mo);
     }
+    
+	@Resource
+	private SucUserSvc sucUserSvc;
+	
+	@Resource
+	private OrdGoodsBuyRelationSvc ordGoodsBuyRelationSvc;
 
     /**
      */
@@ -117,18 +131,47 @@ public class OnlCartSvcImpl extends MybatisBaseSvcImpl<OnlCartMo, java.lang.Long
         return _mapper.selectCartCountByUserId(mo);
     }
 
-    /**
-     *  获取购物车列表 Title: selectCartList Description:
-     *
-     *  @param mo
-     *  @return
-     *  @date 2018年3月30日 下午1:54:09
-     */
-    @Override
-    public List<OnlCartRo> selectCartList(OnlCartMo mo) {
-        _log.info("获取购物车列表的参数为：{}", mo);
-        return _mapper.selectCartList(mo);
-    }
+	/**
+	 * 获取购物车列表 Title: selectCartList Description:
+	 *
+	 * @param mo
+	 * @return
+	 * @date 2018年3月30日 下午1:54:09
+	 */
+	@Override
+	public List<OnlCartRo> selectCartList(OnlCartMo mo) {
+		_log.info("获取购物车列表的参数为：{}", mo);
+		List<OnlCartRo> result = _mapper.selectCartList(mo);
+		_log.info("获取购物车列表的结果为：{}", result);
+
+		for (OnlCartRo onlCartRo : result) {
+			if(onlCartRo.getSubjectType() !=1) {
+				continue;
+			}
+			_log.info("购物车获取商品关系中的上家信息开始++++++++++++++++++++++++++++++");
+			OrdGoodsBuyRelationMo ogbrmo = new OrdGoodsBuyRelationMo();
+			ogbrmo.setDownlineUserId(mo.getUserId());
+			ogbrmo.setOnlineId(onlCartRo.getOnlineId());
+			_log.info("获取商品购买关系的参数为：{}", ogbrmo);
+			List<OrdGoodsBuyRelationMo> ordGoodsBuyRelationMo = ordGoodsBuyRelationSvc.ListExistRelation(ogbrmo);
+			_log.info("获取商品购买关系的结果为：{}", ordGoodsBuyRelationMo);
+
+			if (  ordGoodsBuyRelationMo != null && ordGoodsBuyRelationMo.size() >0) {
+				_log.info("获取商品购买关系中上家家用户信息的参数为：ordGoodsBuyRelationMo.get(0).getUplineUserId():{}",
+						ordGoodsBuyRelationMo.get(0).getUplineUserId());
+				SucUserMo user = sucUserSvc.getById(ordGoodsBuyRelationMo.get(0).getUplineUserId());
+				_log.info("获取商品购买关系中上家家用户信息的结果为：user:{}", user);
+				if(user !=null) {
+					onlCartRo.setUplineWxFace(user.getWxFace());
+					onlCartRo.setUplineWxNickname(user.getWxNickname());
+					onlCartRo.setUplineUserId(user.getId());
+				}
+			}
+
+			_log.info("购物车获取商品关系中的上家信息结束-------------------------------");
+		}
+		return result;
+	}
 
     /**
      *  批量删除购物车 2018年4月3日15:27:40

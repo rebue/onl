@@ -77,5 +77,21 @@ public class OnlCartRo {
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private Long supplierId;
+    
+
+    /**
+		商品购买关系中的上家微信头像
+     */
+    private String uplineWxFace;
+    
+    /**
+     商品购买关系中的上家微信昵称
+     */
+    private String uplineWxNickname;
+    
+    /**
+    商品购买关系中的上家用户id
+    */
+   private Long uplineUserId;
 
 }
