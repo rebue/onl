@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2019/1/8 8:48:33                             */
+/* Created on:     2019/3/22 14:12:53                           */
 /*==============================================================*/
 
 
@@ -18,7 +18,13 @@ drop table if exists ONL_ONLINE_PROMOTION;
 
 drop table if exists ONL_ONLINE_SPEC;
 
+drop table if exists ONL_ONLINE_SPEC_ATTR;
+
 drop table if exists ONL_ONLINE_SPEC_LOG;
+
+drop table if exists ONL_ONLINE_SPEC_ORDER_REMARK;
+
+drop table if exists ONL_SEARCH_CATEGORY_ONLINE;
 
 /*==============================================================*/
 /* Table: ONL_CART                                              */
@@ -98,8 +104,8 @@ alter table ONL_ONLINE_PIC comment '上线图片';
 create table ONL_ONLINE_PIC_LOG
 (
    ID                   bigint not null comment '上线图片日志ID',
-   ONLINE_LOG_ID        bigint not null comment '上线日志ID',
    ONLINE_ID            bigint not null comment '上线ID',
+   ONLINE_LOG_ID        bigint not null comment '上线日志ID',
    PIC_TYPE             tinyint not null comment '图片类型',
    PIC_PATH             varchar(800) not null comment '图片路径',
    primary key (ID)
@@ -148,6 +154,21 @@ create table ONL_ONLINE_SPEC
 alter table ONL_ONLINE_SPEC comment '上线规格';
 
 /*==============================================================*/
+/* Table: ONL_ONLINE_SPEC_ATTR                                  */
+/*==============================================================*/
+create table ONL_ONLINE_SPEC_ATTR
+(
+   ID                   bigint not null comment '上线规格属性ID',
+   ONLINE_SPEC_ID       bigint not null comment '上线规格ID',
+   ATTR_NAME            varchar(50) not null comment '属性名称',
+   ATTR_VALUE           varchar(50) not null comment '属性值',
+   primary key (ID),
+   unique key AK_ONLINE_SPEC_AND_ATTR_NAME_AND_ATTR_VALUE (ONLINE_SPEC_ID, ATTR_NAME, ATTR_VALUE)
+);
+
+alter table ONL_ONLINE_SPEC_ATTR comment '上线规格属性';
+
+/*==============================================================*/
 /* Table: ONL_ONLINE_SPEC_LOG                                   */
 /*==============================================================*/
 create table ONL_ONLINE_SPEC_LOG
@@ -173,6 +194,32 @@ create table ONL_ONLINE_SPEC_LOG
 
 alter table ONL_ONLINE_SPEC_LOG comment '上线规格日志';
 
+/*==============================================================*/
+/* Table: ONL_ONLINE_SPEC_ORDER_REMARK                          */
+/*==============================================================*/
+create table ONL_ONLINE_SPEC_ORDER_REMARK
+(
+   ID                   bigint not null comment '上线规格下单备注ID',
+   ONLINE_SPEC_ID       bigint not null comment '上线规格ID',
+   REMARK               varchar(20) not null comment '备注',
+   primary key (ID)
+);
+
+alter table ONL_ONLINE_SPEC_ORDER_REMARK comment '上线规格下单备注';
+
+/*==============================================================*/
+/* Table: ONL_SEARCH_CATEGORY_ONLINE                            */
+/*==============================================================*/
+create table ONL_SEARCH_CATEGORY_ONLINE
+(
+   ID                   bigint not null comment '搜索分类上线ID',
+   SEARCH_CATEGORY_ID   bigint not null comment '搜索分类ID',
+   ONLINE_ID            bigint not null comment '上线ID',
+   primary key (ID)
+);
+
+alter table ONL_SEARCH_CATEGORY_ONLINE comment '搜索分类上线';
+
 alter table ONL_CART add constraint FK_Relationship_7 foreign key (ONLINE_SPEC_ID)
       references ONL_ONLINE_SPEC (ID) on delete restrict on update restrict;
 
@@ -197,9 +244,18 @@ alter table ONL_ONLINE_PROMOTION add constraint FK_Relationship_5 foreign key (O
 alter table ONL_ONLINE_SPEC add constraint FK_Relationship_2 foreign key (ONLINE_ID)
       references ONL_ONLINE (ID) on delete restrict on update restrict;
 
+alter table ONL_ONLINE_SPEC_ATTR add constraint FK_Relationship_17 foreign key (ONLINE_SPEC_ID)
+      references ONL_ONLINE_SPEC (ID) on delete restrict on update restrict;
+
 alter table ONL_ONLINE_SPEC_LOG add constraint FK_Relationship_11 foreign key (ONLINE_LOG_ID)
       references ONL_ONLINE_LOG (ID) on delete restrict on update restrict;
 
 alter table ONL_ONLINE_SPEC_LOG add constraint FK_Relationship_12 foreign key (ONLINE_ID)
+      references ONL_ONLINE (ID) on delete restrict on update restrict;
+
+alter table ONL_ONLINE_SPEC_ORDER_REMARK add constraint FK_Relationship_16 foreign key (ONLINE_SPEC_ID)
+      references ONL_ONLINE_SPEC (ID) on delete restrict on update restrict;
+
+alter table ONL_SEARCH_CATEGORY_ONLINE add constraint FK_Relationship_15 foreign key (ONLINE_ID)
       references ONL_ONLINE (ID) on delete restrict on update restrict;
 

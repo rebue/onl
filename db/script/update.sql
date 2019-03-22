@@ -165,5 +165,56 @@ alter table ONL_ONLINE_SPEC_LOG change FIRST_BUY_PONT FIRST_BUY_POINT  decimal(1
 alter table ONL_ONLINE_SPEC add IS_HAVE_FIRST_ORDER  bool comment '是否有首单';
 alter table ONL_ONLINE_SPEC_LOG add IS_HAVE_FIRST_ORDER  bool comment '是否有首单';
 -------------------------------------------以上已更新到线上-------------------------------------------
-	
+
+
+/*==============================================================*/
+/* Table: ONL_ONLINE_SPEC_ATTR                                  */
+/*==============================================================*/
+create table ONL_ONLINE_SPEC_ATTR
+(
+   ID                   bigint not null comment '上线规格属性ID',
+   ONLINE_SPEC_ID       bigint not null comment '上线规格ID',
+   ATTR_NAME            varchar(50) not null comment '属性名称',
+   ATTR_VALUE           varchar(50) not null comment '属性值',
+   primary key (ID),
+   unique key AK_ONLINE_SPEC_AND_ATTR_NAME_AND_ATTR_VALUE (ONLINE_SPEC_ID, ATTR_NAME, ATTR_VALUE)
+);
+
+alter table ONL_ONLINE_SPEC_ATTR comment '上线规格属性';
+
+/*==============================================================*/
+/* Table: ONL_ONLINE_SPEC_ORDER_REMARK                          */
+/*==============================================================*/
+create table ONL_ONLINE_SPEC_ORDER_REMARK
+(
+   ID                   bigint not null comment '上线规格下单备注ID',
+   ONLINE_SPEC_ID       bigint not null comment '上线规格ID',
+   REMARK               varchar(20) not null comment '备注',
+   primary key (ID)
+);
+
+alter table ONL_ONLINE_SPEC_ORDER_REMARK comment '上线规格下单备注';
+
+/*==============================================================*/
+/* Table: ONL_SEARCH_CATEGORY_ONLINE                            */
+/*==============================================================*/
+create table ONL_SEARCH_CATEGORY_ONLINE
+(
+   ID                   bigint not null comment '搜索分类上线ID',
+   SEARCH_CATEGORY_ID   bigint not null comment '搜索分类ID',
+   ONLINE_ID            bigint not null comment '上线ID',
+   primary key (ID)
+);
+
+alter table ONL_SEARCH_CATEGORY_ONLINE comment '搜索分类上线'
+
+alter table ONL_ONLINE_SPEC_ATTR add constraint FK_Relationship_17 foreign key (ONLINE_SPEC_ID)
+      references ONL_ONLINE_SPEC (ID) on delete restrict on update restrict;
+      
+alter table ONL_ONLINE_SPEC_ORDER_REMARK add constraint FK_Relationship_16 foreign key (ONLINE_SPEC_ID)
+      references ONL_ONLINE_SPEC (ID) on delete restrict on update restrict;
+
+alter table ONL_SEARCH_CATEGORY_ONLINE add constraint FK_Relationship_15 foreign key (ONLINE_ID)
+      references ONL_ONLINE (ID) on delete restrict on update restrict;
+
 	
