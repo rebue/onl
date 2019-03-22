@@ -19,7 +19,6 @@ import rebue.onl.ro.OnlCartRo;
 import rebue.onl.svc.OnlCartSvc;
 import rebue.ord.mo.OrdGoodsBuyRelationMo;
 import rebue.ord.svr.feign.OrdGoodsBuyRelationSvc;
-import rebue.ord.svr.feign.OrdOrderSvc;
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
 import rebue.suc.mo.SucUserMo;
 import rebue.suc.svr.feign.SucUserSvc;
