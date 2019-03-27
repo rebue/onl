@@ -166,6 +166,24 @@ alter table ONL_ONLINE_SPEC add IS_HAVE_FIRST_ORDER  bool comment '是否有首�
 alter table ONL_ONLINE_SPEC_LOG add IS_HAVE_FIRST_ORDER  bool comment '是否有首单';
 -------------------------------------------以上已更新到线上-------------------------------------------
 
+/*==============================================================*/
+/* Table: ONL_SEARCH_CATEGORY                                   */
+/*==============================================================*/
+create table ONL_SEARCH_CATEGORY
+(
+   ID                   bigint not null comment '分类ID',
+   SELLER_ID            bigint not null comment '卖家ID',
+   SHOP_ID              bigint not null comment '店铺ID',
+   NAME                 varchar(50) not null comment '分类名称',
+   CODE                 varchar(50) not null comment '分类编码',
+   REMARK               varchar(50) comment '分类备注',
+   IS_ENABLED           bool not null default true comment '是否启用',
+   IMAGE                varchar(200) comment '分类图片',
+   primary key (ID),
+   unique key AK_SHOP_ID_AND_NAME (SHOP_ID, NAME)
+);
+
+alter table ONL_SEARCH_CATEGORY comment '搜索分类';
 
 /*==============================================================*/
 /* Table: ONL_ONLINE_SPEC_ATTR                                  */
@@ -206,6 +224,10 @@ create table ONL_SEARCH_CATEGORY_ONLINE
    primary key (ID)
 );
 
+alter table ONL_ONLINE add IS_BELOW_ONLINE      bool not null default false comment '是否线下（如果为线下店铺时，默认不发布到平台）';
+alter table ONL_ONLINE add IS_ONLINE_PLATFORM   bool not null comment '是否上线到平台';
+
+
 alter table ONL_SEARCH_CATEGORY_ONLINE comment '搜索分类上线'
 
 alter table ONL_ONLINE_SPEC_ATTR add constraint FK_Relationship_17 foreign key (ONLINE_SPEC_ID)
@@ -217,4 +239,6 @@ alter table ONL_ONLINE_SPEC_ORDER_REMARK add constraint FK_Relationship_16 forei
 alter table ONL_SEARCH_CATEGORY_ONLINE add constraint FK_Relationship_15 foreign key (ONLINE_ID)
       references ONL_ONLINE (ID) on delete restrict on update restrict;
 
+alter table ONL_SEARCH_CATEGORY_ONLINE add constraint FK_Relationship_18 foreign key (SEARCH_CATEGORY_ID)
+      references ONL_SEARCH_CATEGORY (ID) on delete restrict on update restrict;
 	
