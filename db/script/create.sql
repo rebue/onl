@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2019/3/27 11:38:36                           */
+/* Created on:     2019/4/1 9:36:34                             */
 /*==============================================================*/
 
 
@@ -83,6 +83,8 @@ create table ONL_ONLINE_LOG
    OP_ID                bigint not null comment '操作人ID',
    OP_TIME              datetime not null comment '操作时间',
    PRODUCT_ID           bigint not null comment '产品ID,上一次上线的产品ID',
+   IS_BELOW_ONLINE      bool not null default false comment '是否线下（如果为线下店铺时，默认不发布到平台）',
+   IS_ONLINE_PLATFORM   bool not null comment '是否上线到平台',
    primary key (ID)
 );
 
