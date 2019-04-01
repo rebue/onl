@@ -54,6 +54,33 @@ public class OnlOnlineMo implements Serializable {
     private String onlineDetail;
 
     /**
+     *    上线组织ID
+     *
+     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long onlineOrgId;
+
+    /**
+     *    供应商ID
+     *
+     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long supplierId;
+
+    /**
+     *    发货组织ID(默认填入上线组织ID，可变更为供应商的ID)
+     *
+     *    数据库字段: ONL_ONLINE.DELIVER_ORG_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long deliverOrgId;
+
+    /**
      *    操作人ID
      *
      *    数据库字段: ONL_ONLINE.OP_ID
@@ -92,31 +119,22 @@ public class OnlOnlineMo implements Serializable {
     private Long productId;
 
     /**
-     *    供应商ID
+     *    是否线下（如果为线下店铺时，默认不发布到平台）
      *
-     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
+     *    数据库字段: ONL_ONLINE.IS_BELOW_ONLINE
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private Long supplierId;
+    private Boolean isBelowOnline;
 
     /**
-     *    操作组织ID
+     *    是否上线到平台
      *
-     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Long onlineOrgId;
-
-    /**
-     *    发货组织ID(默认填入上线组织ID，可变更为供应商的ID)
-     *
-     *    数据库字段: ONL_ONLINE.DELIVER_ORG_ID
+     *    数据库字段: ONL_ONLINE.IS_ONLINE_PLATFORM
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private Long deliverOrgId;
+    private Boolean isOnlinePlatform;
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -212,6 +230,72 @@ public class OnlOnlineMo implements Serializable {
     }
 
     /**
+     *    上线组织ID
+     *
+     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Long getOnlineOrgId() {
+        return onlineOrgId;
+    }
+
+    /**
+     *    上线组织ID
+     *
+     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setOnlineOrgId(Long onlineOrgId) {
+        this.onlineOrgId = onlineOrgId;
+    }
+
+    /**
+     *    供应商ID
+     *
+     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Long getSupplierId() {
+        return supplierId;
+    }
+
+    /**
+     *    供应商ID
+     *
+     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setSupplierId(Long supplierId) {
+        this.supplierId = supplierId;
+    }
+
+    /**
+     *    发货组织ID(默认填入上线组织ID，可变更为供应商的ID)
+     *
+     *    数据库字段: ONL_ONLINE.DELIVER_ORG_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Long getDeliverOrgId() {
+        return deliverOrgId;
+    }
+
+    /**
+     *    发货组织ID(默认填入上线组织ID，可变更为供应商的ID)
+     *
+     *    数据库字段: ONL_ONLINE.DELIVER_ORG_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setDeliverOrgId(Long deliverOrgId) {
+        this.deliverOrgId = deliverOrgId;
+    }
+
+    /**
      *    操作人ID
      *
      *    数据库字段: ONL_ONLINE.OP_ID
@@ -300,69 +384,47 @@ public class OnlOnlineMo implements Serializable {
     }
 
     /**
-     *    供应商ID
+     *    是否线下（如果为线下店铺时，默认不发布到平台）
      *
-     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
+     *    数据库字段: ONL_ONLINE.IS_BELOW_ONLINE
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Long getSupplierId() {
-        return supplierId;
+    public Boolean getIsBelowOnline() {
+        return isBelowOnline;
     }
 
     /**
-     *    供应商ID
+     *    是否线下（如果为线下店铺时，默认不发布到平台）
      *
-     *    数据库字段: ONL_ONLINE.SUPPLIER_ID
+     *    数据库字段: ONL_ONLINE.IS_BELOW_ONLINE
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
+    public void setIsBelowOnline(Boolean isBelowOnline) {
+        this.isBelowOnline = isBelowOnline;
     }
 
     /**
-     *    操作组织ID
+     *    是否上线到平台
      *
-     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
+     *    数据库字段: ONL_ONLINE.IS_ONLINE_PLATFORM
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Long getOnlineOrgId() {
-        return onlineOrgId;
+    public Boolean getIsOnlinePlatform() {
+        return isOnlinePlatform;
     }
 
     /**
-     *    操作组织ID
+     *    是否上线到平台
      *
-     *    数据库字段: ONL_ONLINE.ONLINE_ORG_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setOnlineOrgId(Long onlineOrgId) {
-        this.onlineOrgId = onlineOrgId;
-    }
-
-    /**
-     *    发货组织ID(默认填入上线组织ID，可变更为供应商的ID)
-     *
-     *    数据库字段: ONL_ONLINE.DELIVER_ORG_ID
+     *    数据库字段: ONL_ONLINE.IS_ONLINE_PLATFORM
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Long getDeliverOrgId() {
-        return deliverOrgId;
-    }
-
-    /**
-     *    发货组织ID(默认填入上线组织ID，可变更为供应商的ID)
-     *
-     *    数据库字段: ONL_ONLINE.DELIVER_ORG_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setDeliverOrgId(Long deliverOrgId) {
-        this.deliverOrgId = deliverOrgId;
+    public void setIsOnlinePlatform(Boolean isOnlinePlatform) {
+        this.isOnlinePlatform = isOnlinePlatform;
     }
 
     /**

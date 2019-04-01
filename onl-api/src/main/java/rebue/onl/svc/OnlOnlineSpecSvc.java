@@ -48,7 +48,7 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
     /**
      * 更新销售数量(购买后)
      * 新销售数量 = 原销售数量 + 购买数量
-     * 
+     *
      * @param buyCount
      *            购买数量
      * @param onlineSpecId
@@ -62,13 +62,13 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
     /**
      * 根据上线规格id修改销售数量(减)
      */
-	Ro modifySaleCountById(ModifySaleCountByIdTo to);
+    Ro modifySaleCountById(ModifySaleCountByIdTo to);
 
-	/**
-	 * 根据上线规格id修改是否已有首单
-	 * @param id
-	 * @param isHaveFirstOrder
-	 * @return
-	 */
-	Ro modifyIsHaveFirstOrderById(Long id, Boolean isHaveFirstOrder);
+    /**
+     *  根据上线规格id修改是否已有首单
+     *  @param id
+     *  @param isHaveFirstOrder
+     *  @return
+     */
+    Ro modifyIsHaveFirstOrderById(Long id, Boolean isHaveFirstOrder);
 }

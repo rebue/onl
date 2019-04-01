@@ -1,20 +1,17 @@
 package rebue.onl.svc.impl;
 
-import java.util.List;
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import rebue.onl.dic.PromotionTypeDic;
-import rebue.onl.mapper.OnlOnlinePromotionMapper;
-import rebue.onl.mo.OnlOnlinePromotionMo;
-import rebue.onl.svc.OnlOnlinePromotionSvc;
+import rebue.onl.mapper.OnlSearchCategoryMapper;
+import rebue.onl.mo.OnlSearchCategoryMo;
+import rebue.onl.svc.OnlSearchCategorySvc;
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
 
 /**
- * 上线推广
+ * 搜索分类
  *
  * 在单独使用不带任何参数的 @Transactional 注释时，
  * propagation(传播模式)=REQUIRED，readOnly=false，
@@ -29,39 +26,24 @@ import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
  */
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 @Service
-public class OnlOnlinePromotionSvcImpl extends MybatisBaseSvcImpl<OnlOnlinePromotionMo, java.lang.Long, OnlOnlinePromotionMapper> implements OnlOnlinePromotionSvc {
+public class OnlSearchCategorySvcImpl extends MybatisBaseSvcImpl<OnlSearchCategoryMo, java.lang.Long, OnlSearchCategoryMapper> implements OnlSearchCategorySvc {
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private static final Logger _log = LoggerFactory.getLogger(OnlOnlinePromotionSvcImpl.class);
+    private static final Logger _log = LoggerFactory.getLogger(OnlSearchCategorySvcImpl.class);
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public int add(OnlOnlinePromotionMo mo) {
-        _log.info("添加上线推广");
+    public int add(OnlSearchCategoryMo mo) {
+        _log.info("添加搜索分类");
         // 如果id为空那么自动生成分布式id
         if (mo.getId() == null || mo.getId() == 0) {
             mo.setId(_idWorker.getId());
         }
         return super.add(mo);
-    }
-
-    /**
-     * 获取上线的推广活动列表
-     *
-     * @param promotionType
-     *            {@link PromotionTypeDic}
-     *            推广类型（1-每日热门）
-     */
-    @Override
-    public List<Map<String, Object>> listOnlinePromotion(PromotionTypeDic promotionType) {
-        _log.info("查询推广上线商品列表: promotionType={}", promotionType);
-        List<Map<String, Object>> result = _mapper.listOnlinePromotion((byte) promotionType.getCode());
-        _log.info("查询推广上线商品列表结果为 {}:", result);
-        return result;
     }
 }

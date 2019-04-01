@@ -1,9 +1,7 @@
 package rebue.onl.svc;
 
-import java.util.List;
-
 import com.github.pagehelper.PageInfo;
-
+import java.util.List;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.ro.AddOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
@@ -65,13 +63,12 @@ public interface OnlOnlineSvc extends MybatisBaseSvc<OnlOnlineMo, java.lang.Long
      * @param mo
      * @return
      */
-	Ro offline(OnlOnlineMo mo);
-	
-	/**
-	 * 供应商查询商品
-	 * @param mo
-	 * @return
-	 */
-	 PageInfo<SupplierGoodsRo> supplierGoods(SupplierGoodsTo to,int pageNum, int pageSize);
+    Ro offline(OnlOnlineMo mo);
 
+    /**
+     *  供应商查询商品
+     *  @param mo
+     *  @return
+     */
+    PageInfo<SupplierGoodsRo> supplierGoods(SupplierGoodsTo to, int pageNum, int pageSize);
 }

@@ -97,6 +97,15 @@ public class OnlOnlineSpecMo implements Serializable {
     private BigDecimal buyPoint;
 
     /**
+     *    首单积分
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.FIRST_BUY_POINT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private BigDecimal firstBuyPoint;
+
+    /**
      *    销售单位
      *
      *    数据库字段: ONL_ONLINE_SPEC.SALE_UNIT
@@ -141,15 +150,6 @@ public class OnlOnlineSpecMo implements Serializable {
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private Integer seqNo;
-
-    /**
-     *    首单积分
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.FIRST_BUY_POINT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private BigDecimal firstBuyPoint;
 
     /**
      *    是否有首单
@@ -364,6 +364,28 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
+     *    首单积分
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.FIRST_BUY_POINT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public BigDecimal getFirstBuyPoint() {
+        return firstBuyPoint;
+    }
+
+    /**
+     *    首单积分
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.FIRST_BUY_POINT
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setFirstBuyPoint(BigDecimal firstBuyPoint) {
+        this.firstBuyPoint = firstBuyPoint;
+    }
+
+    /**
      *    销售单位
      *
      *    数据库字段: ONL_ONLINE_SPEC.SALE_UNIT
@@ -476,28 +498,6 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
-     *    首单积分
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.FIRST_BUY_POINT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public BigDecimal getFirstBuyPoint() {
-        return firstBuyPoint;
-    }
-
-    /**
-     *    首单积分
-     *
-     *    数据库字段: ONL_ONLINE_SPEC.FIRST_BUY_POINT
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setFirstBuyPoint(BigDecimal firstBuyPoint) {
-        this.firstBuyPoint = firstBuyPoint;
-    }
-
-    /**
      *    是否有首单
      *
      *    数据库字段: ONL_ONLINE_SPEC.IS_HAVE_FIRST_ORDER
@@ -537,12 +537,12 @@ public class OnlOnlineSpecMo implements Serializable {
         sb.append(", cashbackAmount=").append(cashbackAmount);
         sb.append(", commissionAmount=").append(commissionAmount);
         sb.append(", buyPoint=").append(buyPoint);
+        sb.append(", firstBuyPoint=").append(firstBuyPoint);
         sb.append(", saleUnit=").append(saleUnit);
         sb.append(", currentOnlineCount=").append(currentOnlineCount);
         sb.append(", limitCount=").append(limitCount);
         sb.append(", saleCount=").append(saleCount);
         sb.append(", seqNo=").append(seqNo);
-        sb.append(", firstBuyPoint=").append(firstBuyPoint);
         sb.append(", isHaveFirstOrder=").append(isHaveFirstOrder);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

@@ -27,15 +27,6 @@ public class OnlCartMo implements Serializable {
     private Long id;
 
     /**
-     *    上线规格ID
-     *
-     *    数据库字段: ONL_CART.ONLINE_SPEC_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    private Long onlineSpecId;
-
-    /**
      *    上线ID
      *
      *    数据库字段: ONL_CART.ONLINE_ID
@@ -43,6 +34,15 @@ public class OnlCartMo implements Serializable {
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private Long onlineId;
+
+    /**
+     *    上线规格ID
+     *
+     *    数据库字段: ONL_CART.ONLINE_SPEC_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long onlineSpecId;
 
     /**
      *    用户编号
@@ -101,28 +101,6 @@ public class OnlCartMo implements Serializable {
     }
 
     /**
-     *    上线规格ID
-     *
-     *    数据库字段: ONL_CART.ONLINE_SPEC_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public Long getOnlineSpecId() {
-        return onlineSpecId;
-    }
-
-    /**
-     *    上线规格ID
-     *
-     *    数据库字段: ONL_CART.ONLINE_SPEC_ID
-     *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
-     */
-    public void setOnlineSpecId(Long onlineSpecId) {
-        this.onlineSpecId = onlineSpecId;
-    }
-
-    /**
      *    上线ID
      *
      *    数据库字段: ONL_CART.ONLINE_ID
@@ -142,6 +120,28 @@ public class OnlCartMo implements Serializable {
      */
     public void setOnlineId(Long onlineId) {
         this.onlineId = onlineId;
+    }
+
+    /**
+     *    上线规格ID
+     *
+     *    数据库字段: ONL_CART.ONLINE_SPEC_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Long getOnlineSpecId() {
+        return onlineSpecId;
+    }
+
+    /**
+     *    上线规格ID
+     *
+     *    数据库字段: ONL_CART.ONLINE_SPEC_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setOnlineSpecId(Long onlineSpecId) {
+        this.onlineSpecId = onlineSpecId;
     }
 
     /**
@@ -220,8 +220,8 @@ public class OnlCartMo implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", onlineSpecId=").append(onlineSpecId);
         sb.append(", onlineId=").append(onlineId);
+        sb.append(", onlineSpecId=").append(onlineSpecId);
         sb.append(", userId=").append(userId);
         sb.append(", cartCount=").append(cartCount);
         sb.append(", joinTime=").append(joinTime);

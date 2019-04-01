@@ -2,11 +2,11 @@ package rebue.onl.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
-import rebue.onl.mo.OnlOnlineSpecOrderRemarkMo;
+import rebue.onl.mo.OnlSearchCategoryMo;
 import rebue.robotech.mapper.MybatisBaseMapper;
 
 @Mapper
-public interface OnlOnlineSpecOrderRemarkMapper extends MybatisBaseMapper<OnlOnlineSpecOrderRemarkMo, Long> {
+public interface OnlSearchCategoryMapper extends MybatisBaseMapper<OnlSearchCategoryMo, Long> {
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -16,37 +16,37 @@ public interface OnlOnlineSpecOrderRemarkMapper extends MybatisBaseMapper<OnlOnl
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    int insert(OnlOnlineSpecOrderRemarkMo record);
+    int insert(OnlSearchCategoryMo record);
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    int insertSelective(OnlOnlineSpecOrderRemarkMo record);
+    int insertSelective(OnlSearchCategoryMo record);
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    OnlOnlineSpecOrderRemarkMo selectByPrimaryKey(Long id);
+    OnlSearchCategoryMo selectByPrimaryKey(Long id);
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    int updateByPrimaryKeySelective(OnlOnlineSpecOrderRemarkMo record);
+    int updateByPrimaryKeySelective(OnlSearchCategoryMo record);
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    int updateByPrimaryKey(OnlOnlineSpecOrderRemarkMo record);
+    int updateByPrimaryKey(OnlSearchCategoryMo record);
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    List<OnlOnlineSpecOrderRemarkMo> selectAll();
+    List<OnlSearchCategoryMo> selectAll();
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    List<OnlOnlineSpecOrderRemarkMo> selectSelective(OnlOnlineSpecOrderRemarkMo record);
+    List<OnlSearchCategoryMo> selectSelective(OnlSearchCategoryMo record);
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -56,10 +56,10 @@ public interface OnlOnlineSpecOrderRemarkMapper extends MybatisBaseMapper<OnlOnl
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    boolean existSelective(OnlOnlineSpecOrderRemarkMo record);
+    boolean existSelective(OnlSearchCategoryMo record);
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    int countSelective(OnlOnlineSpecOrderRemarkMo record);
+    int countSelective(OnlSearchCategoryMo record);
 }
