@@ -32,6 +32,11 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>com.github.rebue.slr</groupId>
+			<artifactId>slr-svr-feign</artifactId>
+		</dependency>
+		
+		<dependency>
 			<groupId>rebue.damai</groupId>
 			<artifactId>damai-pnt</artifactId>
 		</dependency>
