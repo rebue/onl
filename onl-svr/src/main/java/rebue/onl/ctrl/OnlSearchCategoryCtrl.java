@@ -1,6 +1,9 @@
 package rebue.onl.ctrl;
 
 import com.github.pagehelper.PageInfo;
+
+import java.util.List;
+
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import rebue.onl.mo.OnlSearchCategoryMo;
 import rebue.onl.ro.OnlSearchCategoryRo;
+import rebue.onl.ro.OnlSearchCategoryTreeRo;
 import rebue.onl.svc.OnlSearchCategorySvc;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
@@ -187,4 +191,15 @@ public class OnlSearchCategoryCtrl {
 		return svc.enable(mo);
 	}
 
+	/**
+	 * 根据店铺id获取搜索分类树
+	 * 
+	 * @param shopId
+	 * @return
+	 */
+	@GetMapping("/onl/searchcategory/tree")
+	List<OnlSearchCategoryTreeRo> searchCategoryTreeList(@RequestParam("shopId") Long shopId) {
+		_log.info("根据店铺id获取搜索分类树的参数为：{}", shopId);
+		return svc.searchCategoryTreeList(shopId);
+	}
 }

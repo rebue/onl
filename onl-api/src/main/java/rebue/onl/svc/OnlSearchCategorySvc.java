@@ -1,9 +1,12 @@
 package rebue.onl.svc;
 
+import java.util.List;
+
 import com.github.pagehelper.PageInfo;
 
 import rebue.onl.mo.OnlSearchCategoryMo;
 import rebue.onl.ro.OnlSearchCategoryRo;
+import rebue.onl.ro.OnlSearchCategoryTreeRo;
 import rebue.robotech.ro.Ro;
 import rebue.robotech.svc.MybatisBaseSvc;
 
@@ -44,4 +47,12 @@ public interface OnlSearchCategorySvc extends MybatisBaseSvc<OnlSearchCategoryMo
 	 * @return
 	 */
 	Ro enable(OnlSearchCategoryMo mo);
+
+	/**
+	 * 根据店铺id获取搜索分类树
+	 * 
+	 * @param shopId
+	 * @return
+	 */
+	List<OnlSearchCategoryTreeRo> searchCategoryTreeList(Long shopId);
 }

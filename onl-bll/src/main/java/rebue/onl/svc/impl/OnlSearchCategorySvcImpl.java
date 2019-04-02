@@ -1,6 +1,7 @@
 package rebue.onl.svc.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -17,6 +18,7 @@ import com.github.pagehelper.PageInfo;
 import rebue.onl.mapper.OnlSearchCategoryMapper;
 import rebue.onl.mo.OnlSearchCategoryMo;
 import rebue.onl.ro.OnlSearchCategoryRo;
+import rebue.onl.ro.OnlSearchCategoryTreeRo;
 import rebue.onl.svc.OnlSearchCategorySvc;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
@@ -51,13 +53,13 @@ public class OnlSearchCategorySvcImpl
 
 	@Resource
 	private OnlSearchCategorySvc thisSvc;
-	
+
 	@Resource
 	private Mapper dozerMapper;
 
 	@Resource
 	private SucOrgSvc sucOrgSvc;
-	
+
 	@Resource
 	private SlrShopSvc slrShopSvc;
 
@@ -196,5 +198,61 @@ public class OnlSearchCategorySvcImpl
 		ro.setResult(ResultDic.SUCCESS);
 		ro.setMsg("设置成功");
 		return ro;
+	}
+
+	/**
+	 * 根据店铺id获取搜索分类树
+	 * 
+	 * @param shopId
+	 * @return
+	 */
+	@Override
+	public List<OnlSearchCategoryTreeRo> searchCategoryTreeList(Long shopId) {
+		_log.info("获取店铺搜索分类树的参数为：{}", shopId);
+		List<OnlSearchCategoryTreeRo> list = new ArrayList<OnlSearchCategoryTreeRo>();
+		if (shopId == null) {
+			_log.error("获取搜索店铺分类树的参数为null, 请求的参数为：{}", shopId);
+			return list;
+		}
+		_log.info("获取店铺搜索分类树获取店铺顶级分类的参数为：{}", shopId);
+		List<OnlSearchCategoryMo> shopTopSearchCategoryList = _mapper.selectShopTopSearchCategory(shopId);
+		_log.info("获取店铺搜索分类树获取店铺顶级分类的返回值为：{}", String.valueOf(shopTopSearchCategoryList));
+		for (OnlSearchCategoryMo onlSearchCategoryMo : shopTopSearchCategoryList) {
+			OnlSearchCategoryTreeRo categoryTreeRo = dozerMapper.map(onlSearchCategoryMo,
+					OnlSearchCategoryTreeRo.class);
+			List<OnlSearchCategoryTreeRo> searchCategoryList = searchCategoryList(onlSearchCategoryMo.getShopId(),
+					onlSearchCategoryMo.getCode());
+			if (searchCategoryList.size() != 0) {
+				categoryTreeRo.setList(searchCategoryList);
+			}
+			list.add(categoryTreeRo);
+		}
+		return list;
+	}
+
+	/**
+	 * 根据店铺id和编码获取店铺搜索分类
+	 * 
+	 * @param list
+	 * @param code
+	 * @param level
+	 * @return
+	 */
+	public List<OnlSearchCategoryTreeRo> searchCategoryList(Long shopId, String code) {
+		_log.info("根据店铺id和编码查询店铺搜索分类的参数为：shopId-{}, code-{}", shopId, code);
+		List<OnlSearchCategoryTreeRo> list = new ArrayList<OnlSearchCategoryTreeRo>();
+		List<OnlSearchCategoryMo> shopSonSearchCategoryList = _mapper.selectShopSonSearchCategory(shopId, code);
+		_log.info("根据店铺id和编码查询店铺搜索分类的返回值为：{}", String.valueOf(shopSonSearchCategoryList));
+		for (OnlSearchCategoryMo onlSearchCategoryMo : shopSonSearchCategoryList) {
+			OnlSearchCategoryTreeRo categoryTreeRo = dozerMapper.map(onlSearchCategoryMo,
+					OnlSearchCategoryTreeRo.class);
+			List<OnlSearchCategoryTreeRo> searchCategoryList = searchCategoryList(onlSearchCategoryMo.getShopId(),
+					onlSearchCategoryMo.getCode());
+			if (searchCategoryList.size() != 0) {
+				categoryTreeRo.setList(searchCategoryList);
+			}
+			list.add(categoryTreeRo);
+		}
+		return list;
 	}
 }
