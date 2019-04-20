@@ -9,4 +9,6 @@ import rebue.robotech.svc.MybatisBaseSvc;
  * @mbg.generated 自动生成的注释，如需修改本注释，请删除本行
  */
 public interface OnlOnlineSpecAttrSvc extends MybatisBaseSvc<OnlOnlineSpecAttrMo, java.lang.Long> {
+    int deleteByOnlineSpecId(Long onlineSpecId);
+
 }

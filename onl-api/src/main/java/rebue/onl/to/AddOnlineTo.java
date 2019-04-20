@@ -85,10 +85,30 @@ public class AddOnlineTo {
 	 * @mbg.generated 自动生成，如需修改，请删除本行
 	 */
 	private Long onlineOrgId;
-	
-	
+
 	/**
 	 * 是否能修改供应商，0：否，1：是，2：是，且修改该商品未结算订单的供应商和发货组织。
 	 */
 	private Byte isEditSupplier;
+
+	/**
+	 * 是否上线到平台，0为不上线，1为上线
+	 */
+	private Byte isOnlinePlatform;
+
+	/**
+	 * 是否为线下商品,0为否，1为是
+	 */
+	private Byte isBelowOnline;
+	
+	/**
+	 * 上线规格属性名
+	 */
+	private String[] attrNames;
+	
+	/**
+	 * 上线规格属性值
+	 */
+	private String[][] attrValues;
+	
 }

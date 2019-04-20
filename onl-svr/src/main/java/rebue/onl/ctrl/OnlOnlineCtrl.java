@@ -23,6 +23,7 @@ import rebue.onl.dic.AddOnlineDic;
 import rebue.onl.dic.ReOnlineDic;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.mo.OnlOnlinePicMo;
+import rebue.onl.mo.OnlOnlineSpecAttrMo;
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.AddOnlineRo;
 import rebue.onl.ro.GetOnlinesRo;
@@ -32,6 +33,7 @@ import rebue.onl.ro.OnlinesRo;
 import rebue.onl.ro.ReOnlineRo;
 import rebue.onl.ro.SupplierGoodsRo;
 import rebue.onl.svc.OnlOnlinePicSvc;
+import rebue.onl.svc.OnlOnlineSpecAttrSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
 import rebue.onl.to.AddOnlineTo;
@@ -108,6 +110,9 @@ public class OnlOnlineCtrl {
 
     @Resource
     private Mapper dozerMapper;
+    
+    @Resource
+    private OnlOnlineSpecAttrSvc onlOnlineSpecAttrSvc;
 
     /**
      *  添加上线信息
@@ -237,41 +242,51 @@ public class OnlOnlineCtrl {
         return result;
     }
 
-    /**
-     *  根据id获取上线信息、规格信息、图片信息
-     *
-     *  @param id
-     *  @return
-     *  @throws ParseException
-     *  @throws NumberFormatException
-     */
-    @GetMapping("/onl/online/getonlines")
-    GetOnlinesRo getOnlines(@RequestParam("id") final Long id, final HttpServletRequest req) throws NumberFormatException, ParseException {
-        _log.info("根据上线id获取上线信息的参数为：{}", id);
-        Long orgId = 520874560590053376L;
-        if (!isDebug) {
-            orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
-        }
-        final GetOnlinesRo onlinesRo = new GetOnlinesRo();
-        // 获取上线信息
-        final OnlinesRo onlOnlineRo = dozerMapper.map(svc.listByPrimaryKey(id), OnlinesRo.class);
-        if (orgId == onlOnlineRo.getDeliverOrgId()) {
-            onlOnlineRo.setDeliveryType((byte) 0);
-        } else {
-            onlOnlineRo.setDeliveryType((byte) 1);
-        }
-        // 获取规格信息
-        final OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
-        onlineSpecMo.setOnlineId(id);
-        onlOnlineRo.setOnlineSpecList(onlineSpecSvc.list(onlineSpecMo));
-        // 获取图片信息
-        final OnlOnlinePicMo onlinePicMo = new OnlOnlinePicMo();
-        onlinePicMo.setOnlineId(id);
-        onlOnlineRo.setOnlinePicList(onlinePicSvc.list(onlinePicMo));
-        onlinesRo.setRecord(onlOnlineRo);
-        onlinesRo.setResult((byte) 1);
-        return onlinesRo;
-    }
+	/**
+	 * 根据id获取上线信息、规格信息、图片信息
+	 *
+	 * @param id
+	 * @return
+	 * @throws ParseException
+	 * @throws NumberFormatException
+	 */
+	@GetMapping("/onl/online/getonlines")
+	GetOnlinesRo getOnlines(@RequestParam("id") final Long id, final HttpServletRequest req)
+			throws NumberFormatException, ParseException {
+		_log.info("根据上线id获取上线信息的参数为：{}", id);
+		Long orgId = 520874560590053376L;
+		if (!isDebug) {
+			orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
+		}
+		final GetOnlinesRo onlinesRo = new GetOnlinesRo();
+		// 获取上线信息
+		final OnlinesRo onlOnlineRo = dozerMapper.map(svc.listByPrimaryKey(id), OnlinesRo.class);
+		if (orgId == onlOnlineRo.getDeliverOrgId()) {
+			onlOnlineRo.setDeliveryType((byte) 0);
+		} else {
+			onlOnlineRo.setDeliveryType((byte) 1);
+		}
+		// 获取规格信息
+		final OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
+		onlineSpecMo.setOnlineId(id);
+		onlOnlineRo.setOnlineSpecList(onlineSpecSvc.list(onlineSpecMo));
+		// 获取规格属性信息
+		final List<OnlOnlineSpecAttrMo> onlineSpecAttrMoList = new ArrayList<OnlOnlineSpecAttrMo>();
+		final List<OnlOnlineSpecMo> onlineSpecList = onlOnlineRo.getOnlineSpecList();
+		for (OnlOnlineSpecMo onlOnlineSpecMo : onlineSpecList) {
+			final OnlOnlineSpecAttrMo onlineSpecAttrMo = new OnlOnlineSpecAttrMo();
+			onlineSpecAttrMo.setOnlineSpecId(onlOnlineSpecMo.getId());
+			onlineSpecAttrMoList.addAll(onlOnlineSpecAttrSvc.list(onlineSpecAttrMo));
+		}
+		onlOnlineRo.setOnlOnlineSpecAttrList(onlineSpecAttrMoList);
+		// 获取图片信息
+		final OnlOnlinePicMo onlinePicMo = new OnlOnlinePicMo();
+		onlinePicMo.setOnlineId(id);
+		onlOnlineRo.setOnlinePicList(onlinePicSvc.list(onlinePicMo));
+		onlinesRo.setRecord(onlOnlineRo);
+		onlinesRo.setResult((byte) 1);
+		return onlinesRo;
+	}
 
     /**
      *  重新上线

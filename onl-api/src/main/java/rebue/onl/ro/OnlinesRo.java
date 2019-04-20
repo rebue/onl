@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 import rebue.onl.mo.OnlOnlinePicMo;
+import rebue.onl.mo.OnlOnlineSpecAttrMo;
 import rebue.onl.mo.OnlOnlineSpecMo;
 
 @Data
@@ -65,10 +66,25 @@ public class OnlinesRo {
 	private Byte deliveryType;
 	
 	/**
+	 * 是否线下
+	 */
+	private Byte isBelowOnline;
+	
+	/**
+	 * 是否上线到平台
+	 */
+	private Byte isOnlinePlatform;
+	
+	/**
 	 * 规格信息
 	 */
 	private List<OnlOnlineSpecMo> onlineSpecList;
-
+	
+	/**
+	 * 规格属性信息
+	 */
+	private List<OnlOnlineSpecAttrMo> onlOnlineSpecAttrList;
+	
 	/**
 	 * 图片信息
 	 */

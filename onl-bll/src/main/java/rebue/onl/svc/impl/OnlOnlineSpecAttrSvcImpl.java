@@ -1,5 +1,7 @@
 package rebue.onl.svc.impl;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,9 @@ public class OnlOnlineSpecAttrSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecAt
      */
     private static final Logger _log = LoggerFactory.getLogger(OnlOnlineSpecAttrSvcImpl.class);
 
+    @Resource
+    private OnlOnlineSpecAttrSvc thisSvc;
+    
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
@@ -46,4 +51,15 @@ public class OnlOnlineSpecAttrSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecAt
         }
         return super.add(mo);
     }
+
+	@Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public int deleteByOnlineSpecId(Long onlineSpecId) {
+        _log.info("根据规格id批量删除规格属性");
+		return _mapper.deleteByOnlineSpecId(onlineSpecId);
+	}
+
+
+    
+
 }
