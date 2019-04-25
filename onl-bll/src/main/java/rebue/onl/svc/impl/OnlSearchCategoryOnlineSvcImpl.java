@@ -1,5 +1,10 @@
 package rebue.onl.svc.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -7,6 +12,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import rebue.onl.mapper.OnlSearchCategoryOnlineMapper;
 import rebue.onl.mo.OnlSearchCategoryOnlineMo;
+import rebue.onl.ro.OnlOnlineTreeRo;
+import rebue.onl.svc.OnlOnlineSvc;
 import rebue.onl.svc.OnlSearchCategoryOnlineSvc;
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
 
@@ -32,6 +39,12 @@ public class OnlSearchCategoryOnlineSvcImpl extends MybatisBaseSvcImpl<OnlSearch
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
     private static final Logger _log = LoggerFactory.getLogger(OnlSearchCategoryOnlineSvcImpl.class);
+    
+    @Resource
+    private OnlSearchCategoryOnlineSvc thisSvc;
+    
+    @Resource
+    private OnlOnlineSvc onlOnlineSvc;
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
@@ -45,5 +58,37 @@ public class OnlSearchCategoryOnlineSvcImpl extends MybatisBaseSvcImpl<OnlSearch
             mo.setId(_idWorker.getId());
         }
         return super.add(mo);
+    }
+    
+    /**
+     * 根据搜索分类id获取上线商品树
+     * @param searchCategoryId
+     * @return
+     */
+    @Override
+    public List<OnlOnlineTreeRo> onlineTreeList(Long searchCategoryId) {
+    	_log.info("根据搜索分类id获取上线商品树的参数为：{}", searchCategoryId);
+    	List<OnlOnlineTreeRo> list = new ArrayList<OnlOnlineTreeRo>();
+    	if (searchCategoryId == null) {
+			_log.error("根据搜索分类id获取上线商品树时发现搜索分类id为null");
+			return list;
+		}
+    	
+    	OnlSearchCategoryOnlineMo searchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
+    	searchCategoryOnlineMo.setSearchCategoryId(searchCategoryId);
+    	_log.info("根据搜索分类id获取上线商品树根据id获取搜索分类上线信息的参数为：{}", searchCategoryOnlineMo);
+    	List<OnlSearchCategoryOnlineMo> searchCategoryOnlineList = thisSvc.list(searchCategoryOnlineMo);
+    	_log.info("根据搜索分类id获取上线商品树根据id获取搜索分类上线信息的参数为：{}", searchCategoryOnlineList);
+    	for (OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo : searchCategoryOnlineList) {
+    		_log.info("根据上线id获取上线商品树的参数为：{}", onlSearchCategoryOnlineMo.getOnlineId());
+			OnlOnlineTreeRo onlineTreeRo = onlOnlineSvc.onlineTree(onlSearchCategoryOnlineMo.getOnlineId());
+			_log.info("根据上线id获取上线商品树的返回值为：{}", onlineTreeRo);
+			if (onlineTreeRo != null) {
+				list.add(onlineTreeRo);
+			}
+		}
+    	
+    	_log.info("根据搜索分类id获取上线商品树的返回值为：{}", list);
+    	return list;
     }
 }

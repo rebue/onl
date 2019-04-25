@@ -17,8 +17,11 @@ import com.github.pagehelper.PageInfo;
 
 import rebue.onl.mapper.OnlSearchCategoryMapper;
 import rebue.onl.mo.OnlSearchCategoryMo;
+import rebue.onl.ro.OnlOnlineTreeRo;
 import rebue.onl.ro.OnlSearchCategoryRo;
 import rebue.onl.ro.OnlSearchCategoryTreeRo;
+import rebue.onl.svc.OnlOnlineSvc;
+import rebue.onl.svc.OnlSearchCategoryOnlineSvc;
 import rebue.onl.svc.OnlSearchCategorySvc;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
@@ -62,6 +65,12 @@ public class OnlSearchCategorySvcImpl
 
 	@Resource
 	private SlrShopSvc slrShopSvc;
+
+	@Resource
+	private OnlSearchCategoryOnlineSvc onlSearchCategoryOnlineSvc;
+
+	@Resource
+	private OnlOnlineSvc onlOnlineSvc;
 
 	/**
 	 * @mbg.generated 自动生成，如需修改，请删除本行
@@ -218,14 +227,27 @@ public class OnlSearchCategorySvcImpl
 		List<OnlSearchCategoryMo> shopTopSearchCategoryList = _mapper.selectShopTopSearchCategory(shopId);
 		_log.info("获取店铺搜索分类树获取店铺顶级分类的返回值为：{}", String.valueOf(shopTopSearchCategoryList));
 		for (OnlSearchCategoryMo onlSearchCategoryMo : shopTopSearchCategoryList) {
-			OnlSearchCategoryTreeRo categoryTreeRo = dozerMapper.map(onlSearchCategoryMo,
-					OnlSearchCategoryTreeRo.class);
-			List<OnlSearchCategoryTreeRo> searchCategoryList = searchCategoryList(onlSearchCategoryMo.getShopId(),
-					onlSearchCategoryMo.getCode());
-			if (searchCategoryList.size() != 0) {
-				categoryTreeRo.setList(searchCategoryList);
+			if (onlSearchCategoryMo.getIsEnabled() == true) {
+				OnlSearchCategoryTreeRo categoryTreeRo = dozerMapper.map(onlSearchCategoryMo,
+						OnlSearchCategoryTreeRo.class);
+				List<OnlSearchCategoryTreeRo> searchCategoryList = searchCategoryList(onlSearchCategoryMo.getShopId(),
+						onlSearchCategoryMo.getCode());
+				if (searchCategoryList.size() != 0) {
+					categoryTreeRo.setCategoryList(searchCategoryList);
+				}
+
+				_log.info("根据搜索分类id查询上线商品树信息的参数为：{}", onlSearchCategoryMo.getId());
+				List<OnlOnlineTreeRo> activityList = onlSearchCategoryOnlineSvc
+						.onlineTreeList(onlSearchCategoryMo.getId());
+				_log.info("根据搜索分类id查询上线商品树信息的返回值为：{}", activityList);
+
+				if (activityList.size() != 0) {
+					categoryTreeRo.setActivityList(activityList);
+				}
+
+				list.add(categoryTreeRo);
 			}
-			list.add(categoryTreeRo);
+
 		}
 		return list;
 	}
@@ -235,7 +257,6 @@ public class OnlSearchCategorySvcImpl
 	 * 
 	 * @param list
 	 * @param code
-	 * @param level
 	 * @return
 	 */
 	public List<OnlSearchCategoryTreeRo> searchCategoryList(Long shopId, String code) {
@@ -249,10 +270,20 @@ public class OnlSearchCategorySvcImpl
 			List<OnlSearchCategoryTreeRo> searchCategoryList = searchCategoryList(onlSearchCategoryMo.getShopId(),
 					onlSearchCategoryMo.getCode());
 			if (searchCategoryList.size() != 0) {
-				categoryTreeRo.setList(searchCategoryList);
+				categoryTreeRo.setCategoryList(searchCategoryList);
 			}
+
+			_log.info("根据搜索分类id查询上线商品树信息的参数为：{}", onlSearchCategoryMo.getId());
+			List<OnlOnlineTreeRo> activityList = onlSearchCategoryOnlineSvc.onlineTreeList(onlSearchCategoryMo.getId());
+			_log.info("根据搜索分类id查询上线商品树信息的返回值为：{}", activityList);
+
+			if (activityList.size() != 0) {
+				categoryTreeRo.setActivityList(activityList);
+			}
+
 			list.add(categoryTreeRo);
 		}
+		_log.info("根据店铺id和编码查询店铺搜索分类的返回值为：{}", list);
 		return list;
 	}
 }

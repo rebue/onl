@@ -29,6 +29,7 @@ import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.AddOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 import rebue.onl.ro.OnlOnlineListRo;
+import rebue.onl.ro.OnlOnlineTreeRo;
 import rebue.onl.ro.ReOnlineRo;
 import rebue.onl.ro.SupplierGoodsRo;
 import rebue.onl.svc.OnlCartSvc;
@@ -100,7 +101,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 	/**
 	 */
 	@Resource
-	private OnlOnlineSvc onlOnlineSvc;
+	private OnlOnlineSvc thisSvc;
 
 	@Resource
 	private OnlOnlineLogSvc onlOnlineLogSvc;
@@ -563,7 +564,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			// 返现金额： 如果版块类型为全返商品则等于输入的数量， 否则等于0
 			final BigDecimal cashbackAmount = to.getSubjectType() == 0 ? to.getOnlineSpecs().get(i).getCashbackAmount()
 					: amount;
-			//上线规格名称
+			// 上线规格名称
 			String onlineSpecName = "";
 			String[] attrvalues = to.getAttrValues()[i];
 			for (int j = 0; j < attrvalues.length; j++) {
@@ -599,8 +600,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 				}
 			} else {
 				_log.info("添加上线信息查询上线规格名称是否存在的参数为：{}", onlineSpecName);
-				final boolean existSelectiveResult = onlOnlineSpecSvc
-						.existOnlineSpec(onlineSpecName, to.getOnlineId());
+				final boolean existSelectiveResult = onlOnlineSpecSvc.existOnlineSpec(onlineSpecName, to.getOnlineId());
 				_log.info("添加上线信息查询上线规格名称是否存在的返回值为：{}", existSelectiveResult);
 				if (existSelectiveResult) {
 					_log.error("添加上线信息查询上线规格名称是否存在时发现该商品名称已存在，商品名称为：{}", onlineSpecName);
@@ -632,17 +632,17 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			}
 			// 添加上线规格日志结束
 			// 添加上线规格属性开始
-			//根据上线规格id删除上线规格属性
-			_log.info("删除上线规格属性的参数为：{}",onlineSpecId);
+			// 根据上线规格id删除上线规格属性
+			_log.info("删除上线规格属性的参数为：{}", onlineSpecId);
 			final int deleteByOnlineSpecIdResult = onlOnlineSpecAttrSvc.deleteByOnlineSpecId(onlineSpecId);
-			_log.info("删除上线规格属性的返回值为：{}",deleteByOnlineSpecIdResult);
+			_log.info("删除上线规格属性的返回值为：{}", deleteByOnlineSpecIdResult);
 			for (int j = 0; j < to.getAttrValues()[i].length; j++) {
 				final OnlOnlineSpecAttrMo onlineSpecAttrMo = new OnlOnlineSpecAttrMo();
 				// 上线规格属性名
 				final String attrName = to.getAttrNames()[j];
 				// 上线规格属性值
 				final String attrValue = to.getAttrValues()[i][j];
-				
+
 				onlineSpecAttrMo.setId(_idWorker.getId());
 				onlineSpecAttrMo.setOnlineSpecId(onlineSpecId);
 				onlineSpecAttrMo.setAttrName(attrName);
@@ -819,7 +819,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			final OnlOnlineMo conditions1 = new OnlOnlineMo();
 			conditions1.setId(specTo.getOnlineId());
 			conditions1.setOnlineState((byte) OnlineStateDic.ONLINE.getCode());
-			final boolean isOnline = onlOnlineSvc.existSelective(conditions1);
+			final boolean isOnline = thisSvc.existSelective(conditions1);
 			_log.info("查询商品是否已上线的返回值为：{}", isOnline);
 			if (!isOnline) {
 				final String msg = "商品已下线";
@@ -879,5 +879,37 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 				.doSelectPageInfo(() -> _mapper.selectSupplierGoods(to));
 		_log.info("供应商查询商品的结果为：：supplierGoodsRo：{}", supplierGoodsRo.getList());
 		return supplierGoodsRo;
+	}
+
+	/**
+	 * 获取上线商品树
+	 * 
+	 * @param onlineId
+	 * @return
+	 */
+	@Override
+	public OnlOnlineTreeRo onlineTree(Long onlineId) {
+		_log.info("根据上线id获取上线商品树的参数为：onlineId-{}", onlineId);
+		OnlOnlineTreeRo ro = new OnlOnlineTreeRo();
+		if (onlineId == null) {
+			_log.info("根据上线id获取上线商品树时发现上线id为null");
+			return ro;
+		}
+
+		_log.info("根据上线id获取上线商品树根据id查询上线信息的参数为：onlineId-{}", onlineId);
+		OnlOnlineMo onlOnlineMo = thisSvc.getById(onlineId);
+		_log.info("根据上线id获取上线商品树根据id查询上线信息的返回值为：{}", onlOnlineMo);
+		if (onlOnlineMo != null && onlOnlineMo.getOnlineState() == 1) {
+			ro = dozerMapper.map(onlOnlineMo, OnlOnlineTreeRo.class);
+			OnlOnlineSpecMo specMo = new OnlOnlineSpecMo();
+			specMo.setOnlineId(onlineId);
+			_log.info("根据上线id获取上线商品树根据id查询上线规格信息的参数为：specMo-{}", specMo);
+			List<OnlOnlineSpecMo> list = onlOnlineSpecSvc.list(specMo);
+			_log.info("根据上线id获取上线商品树根据id查询上线规格信息的返回值为：{}", list);
+			ro.setGoodsList(list);
+		}
+
+		_log.info("根据上线id获取上线商品树的返回值为：{}", ro);
+		return ro;
 	}
 }
