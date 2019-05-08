@@ -245,4 +245,11 @@ alter table ONL_SEARCH_CATEGORY_ONLINE add constraint FK_Relationship_18 foreign
       
 alter table ONL_ONLINE_LOG add IS_BELOW_ONLINE      bool not null default false comment '是否线下（如果为线下店铺时，默认不发布到平台）';
 alter table ONL_ONLINE_LOG add IS_ONLINE_PLATFORM   bool not null comment '是否上线到平台';
+
+alter table ONL_ONLINE add IS_ONLINE      bool not null default true comment '是否线上';
+alter table ONL_ONLINE change IS_BELOW_ONLINE IS_BELOW     bool not null default false comment '是否线下（如果为线下店铺时，默认不发布到平台）';
+
+alter table ONL_ONLINE_LOG add IS_ONLINE      bool not null default true comment '是否线上';
+alter table ONL_ONLINE_LOG change IS_BELOW_ONLINE IS_BELOW     bool not null default false comment '是否线下（如果为线下店铺时，默认不发布到平台）';
+
 	

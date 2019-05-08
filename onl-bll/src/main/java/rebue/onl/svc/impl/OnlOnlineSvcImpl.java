@@ -155,7 +155,13 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		Long deliverOrgId = to.getDeliverOrgId();
 		deliverOrgId = deliverOrgId == 0 ? to.getOnlineOrgId() : deliverOrgId;
 		// 是否线下
-		Boolean isBelowOnline = to.getIsBelowOnline() == 0 ? false : true;
+		Boolean isBelow = to.getIsBelowOnline() == 0 ? false : true;
+		// 是否线上
+		Boolean isOnline = to.getIsBelowOnline() == 1 ? false : true;
+		if(to.getIsBelowOnline() == 2) {
+			isBelow =true;
+			isOnline = true;
+		}	
 		// 是否上线到平台
 		Boolean isOnlinePlatform = to.getIsOnlinePlatform() == 0 ? false : true;
 		// 添加上线信息开始
@@ -171,7 +177,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		onlineMo.setOnlineTime(onlineTime);
 		onlineMo.setProductId(productId);
 		onlineMo.setSubjectType((byte) to.getSubjectType());
-		onlineMo.setIsBelowOnline(isBelowOnline);
+		onlineMo.setIsBelow(isBelow);
+		onlineMo.setIsOnline(isOnline);
 		onlineMo.setIsOnlinePlatform(isOnlinePlatform);
 		_log.info("添加上线信息的参数为：{}", onlineMo);
 		final int addResult = add(onlineMo);
@@ -197,7 +204,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		onlineLogMo.setOnlineTitle(to.getOnlineName());
 		onlineLogMo.setOnlineDetail(to.getOnlineDetail());
 		onlineLogMo.setProductId(productId);
-		onlineLogMo.setIsBelowOnline(isBelowOnline);
+		onlineLogMo.setIsBelow(isBelow);
+		onlineLogMo.setIsOnline(isOnline);
 		onlineLogMo.setIsOnlinePlatform(isOnlinePlatform);
 		_log.info("添加上线信息添加上线日志信息的参数为：{}", onlineLogMo);
 		final int addOnlineLogResult = onlOnlineLogSvc.add(onlineLogMo);
@@ -491,7 +499,13 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		// 上线时间
 		final Date onlineTime = new Date();
 		// 是否线下
-		Boolean isBelowOnline = to.getIsBelowOnline() == 0 ? false : true;
+		Boolean isBelow = to.getIsBelowOnline() == 0 ? false : true;
+		// 是否线上
+		Boolean isOnline = to.getIsBelowOnline() == 1 ? false : true;
+		if (to.getIsBelowOnline() == 2) {
+			isBelow = true;
+			isOnline = true;
+		}
 		// 是否上线到平台
 		Boolean isOnlinePlatform = to.getIsOnlinePlatform() == 0 ? false : true;
 		// 修改上线信息开始
@@ -507,7 +521,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		onlineMo.setOnlineState((byte) 1);
 		onlineMo.setOnlineTime(onlineTime);
 		onlineMo.setProductId(to.getProductId());
-		onlineMo.setIsBelowOnline(isBelowOnline);
+		onlineMo.setIsBelow(isBelow);
+		onlineMo.setIsOnline(isOnline);
 		onlineMo.setIsOnlinePlatform(isOnlinePlatform);
 		_log.info("修改上线信息的参数为：{}", onlineMo);
 		final int updateByPrimaryKeyResult = _mapper.updateByPrimaryKey(onlineMo);
@@ -534,7 +549,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		onlineLogMo.setOnlineTitle(to.getOnlineName());
 		onlineLogMo.setOnlineDetail(to.getOnlineDetail());
 		onlineLogMo.setProductId(to.getProductId());
-		onlineLogMo.setIsBelowOnline(isBelowOnline);
+		onlineLogMo.setIsBelow(isBelow);
+		onlineLogMo.setIsOnline(isOnline);
 		onlineLogMo.setIsOnlinePlatform(isOnlinePlatform);
 		_log.info("重新上线添加上线日志信息的参数为：{}", onlineLogMo);
 		final int addOnlineLogResult = onlOnlineLogSvc.add(onlineLogMo);

@@ -121,11 +121,11 @@ public class OnlOnlineLogMo implements Serializable {
     /**
      *    是否线下（如果为线下店铺时，默认不发布到平台）
      *
-     *    数据库字段: ONL_ONLINE_LOG.IS_BELOW_ONLINE
+     *    数据库字段: ONL_ONLINE_LOG.IS_BELOW
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private Boolean isBelowOnline;
+    private Boolean isBelow;
 
     /**
      *    是否上线到平台
@@ -135,6 +135,15 @@ public class OnlOnlineLogMo implements Serializable {
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private Boolean isOnlinePlatform;
+
+    /**
+     *    是否线上
+     *
+     *    数据库字段: ONL_ONLINE_LOG.IS_ONLINE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Boolean isOnline;
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -386,23 +395,23 @@ public class OnlOnlineLogMo implements Serializable {
     /**
      *    是否线下（如果为线下店铺时，默认不发布到平台）
      *
-     *    数据库字段: ONL_ONLINE_LOG.IS_BELOW_ONLINE
+     *    数据库字段: ONL_ONLINE_LOG.IS_BELOW
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Boolean getIsBelowOnline() {
-        return isBelowOnline;
+    public Boolean getIsBelow() {
+        return isBelow;
     }
 
     /**
      *    是否线下（如果为线下店铺时，默认不发布到平台）
      *
-     *    数据库字段: ONL_ONLINE_LOG.IS_BELOW_ONLINE
+     *    数据库字段: ONL_ONLINE_LOG.IS_BELOW
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setIsBelowOnline(Boolean isBelowOnline) {
-        this.isBelowOnline = isBelowOnline;
+    public void setIsBelow(Boolean isBelow) {
+        this.isBelow = isBelow;
     }
 
     /**
@@ -428,6 +437,28 @@ public class OnlOnlineLogMo implements Serializable {
     }
 
     /**
+     *    是否线上
+     *
+     *    数据库字段: ONL_ONLINE_LOG.IS_ONLINE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Boolean getIsOnline() {
+        return isOnline;
+    }
+
+    /**
+     *    是否线上
+     *
+     *    数据库字段: ONL_ONLINE_LOG.IS_ONLINE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setIsOnline(Boolean isOnline) {
+        this.isOnline = isOnline;
+    }
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Override
@@ -447,8 +478,9 @@ public class OnlOnlineLogMo implements Serializable {
         sb.append(", opId=").append(opId);
         sb.append(", opTime=").append(opTime);
         sb.append(", productId=").append(productId);
-        sb.append(", isBelowOnline=").append(isBelowOnline);
+        sb.append(", isBelow=").append(isBelow);
         sb.append(", isOnlinePlatform=").append(isOnlinePlatform);
+        sb.append(", isOnline=").append(isOnline);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
