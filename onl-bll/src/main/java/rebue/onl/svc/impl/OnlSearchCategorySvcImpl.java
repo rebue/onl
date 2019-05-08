@@ -177,9 +177,12 @@ public class OnlSearchCategorySvcImpl
 	/**
 	 * 禁用/启用店铺搜索分类 注：该方法会禁用/启用该分类和该分类下的所有子分类
 	 * 
-	 * @param sellerId 卖家id
-	 * @param shopId   店铺id
-	 * @param code     分类编码
+	 * @param sellerId
+	 *            卖家id
+	 * @param shopId
+	 *            店铺id
+	 * @param code
+	 *            分类编码
 	 * @return
 	 */
 	@Override
@@ -218,38 +221,39 @@ public class OnlSearchCategorySvcImpl
 	@Override
 	public List<OnlSearchCategoryTreeRo> searchCategoryTreeList(Long shopId) {
 		_log.info("获取店铺搜索分类树的参数为：{}", shopId);
-		List<OnlSearchCategoryTreeRo> list = new ArrayList<OnlSearchCategoryTreeRo>();
+		
+		List<OnlSearchCategoryTreeRo> searchCategoryTreeList = new ArrayList<OnlSearchCategoryTreeRo>();
 		if (shopId == null) {
 			_log.error("获取搜索店铺分类树的参数为null, 请求的参数为：{}", shopId);
-			return list;
+			return searchCategoryTreeList;
 		}
+
 		_log.info("获取店铺搜索分类树获取店铺顶级分类的参数为：{}", shopId);
 		List<OnlSearchCategoryMo> shopTopSearchCategoryList = _mapper.selectShopTopSearchCategory(shopId);
 		_log.info("获取店铺搜索分类树获取店铺顶级分类的返回值为：{}", String.valueOf(shopTopSearchCategoryList));
 		for (OnlSearchCategoryMo onlSearchCategoryMo : shopTopSearchCategoryList) {
+			
 			if (onlSearchCategoryMo.getIsEnabled() == true) {
-				OnlSearchCategoryTreeRo categoryTreeRo = dozerMapper.map(onlSearchCategoryMo,
-						OnlSearchCategoryTreeRo.class);
-				List<OnlSearchCategoryTreeRo> searchCategoryList = searchCategoryList(onlSearchCategoryMo.getShopId(),
+				_log.info("查询并设置子分类与活动列表开始--------------------------------------");
+
+				// 获取子级分类
+				OnlSearchCategoryTreeRo categoryTreeRo = new OnlSearchCategoryTreeRo();
+				categoryTreeRo.setId(onlSearchCategoryMo.getId());
+				categoryTreeRo.setName(onlSearchCategoryMo.getName());
+				
+				_log.info("搜索子分类参数是：ShopId()-{} Code()-{}", onlSearchCategoryMo.getShopId(),
 						onlSearchCategoryMo.getCode());
-				if (searchCategoryList.size() != 0) {
-					categoryTreeRo.setCategoryList(searchCategoryList);
-				}
+				List<OnlSearchCategoryTreeRo> categoryList = onlCategoryList(onlSearchCategoryMo.getShopId(),
+						onlSearchCategoryMo.getCode());
+				_log.info("搜索子分类结果是：{}", categoryList);
+				categoryTreeRo.setCategoryList(categoryList);
 
-				_log.info("根据搜索分类id查询上线商品树信息的参数为：{}", onlSearchCategoryMo.getId());
-				List<OnlOnlineTreeRo> activityList = onlSearchCategoryOnlineSvc
-						.onlineTreeList(onlSearchCategoryMo.getId());
-				_log.info("根据搜索分类id查询上线商品树信息的返回值为：{}", activityList);
-
-				if (activityList.size() != 0) {
-					categoryTreeRo.setActivityList(activityList);
-				}
-
-				list.add(categoryTreeRo);
+				searchCategoryTreeList.add(categoryTreeRo);
+				_log.info("查询并设置子分类与活动列表结束+++++++++++++++++++++++++++++++++");
 			}
 
 		}
-		return list;
+		return searchCategoryTreeList;
 	}
 
 	/**
@@ -259,31 +263,43 @@ public class OnlSearchCategorySvcImpl
 	 * @param code
 	 * @return
 	 */
-	public List<OnlSearchCategoryTreeRo> searchCategoryList(Long shopId, String code) {
+	public List<OnlSearchCategoryTreeRo> onlCategoryList(Long shopId, String code) {
 		_log.info("根据店铺id和编码查询店铺搜索分类的参数为：shopId-{}, code-{}", shopId, code);
-		List<OnlSearchCategoryTreeRo> list = new ArrayList<OnlSearchCategoryTreeRo>();
+		List<OnlSearchCategoryTreeRo> categoryList = new ArrayList<OnlSearchCategoryTreeRo>();
 		List<OnlSearchCategoryMo> shopSonSearchCategoryList = _mapper.selectShopSonSearchCategory(shopId, code);
 		_log.info("根据店铺id和编码查询店铺搜索分类的返回值为：{}", String.valueOf(shopSonSearchCategoryList));
 		for (OnlSearchCategoryMo onlSearchCategoryMo : shopSonSearchCategoryList) {
-			OnlSearchCategoryTreeRo categoryTreeRo = dozerMapper.map(onlSearchCategoryMo,
-					OnlSearchCategoryTreeRo.class);
-			List<OnlSearchCategoryTreeRo> searchCategoryList = searchCategoryList(onlSearchCategoryMo.getShopId(),
+			_log.info("循环查询和设置活动列表开始-------------------------------------------");
+			OnlSearchCategoryTreeRo categoryTreeRo = new OnlSearchCategoryTreeRo();
+			categoryTreeRo.setId(onlSearchCategoryMo.getId());
+			categoryTreeRo.setName(onlSearchCategoryMo.getName());
+
+			// 判断是否还有下一级，有的话就递归调用。
+			_log.info("循环查询是否还有下一级的参数为：shpoId-{} code-{}", onlSearchCategoryMo.getShopId(),
 					onlSearchCategoryMo.getCode());
-			if (searchCategoryList.size() != 0) {
-				categoryTreeRo.setCategoryList(searchCategoryList);
+			List<OnlSearchCategoryTreeRo> nextCategoryList = onlCategoryList(onlSearchCategoryMo.getShopId(),
+					onlSearchCategoryMo.getCode());
+			_log.info("循环查询是否还有下一级的结果为：nextCategoryList-{}", nextCategoryList);
+
+			// 如果下一级返回的list不是空，那么这里不需要查询活动列表,因为只有最低层才有活动列表和商品列表。
+			if (nextCategoryList.size() != 0) {
+				categoryTreeRo.setCategoryList(nextCategoryList);
+			} else {
+				_log.info("根据搜索分类id查询上线商品树信息的参数为：{}", onlSearchCategoryMo.getId());
+
+				List<OnlOnlineTreeRo> activityList = onlSearchCategoryOnlineSvc
+						.onlineTreeList(onlSearchCategoryMo.getId());
+				_log.info("根据搜索分类id查询上线商品树信息的返回值为：{}", activityList);
+
+				if (activityList.size() != 0) {
+					categoryTreeRo.setActivityList(activityList);
+				}
 			}
 
-			_log.info("根据搜索分类id查询上线商品树信息的参数为：{}", onlSearchCategoryMo.getId());
-			List<OnlOnlineTreeRo> activityList = onlSearchCategoryOnlineSvc.onlineTreeList(onlSearchCategoryMo.getId());
-			_log.info("根据搜索分类id查询上线商品树信息的返回值为：{}", activityList);
-
-			if (activityList.size() != 0) {
-				categoryTreeRo.setActivityList(activityList);
-			}
-
-			list.add(categoryTreeRo);
+			categoryList.add(categoryTreeRo);
+			_log.info("循环查询和设置活动列表结束+++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		}
-		_log.info("根据店铺id和编码查询店铺搜索分类的返回值为：{}", list);
-		return list;
+		_log.info("根据店铺id和编码查询店铺搜索分类的返回值为：{}", categoryList);
+		return categoryList;
 	}
 }

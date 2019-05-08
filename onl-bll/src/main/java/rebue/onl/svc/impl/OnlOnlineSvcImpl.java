@@ -899,6 +899,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		_log.info("根据上线id获取上线商品树根据id查询上线信息的参数为：onlineId-{}", onlineId);
 		OnlOnlineMo onlOnlineMo = thisSvc.getById(onlineId);
 		_log.info("根据上线id获取上线商品树根据id查询上线信息的返回值为：{}", onlOnlineMo);
+		
 		if (onlOnlineMo != null && onlOnlineMo.getOnlineState() == 1) {
 			ro = dozerMapper.map(onlOnlineMo, OnlOnlineTreeRo.class);
 			OnlOnlineSpecMo specMo = new OnlOnlineSpecMo();
@@ -907,6 +908,16 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			List<OnlOnlineSpecMo> list = onlOnlineSpecSvc.list(specMo);
 			_log.info("根据上线id获取上线商品树根据id查询上线规格信息的返回值为：{}", list);
 			ro.setGoodsList(list);
+		}
+		
+		OnlOnlinePicMo onlOnlinePicMo = new OnlOnlinePicMo();
+		onlOnlinePicMo.setOnlineId(onlineId);
+		onlOnlinePicMo.setPicType((byte) 1);
+		_log.info("根据上线id和图片类型获取获取商品主图的参数是：onlOnlinePicMo-{}", onlOnlinePicMo);
+		List<OnlOnlinePicMo> picList = onlOnlinePicSvc.list(onlOnlinePicMo);
+		_log.info("根据上线id获取获取商品主图的结果是：pigList-{}", picList);
+		if(picList !=null && picList.size() > 0) {
+			ro.setPicPath(picList.get(0).getPicPath());
 		}
 
 		_log.info("根据上线id获取上线商品树的返回值为：{}", ro);

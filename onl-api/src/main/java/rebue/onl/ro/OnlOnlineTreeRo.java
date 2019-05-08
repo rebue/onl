@@ -22,7 +22,6 @@ public class OnlOnlineTreeRo {
 	 *
 	 * 数据库字段: ONL_ONLINE.ID
 	 *
-	 * @mbg.generated 自动生成，如需修改，请删除本行
 	 */
 	private Long id;
 
@@ -31,7 +30,6 @@ public class OnlOnlineTreeRo {
 	 *
 	 * 数据库字段: ONL_ONLINE.SUBJECT_TYPE
 	 *
-	 * @mbg.generated 自动生成，如需修改，请删除本行
 	 */
 	private Byte subjectType;
 
@@ -40,9 +38,16 @@ public class OnlOnlineTreeRo {
 	 *
 	 * 数据库字段: ONL_ONLINE.ONLINE_TITLE
 	 *
-	 * @mbg.generated 自动生成，如需修改，请删除本行
 	 */
 	private String onlineTitle;
+	
+	/**
+	 * 图片路径
+	 *
+	 * 
+	 *
+	 */
+	private String picPath;
 
 	/**
 	 * 规格信息
