@@ -264,10 +264,10 @@ public class OnlSearchCategorySvcImpl
 	 * @return
 	 */
 	public List<OnlSearchCategoryTreeRo> onlCategoryList(Long shopId, String code) {
-		_log.info("根据店铺id和编码查询店铺搜索分类的参数为：shopId-{}, code-{}", shopId, code);
+		_log.info("根据店铺id和编码查询店铺分类的参数为：shopId-{}, code-{}", shopId, code);
 		List<OnlSearchCategoryTreeRo> categoryList = new ArrayList<OnlSearchCategoryTreeRo>();
 		List<OnlSearchCategoryMo> shopSonSearchCategoryList = _mapper.selectShopSonSearchCategory(shopId, code);
-		_log.info("根据店铺id和编码查询店铺搜索分类的返回值为：{}", String.valueOf(shopSonSearchCategoryList));
+		_log.info("根据店铺id和编码查询店铺分类的返回值为：{}", String.valueOf(shopSonSearchCategoryList));
 		for (OnlSearchCategoryMo onlSearchCategoryMo : shopSonSearchCategoryList) {
 			_log.info("循环查询和设置活动列表开始-------------------------------------------");
 			OnlSearchCategoryTreeRo categoryTreeRo = new OnlSearchCategoryTreeRo();
