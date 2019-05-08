@@ -157,7 +157,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		// 是否线下
 		Boolean isBelow = to.getIsBelowOnline() == 0 ? false : true;
 		// 是否线上
-		Boolean isOnline = to.getIsBelowOnline() == 1 ? false : true;
+		Boolean isOnline = to.getIsBelowOnline() == 0 ? true : false;
 		if(to.getIsBelowOnline() == 2) {
 			isBelow =true;
 			isOnline = true;
@@ -501,7 +501,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		// 是否线下
 		Boolean isBelow = to.getIsBelowOnline() == 0 ? false : true;
 		// 是否线上
-		Boolean isOnline = to.getIsBelowOnline() == 1 ? false : true;
+		Boolean isOnline = to.getIsBelowOnline() == 0 ? true : false;
 		if (to.getIsBelowOnline() == 2) {
 			isBelow = true;
 			isOnline = true;

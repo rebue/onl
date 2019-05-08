@@ -97,18 +97,18 @@ public class AddOnlineTo {
 	private Byte isOnlinePlatform;
 
 	/**
-	 * 是否为线下商品,0为否，1为是
+	 * 是否为线下商品,0为否，1为是,2为既是线下商品也是线上商品
 	 */
 	private Byte isBelowOnline;
-	
+
 	/**
 	 * 上线规格属性名
 	 */
 	private String[] attrNames;
-	
+
 	/**
 	 * 上线规格属性值
 	 */
 	private String[][] attrValues;
-	
+
 }
