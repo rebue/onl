@@ -68,7 +68,12 @@ public class OnlinesRo {
 	/**
 	 * 是否线下
 	 */
-	private Byte isBelowOnline;
+	private Byte isBelow;
+	
+	/**
+	 * 是否线上
+	 */
+	private Byte isOnline;
 	
 	/**
 	 * 是否上线到平台
