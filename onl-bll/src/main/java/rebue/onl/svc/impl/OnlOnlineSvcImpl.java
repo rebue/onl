@@ -158,10 +158,10 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		Boolean isBelow = to.getIsBelowOnline() == 0 ? false : true;
 		// 是否线上
 		Boolean isOnline = to.getIsBelowOnline() == 0 ? true : false;
-		if(to.getIsBelowOnline() == 2) {
-			isBelow =true;
+		if (to.getIsBelowOnline() == 2) {
+			isBelow = true;
 			isOnline = true;
-		}	
+		}
 		// 是否上线到平台
 		Boolean isOnlinePlatform = to.getIsOnlinePlatform() == 0 ? false : true;
 		// 添加上线信息开始
@@ -867,11 +867,13 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 				throw new RuntimeException(msg);
 			}
 			_log.debug("删除购物车");
-			try {
-				cartSvc.del(specTo.getCartId());
-			} catch (final RuntimeException e) {
-				// 这里捕获运行时，不让其抛出，避免事务回滚
-				_log.error("删除购物车出现运行时异常", e);
+			if (specTo.getCartId() != null) {
+				try {
+					cartSvc.del(specTo.getCartId());
+				} catch (final RuntimeException e) {
+					// 这里捕获运行时，不让其抛出，避免事务回滚
+					_log.error("删除购物车出现运行时异常", e);
+				}
 			}
 			if (onlineSpecMo.getCurrentOnlineCount() <= onlineSpecMo.getSaleCount() + specTo.getBuyCount()) {
 				_log.debug("如果上线的所有规格的上线数量都<=销售数量，那么此上线记录自动下线");
@@ -915,7 +917,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		_log.info("根据上线id获取上线商品树根据id查询上线信息的参数为：onlineId-{}", onlineId);
 		OnlOnlineMo onlOnlineMo = thisSvc.getById(onlineId);
 		_log.info("根据上线id获取上线商品树根据id查询上线信息的返回值为：{}", onlOnlineMo);
-		
+
 		if (onlOnlineMo != null && onlOnlineMo.getOnlineState() == 1) {
 			ro = dozerMapper.map(onlOnlineMo, OnlOnlineTreeRo.class);
 			OnlOnlineSpecMo specMo = new OnlOnlineSpecMo();
@@ -925,14 +927,14 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			_log.info("根据上线id获取上线商品树根据id查询上线规格信息的返回值为：{}", list);
 			ro.setGoodsList(list);
 		}
-		
+
 		OnlOnlinePicMo onlOnlinePicMo = new OnlOnlinePicMo();
 		onlOnlinePicMo.setOnlineId(onlineId);
 		onlOnlinePicMo.setPicType((byte) 1);
 		_log.info("根据上线id和图片类型获取获取商品主图的参数是：onlOnlinePicMo-{}", onlOnlinePicMo);
 		List<OnlOnlinePicMo> picList = onlOnlinePicSvc.list(onlOnlinePicMo);
 		_log.info("根据上线id获取获取商品主图的结果是：pigList-{}", picList);
-		if(picList !=null && picList.size() > 0) {
+		if (picList != null && picList.size() > 0) {
 			ro.setPicPath(picList.get(0).getPicPath());
 		}
 
