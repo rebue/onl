@@ -62,4 +62,12 @@ public interface OnlSearchCategoryOnlineMapper extends MybatisBaseMapper<OnlSear
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     int countSelective(OnlSearchCategoryOnlineMo record);
+    
+    /**
+     * 根据上线id修改搜索分类id
+     * @param record
+     * @return
+     */
+    int updateByOnlineId(OnlSearchCategoryOnlineMo record);
+
 }

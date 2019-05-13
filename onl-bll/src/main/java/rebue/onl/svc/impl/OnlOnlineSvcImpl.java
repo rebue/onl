@@ -26,6 +26,7 @@ import rebue.onl.mo.OnlOnlinePromotionMo;
 import rebue.onl.mo.OnlOnlineSpecAttrMo;
 import rebue.onl.mo.OnlOnlineSpecLogMo;
 import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.mo.OnlSearchCategoryOnlineMo;
 import rebue.onl.ro.AddOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 import rebue.onl.ro.OnlOnlineListRo;
@@ -41,6 +42,7 @@ import rebue.onl.svc.OnlOnlineSpecAttrSvc;
 import rebue.onl.svc.OnlOnlineSpecLogSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
+import rebue.onl.svc.OnlSearchCategoryOnlineSvc;
 import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlOnlineSpecTo;
 import rebue.onl.to.OnlineGoodsListTo;
@@ -97,6 +99,9 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 	 */
 	@Resource
 	private OnlOnlinePicSvc onlOnlinePicSvc;
+	
+	@Resource
+	private OnlSearchCategoryOnlineSvc onlSearchCategoryOnlineSvc;
 
 	/**
 	 */
@@ -322,6 +327,22 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			}
 			// 添加上线规格日志信息结束
 		}
+		// 添加搜索分类上线开始
+		// 搜索分类上线id
+		final Long searchCategoryOnlineId = _idWorker.getId();
+		final OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo =new OnlSearchCategoryOnlineMo();
+		onlSearchCategoryOnlineMo.setId(searchCategoryOnlineId);
+		onlSearchCategoryOnlineMo.setOnlineId(onlineId);
+		onlSearchCategoryOnlineMo.setSearchCategoryId(to.getClassificationId());
+		_log.info("添加搜索分类上线的参数为：{}",onlSearchCategoryOnlineMo);
+		final int searchCategoryOnlineResult = onlSearchCategoryOnlineSvc.add(onlSearchCategoryOnlineMo);
+		_log.info("添加搜索分类上线的返回值为：{}",searchCategoryOnlineResult);
+		if (searchCategoryOnlineResult != 1) {
+			_log.error("添加搜索分类上线时出错，用户id为：{}", to.getOpId());
+			throw new RuntimeException("添加搜索分类上线出错");
+		}
+		// 添加搜索分类上线结束
+		
 		// 添加商品主图开始
 		// 上线图片id
 		final Long onlinePicId = _idWorker.getId();
@@ -560,6 +581,20 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			throw new RuntimeException("添加上线日志信息出错");
 		}
 		// 添加上线日志信息结束
+
+		// 修改搜索分类上线开始
+		// 搜索分类上线id
+		final OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
+		onlSearchCategoryOnlineMo.setOnlineId(to.getOnlineId());
+		onlSearchCategoryOnlineMo.setSearchCategoryId(to.getClassificationId());
+		_log.info("添加搜索分类上线的参数为：{}", onlSearchCategoryOnlineMo);
+		final int searchCategoryOnlineResult = onlSearchCategoryOnlineSvc.updateByOnlineId(onlSearchCategoryOnlineMo);
+		_log.info("添加搜索分类上线的返回值为：{}", searchCategoryOnlineResult);
+		if (searchCategoryOnlineResult != 1) {
+			_log.error("添加搜索分类上线时出错，用户id为：{}", to.getOpId());
+			throw new RuntimeException("添加搜索分类上线出错");
+		}
+		// 修改搜索分类上线结束
 		// 用于存放未删除的规格id
 		final StringBuilder onlineSpecIds = new StringBuilder();
 		for (int i = 0; i < to.getOnlineSpecs().size(); i++) {
@@ -680,6 +715,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 					onlineSpecIds.toString().substring(0, onlineSpecIds.toString().length() - 1), to.getOnlineId());
 		}
 		// 删除上线规格结束
+		
 		// 根据上线id删除上线图片开始
 		_log.info("重新上线删除上线图片的参数为：{}", to.getOnlineId());
 		int deleteByOnlineIdResult = 0;

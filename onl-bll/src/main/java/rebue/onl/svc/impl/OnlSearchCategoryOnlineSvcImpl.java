@@ -91,4 +91,11 @@ public class OnlSearchCategoryOnlineSvcImpl extends MybatisBaseSvcImpl<OnlSearch
     	_log.info("根据搜索分类id获取上线商品树的返回值为：{}", list);
     	return list;
     }
+
+	@Override
+	public int updateByOnlineId(OnlSearchCategoryOnlineMo searchCategoryOnlineMo) {
+		_log.info("开始根据上线id修改搜索分类id");
+		int updateByOnlineIdResult =_mapper.updateByOnlineId(searchCategoryOnlineMo);
+		return updateByOnlineIdResult;
+	}
 }

@@ -110,5 +110,9 @@ public class AddOnlineTo {
 	 * 上线规格属性值
 	 */
 	private String[][] attrValues;
-
+	
+	/**
+	 * 搜索分类id
+	 */
+	private Long classificationId;
 }
