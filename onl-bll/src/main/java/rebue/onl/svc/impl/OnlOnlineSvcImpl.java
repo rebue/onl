@@ -26,6 +26,7 @@ import rebue.onl.mo.OnlOnlinePromotionMo;
 import rebue.onl.mo.OnlOnlineSpecAttrMo;
 import rebue.onl.mo.OnlOnlineSpecLogMo;
 import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.mo.OnlSearchCategoryMo;
 import rebue.onl.mo.OnlSearchCategoryOnlineMo;
 import rebue.onl.ro.AddOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
@@ -43,6 +44,7 @@ import rebue.onl.svc.OnlOnlineSpecLogSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
 import rebue.onl.svc.OnlSearchCategoryOnlineSvc;
+import rebue.onl.svc.OnlSearchCategorySvc;
 import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlOnlineSpecTo;
 import rebue.onl.to.OnlineGoodsListTo;
@@ -55,6 +57,8 @@ import rebue.prm.svr.feign.PrmPartnerSvr;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
+import rebue.slr.mo.SlrShopMo;
+import rebue.slr.svr.feign.SlrShopSvc;
 
 /**
  * 上线信息
@@ -135,6 +139,12 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 	@Resource
 	private OnlOnlineSpecAttrSvc onlOnlineSpecAttrSvc;
 
+
+	@Resource
+	private OnlSearchCategorySvc onlSearchCategorySvc;
+
+	@Resource
+	private  SlrShopSvc  slrShopSvc;
 	/**
 	 * 添加上线信息
 	 *
@@ -811,6 +821,37 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			final String orderBy) {
 		PageInfo<OnlOnlineListRo> pageInfo = new PageInfo<>();
 		final List<OnlOnlineListRo> listEx = new ArrayList<>();
+		
+		// 根据thisOrgId查询查询当前卖家的所有店铺
+		_log.info("根据当前组织id获取该组织下的所有店铺的信息参数为：{}", ro.getThisOrgId());
+		SlrShopMo ListslrShopMo=new SlrShopMo();
+		ListslrShopMo.setShortName(ro.getShopName());
+		ListslrShopMo.setSellerId(ro.getThisOrgId());
+		List<SlrShopMo> slrShopMoList = slrShopSvc.list(ListslrShopMo);
+		_log.info("根据当前组织id获取该组织下的所有店铺的信息结果为：slrShopMoList-{}", slrShopMoList);
+		
+		//根据店铺id获取所有搜索分类
+		for (SlrShopMo slrShopMo : slrShopMoList) {
+			_log.info("开始根据店铺获取获取分类信息------------------");
+			OnlSearchCategoryMo onlSearchCategoryMo = new OnlSearchCategoryMo();
+			onlSearchCategoryMo.setSellerId(slrShopMo.getId());
+			_log.info("根据店铺id获取搜索分类的参数是：{}", onlSearchCategoryMo);
+			List<OnlSearchCategoryMo> OnlSearchCategoryMoList = onlSearchCategorySvc.list(onlSearchCategoryMo);
+			_log.info("根据店铺id获取搜索分类的结果是：{}", OnlSearchCategoryMoList);
+			
+			//根据搜索分类获取所有上线信息
+			for (OnlSearchCategoryMo OnlSearchCategoryMo : OnlSearchCategoryMoList) {
+				_log.info("开始根据搜索分类获取上线信息》》》》》》》》》》》》》》》》》》》》》》》》");
+				
+				
+				
+				
+				_log.info("结束根据搜索分类获取上线信息《《《《《《《《《《《《《《《《《《《《《《《《《");
+			}
+			_log.info("开始根据店铺获取获取分类信息+++++++++++++++++++");
+		}
+
+
 		final OnlOnlineMo mo = dozerMapper.map(ro, OnlOnlineMo.class);
 		final PageInfo<OnlOnlineMo> onlinePageInfo = PageHelper.startPage(pageNum, pageSize, orderBy)
 				.doSelectPageInfo(() -> _mapper.selectSelective(mo));

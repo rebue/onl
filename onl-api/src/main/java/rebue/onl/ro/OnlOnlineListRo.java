@@ -132,4 +132,9 @@ public class OnlOnlineListRo {
 	 * 当前组织id
 	 */
 	private Long thisOrgId;
+	
+	/**
+	 * 店铺名称
+	 */
+	private String shopName  ;
 }
