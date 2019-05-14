@@ -115,4 +115,13 @@ public interface OnlSearchCategoryMapper extends MybatisBaseMapper<OnlSearchCate
 	 */
 	@Select("SELECT * FROM ONL_SEARCH_CATEGORY where SHOP_ID = #{shopId,jdbcType=BIGINT} and code like '${code}__';")
 	List<OnlSearchCategoryMo> selectShopSonSearchCategory(@Param("shopId") Long shopId, @Param("code") String code);
+
+	/**
+	 * 根据店铺集合获取搜索分类id
+	 * @param shopIds
+	 * @return
+	 */
+	@Select("SELECT * FROM ONL_SEARCH_CATEGORY where SELLER_ID in (${shopIds}) ")
+	List<OnlSearchCategoryMo>  searchCategoryByshopIds(@Param("shopIds") String shopIds);
+
 }

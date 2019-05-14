@@ -98,4 +98,13 @@ public class OnlSearchCategoryOnlineSvcImpl extends MybatisBaseSvcImpl<OnlSearch
 		int updateByOnlineIdResult =_mapper.updateByOnlineId(searchCategoryOnlineMo);
 		return updateByOnlineIdResult;
 	}
+	
+	/**
+	 * 根据搜索分类id集合查询符合条件搜索上线信息
+	 */
+	@Override
+	public List<OnlSearchCategoryOnlineMo> selectBysearchCategoryIds(String searchCategoryIds) {
+		_log.info("根据搜索分类id集合查询所有上线id的参数为-{}",searchCategoryIds);
+		return _mapper.selectBysearchCategoryIds(searchCategoryIds);
+	}
 }

@@ -302,4 +302,14 @@ public class OnlSearchCategorySvcImpl
 		_log.info("根据店铺id和编码查询店铺搜索分类的返回值为：{}", categoryList);
 		return categoryList;
 	}
+	
+	
+	/**
+	 * 根据店铺id集合获取所有搜索分类。
+	 */
+	@Override
+	public List<OnlSearchCategoryMo> searchCategoryByshopIds(String shopIds) {
+		_log.info("根据店铺id集合所有搜索分参数是：{}", shopIds);
+		return _mapper.searchCategoryByshopIds(shopIds);
+	}
 }

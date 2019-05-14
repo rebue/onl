@@ -2,6 +2,8 @@ package rebue.onl.svc;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import rebue.onl.mo.OnlSearchCategoryOnlineMo;
 import rebue.onl.ro.OnlOnlineTreeRo;
 import rebue.robotech.svc.MybatisBaseSvc;
@@ -26,4 +28,11 @@ public interface OnlSearchCategoryOnlineSvc extends MybatisBaseSvc<OnlSearchCate
 	 * @return
 	 */
     int updateByOnlineId(OnlSearchCategoryOnlineMo searchCategoryOnlineMo);
+    
+    /**
+     * 根据搜索分类id集合查询符合条件搜索上线信息
+     * @param searchCategoryIds
+     * @return
+     */
+    List<OnlSearchCategoryOnlineMo>  selectBysearchCategoryIds(String searchCategoryIds);
 }

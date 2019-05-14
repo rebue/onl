@@ -461,4 +461,22 @@
 		</if>
     </where>
   </select>
+      <select id="selectOnlineInfo" parameterType="rebue.onl.to.SelectOnlineTo" resultType="rebue.onl.mo.OnlOnlineMo">
+    <!-- 
+		大卖后台查询商品信息
+    -->
+    SELECT * FROM ONL_ONLINE 
+    <where>
+    
+      <if test="onlineTitle != null and onlineTitle != ''">
+        and ONLINE_TITLE LIKE '%${onlineTitle}%'
+      </if>
+      <if test="onlineState != null ">
+        and ONLINE_STATE = #{onlineState,jdbcType=TINYINT}
+      </if>
+       <if test=" onlineIds != null ">
+        and id in(${onlineIds})
+      </if>
+    </where>
+  </select>
 </mapper>

@@ -8,6 +8,7 @@ import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 import rebue.onl.ro.SupplierGoodsRo;
 import rebue.onl.to.OnlineGoodsListTo;
+import rebue.onl.to.SelectOnlineTo;
 import rebue.onl.to.SupplierGoodsTo;
 import rebue.robotech.mapper.MybatisBaseMapper;
 
@@ -101,4 +102,11 @@ public interface OnlOnlineMapper extends MybatisBaseMapper<OnlOnlineMo, Long> {
      * @return
      */
     List<SupplierGoodsRo> selectSupplierGoods(SupplierGoodsTo record);
+    
+    /**
+     * 查询上线信息
+     * @param to
+     * @return
+     */
+    List<OnlOnlineMo> selectOnlineInfo(SelectOnlineTo to);
 }

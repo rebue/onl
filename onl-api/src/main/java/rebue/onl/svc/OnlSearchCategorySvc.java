@@ -2,6 +2,7 @@ package rebue.onl.svc;
 
 import java.util.List;
 
+
 import com.github.pagehelper.PageInfo;
 
 import rebue.onl.mo.OnlSearchCategoryMo;
@@ -55,4 +56,12 @@ public interface OnlSearchCategorySvc extends MybatisBaseSvc<OnlSearchCategoryMo
 	 * @return
 	 */
 	List<OnlSearchCategoryTreeRo> searchCategoryTreeList(Long shopId);
+	
+	/**
+	 * 根据店铺id集合获取搜索分类
+	 * @param shopId
+	 * @return
+	 */
+
+	List<OnlSearchCategoryMo> searchCategoryByshopIds(String shopIds );
 }

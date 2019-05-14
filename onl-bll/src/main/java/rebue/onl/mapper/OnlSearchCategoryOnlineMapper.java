@@ -2,6 +2,10 @@ package rebue.onl.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import rebue.onl.mo.OnlSearchCategoryMo;
 import rebue.onl.mo.OnlSearchCategoryOnlineMo;
 import rebue.robotech.mapper.MybatisBaseMapper;
 
@@ -69,5 +73,13 @@ public interface OnlSearchCategoryOnlineMapper extends MybatisBaseMapper<OnlSear
      * @return
      */
     int updateByOnlineId(OnlSearchCategoryOnlineMo record);
+    
+    /**
+     * 
+     * @param searchCategoryId
+     * @return
+     */
+	@Select("SELECT * FROM ONL_SEARCH_CATEGORY_ONLINE where SEARCH_CATEGORY_ID in (${searchCategoryIds}) ")
+	List<OnlSearchCategoryOnlineMo>  selectBysearchCategoryIds(@Param("searchCategoryIds") String searchCategoryIds);
 
 }

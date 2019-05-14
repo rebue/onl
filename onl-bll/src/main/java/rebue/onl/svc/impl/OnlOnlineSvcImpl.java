@@ -48,6 +48,7 @@ import rebue.onl.svc.OnlSearchCategorySvc;
 import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlOnlineSpecTo;
 import rebue.onl.to.OnlineGoodsListTo;
+import rebue.onl.to.SelectOnlineTo;
 import rebue.onl.to.SupplierGoodsTo;
 import rebue.onl.to.UpdateOnlineAfterOrderTo;
 import rebue.onl.to.UpdateOnlineSpecAfterOrderTo;
@@ -103,7 +104,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 	 */
 	@Resource
 	private OnlOnlinePicSvc onlOnlinePicSvc;
-	
+
 	@Resource
 	private OnlSearchCategoryOnlineSvc onlSearchCategoryOnlineSvc;
 
@@ -139,12 +140,12 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 	@Resource
 	private OnlOnlineSpecAttrSvc onlOnlineSpecAttrSvc;
 
-
 	@Resource
 	private OnlSearchCategorySvc onlSearchCategorySvc;
 
 	@Resource
-	private  SlrShopSvc  slrShopSvc;
+	private SlrShopSvc slrShopSvc;
+
 	/**
 	 * 添加上线信息
 	 *
@@ -340,19 +341,19 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		// 添加搜索分类上线开始
 		// 搜索分类上线id
 		final Long searchCategoryOnlineId = _idWorker.getId();
-		final OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo =new OnlSearchCategoryOnlineMo();
+		final OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
 		onlSearchCategoryOnlineMo.setId(searchCategoryOnlineId);
 		onlSearchCategoryOnlineMo.setOnlineId(onlineId);
 		onlSearchCategoryOnlineMo.setSearchCategoryId(to.getClassificationId());
-		_log.info("添加搜索分类上线的参数为：{}",onlSearchCategoryOnlineMo);
+		_log.info("添加搜索分类上线的参数为：{}", onlSearchCategoryOnlineMo);
 		final int searchCategoryOnlineResult = onlSearchCategoryOnlineSvc.add(onlSearchCategoryOnlineMo);
-		_log.info("添加搜索分类上线的返回值为：{}",searchCategoryOnlineResult);
+		_log.info("添加搜索分类上线的返回值为：{}", searchCategoryOnlineResult);
 		if (searchCategoryOnlineResult != 1) {
 			_log.error("添加搜索分类上线时出错，用户id为：{}", to.getOpId());
 			throw new RuntimeException("添加搜索分类上线出错");
 		}
 		// 添加搜索分类上线结束
-		
+
 		// 添加商品主图开始
 		// 上线图片id
 		final Long onlinePicId = _idWorker.getId();
@@ -725,7 +726,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 					onlineSpecIds.toString().substring(0, onlineSpecIds.toString().length() - 1), to.getOnlineId());
 		}
 		// 删除上线规格结束
-		
+
 		// 根据上线id删除上线图片开始
 		_log.info("重新上线删除上线图片的参数为：{}", to.getOnlineId());
 		int deleteByOnlineIdResult = 0;
@@ -821,40 +822,73 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			final String orderBy) {
 		PageInfo<OnlOnlineListRo> pageInfo = new PageInfo<>();
 		final List<OnlOnlineListRo> listEx = new ArrayList<>();
-		
-		// 根据thisOrgId查询查询当前卖家的所有店铺
-		_log.info("根据当前组织id获取该组织下的所有店铺的信息参数为：{}", ro.getThisOrgId());
-		SlrShopMo ListslrShopMo=new SlrShopMo();
-		ListslrShopMo.setShortName(ro.getShopName());
+
+		// 根据thisOrgId和店铺名字查询当前卖家的所有店铺
+		SlrShopMo ListslrShopMo = new SlrShopMo();
+		ListslrShopMo.setShopName(ro.getShopName());
 		ListslrShopMo.setSellerId(ro.getThisOrgId());
+		_log.info("根据当前组织id获取该组织下的所有店铺的信息参数为：{}",ListslrShopMo);
 		List<SlrShopMo> slrShopMoList = slrShopSvc.list(ListslrShopMo);
 		_log.info("根据当前组织id获取该组织下的所有店铺的信息结果为：slrShopMoList-{}", slrShopMoList);
-		
-		//根据店铺id获取所有搜索分类
-		for (SlrShopMo slrShopMo : slrShopMoList) {
-			_log.info("开始根据店铺获取获取分类信息------------------");
-			OnlSearchCategoryMo onlSearchCategoryMo = new OnlSearchCategoryMo();
-			onlSearchCategoryMo.setSellerId(slrShopMo.getId());
-			_log.info("根据店铺id获取搜索分类的参数是：{}", onlSearchCategoryMo);
-			List<OnlSearchCategoryMo> OnlSearchCategoryMoList = onlSearchCategorySvc.list(onlSearchCategoryMo);
-			_log.info("根据店铺id获取搜索分类的结果是：{}", OnlSearchCategoryMoList);
-			
-			//根据搜索分类获取所有上线信息
-			for (OnlSearchCategoryMo OnlSearchCategoryMo : OnlSearchCategoryMoList) {
-				_log.info("开始根据搜索分类获取上线信息》》》》》》》》》》》》》》》》》》》》》》》》");
-				
-				
-				
-				
-				_log.info("结束根据搜索分类获取上线信息《《《《《《《《《《《《《《《《《《《《《《《《《");
-			}
-			_log.info("开始根据店铺获取获取分类信息+++++++++++++++++++");
+		if (slrShopMoList.size() == 0) {
+			return pageInfo;
 		}
 
+		// 根据店铺id获取所有搜索分类
+		// 拼接的店铺shopIds
+		String shopIds = "";
+		for (int i = 0; i < slrShopMoList.size(); i++) {
+			if (i != 0 && i < slrShopMoList.size()) {
+				shopIds += ",'" + slrShopMoList.get(i).getId() + "'";
+			} else {
+				shopIds += "'" + slrShopMoList.get(i).getId() + "'";
+			}
+		}
+		_log.info("根据店铺id集合获取所有搜索分类的参数为: shopIds-{}", shopIds);
+		List<OnlSearchCategoryMo> onlSearchCategoryList = onlSearchCategorySvc.searchCategoryByshopIds(shopIds);
+		_log.info("根据店铺id集合获取所有搜索分类的结果为: shopIds-{}", onlSearchCategoryList);
+		if (onlSearchCategoryList.size() == 0) {
+			return pageInfo;
+		}
 
-		final OnlOnlineMo mo = dozerMapper.map(ro, OnlOnlineMo.class);
+		// 根据分类id集合获取所有上线id
+		// 拼接的searchCategoryIds
+		String searchCategoryIds = "";
+		for (int i = 0; i < onlSearchCategoryList.size(); i++) {
+			if (i != 0 && i < onlSearchCategoryList.size()) {
+				searchCategoryIds += ",'" + onlSearchCategoryList.get(i).getId() + "'";
+			} else {
+				searchCategoryIds += "'" + onlSearchCategoryList.get(i).getId() + "'";
+			}
+		}
+		_log.info("根据搜索分类id集合获取搜索上线信息参数为: searchCategoryId-{}", searchCategoryIds);
+		List<OnlSearchCategoryOnlineMo> SearchCategoryOnlineList = onlSearchCategoryOnlineSvc
+				.selectBysearchCategoryIds(searchCategoryIds);
+		_log.info("根据搜索分类id集合获取搜索上线结果为: SearchCategoryOnlineList-{}", SearchCategoryOnlineList);
+		if (SearchCategoryOnlineList.size() == 0) {
+			return pageInfo;
+		}
+
+		// 根据上线id集合获取所有的上线信息。
+		// 拼接的onlinerIds
+		String onlineIds = "";
+		for (int i = 0; i < SearchCategoryOnlineList.size(); i++) {
+			if (i != 0 && i < SearchCategoryOnlineList.size()) {
+				onlineIds += ",'" + SearchCategoryOnlineList.get(i).getOnlineId() + "'";
+			} else {
+				onlineIds += "'" + SearchCategoryOnlineList.get(i).getOnlineId() + "'";
+			}
+		}
+		_log.info("拼接后的上线id集合 onlinerIds-{} ", onlineIds);
+		SelectOnlineTo SelectOnlineTo = new SelectOnlineTo();
+		SelectOnlineTo.setOnlineIds(onlineIds);
+		SelectOnlineTo.setOnlineState(ro.getOnlineState());
+		SelectOnlineTo.setOnlineTitle(ro.getOnlineTitle());
+		_log.info("查询上线信息的参数为 SelectOnlineTo-{} ", SelectOnlineTo);
 		final PageInfo<OnlOnlineMo> onlinePageInfo = PageHelper.startPage(pageNum, pageSize, orderBy)
-				.doSelectPageInfo(() -> _mapper.selectSelective(mo));
+				.doSelectPageInfo(() -> _mapper.selectOnlineInfo(SelectOnlineTo));
+		_log.info("查询上线信息的结果为 onlinePageInfo.getList()-{} ", onlinePageInfo.getList());
+		
 		for (final OnlOnlineMo onlOnlineMo : onlinePageInfo.getList()) {
 			final OnlOnlineListRo onlineListRo = dozerMapper.map(onlOnlineMo, OnlOnlineListRo.class);
 			if (onlOnlineMo.getSupplierId() != null) {
