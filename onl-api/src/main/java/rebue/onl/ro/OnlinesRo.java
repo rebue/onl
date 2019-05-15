@@ -11,6 +11,7 @@ import lombok.Data;
 import rebue.onl.mo.OnlOnlinePicMo;
 import rebue.onl.mo.OnlOnlineSpecAttrMo;
 import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.mo.OnlSearchCategoryMo;
 
 @Data
 public class OnlinesRo {
@@ -94,5 +95,9 @@ public class OnlinesRo {
 	 * 图片信息
 	 */
 	private List<OnlOnlinePicMo> onlinePicList;
-
+	
+	/**
+	 * 搜索分类
+	 */
+	private OnlSearchCategoryMo searchCategoryMo; 
 }

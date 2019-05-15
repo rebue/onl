@@ -25,6 +25,7 @@ import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.mo.OnlOnlinePicMo;
 import rebue.onl.mo.OnlOnlineSpecAttrMo;
 import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.mo.OnlSearchCategoryOnlineMo;
 import rebue.onl.ro.AddOnlineRo;
 import rebue.onl.ro.GetOnlinesRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
@@ -36,6 +37,8 @@ import rebue.onl.svc.OnlOnlinePicSvc;
 import rebue.onl.svc.OnlOnlineSpecAttrSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
+import rebue.onl.svc.OnlSearchCategoryOnlineSvc;
+import rebue.onl.svc.OnlSearchCategorySvc;
 import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlineGoodsListTo;
 import rebue.onl.to.SupplierGoodsTo;
@@ -114,6 +117,11 @@ public class OnlOnlineCtrl {
     @Resource
     private OnlOnlineSpecAttrSvc onlOnlineSpecAttrSvc;
 
+    @Resource
+    private OnlSearchCategoryOnlineSvc onlSearchCategoryOnlineSvc;
+    
+    @Resource
+    private OnlSearchCategorySvc onlSearchCategorySvc;
     /**
      *  添加上线信息
      *
@@ -243,7 +251,7 @@ public class OnlOnlineCtrl {
     }
 
 	/**
-	 * 根据id获取上线信息、规格信息、图片信息
+	 * 根据id获取上线信息、规格信息、图片信息、搜索分类信息
 	 *
 	 * @param id
 	 * @return
@@ -283,6 +291,15 @@ public class OnlOnlineCtrl {
 		final OnlOnlinePicMo onlinePicMo = new OnlOnlinePicMo();
 		onlinePicMo.setOnlineId(id);
 		onlOnlineRo.setOnlinePicList(onlinePicSvc.list(onlinePicMo));
+		//获取搜索分类上线
+		final OnlSearchCategoryOnlineMo searchCategoryOnlineMo =new OnlSearchCategoryOnlineMo();
+		searchCategoryOnlineMo.setOnlineId(id);
+		List<OnlSearchCategoryOnlineMo> searchCategoryOnlineResult = onlSearchCategoryOnlineSvc.list(searchCategoryOnlineMo);
+		//获取搜索分类
+		//final OnlSearchCategoryMo searchCategoryMo =new OnlSearchCategoryMo();
+		Long searchCategoryId=searchCategoryOnlineResult.get(0).getSearchCategoryId();
+		onlOnlineRo.setSearchCategoryMo(onlSearchCategorySvc.getById(searchCategoryId));
+		
 		onlinesRo.setRecord(onlOnlineRo);
 		onlinesRo.setResult((byte) 1);
 		return onlinesRo;
