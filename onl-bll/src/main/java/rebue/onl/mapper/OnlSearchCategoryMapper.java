@@ -121,7 +121,7 @@ public interface OnlSearchCategoryMapper extends MybatisBaseMapper<OnlSearchCate
 	 * @param shopIds
 	 * @return
 	 */
-	@Select("SELECT * FROM ONL_SEARCH_CATEGORY where SELLER_ID in (${shopIds}) ")
+	@Select("SELECT * FROM ONL_SEARCH_CATEGORY where SHOP_ID in (${shopIds}) ")
 	List<OnlSearchCategoryMo>  searchCategoryByshopIds(@Param("shopIds") String shopIds);
 
 }
