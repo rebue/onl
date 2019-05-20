@@ -238,7 +238,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			String onlineSpecName = "";
 			String[] attrvalues = to.getAttrValues()[i];
 			for (int j = 0; j < attrvalues.length; j++) {
-				onlineSpecName += attrvalues[j] + "";
+				onlineSpecName += attrvalues[j] + "/";
 			}
 			_log.info("添加上线信息查询上线规格名称是否存在的参数为：{}", onlineSpecName);
 			final boolean existSelectiveResult = onlOnlineSpecSvc.existOnlineSpec(onlineSpecName, onlineId);
@@ -630,7 +630,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			String onlineSpecName = "";
 			String[] attrvalues = to.getAttrValues()[i];
 			for (int j = 0; j < attrvalues.length; j++) {
-				onlineSpecName += attrvalues[j] + "";
+				onlineSpecName += attrvalues[j] + "/";
 			}
 			// 修改或添加上线规格开始
 			final OnlOnlineSpecTo onlineSpecTo = new OnlOnlineSpecTo();
