@@ -83,7 +83,7 @@ public class OnlSearchCategoryOnlineSvcImpl extends MybatisBaseSvcImpl<OnlSearch
     		_log.info("根据上线id获取上线商品树的参数为：{}", onlSearchCategoryOnlineMo.getOnlineId());
 			OnlOnlineTreeRo onlineTreeRo = onlOnlineSvc.onlineTree(onlSearchCategoryOnlineMo.getOnlineId());
 			_log.info("根据上线id获取上线商品树的返回值为：{}", onlineTreeRo);
-			if (onlineTreeRo != null) {
+			if (onlineTreeRo != null && onlineTreeRo.getId() !=null ) {
 				list.add(onlineTreeRo);
 			}
 		}
