@@ -236,10 +236,22 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			final OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
 			// 上线规格名称
 			String onlineSpecName = "";
-			String[] attrvalues = to.getAttrValues()[i];
-			for (int j = 0; j < attrvalues.length; j++) {
-				onlineSpecName += attrvalues[j] + "/";
+			if (to.getOnlineSpecs().get(i).getOnlineSpec() != ""
+					&& to.getOnlineSpecs().get(i).getOnlineSpec() != null) {
+				onlineSpecName = to.getOnlineSpecs().get(i).getOnlineSpec();
 			}
+			if (to.getAttrNames() != null) {
+				String[] oldOnlineSpec = onlineSpecName.split("/");
+				onlineSpecName =oldOnlineSpec[0];
+				String[] attrvalues = to.getAttrValues()[i];
+				for (int j = 0; j < attrvalues.length; j++) {
+					if (onlineSpecName != "") {
+						onlineSpecName += "/";
+					}
+					onlineSpecName += attrvalues[j];
+				}
+			}
+
 			_log.info("添加上线信息查询上线规格名称是否存在的参数为：{}", onlineSpecName);
 			final boolean existSelectiveResult = onlOnlineSpecSvc.existOnlineSpec(onlineSpecName, onlineId);
 			_log.info("添加上线信息查询上线规格名称是否存在的返回值为：{}", existSelectiveResult);
@@ -287,28 +299,30 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 				throw new RuntimeException("添加商品规格出错");
 			}
 			// 添加上线规格信息结束
-			// 添加上线规格属性开始
-			for (int j = 0; j < to.getAttrValues()[i].length; j++) {
-				final OnlOnlineSpecAttrMo onlineSpecAttrMo = new OnlOnlineSpecAttrMo();
-				// 上线规格属性ID
-				final Long specAttrId = _idWorker.getId();
-				// 上线规格属性名
-				final String attrName = to.getAttrNames()[j];
-				// 上线规格属性值
-				final String attrValue = to.getAttrValues()[i][j];
-				onlineSpecAttrMo.setId(specAttrId);
-				onlineSpecAttrMo.setOnlineSpecId(onlineSpecId);
-				onlineSpecAttrMo.setAttrName(attrName);
-				onlineSpecAttrMo.setAttrValue(attrValue);
-				_log.info("添加上线规格属性的参数为：{}", onlineSpecAttrMo);
-				final int addOnlineSpecAttrResult = onlOnlineSpecAttrSvc.add(onlineSpecAttrMo);
-				_log.info("添加上线规格属性的返回值为：{}", addOnlineSpecAttrResult);
-				if (addOnlineSpecAttrResult != 1) {
-					_log.error("添加上线规格属性时出错，操作人id为：{}", to.getOpId());
-					throw new RuntimeException("添加上线规格属性出错");
+			if (to.getAttrNames() != null) {
+				// 添加上线规格属性开始
+				for (int j = 0; j < to.getAttrValues()[i].length; j++) {
+					final OnlOnlineSpecAttrMo onlineSpecAttrMo = new OnlOnlineSpecAttrMo();
+					// 上线规格属性ID
+					final Long specAttrId = _idWorker.getId();
+					// 上线规格属性名
+					final String attrName = to.getAttrNames()[j];
+					// 上线规格属性值
+					final String attrValue = to.getAttrValues()[i][j];
+					onlineSpecAttrMo.setId(specAttrId);
+					onlineSpecAttrMo.setOnlineSpecId(onlineSpecId);
+					onlineSpecAttrMo.setAttrName(attrName);
+					onlineSpecAttrMo.setAttrValue(attrValue);
+					_log.info("添加上线规格属性的参数为：{}", onlineSpecAttrMo);
+					final int addOnlineSpecAttrResult = onlOnlineSpecAttrSvc.add(onlineSpecAttrMo);
+					_log.info("添加上线规格属性的返回值为：{}", addOnlineSpecAttrResult);
+					if (addOnlineSpecAttrResult != 1) {
+						_log.error("添加上线规格属性时出错，操作人id为：{}", to.getOpId());
+						throw new RuntimeException("添加上线规格属性出错");
+					}
+					// 添加上线规格属性结束
 				}
 			}
-			// 添加上线规格属性结束
 			// 添加上线规格日志信息开始
 			final OnlOnlineSpecLogMo onlineSpecLogMo = new OnlOnlineSpecLogMo();
 			onlineSpecLogMo.setOnlineLogId(onlineLogId);
@@ -628,9 +642,20 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 					: amount;
 			// 上线规格名称
 			String onlineSpecName = "";
-			String[] attrvalues = to.getAttrValues()[i];
-			for (int j = 0; j < attrvalues.length; j++) {
-				onlineSpecName += attrvalues[j] + "/";
+			if (to.getOnlineSpecs().get(i).getOnlineSpec() != ""
+					&& to.getOnlineSpecs().get(i).getOnlineSpec() != null) {
+				onlineSpecName = to.getOnlineSpecs().get(i).getOnlineSpec();
+			}
+			if (to.getAttrNames() != null) {
+				String[] oldOnlineSpec = onlineSpecName.split("/");
+				onlineSpecName =oldOnlineSpec[0];
+				String[] attrvalues = to.getAttrValues()[i];
+				for (int j = 0; j < attrvalues.length; j++) {
+					if (onlineSpecName != "") {
+						onlineSpecName += "/";
+					}
+					onlineSpecName += attrvalues[j];
+				}
 			}
 			// 修改或添加上线规格开始
 			final OnlOnlineSpecTo onlineSpecTo = new OnlOnlineSpecTo();
@@ -692,32 +717,34 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 				_log.error("重新上线添加上线规格日志信息出错，上线id为：{}", to.getOnlineId());
 				throw new RuntimeException("添加上线规格日志出错");
 			}
-			// 添加上线规格日志结束
-			// 添加上线规格属性开始
-			// 根据上线规格id删除上线规格属性
 			_log.info("删除上线规格属性的参数为：{}", onlineSpecId);
 			final int deleteByOnlineSpecIdResult = onlOnlineSpecAttrSvc.deleteByOnlineSpecId(onlineSpecId);
 			_log.info("删除上线规格属性的返回值为：{}", deleteByOnlineSpecIdResult);
-			for (int j = 0; j < to.getAttrValues()[i].length; j++) {
-				final OnlOnlineSpecAttrMo onlineSpecAttrMo = new OnlOnlineSpecAttrMo();
-				// 上线规格属性名
-				final String attrName = to.getAttrNames()[j];
-				// 上线规格属性值
-				final String attrValue = to.getAttrValues()[i][j];
+			// 添加上线规格日志结束
+			if (to.getAttrNames() != null) {
+				// 添加上线规格属性开始
+				// 根据上线规格id删除上线规格属性
+				for (int j = 0; j < to.getAttrValues()[i].length; j++) {
+					final OnlOnlineSpecAttrMo onlineSpecAttrMo = new OnlOnlineSpecAttrMo();
+					// 上线规格属性名
+					final String attrName = to.getAttrNames()[j];
+					// 上线规格属性值
+					final String attrValue = to.getAttrValues()[i][j];
 
-				onlineSpecAttrMo.setId(_idWorker.getId());
-				onlineSpecAttrMo.setOnlineSpecId(onlineSpecId);
-				onlineSpecAttrMo.setAttrName(attrName);
-				onlineSpecAttrMo.setAttrValue(attrValue);
-				_log.info("添加上线规格属性的参数为：{}", onlineSpecAttrMo);
-				final int addOnlineSpecAttrResult = onlOnlineSpecAttrSvc.add(onlineSpecAttrMo);
-				_log.info("添加上线规格属性的返回值为：{}", addOnlineSpecAttrResult);
-				if (addOnlineSpecAttrResult != 1) {
-					_log.error("添加上线规格属性时出错，操作人id为：{}", to.getOpId());
-					throw new RuntimeException("添加上线规格属性出错");
+					onlineSpecAttrMo.setId(_idWorker.getId());
+					onlineSpecAttrMo.setOnlineSpecId(onlineSpecId);
+					onlineSpecAttrMo.setAttrName(attrName);
+					onlineSpecAttrMo.setAttrValue(attrValue);
+					_log.info("添加上线规格属性的参数为：{}", onlineSpecAttrMo);
+					final int addOnlineSpecAttrResult = onlOnlineSpecAttrSvc.add(onlineSpecAttrMo);
+					_log.info("添加上线规格属性的返回值为：{}", addOnlineSpecAttrResult);
+					if (addOnlineSpecAttrResult != 1) {
+						_log.error("添加上线规格属性时出错，操作人id为：{}", to.getOpId());
+						throw new RuntimeException("添加上线规格属性出错");
+					}
 				}
+				// 添加上线规格属性结束
 			}
-			// 添加上线规格属性结束
 		}
 		// 删除上线规格开始
 		if (onlineSpecIds.length() != 0) {
