@@ -135,6 +135,8 @@ public class OnlOnlineCtrl {
         if (!isDebug) {
             currentUserId = JwtUtils.getJwtUserIdInCookie(req);
             orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
+            _log.info("从cookie中获取的组织id：{}", orgId);
+            _log.info("从cookie中获取的用户：{}", currentUserId);
         }
         final AddOnlineRo ro = new AddOnlineRo();
         if (currentUserId == null) {
