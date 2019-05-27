@@ -271,7 +271,7 @@ public class OnlOnlineCtrl {
 		final GetOnlinesRo onlinesRo = new GetOnlinesRo();
 		// 获取上线信息
 		final OnlinesRo onlOnlineRo = dozerMapper.map(svc.listByPrimaryKey(id), OnlinesRo.class);
-		if (orgId == onlOnlineRo.getDeliverOrgId()) {
+		if (orgId.equals(onlOnlineRo.getDeliverOrgId()) ) {
 			onlOnlineRo.setDeliveryType((byte) 0);
 		} else {
 			onlOnlineRo.setDeliveryType((byte) 1);
