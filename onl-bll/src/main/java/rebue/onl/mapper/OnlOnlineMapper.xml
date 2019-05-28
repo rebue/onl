@@ -471,7 +471,7 @@
       <if test="onlineTitle != null and onlineTitle != ''">
         and ONLINE_TITLE LIKE '%${onlineTitle}%'
       </if>
-      <if test="onlineState != null ">
+      <if test="onlineState != null and onlineState != '-1' ">
         and ONLINE_STATE = #{onlineState,jdbcType=TINYINT}
       </if>
        <if test=" onlineIds != null ">

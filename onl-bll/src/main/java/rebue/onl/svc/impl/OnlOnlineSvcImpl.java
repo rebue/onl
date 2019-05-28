@@ -53,13 +53,13 @@ import rebue.onl.to.SupplierGoodsTo;
 import rebue.onl.to.UpdateOnlineAfterOrderTo;
 import rebue.onl.to.UpdateOnlineSpecAfterOrderTo;
 import rebue.ord.svr.feign.OrdOrderDetailSvc;
-import rebue.prm.mo.PrmPartnerMo;
-import rebue.prm.svr.feign.PrmPartnerSvr;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
 import rebue.slr.mo.SlrShopMo;
 import rebue.slr.svr.feign.SlrShopSvc;
+import rebue.suc.ro.SucOrgRo;
+import rebue.suc.svr.feign.SucOrgSvc;
 
 /**
  * 上线信息
@@ -127,9 +127,12 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 
 	@Resource
 	private Mapper dozerMapper;
+	
 
 	@Resource
-	private PrmPartnerSvr prmPartnerSvr;
+	private SucOrgSvc sucOrgSvc;
+
+
 
 	@Resource
 	private OnlOnlinePromotionSvc onlOnlinePromotionSvc;
@@ -919,19 +922,19 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		for (final OnlOnlineMo onlOnlineMo : onlinePageInfo.getList()) {
 			final OnlOnlineListRo onlineListRo = dozerMapper.map(onlOnlineMo, OnlOnlineListRo.class);
 			if (onlOnlineMo.getSupplierId() != null) {
-				_log.info("重写查询上线信息查询伙伴信息的参数为：{}", onlOnlineMo.getSupplierId());
-				final PrmPartnerMo partnerMo = prmPartnerSvr.getOneByOrgId(onlOnlineMo.getSupplierId());
-				_log.info("重写查询上线信息查询伙伴信息的返回值为：{}", partnerMo);
-				if (partnerMo != null) {
-					onlineListRo.setSupplierName(partnerMo.getPartnerName());
+				_log.info("获取供应商名称参数为：{}", onlOnlineMo.getSupplierId());
+				final SucOrgRo sucOrgRo = sucOrgSvc.getById(onlOnlineMo.getSupplierId());
+				_log.info("获取供应商名称的返回值为：{}", sucOrgRo);
+				if (sucOrgRo.getRecord() != null && sucOrgRo.getRecord().getName() !=null) {
+					onlineListRo.setSupplierName(sucOrgRo.getRecord().getName());
 				}
 			}
 			if (onlOnlineMo.getDeliverOrgId() != null) {
-				_log.info("重写查询上线信息查询伙伴信息的参数为：{}", onlOnlineMo.getDeliverOrgId());
-				final PrmPartnerMo orgMo = prmPartnerSvr.getOneByOrgId(onlOnlineMo.getDeliverOrgId());
-				_log.info("重写查询上线信息查询伙伴信息的返回值为：{}", orgMo);
-				if (orgMo != null) {
-					onlineListRo.setDeliverOrgName(orgMo.getPartnerName());
+				_log.info("获取发货组织名称的参数为：{}", onlOnlineMo.getDeliverOrgId());
+				final SucOrgRo sucOrgRo = sucOrgSvc.getById(onlOnlineMo.getSupplierId());
+				_log.info("获取发货组织名称的返回值为：{}", sucOrgRo);
+				if (sucOrgRo.getRecord() != null && sucOrgRo.getRecord().getName() !=null) {
+					onlineListRo.setDeliverOrgName(sucOrgRo.getRecord().getName());
 				}
 			}
 			OnlOnlinePromotionMo onlinePromotionMo = new OnlOnlinePromotionMo();
