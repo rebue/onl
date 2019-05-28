@@ -127,12 +127,9 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 
 	@Resource
 	private Mapper dozerMapper;
-	
 
 	@Resource
 	private SucOrgSvc sucOrgSvc;
-
-
 
 	@Resource
 	private OnlOnlinePromotionSvc onlOnlinePromotionSvc;
@@ -245,7 +242,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			}
 			if (to.getAttrNames() != null) {
 				String[] oldOnlineSpec = onlineSpecName.split("/");
-				onlineSpecName =oldOnlineSpec[0];
+				onlineSpecName = oldOnlineSpec[0];
 				String[] attrvalues = to.getAttrValues()[i];
 				for (int j = 0; j < attrvalues.length; j++) {
 					if (onlineSpecName != "") {
@@ -526,7 +523,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			return ro;
 		}
 		// 根据上线id修改该商品的订单供应商和发货组织IsEditSupplier：0：否，1：是，2，是且修改没有结算的订单详情供应商和发货组织。
-		if (to.getIsEditSupplier() == 2) {
+		if (to.getIsEditSupplier() != null && to.getIsEditSupplier() == 2) {
 			_log.info("需要修改该商品订单详情的供应商和发货组织，IsEditSupplier-{}", to.getIsEditSupplier());
 			try {
 				_log.info("根据上线id修改订单详情供应商和发货组织参数为：getSupplierId()-{},deliverOrgId()-{},getOnlineId()-{}",
@@ -651,7 +648,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 			}
 			if (to.getAttrNames() != null) {
 				String[] oldOnlineSpec = onlineSpecName.split("/");
-				onlineSpecName =oldOnlineSpec[0];
+				onlineSpecName = oldOnlineSpec[0];
 				String[] attrvalues = to.getAttrValues()[i];
 				for (int j = 0; j < attrvalues.length; j++) {
 					if (onlineSpecName != "") {
@@ -925,7 +922,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 				_log.info("获取供应商名称参数为：{}", onlOnlineMo.getSupplierId());
 				final SucOrgRo sucOrgRo = sucOrgSvc.getById(onlOnlineMo.getSupplierId());
 				_log.info("获取供应商名称的返回值为：{}", sucOrgRo);
-				if (sucOrgRo.getRecord() != null && sucOrgRo.getRecord().getName() !=null) {
+				if (sucOrgRo.getRecord() != null && sucOrgRo.getRecord().getName() != null) {
 					onlineListRo.setSupplierName(sucOrgRo.getRecord().getName());
 				}
 			}
@@ -933,7 +930,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 				_log.info("获取发货组织名称的参数为：{}", onlOnlineMo.getDeliverOrgId());
 				final SucOrgRo sucOrgRo = sucOrgSvc.getById(onlOnlineMo.getSupplierId());
 				_log.info("获取发货组织名称的返回值为：{}", sucOrgRo);
-				if (sucOrgRo.getRecord() != null && sucOrgRo.getRecord().getName() !=null) {
+				if (sucOrgRo.getRecord() != null && sucOrgRo.getRecord().getName() != null) {
 					onlineListRo.setDeliverOrgName(sucOrgRo.getRecord().getName());
 				}
 			}
