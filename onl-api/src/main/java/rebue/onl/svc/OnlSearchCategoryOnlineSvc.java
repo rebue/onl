@@ -23,11 +23,11 @@ public interface OnlSearchCategoryOnlineSvc extends MybatisBaseSvc<OnlSearchCate
 	List<OnlOnlineTreeRo> onlineTreeList(Long searchCategoryId);
 	
 	/**
-	 * 根据上线id修改搜索分类id
+	 * 根据上线id和搜索分类id删除数据
 	 * @param record
 	 * @return
 	 */
-    int updateByOnlineId(OnlSearchCategoryOnlineMo searchCategoryOnlineMo);
+    int deleteByOnlineId(OnlSearchCategoryOnlineMo searchCategoryOnlineMo);
     
     /**
      * 根据搜索分类id集合查询符合条件搜索上线信息

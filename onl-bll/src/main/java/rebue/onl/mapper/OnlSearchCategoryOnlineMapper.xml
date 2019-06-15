@@ -170,9 +170,8 @@
     </where>
   </select>
   
-  <update id="updateByOnlineId" parameterType="rebue.onl.mo.OnlSearchCategoryOnlineMo">
-    update ONL_SEARCH_CATEGORY_ONLINE
-    set SEARCH_CATEGORY_ID = #{searchCategoryId,jdbcType=BIGINT} 
+  <update id="deleteByOnlineId" parameterType="rebue.onl.mo.OnlSearchCategoryOnlineMo">
+    delete from ONL_SEARCH_CATEGORY_ONLINE
     where ONLINE_ID = #{onlineId,jdbcType=BIGINT}
   </update>
   

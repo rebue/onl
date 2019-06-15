@@ -114,5 +114,6 @@ public class AddOnlineTo {
 	/**
 	 * 搜索分类id
 	 */
-	private Long classificationId;
+	private List<Long> classificationId;
+	
 }

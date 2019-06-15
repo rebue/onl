@@ -68,11 +68,11 @@ public interface OnlSearchCategoryOnlineMapper extends MybatisBaseMapper<OnlSear
     int countSelective(OnlSearchCategoryOnlineMo record);
     
     /**
-     * 根据上线id修改搜索分类id
+     * 根据上线id和搜索分类id删除数据
      * @param record
      * @return
      */
-    int updateByOnlineId(OnlSearchCategoryOnlineMo record);
+    int deleteByOnlineId(OnlSearchCategoryOnlineMo record);
     
     /**
      * 

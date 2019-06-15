@@ -25,6 +25,7 @@ import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.mo.OnlOnlinePicMo;
 import rebue.onl.mo.OnlOnlineSpecAttrMo;
 import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.mo.OnlSearchCategoryMo;
 import rebue.onl.mo.OnlSearchCategoryOnlineMo;
 import rebue.onl.ro.AddOnlineRo;
 import rebue.onl.ro.GetOnlinesRo;
@@ -297,10 +298,13 @@ public class OnlOnlineCtrl {
 		final OnlSearchCategoryOnlineMo searchCategoryOnlineMo =new OnlSearchCategoryOnlineMo();
 		searchCategoryOnlineMo.setOnlineId(id);
 		List<OnlSearchCategoryOnlineMo> searchCategoryOnlineResult = onlSearchCategoryOnlineSvc.list(searchCategoryOnlineMo);
-		//获取搜索分类
-		//final OnlSearchCategoryMo searchCategoryMo =new OnlSearchCategoryMo();
-		Long searchCategoryId=searchCategoryOnlineResult.get(0).getSearchCategoryId();
-		onlOnlineRo.setSearchCategoryMo(onlSearchCategorySvc.getById(searchCategoryId));
+		//获取搜索子分类信息
+		final List<OnlSearchCategoryMo> onlSearchCategoryMo  =new ArrayList<OnlSearchCategoryMo>();
+		for(OnlSearchCategoryOnlineMo searchCategoryOnline:searchCategoryOnlineResult) {
+		Long searchCategoryId=searchCategoryOnline.getSearchCategoryId();
+		onlSearchCategoryMo.add(onlSearchCategorySvc.getById(searchCategoryId));
+		}
+		onlOnlineRo.setSearchCategoryMo(onlSearchCategoryMo);
 		
 		onlinesRo.setRecord(onlOnlineRo);
 		onlinesRo.setResult((byte) 1);

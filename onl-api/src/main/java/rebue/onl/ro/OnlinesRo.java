@@ -99,5 +99,5 @@ public class OnlinesRo {
 	/**
 	 * 搜索分类
 	 */
-	private OnlSearchCategoryMo searchCategoryMo; 
+	private List<OnlSearchCategoryMo> searchCategoryMo; 
 }

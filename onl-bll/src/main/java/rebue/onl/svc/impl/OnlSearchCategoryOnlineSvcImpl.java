@@ -93,9 +93,9 @@ public class OnlSearchCategoryOnlineSvcImpl extends MybatisBaseSvcImpl<OnlSearch
     }
 
 	@Override
-	public int updateByOnlineId(OnlSearchCategoryOnlineMo searchCategoryOnlineMo) {
-		_log.info("开始根据上线id修改搜索分类id");
-		int updateByOnlineIdResult =_mapper.updateByOnlineId(searchCategoryOnlineMo);
+	public int deleteByOnlineId(OnlSearchCategoryOnlineMo searchCategoryOnlineMo) {
+		_log.info("开始根据上线id和搜索分类id删除记录");
+		int updateByOnlineIdResult =_mapper.deleteByOnlineId(searchCategoryOnlineMo);
 		return updateByOnlineIdResult;
 	}
 	

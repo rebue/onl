@@ -354,17 +354,21 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		}
 		// 添加搜索分类上线开始
 		// 搜索分类上线id
-		final Long searchCategoryOnlineId = _idWorker.getId();
-		final OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
-		onlSearchCategoryOnlineMo.setId(searchCategoryOnlineId);
-		onlSearchCategoryOnlineMo.setOnlineId(onlineId);
-		onlSearchCategoryOnlineMo.setSearchCategoryId(to.getClassificationId());
-		_log.info("添加搜索分类上线的参数为：{}", onlSearchCategoryOnlineMo);
-		final int searchCategoryOnlineResult = onlSearchCategoryOnlineSvc.add(onlSearchCategoryOnlineMo);
-		_log.info("添加搜索分类上线的返回值为：{}", searchCategoryOnlineResult);
-		if (searchCategoryOnlineResult != 1) {
-			_log.error("添加搜索分类上线时出错，用户id为：{}", to.getOpId());
-			throw new RuntimeException("添加搜索分类上线出错");
+		List<Long> classificationIds = to.getClassificationId();
+		for (Long classificationId : classificationIds) {
+			// 搜索分类上线id
+			final Long searchCategoryOnlineId = _idWorker.getId();
+			final OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
+			onlSearchCategoryOnlineMo.setId(searchCategoryOnlineId);
+			onlSearchCategoryOnlineMo.setOnlineId(onlineId);
+			onlSearchCategoryOnlineMo.setSearchCategoryId(classificationId);
+			_log.info("添加搜索分类上线的参数为：{}", onlSearchCategoryOnlineMo);
+			final int searchCategoryOnlineResult = onlSearchCategoryOnlineSvc.add(onlSearchCategoryOnlineMo);
+			_log.info("添加搜索分类上线的返回值为：{}", searchCategoryOnlineResult);
+			if (searchCategoryOnlineResult == 0) {
+				_log.error("添加搜索分类上线时出错，用户id为：{}", to.getOpId());
+				throw new RuntimeException("添加搜索分类上线出错");
+			}
 		}
 		// 添加搜索分类上线结束
 
@@ -517,7 +521,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		final ReOnlineRo ro = new ReOnlineRo();
 		if (to.getOnlineId() == null || to.getOnlineName() == null || to.getOnlineName().equals("")
 				|| to.getGoodsQsmm() == null || to.getGoodsQsmm().equals("") || to.getOnlineSpecs().size() == 0
-				|| to.getSlideshow().size() == 0 || to.getSupplierId() == null || to.getDeliverOrgId() == null) {
+				|| to.getSlideshow().size() == 0 || to.getSupplierId() == null) {
 			ro.setResult(ReOnlineDic.PARAMETER_ERROR);
 			ro.setMsg("参数错误");
 			return ro;
@@ -607,17 +611,31 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 		}
 		// 添加上线日志信息结束
 
+		// 开始删除旧的搜索分类上线
+		final OnlSearchCategoryOnlineMo deleteSearchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
+		deleteSearchCategoryOnlineMo.setOnlineId(to.getOnlineId());
+		_log.info("删除搜索分类上线的参数为：{}", deleteSearchCategoryOnlineMo);
+		final int deleteSearchCategoryOnlineResult = onlSearchCategoryOnlineSvc
+				.deleteByOnlineId(deleteSearchCategoryOnlineMo);
+		_log.info("删除搜索分类上线的返回值为：{}", deleteSearchCategoryOnlineResult);
+		// 删除旧的搜索分类上线结束
+
 		// 修改搜索分类上线开始
-		// 搜索分类上线id
-		final OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
-		onlSearchCategoryOnlineMo.setOnlineId(to.getOnlineId());
-		onlSearchCategoryOnlineMo.setSearchCategoryId(to.getClassificationId());
-		_log.info("添加搜索分类上线的参数为：{}", onlSearchCategoryOnlineMo);
-		final int searchCategoryOnlineResult = onlSearchCategoryOnlineSvc.updateByOnlineId(onlSearchCategoryOnlineMo);
-		_log.info("添加搜索分类上线的返回值为：{}", searchCategoryOnlineResult);
-		if (searchCategoryOnlineResult != 1) {
-			_log.error("添加搜索分类上线时出错，用户id为：{}", to.getOpId());
-			throw new RuntimeException("添加搜索分类上线出错");
+		List<Long> classificationIds = to.getClassificationId();
+		for (Long classificationId : classificationIds) {
+			// 搜索分类上线id
+			final Long searchCategoryOnlineId = _idWorker.getId();
+			final OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
+			onlSearchCategoryOnlineMo.setId(searchCategoryOnlineId);
+			onlSearchCategoryOnlineMo.setOnlineId(to.getOnlineId());
+			onlSearchCategoryOnlineMo.setSearchCategoryId(classificationId);
+			_log.info("添加搜索分类上线的参数为：{}", onlSearchCategoryOnlineMo);
+			final int searchCategoryOnlineResult = onlSearchCategoryOnlineSvc.add(onlSearchCategoryOnlineMo);
+			_log.info("添加搜索分类上线的返回值为：{}", searchCategoryOnlineResult);
+			if (searchCategoryOnlineResult == 0) {
+				_log.error("添加搜索分类上线时出错，用户id为：{}", to.getOpId());
+				throw new RuntimeException("添加搜索分类上线出错");
+			}
 		}
 		// 修改搜索分类上线结束
 		// 用于存放未删除的规格id
