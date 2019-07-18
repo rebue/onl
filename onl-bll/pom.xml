@@ -22,6 +22,11 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>com.github.rebue.ibr</groupId>
+			<artifactId>ibr-svr-feign</artifactId>
+		</dependency>
+		
+		<dependency>
 			<groupId>com.github.rebue.suc</groupId>
 			<artifactId>suc-svr-feign</artifactId>
 		</dependency>

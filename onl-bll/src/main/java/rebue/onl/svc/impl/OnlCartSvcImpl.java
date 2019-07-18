@@ -3,20 +3,25 @@ package rebue.onl.svc.impl;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import rebue.ibr.mo.IbrInviteRelationMo;
+import rebue.ibr.svr.feign.IbrInviteRelationSvc;
 import rebue.onl.dic.AddCartDic;
 import rebue.onl.mapper.OnlCartMapper;
 import rebue.onl.mo.OnlCartMo;
 import rebue.onl.ro.AddCartRo;
 import rebue.onl.ro.OnlCartRo;
 import rebue.onl.svc.OnlCartSvc;
-import rebue.ord.mo.OrdGoodsBuyRelationMo;
-import rebue.ord.svr.feign.OrdGoodsBuyRelationSvc;
+import rebue.ord.mo.OrdOrderDetailMo;
+import rebue.ord.svr.feign.OrdOrderDetailSvc;
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
 import rebue.suc.mo.SucUserMo;
 import rebue.suc.svr.feign.SucUserSvc;
@@ -57,14 +62,17 @@ public class OnlCartSvcImpl extends MybatisBaseSvcImpl<OnlCartMo, java.lang.Long
     private SucUserSvc sucUserSvc;
 
     @Resource
-    private OrdGoodsBuyRelationSvc ordGoodsBuyRelationSvc;
+    private OrdOrderDetailSvc ordOrderDetailSvc;
+
+    @Resource
+    private IbrInviteRelationSvc ibrInviteRelationSvc;
 
     /**
      */
     private static final Logger _log = LoggerFactory.getLogger(OnlCartSvcImpl.class);
 
     /**
-     *  根据用户编号和购物车编号删除购物车 2018年3月29日15:04:28
+     * 根据用户编号和购物车编号删除购物车 2018年3月29日15:04:28
      */
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -73,7 +81,7 @@ public class OnlCartSvcImpl extends MybatisBaseSvcImpl<OnlCartMo, java.lang.Long
     }
 
     /**
-     *  加入购物车 2018年3月30日10:03:51
+     * 加入购物车 2018年3月30日10:03:51
      */
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -120,7 +128,7 @@ public class OnlCartSvcImpl extends MybatisBaseSvcImpl<OnlCartMo, java.lang.Long
     }
 
     /**
-     *  根据用户编号查询购物车数量 2018年3月30日10:50:26
+     * 根据用户编号查询购物车数量 2018年3月30日10:50:26
      */
     @Override
     public int selectCartCount(OnlCartMo mo) {
@@ -129,11 +137,11 @@ public class OnlCartSvcImpl extends MybatisBaseSvcImpl<OnlCartMo, java.lang.Long
     }
 
     /**
-     *  获取购物车列表 Title: selectCartList Description:
+     * 获取购物车列表 Title: selectCartList Description:
      *
-     *  @param mo
-     *  @return
-     *  @date 2018年3月30日 下午1:54:09
+     * @param mo
+     * @return
+     * @date 2018年3月30日 下午1:54:09
      */
     @Override
     public List<OnlCartRo> selectCartList(OnlCartMo mo) {
@@ -145,16 +153,22 @@ public class OnlCartSvcImpl extends MybatisBaseSvcImpl<OnlCartMo, java.lang.Long
                 continue;
             }
             _log.info("购物车获取商品关系中的上家信息开始++++++++++++++++++++++++++++++");
-            OrdGoodsBuyRelationMo ogbrmo = new OrdGoodsBuyRelationMo();
-            ogbrmo.setDownlineUserId(mo.getUserId());
-            ogbrmo.setOnlineId(onlCartRo.getOnlineId());
-            _log.info("获取商品购买关系的参数为：{}", ogbrmo);
-            List<OrdGoodsBuyRelationMo> ordGoodsBuyRelationMo = ordGoodsBuyRelationSvc.ListExistRelation(ogbrmo);
-            _log.info("获取商品购买关系的结果为：{}", ordGoodsBuyRelationMo);
-            if (ordGoodsBuyRelationMo != null && ordGoodsBuyRelationMo.size() > 0) {
-                _log.info("获取商品购买关系中上家家用户信息的参数为：ordGoodsBuyRelationMo.get(0).getUplineUserId():{}", ordGoodsBuyRelationMo.get(0).getUplineUserId());
-                SucUserMo user = sucUserSvc.getById(ordGoodsBuyRelationMo.get(0).getUplineUserId());
-                _log.info("获取商品购买关系中上家家用户信息的结果为：user:{}", user);
+            _log.info("获取商品购买关系的参数为：userId-{}", mo.getUserId());
+            IbrInviteRelationMo getInviterResult = ibrInviteRelationSvc.getOne(mo.getUserId());
+            _log.info("获取商品购买关系的结果为：{}", getInviterResult);
+            if (getInviterResult != null) {
+                // 先查询是否有购买过该价格的商品,有再查询用户信息
+                _log.info("获取商品购买关系中上家是否购买过相同商品参数为：userId-{},salePrice-{}", getInviterResult.getInviterId(),
+                        onlCartRo.getSalePrice());
+                OrdOrderDetailMo getOrderDetalResult = ordOrderDetailSvc.getOneDetail(getInviterResult.getInviterId(),
+                        onlCartRo.getSalePrice());
+                _log.info("获取商品购买关系中上家是否购买过相同商品结果为：getOrderDetalResult-{}", getOrderDetalResult);
+                if (getOrderDetalResult == null) {
+                    continue;
+                }
+                _log.info("获取商品购买关系中上家用户信息的参数为：inviterId-{}", getInviterResult.getInviterId());
+                SucUserMo user = sucUserSvc.getById(getInviterResult.getInviterId());
+                _log.info("获取商品购买关系中上家用户信息的结果为：user:{}", user);
                 if (user != null) {
                     onlCartRo.setUplineWxFace(user.getWxFace());
                     onlCartRo.setUplineWxNickname(user.getWxNickname());
@@ -167,7 +181,7 @@ public class OnlCartSvcImpl extends MybatisBaseSvcImpl<OnlCartMo, java.lang.Long
     }
 
     /**
-     *  批量删除购物车 2018年4月3日15:27:40
+     * 批量删除购物车 2018年4月3日15:27:40
      */
     @Override
     public int deleteByUserIdAndCartIds(Map<String, Object> map) {
