@@ -1,6 +1,8 @@
 package rebue.onl.svc;
 
+import java.math.BigDecimal;
 import java.util.List;
+
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.to.ModifySaleCountByIdTo;
@@ -50,14 +52,14 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
      * 新销售数量 = 原销售数量 + 购买数量
      *
      * @param buyCount
-     *            购买数量
+     *                     购买数量
      * @param onlineSpecId
-     *            上线规格ID
+     *                     上线规格ID
      * @param saleCount
-     *            原销售数量
+     *                     原销售数量
      * @return 更新影响的行数，为0表示出现并发问题
      */
-    int updateSaleCount(Integer buyCount, Long onlineSpecId, Integer saleCount);
+    int updateSaleCount(BigDecimal buyCount, Long onlineSpecId, BigDecimal saleCount);
 
     /**
      * 根据上线规格id修改销售数量(减)
@@ -65,10 +67,11 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
     Ro modifySaleCountById(ModifySaleCountByIdTo to);
 
     /**
-     *  根据上线规格id修改是否已有首单
-     *  @param id
-     *  @param isHaveFirstOrder
-     *  @return
+     * 根据上线规格id修改是否已有首单
+     * 
+     * @param id
+     * @param isHaveFirstOrder
+     * @return
      */
     Ro modifyIsHaveFirstOrderById(Long id, Boolean isHaveFirstOrder);
 }

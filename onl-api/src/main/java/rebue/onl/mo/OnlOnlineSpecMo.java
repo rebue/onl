@@ -121,17 +121,17 @@ public class OnlOnlineSpecMo implements Serializable {
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private Integer currentOnlineCount;
+    private BigDecimal currentOnlineCount;
 
     /**
-     *    限制购买数量(默认为0，不限制)
-     *                每个人限制购买的数量
+     *     限制购买数量(默认为0，不限制)
+     * 每个人限制购买的数量
      *
-     *    数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
+     *     数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
      *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     *     @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private Integer limitCount;
+    private BigDecimal limitCount;
 
     /**
      *    销售数量
@@ -140,7 +140,7 @@ public class OnlOnlineSpecMo implements Serializable {
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private Integer saleCount;
+    private BigDecimal saleCount;
 
     /**
      *    排序号
@@ -414,7 +414,7 @@ public class OnlOnlineSpecMo implements Serializable {
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Integer getCurrentOnlineCount() {
+    public BigDecimal getCurrentOnlineCount() {
         return currentOnlineCount;
     }
 
@@ -425,31 +425,31 @@ public class OnlOnlineSpecMo implements Serializable {
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setCurrentOnlineCount(Integer currentOnlineCount) {
+    public void setCurrentOnlineCount(BigDecimal currentOnlineCount) {
         this.currentOnlineCount = currentOnlineCount;
     }
 
     /**
-     *    限制购买数量(默认为0，不限制)
-     *                每个人限制购买的数量
+     *     限制购买数量(默认为0，不限制)
+     * 每个人限制购买的数量
      *
-     *    数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
+     *     数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
      *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     *     @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Integer getLimitCount() {
+    public BigDecimal getLimitCount() {
         return limitCount;
     }
 
     /**
-     *    限制购买数量(默认为0，不限制)
-     *                每个人限制购买的数量
+     *     限制购买数量(默认为0，不限制)
+     * 每个人限制购买的数量
      *
-     *    数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
+     *     数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
      *
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     *     @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setLimitCount(Integer limitCount) {
+    public void setLimitCount(BigDecimal limitCount) {
         this.limitCount = limitCount;
     }
 
@@ -460,7 +460,7 @@ public class OnlOnlineSpecMo implements Serializable {
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Integer getSaleCount() {
+    public BigDecimal getSaleCount() {
         return saleCount;
     }
 
@@ -471,7 +471,7 @@ public class OnlOnlineSpecMo implements Serializable {
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setSaleCount(Integer saleCount) {
+    public void setSaleCount(BigDecimal saleCount) {
         this.saleCount = saleCount;
     }
 

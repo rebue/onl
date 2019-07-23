@@ -1,13 +1,18 @@
 package rebue.onl.svc.impl;
 
-import com.github.dozermapper.core.Mapper;
+import java.math.BigDecimal;
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.github.dozermapper.core.Mapper;
+
 import rebue.onl.mapper.OnlOnlineSpecMapper;
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
@@ -36,7 +41,8 @@ import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
  */
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 @Service
-public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, java.lang.Long, OnlOnlineSpecMapper> implements OnlOnlineSpecSvc {
+public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, java.lang.Long, OnlOnlineSpecMapper>
+        implements OnlOnlineSpecSvc {
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
@@ -167,20 +173,21 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
      * 新销售数量 = 原销售数量 + 购买数量
      *
      * @param buyCount
-     *            购买数量
+     *                     购买数量
      * @param onlineSpecId
-     *            上线规格ID
+     *                     上线规格ID
      * @param saleCount
-     *            原销售数量
+     *                     原销售数量
      * @return 更新影响的行数，为0表示出现并发问题
      */
     @Override
-    public int updateSaleCount(final Integer buyCount, final Long onlineSpecId, final Integer saleCount) {
+    public int updateSaleCount(final BigDecimal buyCount, final Long onlineSpecId, final BigDecimal saleCount) {
         return _mapper.updateSaleCount(buyCount, onlineSpecId, saleCount);
     }
 
     /**
      * 根据上线规格id修改是否已有首单
+     * 
      * @param id
      * @param isHaveFirstOrder
      * @return

@@ -1,10 +1,13 @@
 package rebue.onl.mapper;
 
+import java.math.BigDecimal;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
+
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.to.AppendOnlineSpecCountTo;
@@ -15,57 +18,57 @@ import rebue.robotech.mapper.MybatisBaseMapper;
 public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, Long> {
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     int deleteByPrimaryKey(Long id);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     int insert(OnlOnlineSpecMo record);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     int insertSelective(OnlOnlineSpecMo record);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     OnlOnlineSpecMo selectByPrimaryKey(Long id);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     int updateByPrimaryKeySelective(OnlOnlineSpecMo record);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     int updateByPrimaryKey(OnlOnlineSpecMo record);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     List<OnlOnlineSpecMo> selectAll();
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     List<OnlOnlineSpecMo> selectSelective(OnlOnlineSpecMo record);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     boolean existByPrimaryKey(Long id);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     boolean existSelective(OnlOnlineSpecMo record);
 
     /**
-     *    @mbg.generated 自动生成，如需修改，请删除本行
+     * @mbg.generated 自动生成，如需修改，请删除本行
      */
     int countSelective(OnlOnlineSpecMo record);
 
@@ -99,18 +102,20 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
      * 新销售数量 = 原销售数量 + 购买数量
      *
      * @param buyCount
-     *            购买数量
+     *                     购买数量
      * @param onlineSpecId
-     *            上线规格ID
+     *                     上线规格ID
      * @param saleCount
-     *            原销售数量
+     *                     原销售数量
      * @return
      */
     @Update("update ONL_ONLINE_SPEC set SALE_COUNT=SALE_COUNT + ${buyCount} where ID=#{onlineSpecId} and SALE_COUNT=#{saleCount}")
-    int updateSaleCount(@Param("buyCount") Integer buyCount, @Param("onlineSpecId") Long onlineSpecId, @Param("saleCount") Integer saleCount);
+    int updateSaleCount(@Param("buyCount") BigDecimal buyCount, @Param("onlineSpecId") Long onlineSpecId,
+            @Param("saleCount") BigDecimal saleCount);
 
     /**
      * 减去销量数量
+     * 
      * @return
      */
     @Update("update ONL_ONLINE_SPEC set SALE_COUNT=SALE_COUNT - ${buyCount} where ID=#{id,jdbcType=BIGINT}")
@@ -135,6 +140,7 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
 
     /**
      * 根据上线规格ID修改是否有首单
+     * 
      * @param id
      * @param isHaveFirstOrder
      * @return

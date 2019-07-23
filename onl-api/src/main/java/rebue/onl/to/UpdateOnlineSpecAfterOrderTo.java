@@ -1,5 +1,7 @@
 package rebue.onl.to;
 
+import java.math.BigDecimal;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -15,21 +17,21 @@ public class UpdateOnlineSpecAfterOrderTo {
     /**
      * 上线ID
      */
-    private Long    onlineId;
+    private Long onlineId;
 
     /**
      * 上线规格ID
      */
-    private Long    onlineSpecId;
+    private Long onlineSpecId;
 
     /**
      * 购买数量
      */
-    private Integer buyCount;
+    private BigDecimal buyCount;
 
     /**
      * 购物车ID
      */
-    private Long    cartId;
+    private Long cartId;
 
 }
