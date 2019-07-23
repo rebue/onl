@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2019/5/8 14:56:25                            */
+/* Created on:     2019/7/15 17:04:42                           */
 /*==============================================================*/
 
 
@@ -63,6 +63,8 @@ create table ONL_ONLINE
    IS_BELOW             bool not null default false comment '是否线下（如果为线下店铺时，默认不发布到平台）',
    IS_ONLINE            bool not null default true comment '是否线上',
    IS_ONLINE_PLATFORM   bool not null comment '是否上线到平台',
+   IS_WEIGH_GOODS       bool not null default false comment '是否是称重商品',
+   SHORT_NAME           varchar(20) comment '商品简称',
    primary key (ID)
 );
 
@@ -87,6 +89,8 @@ create table ONL_ONLINE_LOG
    IS_BELOW             bool not null default false comment '是否线下（如果为线下店铺时，默认不发布到平台）',
    IS_ONLINE            bool not null default true comment '是否线上',
    IS_ONLINE_PLATFORM   bool not null comment '是否上线到平台',
+   IS_WEIGH_GOODS       bool not null default false comment '是否是称重商品',
+   SHORT_NAME           varchar(20) comment '商品简称',
    primary key (ID)
 );
 
@@ -139,10 +143,10 @@ alter table ONL_ONLINE_PROMOTION comment '上线推广';
 /*==============================================================*/
 create table ONL_ONLINE_SPEC
 (
-   ID                   bigint not null comment '上线规格ID',
+   ID                   bigint not null comment '上线详情ID',
    ONLINE_ID            bigint not null comment '上线ID',
-   PRODUCT_SPEC_ID      bigint comment '产品规格ID',
-   ONLINE_SPEC          varchar(200) not null comment '上线规格名称',
+   PRODUCT_SPEC_ID      bigint comment '产品详情ID',
+   ONLINE_SPEC          varchar(200) not null comment '上线详情名称',
    SALE_PRICE           decimal(20,4) not null comment '销售价格(单价)',
    COST_PRICE           decimal(20,4) comment '成本价格',
    CASHBACK_AMOUNT      decimal(20,4) not null comment '返现金额',
@@ -150,16 +154,16 @@ create table ONL_ONLINE_SPEC
    BUY_POINT            decimal(18,4) comment '购买积分',
    FIRST_BUY_POINT      decimal(18,4) comment '首单积分',
    SALE_UNIT            varchar(50) comment '销售单位',
-   CURRENT_ONLINE_COUNT int not null comment '当前上线数量（每次追加的数量）',
-   LIMIT_COUNT          int not null default 0 comment '限制购买数量(默认为0，不限制)
+   CURRENT_ONLINE_COUNT decimal(20,4) not null comment '当前上线数量（每次追加的数量）',
+   LIMIT_COUNT          decimal(20,4) not null default 0 comment '限制购买数量(默认为0，不限制)
             每个人限制购买的数量',
-   SALE_COUNT           int not null comment '销售数量',
+   SALE_COUNT           decimal(20,4) not null comment '销售数量',
    SEQ_NO               int not null comment '排序号',
    IS_HAVE_FIRST_ORDER  bool comment '是否有首单',
    primary key (ID)
 );
 
-alter table ONL_ONLINE_SPEC comment '上线规格';
+alter table ONL_ONLINE_SPEC comment '上线详情';
 
 /*==============================================================*/
 /* Table: ONL_ONLINE_SPEC_ATTR                                  */
@@ -192,8 +196,8 @@ create table ONL_ONLINE_SPEC_LOG
    BUY_POINT            decimal(18,4) comment '购买积分',
    FIRST_BUY_POINT      decimal(18,4) comment '首单积分',
    SALE_UNIT            varchar(50) comment '销售单位',
-   CURRENT_ONLINE_COUNT int not null comment '当前上线数量（每次追加的数量）',
-   LIMIT_COUNT          int not null default 0 comment '限制购买数量(默认为0，不限制)
+   CURRENT_ONLINE_COUNT decimal(18,4) not null comment '当前上线数量（每次追加的数量）',
+   LIMIT_COUNT          decimal(18,4) not null default 0 comment '限制购买数量(默认为0，不限制)
             每个人限制购买的数量',
    SEQ_NO               int not null comment '排序号',
    IS_HAVE_FIRST_ORDER  bool comment '是否有首单',
@@ -232,7 +236,7 @@ create table ONL_SEARCH_CATEGORY
    unique key AK_SHOP_ID_AND_NAME (SHOP_ID, NAME)
 );
 
-alter table ONL_SEARCH_CATEGORY comment '搜索分类';
+alter table ONL_SEARCH_CATEGORY comment '店铺搜索分类';
 
 /*==============================================================*/
 /* Table: ONL_SEARCH_CATEGORY_ONLINE                            */
