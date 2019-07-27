@@ -20,51 +20,61 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     int deleteByPrimaryKey(Long id);
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     int insert(OnlOnlineSpecMo record);
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     int insertSelective(OnlOnlineSpecMo record);
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     OnlOnlineSpecMo selectByPrimaryKey(Long id);
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     int updateByPrimaryKeySelective(OnlOnlineSpecMo record);
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     int updateByPrimaryKey(OnlOnlineSpecMo record);
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     List<OnlOnlineSpecMo> selectAll();
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     List<OnlOnlineSpecMo> selectSelective(OnlOnlineSpecMo record);
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     boolean existByPrimaryKey(Long id);
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
+    @Override
     boolean existSelective(OnlOnlineSpecMo record);
 
     /**
@@ -102,11 +112,11 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
      * 新销售数量 = 原销售数量 + 购买数量
      *
      * @param buyCount
-     *                     购买数量
+     *            购买数量
      * @param onlineSpecId
-     *                     上线规格ID
+     *            上线规格ID
      * @param saleCount
-     *                     原销售数量
+     *            原销售数量
      * @return
      */
     @Update("update ONL_ONLINE_SPEC set SALE_COUNT=SALE_COUNT + ${buyCount} where ID=#{onlineSpecId} and SALE_COUNT=#{saleCount}")
@@ -119,7 +129,7 @@ public interface OnlOnlineSpecMapper extends MybatisBaseMapper<OnlOnlineSpecMo, 
      * @return
      */
     @Update("update ONL_ONLINE_SPEC set SALE_COUNT=SALE_COUNT - ${buyCount} where ID=#{id,jdbcType=BIGINT}")
-    int updateSaleCountBySubtract(@Param("id") Long id, @Param("buyCount") Integer buyCount);
+    int updateSaleCountBySubtract(@Param("id") Long id, @Param("buyCount") BigDecimal buyCount);
 
     /**
      * 修改上线规格信息
