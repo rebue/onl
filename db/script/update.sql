@@ -265,6 +265,8 @@ alter table ONL_ONLINE_SPEC_LOG modify column LIMIT_COUNT decimal(20,4) default 
 每个人限制购买的数量";
 
 alter table ONL_ONLINE add column IS_WEIGH_GOODS boolean default false comment "是否是称重商品";
+-- ------------------------------------------------------- 上面的已更新到线上 2019.08.13 ----------------------------------------------------
+
 
 
 	
