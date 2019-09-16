@@ -22,7 +22,7 @@ import rebue.sbs.feign.FeignConfig;
  * @version 1.0
  * @since JDK 1.8 文件名称：OnlOnlSpecSvc.java 类说明： 上线规格对内接口
  */
-@FeignClient(name = "onl-svr", configuration = FeignConfig.class)
+@FeignClient(name = "onl-svr", configuration = FeignConfig.class, contextId = "onl-svr-online-spec")
 public interface OnlOnlineSpecSvc {
 
     /**

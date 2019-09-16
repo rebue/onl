@@ -86,7 +86,7 @@ public class OnlOnlineTests {
      */
 //    @Test
     public void selectOnlineTest() throws IOException {
-        final String url  = hostUrl + "/onl/online?pageNum=" + 2 + "&pageSize=" + 1;
+        final String url  = hostUrl + "onl/online?pageNum=" + 1 + "&pageSize=" + 5;
         final String list = OkhttpUtils.get(url);
         System.out.println(list);
     }
@@ -180,9 +180,9 @@ public class OnlOnlineTests {
      * 根据上线编号获取上线详情信息
      */
 
-//    @Test
+    @Test
     public void selectOnlineGoodsDetails() throws IOException {
-        final String result = OkhttpUtils.get(hostUrl + "/onl/online/details?id=" + "454098678299361291");
+        final String result = OkhttpUtils.get(hostUrl + "/onl/online/getbyid?id=" + "616166003142950925");
         System.out.println(result);
     }
 
@@ -240,7 +240,7 @@ public class OnlOnlineTests {
         to = new UpdateOnlineAfterOrderTo();
         to.setUserId(524919076280205312L);
         specList = new ArrayList<>();
-        specTo = new UpdateOnlineSpecAfterOrderTo();
+        specTo   = new UpdateOnlineSpecAfterOrderTo();
         specTo.setOnlineId(522009343600623638L);
         specTo.setOnlineSpecId(522009343650955288L);
         specTo.setBuyCount(new BigDecimal(Integer.MAX_VALUE + ""));
@@ -255,7 +255,7 @@ public class OnlOnlineTests {
         to = new UpdateOnlineAfterOrderTo();
         to.setUserId(524919076280205312L);
         specList = new ArrayList<>();
-        specTo = new UpdateOnlineSpecAfterOrderTo();
+        specTo   = new UpdateOnlineSpecAfterOrderTo();
         specTo.setOnlineId(522009343600623638L);
         specTo.setOnlineSpecId(522009343650955288L);
         specTo.setBuyCount(new BigDecimal("3"));
@@ -278,7 +278,7 @@ public class OnlOnlineTests {
         return ro;
     }
 
-    @Test
+//    @Test
     public void listExTest() throws IOException {
         String result = OkhttpUtils.get(hostUrl + "/onl/online?pageNum=1&pageSize=10");
         System.out.println(result);
