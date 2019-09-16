@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import rebue.onl.mo.OnlOnlineSpecMo;
@@ -43,6 +45,12 @@ public interface OnlOnlineSpecSvc {
             @RequestParam("onlineSpec") String onlineSpec);
 
     /**
+     * 根据产品规格ID获取上线规格信息
+     */
+    @GetMapping(value = "/onl/onlinespec/details")
+    List<OnlOnlineSpecInfoRo> selectOnlineSpecByProductSpecId(@RequestParam("productSpecId") Long productSpecId);
+
+    /**
      * 根据上线规格id修改是否已有首单
      * 
      * @param id
@@ -52,4 +60,7 @@ public interface OnlOnlineSpecSvc {
     @PutMapping(value = "/onl/onlinespec/modifyishavefirstorder")
     Ro modifyIsHaveFirstOrderById(@RequestParam("id") Long id,
             @RequestParam("isHaveFirstOrder") Boolean isHaveFirstOrder);
+
+    @PostMapping("/onl/onlinespec")
+    Ro add(@RequestBody OnlOnlineSpecMo mo);
 }

@@ -464,14 +464,19 @@
 		LEFT JOIN ONL_ONLINE_PIC oop ON
 		oos.ONLINE_ID=oop.ONLINE_ID AND oop.PIC_TYPE=1
 		WHERE
-		<if test="onlineId != null and onlineId != '' ">
+		<if test="productSpecId != null and productSpecId != '' ">
+			 oos.PRODUCT_SPEC_ID=#{productSpecId,jdbcType=BIGINT}
+		</if>
+		
+		<if test="onlineId != null and onlineId != '' ">　　　
 			oos.ONLINE_ID=#{onlineId,jdbcType=INTEGER}
 		</if>
 		<if test="id != null and id != '' ">
 			AND oos.ID=#{id,jdbcType=BIGINT}
 		</if>
+
 		<if test="onlineSpec != null and onlineSpec != '' ">
-			AND oos.ONLINE_SPEC=#{onlineSpec,jdbcType=VARCHAR}
+			AND oos.ONLINE_SPEC=#{onlineSpec,jdbcType=VARCHAR}　　
 		</if>
 		ORDER BY oos.SEQ_NO ASC
 	</select>

@@ -1,12 +1,12 @@
 package rebue.onl.ctrl;
 
-import com.github.dozermapper.core.Mapper;
-import com.github.pagehelper.PageInfo;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.github.dozermapper.core.Mapper;
+import com.github.pagehelper.PageInfo;
+
 import rebue.onl.dic.AddOnlineDic;
 import rebue.onl.dic.ReOnlineDic;
 import rebue.onl.mo.OnlOnlineMo;
@@ -114,19 +118,20 @@ public class OnlOnlineCtrl {
 
     @Resource
     private Mapper dozerMapper;
-    
+
     @Resource
     private OnlOnlineSpecAttrSvc onlOnlineSpecAttrSvc;
 
     @Resource
     private OnlSearchCategoryOnlineSvc onlSearchCategoryOnlineSvc;
-    
+
     @Resource
     private OnlSearchCategorySvc onlSearchCategorySvc;
+
     /**
-     *  添加上线信息
+     * 添加上线信息
      *
-     *  @mbg.overrideByMethodName
+     * @mbg.overrideByMethodName
      */
     @PostMapping("/onl/online")
     AddOnlineRo add(@RequestBody final AddOnlineTo to, final HttpServletRequest req) throws Exception {
@@ -164,18 +169,20 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     *  重写查询查询商品上线信息
+     * 重写查询查询商品上线信息
      *
-     *  @param ro
-     *  @param pageNum
-     *  @param pageSize
-     *  @return
-     *  @throws ParseException
-     *  @throws NumberFormatException
-     *  @mbg.overrideByMethodName
+     * @param ro
+     * @param pageNum
+     * @param pageSize
+     * @return
+     * @throws ParseException
+     * @throws NumberFormatException
+     * @mbg.overrideByMethodName
      */
     @GetMapping("/onl/online")
-    PageInfo<OnlOnlineListRo> listEx(final OnlOnlineListRo ro, @RequestParam("pageNum") final int pageNum, @RequestParam("pageSize") final int pageSize, final HttpServletRequest req) throws NumberFormatException, ParseException {
+    PageInfo<OnlOnlineListRo> listEx(final OnlOnlineListRo ro, @RequestParam("pageNum") final int pageNum,
+            @RequestParam("pageSize") final int pageSize, final HttpServletRequest req)
+            throws NumberFormatException, ParseException {
         _log.info("list OnlOnlineListMo:" + ro + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
         if (pageSize > 50) {
             final String msg = "pageSize不能大于50";
@@ -193,12 +200,12 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     *  商品下线 Title: modify Description:
+     * 商品下线 Title: modify Description:
      *
-     *  @param vo
-     *  @return
-     *  @throws Exception
-     *  @date 2018年3月28日 下午3:14:23
+     * @param vo
+     * @return
+     * @throws Exception
+     * @date 2018年3月28日 下午3:14:23
      */
     @PutMapping("/onl/online")
     Ro offline(final OnlOnlineMo vo) throws Exception {
@@ -215,10 +222,10 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     *  获取上线商品列表 Title: selectOnlineGoodsList Description:
+     * 获取上线商品列表 Title: selectOnlineGoodsList Description:
      *
-     *  @return
-     *  @date 2018年3月29日 下午5:42:46
+     * @return
+     * @date 2018年3月29日 下午5:42:46
      */
     @SuppressWarnings("finally")
     @GetMapping("/onl/online/list")
@@ -235,11 +242,11 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     *  查询是否已上线 Title: existSelective Description:
+     * 查询是否已上线 Title: existSelective Description:
      *
-     *  @param qo
-     *  @return
-     *  @date 2018年4月10日 下午4:06:26
+     * @param qo
+     * @return
+     * @date 2018年4月10日 下午4:06:26
      */
     @GetMapping(value = "/onl/online/exist")
     @ResponseBody
@@ -253,75 +260,77 @@ public class OnlOnlineCtrl {
         return result;
     }
 
-	/**
-	 * 根据id获取上线信息、规格信息、图片信息、搜索分类信息
-	 *
-	 * @param id
-	 * @return
-	 * @throws ParseException
-	 * @throws NumberFormatException
-	 */
-	@GetMapping("/onl/online/getonlines")
-	GetOnlinesRo getOnlines(@RequestParam("id") final Long id, final HttpServletRequest req)
-			throws NumberFormatException, ParseException {
-		_log.info("根据上线id获取上线信息的参数为：{}", id);
-		Long orgId = 520874560590053376L;
-		if (!isDebug) {
-			orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
-		}
-		final GetOnlinesRo onlinesRo = new GetOnlinesRo();
-		// 获取上线信息
-		final OnlinesRo onlOnlineRo = dozerMapper.map(svc.listByPrimaryKey(id), OnlinesRo.class);
-		if (orgId.equals(onlOnlineRo.getDeliverOrgId()) ) {
-			onlOnlineRo.setDeliveryType((byte) 0);
-		} else {
-			onlOnlineRo.setDeliveryType((byte) 1);
-		}
-		// 获取规格信息
-		final OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
-		onlineSpecMo.setOnlineId(id);
-		onlOnlineRo.setOnlineSpecList(onlineSpecSvc.list(onlineSpecMo));
-		// 获取规格属性信息
-		final List<OnlOnlineSpecAttrMo> onlineSpecAttrMoList = new ArrayList<OnlOnlineSpecAttrMo>();
-		final List<OnlOnlineSpecMo> onlineSpecList = onlOnlineRo.getOnlineSpecList();
-		for (OnlOnlineSpecMo onlOnlineSpecMo : onlineSpecList) {
-			final OnlOnlineSpecAttrMo onlineSpecAttrMo = new OnlOnlineSpecAttrMo();
-			onlineSpecAttrMo.setOnlineSpecId(onlOnlineSpecMo.getId());
-			onlineSpecAttrMoList.addAll(onlOnlineSpecAttrSvc.list(onlineSpecAttrMo));
-		}
-		onlOnlineRo.setOnlOnlineSpecAttrList(onlineSpecAttrMoList);
-		// 获取图片信息
-		final OnlOnlinePicMo onlinePicMo = new OnlOnlinePicMo();
-		onlinePicMo.setOnlineId(id);
-		onlOnlineRo.setOnlinePicList(onlinePicSvc.list(onlinePicMo));
-		//获取搜索分类上线
-		final OnlSearchCategoryOnlineMo searchCategoryOnlineMo =new OnlSearchCategoryOnlineMo();
-		searchCategoryOnlineMo.setOnlineId(id);
-		List<OnlSearchCategoryOnlineMo> searchCategoryOnlineResult = onlSearchCategoryOnlineSvc.list(searchCategoryOnlineMo);
-		//获取搜索子分类信息
-		final List<OnlSearchCategoryMo> onlSearchCategoryMo  =new ArrayList<OnlSearchCategoryMo>();
-		for(OnlSearchCategoryOnlineMo searchCategoryOnline:searchCategoryOnlineResult) {
-		Long searchCategoryId=searchCategoryOnline.getSearchCategoryId();
-		onlSearchCategoryMo.add(onlSearchCategorySvc.getById(searchCategoryId));
-		}
-		onlOnlineRo.setSearchCategoryMo(onlSearchCategoryMo);
-		
-		onlinesRo.setRecord(onlOnlineRo);
-		onlinesRo.setResult((byte) 1);
-		return onlinesRo;
-	}
+    /**
+     * 根据id获取上线信息、规格信息、图片信息、搜索分类信息
+     *
+     * @param id
+     * @return
+     * @throws ParseException
+     * @throws NumberFormatException
+     */
+    @GetMapping("/onl/online/getonlines")
+    GetOnlinesRo getOnlines(@RequestParam("id") final Long id, final HttpServletRequest req)
+            throws NumberFormatException, ParseException {
+        _log.info("根据上线id获取上线信息的参数为：{}", id);
+        Long orgId = 520874560590053376L;
+        if (!isDebug) {
+            orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
+        }
+        final GetOnlinesRo onlinesRo = new GetOnlinesRo();
+        // 获取上线信息
+        final OnlinesRo onlOnlineRo = dozerMapper.map(svc.listByPrimaryKey(id), OnlinesRo.class);
+        if (orgId.equals(onlOnlineRo.getDeliverOrgId())) {
+            onlOnlineRo.setDeliveryType((byte) 0);
+        } else {
+            onlOnlineRo.setDeliveryType((byte) 1);
+        }
+        // 获取规格信息
+        final OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
+        onlineSpecMo.setOnlineId(id);
+        onlOnlineRo.setOnlineSpecList(onlineSpecSvc.list(onlineSpecMo));
+        // 获取规格属性信息
+        final List<OnlOnlineSpecAttrMo> onlineSpecAttrMoList = new ArrayList<OnlOnlineSpecAttrMo>();
+        final List<OnlOnlineSpecMo> onlineSpecList = onlOnlineRo.getOnlineSpecList();
+        for (OnlOnlineSpecMo onlOnlineSpecMo : onlineSpecList) {
+            final OnlOnlineSpecAttrMo onlineSpecAttrMo = new OnlOnlineSpecAttrMo();
+            onlineSpecAttrMo.setOnlineSpecId(onlOnlineSpecMo.getId());
+            onlineSpecAttrMoList.addAll(onlOnlineSpecAttrSvc.list(onlineSpecAttrMo));
+        }
+        onlOnlineRo.setOnlOnlineSpecAttrList(onlineSpecAttrMoList);
+        // 获取图片信息
+        final OnlOnlinePicMo onlinePicMo = new OnlOnlinePicMo();
+        onlinePicMo.setOnlineId(id);
+        onlOnlineRo.setOnlinePicList(onlinePicSvc.list(onlinePicMo));
+        // 获取搜索分类上线
+        final OnlSearchCategoryOnlineMo searchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
+        searchCategoryOnlineMo.setOnlineId(id);
+        List<OnlSearchCategoryOnlineMo> searchCategoryOnlineResult = onlSearchCategoryOnlineSvc
+                .list(searchCategoryOnlineMo);
+        // 获取搜索子分类信息
+        final List<OnlSearchCategoryMo> onlSearchCategoryMo = new ArrayList<OnlSearchCategoryMo>();
+        for (OnlSearchCategoryOnlineMo searchCategoryOnline : searchCategoryOnlineResult) {
+            Long searchCategoryId = searchCategoryOnline.getSearchCategoryId();
+            onlSearchCategoryMo.add(onlSearchCategorySvc.getById(searchCategoryId));
+        }
+        onlOnlineRo.setSearchCategoryMo(onlSearchCategoryMo);
+
+        onlinesRo.setRecord(onlOnlineRo);
+        onlinesRo.setResult((byte) 1);
+        return onlinesRo;
+    }
 
     /**
-     *  重新上线
+     * 重新上线
      *
-     *  @param to
-     *  @param req
-     *  @return
-     *  @throws ParseException
-     *  @throws NumberFormatException
+     * @param to
+     * @param req
+     * @return
+     * @throws ParseException
+     * @throws NumberFormatException
      */
     @PutMapping("/onl/online/reonline")
-    ReOnlineRo reOnline(@RequestBody final AddOnlineTo to, final HttpServletRequest req) throws NumberFormatException, ParseException {
+    ReOnlineRo reOnline(@RequestBody final AddOnlineTo to, final HttpServletRequest req)
+            throws NumberFormatException, ParseException {
         // 获取当前登录用户id
         Long currentUserId = 520469568947224576L;
         Long orgId = 520874560590053376L;
@@ -354,7 +363,7 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     *  更新上线信息(下单后)
+     * 更新上线信息(下单后)
      */
     @PutMapping(value = "/onl/online/updateonlineafterorder")
     Ro updateOnlineAfterOrder(@RequestBody final UpdateOnlineAfterOrderTo to) {
@@ -375,10 +384,12 @@ public class OnlOnlineCtrl {
     }
 
     /**
-     * 		供应商获取商品
+     * 供应商获取商品
      */
     @GetMapping("/onl/online/supplierGoods")
-    PageInfo<SupplierGoodsRo> listSupplierGoods(final SupplierGoodsTo to, @RequestParam("pageNum") final int pageNum, @RequestParam("pageSize") final int pageSize, final HttpServletRequest req) throws NumberFormatException, ParseException {
+    PageInfo<SupplierGoodsRo> listSupplierGoods(final SupplierGoodsTo to, @RequestParam("pageNum") final int pageNum,
+            @RequestParam("pageSize") final int pageSize, final HttpServletRequest req)
+            throws NumberFormatException, ParseException {
         _log.info("listSupplierGoods SupplierGoodsTo:" + to + ", pageNum = " + pageNum + ", pageSize = " + pageSize);
         if (pageSize > 50) {
             final String msg = "pageSize不能大于50";
@@ -387,5 +398,11 @@ public class OnlOnlineCtrl {
         }
         final PageInfo<SupplierGoodsRo> result = svc.supplierGoods(to, pageNum, pageSize);
         return result;
+    }
+
+    @PostMapping("/onl/online/import")
+    int importOnline(@RequestBody OnlOnlineMo mo) {
+        _log.info("导入上线信息：{}", mo);
+        return svc.add(mo);
     }
 }

@@ -2,6 +2,7 @@ package rebue.onl.svr.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,5 +44,14 @@ public interface OnlOnlineSvc {
      */
     @PutMapping(value = "/onl/online/updateonlineafterorder")
     Ro updateOnlineAfterOrder(@RequestBody UpdateOnlineAfterOrderTo to);
+
+    /**
+     * 导入上线信息
+     * 
+     * @param mo
+     * @return
+     */
+    @PostMapping("/onl/online/import")
+    int importOnline(@RequestBody OnlOnlineMo mo);
 
 }
