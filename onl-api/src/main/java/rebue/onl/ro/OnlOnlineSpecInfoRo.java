@@ -18,6 +18,11 @@ public class OnlOnlineSpecInfoRo {
 	 * 规格编号
 	 */
 	private long specId;
+	
+	/**
+	 * 上线ID
+	 */
+	private long onlineId;
 
 	/**
 	 * 上线规格

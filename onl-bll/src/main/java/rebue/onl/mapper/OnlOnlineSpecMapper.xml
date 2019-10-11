@@ -458,7 +458,7 @@
 
 	<!-- 获取上线规格详情信息 -->
 	<select id="selectOnlineSpecInfo" parameterType="rebue.onl.mo.OnlOnlineSpecMo" resultMap="OnlineSpecInfoResultMap">
-		SELECT oos.ID, oos.ONLINE_SPEC, oos.SALE_PRICE, oos.CASHBACK_AMOUNT, oos.CURRENT_ONLINE_COUNT, 
+		SELECT oos.ID,oos.ONLINE_ID ,oos.ONLINE_SPEC, oos.SALE_PRICE, oos.CASHBACK_AMOUNT, oos.CURRENT_ONLINE_COUNT, 
 		oos.SALE_COUNT, oop.PIC_PATH, oos.BUY_POINT, oos.FIRST_BUY_POINT, oos.IS_HAVE_FIRST_ORDER
 		FROM ONL_ONLINE_SPEC oos
 		LEFT JOIN ONL_ONLINE_PIC oop ON
