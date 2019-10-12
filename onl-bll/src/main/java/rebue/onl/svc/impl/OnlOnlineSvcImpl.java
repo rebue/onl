@@ -179,7 +179,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         // 是否线上
         Boolean isOnline = to.getIsBelowOnline() == 0 ? true : false;
         if (to.getIsBelowOnline() == 2) {
-            isBelow = true;
+            isBelow  = true;
             isOnline = true;
         }
         // 是否上线到平台
@@ -483,6 +483,9 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         if (updateByPrimaryKeyResullt != 1) {
             _log.error("商品下线出现错误,请求的参数为:{}", mo);
             throw new RuntimeException("下线失败");
+        } else {
+            // 将下线的上线规格从elasticSearch中移除
+            onlOnlineSpecSvc.deleteEsByOnlineId(mo.getId());
         }
         _log.info("商品下线成功,请求参数为:{}", mo);
         ro.setResult(ResultDic.SUCCESS);
@@ -557,7 +560,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         // 是否线上
         Boolean isOnline = to.getIsBelowOnline() == 0 ? true : false;
         if (to.getIsBelowOnline() == 2) {
-            isBelow = true;
+            isBelow  = true;
             isOnline = true;
         }
         // 是否上线到平台
@@ -1045,6 +1048,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                     // 这里捕获运行时，不让其抛出，避免事务回滚
                     _log.error("自动下线出现运行时异常", e);
                 }
+                // 下线后,删除elasticSearch中相应的上线规格
+                onlOnlineSpecSvc.deleteEsByOnlineId(specTo.getOnlineId());
             }
         }
         ro.setResult(ResultDic.SUCCESS);

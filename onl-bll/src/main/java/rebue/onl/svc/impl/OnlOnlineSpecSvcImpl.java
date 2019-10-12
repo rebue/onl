@@ -16,7 +16,9 @@ import com.github.dozermapper.core.Mapper;
 import rebue.onl.mapper.OnlOnlineSpecMapper;
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
+import rebue.onl.so.OnlOnlineSpecSo;
 import rebue.onl.svc.OnlCartSvc;
+import rebue.onl.svc.OnlOnlineSpecEsSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
 import rebue.onl.to.ModifySaleCountByIdTo;
@@ -55,7 +57,39 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
         if (mo.getId() == null || mo.getId() == 0) {
             mo.setId(_idWorker.getId());
         }
-        return super.add(mo);
+        final int rowCount = super.add(mo);
+        // 修改成功时修改搜索引擎中的参数
+        if (rowCount == 1) {
+            if (mo.getCurrentOnlineCount().compareTo(BigDecimal.ZERO) == 1) {
+                onlOnlineSpecEsSvc.add(dozerMapper.map(mo, OnlOnlineSpecSo.class));
+            }
+        }
+        return rowCount;
+    }
+
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public int modify(final OnlOnlineSpecMo mo) {
+        _log.info("svc.modify: mo-{}", mo);
+        final int rowCount = super.modify(mo);
+        // 修改成功时修改搜索引擎中的参数
+        if (rowCount == 1) {
+            if (mo.getCurrentOnlineCount().compareTo(BigDecimal.ZERO) == 1) {
+                onlOnlineSpecEsSvc.modify(dozerMapper.map(mo, OnlOnlineSpecSo.class));
+            }
+        }
+        return rowCount;
+    }
+
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public int del(final Long id) {
+        _log.info("svc.del: id-{}", id);
+        final int rowCount = super.del(id);
+        if (rowCount == 1) {
+            onlOnlineSpecEsSvc.del(id.toString());
+        }
+        return rowCount;
     }
 
     private static final Logger _log = LoggerFactory.getLogger(OnlOnlineSpecSvcImpl.class);
@@ -71,6 +105,9 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 
     @Resource
     private OnlOnlineSpecSvc thisSvc;
+
+    @Resource
+    private OnlOnlineSpecEsSvc onlOnlineSpecEsSvc;
 
     /**
      * 根据商品规格编号查询商品规格信息 2018年3月29日14:28:59
@@ -97,6 +134,9 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
         final int updateResult = _mapper.updateSelective(mo);
         if (updateResult < 1) {
             throw new RuntimeException("修改上线规格信息失败");
+        } else {
+            // 修改成功时修改elasticSearch中的参数
+            onlOnlineSpecEsSvc.modify(dozerMapper.map(mo, OnlOnlineSpecSo.class));
         }
         return updateResult;
     }
@@ -144,7 +184,14 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public int updateOnlineSpec(final OnlOnlineSpecTo to) {
         _log.info("修改上线规格的参数为：{}", to);
-        return _mapper.updateOnlineSpec(to);
+        int rowCount = _mapper.updateOnlineSpec(to);
+        // 修改成功时修改elasticSearch中的参数
+        if (rowCount == 1) {
+            if (to.getCurrentOnlineCount().compareTo(BigDecimal.ZERO) == 1) {
+                onlOnlineSpecEsSvc.add(dozerMapper.map(to, OnlOnlineSpecSo.class));
+            }
+        }
+        return rowCount;
     }
 
     /**
@@ -154,7 +201,14 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public int batchDeleteByIds(final String ids, final Long onlineId) {
         _log.info("根据规格id批量删除规格信息的参数为：{}, onlineId", ids);
-        return _mapper.batchDeleteByIds(ids, onlineId);
+        final int rowCount = _mapper.batchDeleteByIds(ids, onlineId);
+        if (rowCount == 1) {
+            String[] deleteIds = ids.split(",");
+            for (String id : deleteIds) {
+                onlOnlineSpecEsSvc.del(id);
+            }
+        }
+        return rowCount;
     }
 
     /**
@@ -182,7 +236,15 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
      */
     @Override
     public int updateSaleCount(final BigDecimal buyCount, final Long onlineSpecId, final BigDecimal saleCount) {
-        return _mapper.updateSaleCount(buyCount, onlineSpecId, saleCount);
+        int rowCount = _mapper.updateSaleCount(buyCount, onlineSpecId, saleCount);
+        if (rowCount != 0) {
+            OnlOnlineSpecMo mo = _mapper.selectByPrimaryKey(onlineSpecId);
+            // 当销售数量>=上线数量则删除elasticSearch中的参数
+            if (mo.getSaleCount().compareTo(mo.getCurrentOnlineCount()) != -1) {
+                onlOnlineSpecEsSvc.del(onlineSpecId.toString());
+            }
+        }
+        return rowCount;
     }
 
     /**
@@ -230,5 +292,26 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
         ro.setResult(ResultDic.SUCCESS);
         ro.setMsg("修改成功");
         return ro;
+    }
+
+    /**
+     * 根据上线id删除ElasticSearch中的上线规格
+     */
+    @Override
+    public void deleteEsByOnlineId(Long onlineId) {
+        _log.info("根据上线id删除ElasticSearch中的上线规格的参数为：onlineId-{}", onlineId);
+        OnlOnlineSpecMo mo = new OnlOnlineSpecMo();
+        mo.setOnlineId(onlineId);
+        List<OnlOnlineSpecMo> list = _mapper.selectSelective(mo);
+        _log.info("根据上线id查询上线规格的返回值为：list-{}", list);
+        for (OnlOnlineSpecMo deleteMo : list) {
+            OnlOnlineSpecSo so = onlOnlineSpecEsSvc.getById(deleteMo.getId().toString());
+            if (so == null) {
+                _log.info("ElasticSearch中没有相应的记录：deleteId-{}", deleteMo.getId());
+            } else {
+                // 删除elasticSearch中的参数
+                onlOnlineSpecEsSvc.del(deleteMo.getId().toString());
+            }
+        }
     }
 }

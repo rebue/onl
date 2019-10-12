@@ -74,4 +74,11 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
      * @return
      */
     Ro modifyIsHaveFirstOrderById(Long id, Boolean isHaveFirstOrder);
+
+    /**
+     * 根据上线id删除ElasticSearch中的上线规格
+     * 
+     * @param onlineId
+     */
+    void deleteEsByOnlineId(Long onlineId);
 }
