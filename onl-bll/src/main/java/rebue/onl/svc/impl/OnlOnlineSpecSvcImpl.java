@@ -1,6 +1,7 @@
 package rebue.onl.svc.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -23,6 +24,8 @@ import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
 import rebue.onl.to.ModifySaleCountByIdTo;
 import rebue.onl.to.OnlOnlineSpecTo;
+import rebue.prd.mo.PrdProductSpecCodeMo;
+import rebue.prd.svr.feign.PrdProductSpecCodeSvc;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
 import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
@@ -108,6 +111,9 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 
     @Resource
     private OnlOnlineSpecEsSvc onlOnlineSpecEsSvc;
+
+    @Resource
+    private PrdProductSpecCodeSvc prdProductSpecCodeSvc;
 
     /**
      * 根据商品规格编号查询商品规格信息 2018年3月29日14:28:59
@@ -313,5 +319,28 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
                 onlOnlineSpecEsSvc.del(deleteMo.getId().toString());
             }
         }
+    }
+
+    /**
+     * 根据条码获取上线规格信息
+     */
+    @Override
+    public List<OnlOnlineSpecMo> selectByCode(String code) {
+        List<OnlOnlineSpecMo> list = new ArrayList<OnlOnlineSpecMo>();
+        _log.info("根据条码获取产品规格信息的参数为：code-{}", code);
+        List<PrdProductSpecCodeMo> codeList = prdProductSpecCodeSvc.selectByCode(code);
+        _log.info("根据条码获取产品规格信息的返回值为：codeList-{}", codeList);
+        for (PrdProductSpecCodeMo specCode : codeList) {
+            OnlOnlineSpecMo mo = new OnlOnlineSpecMo();
+            mo.setProductSpecId(specCode.getProductSpecId());
+            _log.info("根据产品规格获取上线规格的参数为：mo-{}", mo);
+            List<OnlOnlineSpecMo> onlSpec = _mapper.selectSelective(mo);
+            _log.info("根据产品规格获取上线规格的返回值为：mo-{}", onlSpec);
+            if (onlSpec != null && onlSpec.size() != 0) {
+                list.addAll(onlSpec);
+            }
+        }
+        _log.info("根据条码获取上线规格信息：list-{}", list);
+        return list;
     }
 }

@@ -1,12 +1,13 @@
 package rebue.onl.ctrl;
 
-import com.github.pagehelper.PageInfo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
@@ -17,8 +18,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.github.pagehelper.PageInfo;
+
 import rebue.onl.mo.OnlOnlineSpecMo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
+import rebue.onl.svc.OnlOnlineSpecEsSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.to.ModifySaleCountByIdTo;
 import rebue.robotech.dic.ResultDic;
@@ -42,6 +47,9 @@ public class OnlOnlineSpecCtrl {
      */
     @Resource
     private OnlOnlineSpecSvc svc;
+
+    @Resource
+    private OnlOnlineSpecEsSvc esSvc;
 
     /**
      * 有唯一约束的字段名称
@@ -82,7 +90,7 @@ public class OnlOnlineSpecCtrl {
             return ro;
         } catch (RuntimeException e) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String msg = "添加失败，出现运行时异常(" + sdf.format(new Date()) + ")";
+            String           msg = "添加失败，出现运行时异常(" + sdf.format(new Date()) + ")";
             _log.error(msg + ": mo=" + mo, e);
             ro.setMsg(msg);
             ro.setResult(ResultDic.FAIL);
@@ -99,7 +107,7 @@ public class OnlOnlineSpecCtrl {
     Ro del(@RequestParam("id") java.lang.Long id) {
         _log.info("del OnlOnlineSpecMo by id: {}", id);
         int result = svc.del(id);
-        Ro ro = new Ro();
+        Ro  ro     = new Ro();
         if (result == 1) {
             String msg = "删除成功";
             _log.info("{}: id-{}", msg, id);
@@ -121,7 +129,9 @@ public class OnlOnlineSpecCtrl {
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
     @GetMapping("/onl/onlinespec")
-    PageInfo<OnlOnlineSpecMo> list(OnlOnlineSpecMo mo, @RequestParam(value = "pageNum", required = false) Integer pageNum, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+    PageInfo<OnlOnlineSpecMo> list(OnlOnlineSpecMo mo,
+            @RequestParam(value = "pageNum", required = false) Integer pageNum,
+            @RequestParam(value = "pageSize", required = false) Integer pageSize) {
         if (pageNum == null)
             pageNum = 1;
         if (pageSize == null)
@@ -149,11 +159,11 @@ public class OnlOnlineSpecCtrl {
     }
 
     /**
-     *  获取上线规格信息 Title: selectOnlineSpecInfoByOnlineId Description:
+     * 获取上线规格信息 Title: selectOnlineSpecInfoByOnlineId Description:
      *
-     *  @param record
-     *  @return
-     *  @date 2018年4月1日 下午4:29:31
+     * @param record
+     * @return
+     * @date 2018年4月1日 下午4:29:31
      */
     @GetMapping(value = "/onl/onlinespec/details")
     List<OnlOnlineSpecInfoRo> selectOnlineSpecInfo(final OnlOnlineSpecMo mo) {
@@ -162,7 +172,7 @@ public class OnlOnlineSpecCtrl {
     }
 
     /**
-     *  修改上线规格信息 Title: updateSelective Description:
+     * 修改上线规格信息 Title: updateSelective Description:
      */
     @PutMapping("/onl/onlinespec")
     Map<String, Object> modify(final OnlOnlineSpecMo mo) {
@@ -185,7 +195,7 @@ public class OnlOnlineSpecCtrl {
     }
 
     /**
-     *  根据上线规格id修改销售数量(减)
+     * 根据上线规格id修改销售数量(减)
      */
     @PutMapping(value = "/onl/onlinespec/modifysalecountbyid")
     Ro modifySaleCountById(ModifySaleCountByIdTo to) {
@@ -202,14 +212,15 @@ public class OnlOnlineSpecCtrl {
     }
 
     /**
-     *  根据上线规格id修改是否已有首单
+     * 根据上线规格id修改是否已有首单
      *
-     *  @param id
-     *  @param isHaveFirstOrder
-     *  @return
+     * @param id
+     * @param isHaveFirstOrder
+     * @return
      */
     @PutMapping(value = "/onl/onlinespec/modifyishavefirstorder")
-    Ro modifyIsHaveFirstOrderById(@RequestParam("id") Long id, @RequestParam("isHaveFirstOrder") Boolean isHaveFirstOrder) {
+    Ro modifyIsHaveFirstOrderById(@RequestParam("id") Long id,
+            @RequestParam("isHaveFirstOrder") Boolean isHaveFirstOrder) {
         _log.info("根据上线规格id修改是否已有首单的参数为：id-{}, isHaveFirstOrder-{}", id, isHaveFirstOrder);
         try {
             return svc.modifyIsHaveFirstOrderById(id, isHaveFirstOrder);
@@ -219,6 +230,34 @@ public class OnlOnlineSpecCtrl {
             ro.setResult(ResultDic.FAIL);
             ro.setMsg("出现异常");
             return ro;
+        }
+    }
+
+    /**
+     * 根据条码获取上线规格信息
+     * 
+     * @param code
+     * @return
+     */
+    @GetMapping(value = "/onl/onlinespec/select-by-code")
+    public List<OnlOnlineSpecMo> selectByCode(String code) {
+        _log.info("根据条码获取上线规格信息的参数: code-{}", code);
+        return svc.selectByCode(code);
+    }
+
+    /**
+     * 判断搜索类型
+     */
+    @GetMapping(value = "/onl-svr/onl/online-spec/search")
+    public List<OnlOnlineSpecMo> selectBySearch(@RequestParam("onlineSpec") final String onlineSpec) {
+        _log.info("搜索的参数: code-{}", onlineSpec);
+        String reg = "^[0-9]{1,6}$";
+        if (reg.matches(onlineSpec)) {
+            _log.info("商品名称为6位纯数字,搜索条码");
+            return svc.selectByCode(onlineSpec);
+        } else {
+            _log.info("商品名称不为6位纯数字,搜索商品名称");
+            return esSvc.selectByName(onlineSpec);
         }
     }
 }

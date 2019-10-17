@@ -61,6 +61,13 @@
 				<artifactId>slr-svr-feign</artifactId>
 				<version>1.1.0</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>com.github.rebue.prd</groupId>
+				<artifactId>prd-svr-feign</artifactId>
+				<version>1.1.0</version>
+			</dependency>
+			
 			<dependency>
 				<groupId>rebue.damai</groupId>
 				<artifactId>damai-pnt</artifactId>

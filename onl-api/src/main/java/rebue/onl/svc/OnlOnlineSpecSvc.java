@@ -81,4 +81,9 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
      * @param onlineId
      */
     void deleteEsByOnlineId(Long onlineId);
+
+    /**
+     * 根据条码获取上线规格信息
+     */
+    List<OnlOnlineSpecMo> selectByCode(String code);
 }

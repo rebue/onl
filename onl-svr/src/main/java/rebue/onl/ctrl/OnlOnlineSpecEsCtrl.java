@@ -39,9 +39,9 @@ public class OnlOnlineSpecEsCtrl {
     /**
      * 根据上线名称获取上线规格
      */
-    @GetMapping("/prd/online-spec-es/select-by-name")
-    List<OnlOnlineSpecMo> selectByName(@RequestParam final String name) {
-        _log.info("PrdProductSpecEsCtrl.getById:{}", name);
-        return svc.selectByName(name);
+    @GetMapping("/onl/online-spec-es/select-by-name")
+    List<OnlOnlineSpecMo> selectByName(@RequestParam("onlineSpec") final String onlineSpec) {
+        _log.info("PrdProductSpecEsCtrl.getById:{}", onlineSpec);
+        return svc.selectByName(onlineSpec);
     }
 }

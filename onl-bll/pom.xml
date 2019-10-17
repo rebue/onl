@@ -42,6 +42,11 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>com.github.rebue.prd</groupId>
+			<artifactId>prd-svr-feign</artifactId>
+		</dependency>
+		
+		<dependency>
 			<groupId>rebue.damai</groupId>
 			<artifactId>damai-pnt</artifactId>
 		</dependency>

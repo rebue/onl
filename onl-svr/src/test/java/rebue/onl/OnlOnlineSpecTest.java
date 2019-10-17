@@ -29,7 +29,7 @@ public class OnlOnlineSpecTest {
 
     @Test
     public void test() throws IOException {
-        final String result = OkhttpUtils.get(hostUrl + "/prd/online-spec-es/select-by-name?name=kekou");
+        final String result = OkhttpUtils.get(hostUrl + "/onl/online-spec-es/select-by-name?name=bs");
         System.out.println(result);
     }
 }
