@@ -248,7 +248,7 @@ public class OnlOnlineSpecCtrl {
     /**
      * 判断搜索类型
      */
-    @GetMapping(value = "/onl-svr/onl/online-spec/search")
+    @GetMapping(value = "/onl/online-spec/search")
     public List<OnlOnlineSpecMo> selectBySearch(@RequestParam("onlineSpec") final String onlineSpec) {
         _log.info("搜索的参数: code-{}", onlineSpec);
         String reg = "^\\d{6}$";
