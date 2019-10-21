@@ -251,8 +251,8 @@ public class OnlOnlineSpecCtrl {
     @GetMapping(value = "/onl-svr/onl/online-spec/search")
     public List<OnlOnlineSpecMo> selectBySearch(@RequestParam("onlineSpec") final String onlineSpec) {
         _log.info("搜索的参数: code-{}", onlineSpec);
-        String reg = "^[0-9]{1,6}$";
-        if (reg.matches(onlineSpec)) {
+        String reg = "^\\d{6}$";
+        if (onlineSpec.matches(reg)) {
             _log.info("商品名称为6位纯数字,搜索条码");
             return svc.selectByCode(onlineSpec);
         } else {
