@@ -295,6 +295,10 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlineSpecMo.setFirstBuyPoint(firstOrderPoint);
             onlineSpecMo.setSeqNo(i);
             onlineSpecMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
+
+            if (onlineSpecMo.getLimitCount() == null) {
+                onlineSpecMo.setLimitCount(BigDecimal.ZERO);
+            }
             _log.info("添加上线信息添加上线规格信息的参数为：{}", onlineSpecMo);
             final int addOnlineSpecResult = onlOnlineSpecSvc.add(onlineSpecMo);
             _log.info("添加上线信息添加上线规格信息的返回值为：{}", addOnlineSpecResult);
@@ -698,6 +702,10 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlineSpecTo.setFirstBuyPoint(firstOrderPoint);
             onlineSpecTo.setCashbackAmount(cashbackAmount);
             Long onlineSpecId = _idWorker.getId();
+
+            if (onlineSpecTo.getLimitCount() == null) {
+                onlineSpecTo.setLimitCount(BigDecimal.ZERO);
+            }
             // 如果规格id的长度大于13位的话说明该规格属于已上线的规格
             if (to.getOnlineSpecs().get(i).getId().toString().length() > 13) {
                 onlineSpecId = to.getOnlineSpecs().get(i).getId();
