@@ -20,6 +20,11 @@ public class OnlOnlineSpecTo {
     private Long id;
 
     /**
+     * 产品详情id
+     */
+    private Long productSpecId;
+
+    /**
      * 上线ID
      *
      * 数据库字段: ONL_ONLINE_SPEC.ONLINE_ID
@@ -142,4 +147,5 @@ public class OnlOnlineSpecTo {
      * 首单积分
      */
     private BigDecimal firstBuyPoint;
+
 }

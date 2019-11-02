@@ -80,7 +80,7 @@ public class OnlOnlineCtrl {
     Ro del(@RequestParam("id") java.lang.Long id) {
         _log.info("del OnlOnlineMo by id: {}", id);
         int result = svc.del(id);
-        Ro ro = new Ro();
+        Ro  ro     = new Ro();
         if (result == 1) {
             String msg = "删除成功";
             _log.info("{}: id-{}", msg, id);
@@ -137,10 +137,10 @@ public class OnlOnlineCtrl {
     AddOnlineRo add(@RequestBody final AddOnlineTo to, final HttpServletRequest req) throws Exception {
         // 获取当前登录用户id
         Long currentUserId = 520469568947224576L;
-        Long orgId = 520874560590053376L;
+        Long orgId         = 520874560590053376L;
         if (!isDebug) {
             currentUserId = JwtUtils.getJwtUserIdInCookie(req);
-            orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
+            orgId         = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
             _log.info("从cookie中获取的组织id：{}", orgId);
             _log.info("从cookie中获取的用户：{}", currentUserId);
         }
@@ -157,6 +157,7 @@ public class OnlOnlineCtrl {
         }
         to.setOpId(currentUserId);
         to.setOnlineOrgId(orgId);
+        to.setIsPos((byte) 0);
         _log.info("添加上线信息的参数为：{}", to);
         try {
             return svc.addOnline(to);
@@ -290,7 +291,7 @@ public class OnlOnlineCtrl {
         onlOnlineRo.setOnlineSpecList(onlineSpecSvc.list(onlineSpecMo));
         // 获取规格属性信息
         final List<OnlOnlineSpecAttrMo> onlineSpecAttrMoList = new ArrayList<OnlOnlineSpecAttrMo>();
-        final List<OnlOnlineSpecMo> onlineSpecList = onlOnlineRo.getOnlineSpecList();
+        final List<OnlOnlineSpecMo>     onlineSpecList       = onlOnlineRo.getOnlineSpecList();
         for (OnlOnlineSpecMo onlOnlineSpecMo : onlineSpecList) {
             final OnlOnlineSpecAttrMo onlineSpecAttrMo = new OnlOnlineSpecAttrMo();
             onlineSpecAttrMo.setOnlineSpecId(onlOnlineSpecMo.getId());
@@ -333,10 +334,10 @@ public class OnlOnlineCtrl {
             throws NumberFormatException, ParseException {
         // 获取当前登录用户id
         Long currentUserId = 520469568947224576L;
-        Long orgId = 520874560590053376L;
+        Long orgId         = 520874560590053376L;
         if (!isDebug) {
             currentUserId = JwtUtils.getJwtUserIdInCookie(req);
-            orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
+            orgId         = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
         }
         to.setOpId(currentUserId);
         final ReOnlineRo ro = new ReOnlineRo();
@@ -404,5 +405,26 @@ public class OnlOnlineCtrl {
     int importOnline(@RequestBody OnlOnlineMo mo) {
         _log.info("导入上线信息：{}", mo);
         return svc.add(mo);
+    }
+
+    /**
+     * 商超收银系统上线
+     * 
+     * @param to
+     * @return
+     */
+    @PostMapping("/onl/online/online-to-pos")
+    AddOnlineRo onlineToPos(@RequestBody final AddOnlineTo to) {
+        to.setIsPos((byte) 1);
+        _log.info("开始商超收银系统上线：{}", to);
+        final AddOnlineRo ro = new AddOnlineRo();
+        try {
+            return svc.addOnline(to);
+        } catch (final RuntimeException e) {
+            final String msg = e.getMessage();
+            ro.setMsg(msg);
+            ro.setResult(AddOnlineDic.ERROR);
+            return ro;
+        }
     }
 }

@@ -33,6 +33,18 @@ public class OnlOnlineSpecSo extends So implements Serializable {
     private String onlineSpec;
 
     /**
+     * 产品ID
+     *
+     */
+    private Long producId;
+
+    /**
+     * 产品规格ID
+     *
+     */
+    private String producSpecId;
+
+    /**
      * 销售价格(单价)
      *
      */

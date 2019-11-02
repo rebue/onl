@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import rebue.onl.mo.OnlOnlineMo;
+import rebue.onl.ro.AddOnlineRo;
+import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.UpdateOnlineAfterOrderTo;
 import rebue.robotech.ro.Ro;
 import rebue.sbs.feign.FeignConfig;
@@ -53,5 +55,14 @@ public interface OnlOnlineSvc {
      */
     @PostMapping("/onl/online/import")
     int importOnline(@RequestBody OnlOnlineMo mo);
+
+    /**
+     * 商超收银系统上线
+     * 
+     * @param to
+     * @return
+     */
+    @PostMapping("/onl/online/online-to-pos")
+    AddOnlineRo onlineToPos(@RequestBody final AddOnlineTo to);
 
 }

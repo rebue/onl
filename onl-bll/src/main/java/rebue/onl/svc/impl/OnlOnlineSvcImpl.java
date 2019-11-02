@@ -38,12 +38,14 @@ import rebue.onl.ro.OnlOnlineListRo;
 import rebue.onl.ro.OnlOnlineTreeRo;
 import rebue.onl.ro.ReOnlineRo;
 import rebue.onl.ro.SupplierGoodsRo;
+import rebue.onl.so.OnlOnlineSpecSo;
 import rebue.onl.svc.OnlCartSvc;
 import rebue.onl.svc.OnlOnlineLogSvc;
 import rebue.onl.svc.OnlOnlinePicLogSvc;
 import rebue.onl.svc.OnlOnlinePicSvc;
 import rebue.onl.svc.OnlOnlinePromotionSvc;
 import rebue.onl.svc.OnlOnlineSpecAttrSvc;
+import rebue.onl.svc.OnlOnlineSpecEsSvc;
 import rebue.onl.svc.OnlOnlineSpecLogSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
@@ -149,6 +151,9 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 
     @Resource
     private SlrShopSvc slrShopSvc;
+
+    @Resource
+    private OnlOnlineSpecEsSvc onlOnlineSpecEsSvc;
 
     /**
      * 添加上线信息
@@ -295,7 +300,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlineSpecMo.setFirstBuyPoint(firstOrderPoint);
             onlineSpecMo.setSeqNo(i);
             onlineSpecMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
-
+            onlineSpecMo.setProductSpecId(to.getOnlineSpecs().get(i).getProductSpecId());// 添加产品规格id
             if (onlineSpecMo.getLimitCount() == null) {
                 onlineSpecMo.setLimitCount(BigDecimal.ZERO);
             }
@@ -305,6 +310,14 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             if (addOnlineSpecResult != 1) {
                 _log.error("添加上线信息添加上线规格信息时出错，用户id为：{}", to.getOpId());
                 throw new RuntimeException("添加商品规格出错");
+            } else {
+                // TODO 添加到搜索引擎
+                if (to.getIsPos() == 1) {
+                    OnlOnlineSpecSo so = dozerMapper.map(onlineSpecMo, OnlOnlineSpecSo.class);
+                    so.setProducId(to.getProductId());
+                    so.setProducSpecId(to.getOnlineSpecs().get(i).getProductSpecId().toString());
+                    onlOnlineSpecEsSvc.add(so);
+                }
             }
             // 添加上线规格信息结束
             if (to.getAttrNames() != null) {
@@ -711,12 +724,21 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                 onlineSpecId = to.getOnlineSpecs().get(i).getId();
                 onlineSpecTo.setId(onlineSpecId);
                 onlineSpecTo.setAlreadyOnlineTotal(to.getOnlineSpecs().get(i).getOnlineTotal());
+                onlineSpecTo.setProductSpecId(to.getOnlineSpecs().get(i).getProductSpecId());
                 _log.info("重新上线修改上线规格信息的参数为：{}", onlineSpecTo);
                 final int updateOnlineSpecResult = onlOnlineSpecSvc.updateOnlineSpec(onlineSpecTo);
                 _log.info("重新上线修改上线规格信息的返回值为：{}", updateOnlineSpecResult);
                 if (updateOnlineSpecResult != 1) {
                     _log.error("重新上线修改上线规格信息出错，上线id为：{}", to.getOnlineId());
                     throw new RuntimeException("修改上线规格出错");
+                } else {
+                    // TODO
+                    if (onlineSpecTo.getProductSpecId() != null) {
+                        OnlOnlineSpecSo so = dozerMapper.map(onlineSpecTo, OnlOnlineSpecSo.class);
+                        so.setProducId(to.getProductId());
+                        so.setProducSpecId(to.getOnlineSpecs().get(i).getProductSpecId().toString());
+                        onlOnlineSpecEsSvc.add(so);
+                    }
                 }
             } else {
                 _log.info("添加上线信息查询上线规格名称是否存在的参数为：{}", onlineSpecName);
@@ -1056,8 +1078,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                     // 这里捕获运行时，不让其抛出，避免事务回滚
                     _log.error("自动下线出现运行时异常", e);
                 }
-                // 下线后,删除elasticSearch中相应的上线规格
-                onlOnlineSpecSvc.deleteEsByOnlineId(specTo.getOnlineId());
+                // 上线数量都<=销售数量,删除elasticSearch中相应的上线规格
+                onlOnlineSpecEsSvc.del(onlineSpecMo.getId().toString());
             }
         }
         ro.setResult(ResultDic.SUCCESS);
