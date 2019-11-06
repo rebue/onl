@@ -109,4 +109,7 @@ public interface OnlOnlineMapper extends MybatisBaseMapper<OnlOnlineMo, Long> {
      * @return
      */
     List<OnlOnlineMo> selectOnlineInfo(SelectOnlineTo to);
+    
+    
+    OnlOnlineMo  selectOne(OnlOnlineMo mo);
 }

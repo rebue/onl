@@ -25,6 +25,7 @@ import com.github.pagehelper.PageInfo;
 
 import rebue.onl.dic.AddOnlineDic;
 import rebue.onl.dic.ReOnlineDic;
+import rebue.onl.mapper.OnlOnlineMapper;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.mo.OnlOnlinePicMo;
 import rebue.onl.mo.OnlOnlineSpecAttrMo;
@@ -127,6 +128,11 @@ public class OnlOnlineCtrl {
 
     @Resource
     private OnlSearchCategorySvc onlSearchCategorySvc;
+    
+    
+    @Resource
+    private OnlOnlineMapper onlOnlineMapper;
+    
 
     /**
      * 添加上线信息
@@ -280,10 +286,10 @@ public class OnlOnlineCtrl {
         final GetOnlinesRo onlinesRo = new GetOnlinesRo();
         // 获取上线信息
         final OnlOnlineMo onlinesResult = svc.listByPrimaryKey(id);
-        _log.info("获取上线信息的返回值onlinesResult-{}",onlinesResult);
+        _log.info("获取上线信息的返回值onlinesResult-{}", onlinesResult);
         if (onlinesResult != null) {
             final OnlinesRo onlOnlineRo = dozerMapper.map(onlinesResult, OnlinesRo.class);
-          
+
             if (orgId.equals(onlOnlineRo.getDeliverOrgId())) {
                 onlOnlineRo.setDeliveryType((byte) 0);
             } else {
@@ -322,7 +328,7 @@ public class OnlOnlineCtrl {
             onlinesRo.setRecord(onlOnlineRo);
             onlinesRo.setResult((byte) 1);
         }
-        _log.info("获取上线信息的最终返回值-{}",onlinesRo);
+        _log.info("获取上线信息的最终返回值-{}", onlinesRo);
 
         return onlinesRo;
     }
@@ -433,5 +439,11 @@ public class OnlOnlineCtrl {
             ro.setResult(AddOnlineDic.ERROR);
             return ro;
         }
+    }
+
+    @GetMapping("/onl/online/get-one")
+    int getOneInfo(OnlOnlineMo mo) {
+        _log.info("获取单个上线信息参数-{}", mo);
+        return onlOnlineMapper.countSelective(mo);
     }
 }
