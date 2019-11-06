@@ -504,10 +504,15 @@ public class OnlOnlineMo implements Serializable {
         this.onlineId = onlineId;
     }
 
-    /**
-     */
     @Override
     public String toString() {
-        return "OnlOnlineMo [id=" + id + ", onlineTitle=" + onlineTitle + ", onlineDetail=" + onlineDetail + ", onlineState=" + onlineState + ", onlineTime=" + onlineTime + ", onlineId=" + onlineId + "]";
+        return "OnlOnlineMo [id=" + id + ", subjectType=" + subjectType + ", onlineTitle=" + onlineTitle
+                + ", onlineDetail=" + onlineDetail + ", onlineOrgId=" + onlineOrgId + ", supplierId=" + supplierId
+                + ", deliverOrgId=" + deliverOrgId + ", opId=" + opId + ", onlineState=" + onlineState + ", onlineTime="
+                + onlineTime + ", productId=" + productId + ", isBelow=" + isBelow + ", isOnlinePlatform="
+                + isOnlinePlatform + ", isOnline=" + isOnline + ", onlineId=" + onlineId + "]";
     }
+    
+    
+ 
 }

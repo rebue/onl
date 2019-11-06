@@ -80,7 +80,7 @@ public class OnlOnlineCtrl {
     Ro del(@RequestParam("id") java.lang.Long id) {
         _log.info("del OnlOnlineMo by id: {}", id);
         int result = svc.del(id);
-        Ro  ro     = new Ro();
+        Ro ro = new Ro();
         if (result == 1) {
             String msg = "删除成功";
             _log.info("{}: id-{}", msg, id);
@@ -137,10 +137,10 @@ public class OnlOnlineCtrl {
     AddOnlineRo add(@RequestBody final AddOnlineTo to, final HttpServletRequest req) throws Exception {
         // 获取当前登录用户id
         Long currentUserId = 520469568947224576L;
-        Long orgId         = 520874560590053376L;
+        Long orgId = 520874560590053376L;
         if (!isDebug) {
             currentUserId = JwtUtils.getJwtUserIdInCookie(req);
-            orgId         = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
+            orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
             _log.info("从cookie中获取的组织id：{}", orgId);
             _log.info("从cookie中获取的用户：{}", currentUserId);
         }
@@ -279,44 +279,51 @@ public class OnlOnlineCtrl {
         }
         final GetOnlinesRo onlinesRo = new GetOnlinesRo();
         // 获取上线信息
-        final OnlinesRo onlOnlineRo = dozerMapper.map(svc.listByPrimaryKey(id), OnlinesRo.class);
-        if (orgId.equals(onlOnlineRo.getDeliverOrgId())) {
-            onlOnlineRo.setDeliveryType((byte) 0);
-        } else {
-            onlOnlineRo.setDeliveryType((byte) 1);
-        }
-        // 获取规格信息
-        final OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
-        onlineSpecMo.setOnlineId(id);
-        onlOnlineRo.setOnlineSpecList(onlineSpecSvc.list(onlineSpecMo));
-        // 获取规格属性信息
-        final List<OnlOnlineSpecAttrMo> onlineSpecAttrMoList = new ArrayList<OnlOnlineSpecAttrMo>();
-        final List<OnlOnlineSpecMo>     onlineSpecList       = onlOnlineRo.getOnlineSpecList();
-        for (OnlOnlineSpecMo onlOnlineSpecMo : onlineSpecList) {
-            final OnlOnlineSpecAttrMo onlineSpecAttrMo = new OnlOnlineSpecAttrMo();
-            onlineSpecAttrMo.setOnlineSpecId(onlOnlineSpecMo.getId());
-            onlineSpecAttrMoList.addAll(onlOnlineSpecAttrSvc.list(onlineSpecAttrMo));
-        }
-        onlOnlineRo.setOnlOnlineSpecAttrList(onlineSpecAttrMoList);
-        // 获取图片信息
-        final OnlOnlinePicMo onlinePicMo = new OnlOnlinePicMo();
-        onlinePicMo.setOnlineId(id);
-        onlOnlineRo.setOnlinePicList(onlinePicSvc.list(onlinePicMo));
-        // 获取搜索分类上线
-        final OnlSearchCategoryOnlineMo searchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
-        searchCategoryOnlineMo.setOnlineId(id);
-        List<OnlSearchCategoryOnlineMo> searchCategoryOnlineResult = onlSearchCategoryOnlineSvc
-                .list(searchCategoryOnlineMo);
-        // 获取搜索子分类信息
-        final List<OnlSearchCategoryMo> onlSearchCategoryMo = new ArrayList<OnlSearchCategoryMo>();
-        for (OnlSearchCategoryOnlineMo searchCategoryOnline : searchCategoryOnlineResult) {
-            Long searchCategoryId = searchCategoryOnline.getSearchCategoryId();
-            onlSearchCategoryMo.add(onlSearchCategorySvc.getById(searchCategoryId));
-        }
-        onlOnlineRo.setSearchCategoryMo(onlSearchCategoryMo);
+        final OnlOnlineMo onlinesResult = svc.listByPrimaryKey(id);
+        _log.info("获取上线信息的返回值onlinesResult-{}",onlinesResult);
+        if (onlinesResult != null) {
+            final OnlinesRo onlOnlineRo = dozerMapper.map(onlinesResult, OnlinesRo.class);
+          
+            if (orgId.equals(onlOnlineRo.getDeliverOrgId())) {
+                onlOnlineRo.setDeliveryType((byte) 0);
+            } else {
+                onlOnlineRo.setDeliveryType((byte) 1);
+            }
+            // 获取规格信息
+            final OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
+            onlineSpecMo.setOnlineId(id);
+            onlOnlineRo.setOnlineSpecList(onlineSpecSvc.list(onlineSpecMo));
+            // 获取规格属性信息
+            final List<OnlOnlineSpecAttrMo> onlineSpecAttrMoList = new ArrayList<OnlOnlineSpecAttrMo>();
+            final List<OnlOnlineSpecMo> onlineSpecList = onlOnlineRo.getOnlineSpecList();
+            for (OnlOnlineSpecMo onlOnlineSpecMo : onlineSpecList) {
+                final OnlOnlineSpecAttrMo onlineSpecAttrMo = new OnlOnlineSpecAttrMo();
+                onlineSpecAttrMo.setOnlineSpecId(onlOnlineSpecMo.getId());
+                onlineSpecAttrMoList.addAll(onlOnlineSpecAttrSvc.list(onlineSpecAttrMo));
+            }
+            onlOnlineRo.setOnlOnlineSpecAttrList(onlineSpecAttrMoList);
+            // 获取图片信息
+            final OnlOnlinePicMo onlinePicMo = new OnlOnlinePicMo();
+            onlinePicMo.setOnlineId(id);
+            onlOnlineRo.setOnlinePicList(onlinePicSvc.list(onlinePicMo));
+            // 获取搜索分类上线
+            final OnlSearchCategoryOnlineMo searchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
+            searchCategoryOnlineMo.setOnlineId(id);
+            List<OnlSearchCategoryOnlineMo> searchCategoryOnlineResult = onlSearchCategoryOnlineSvc
+                    .list(searchCategoryOnlineMo);
+            // 获取搜索子分类信息
+            final List<OnlSearchCategoryMo> onlSearchCategoryMo = new ArrayList<OnlSearchCategoryMo>();
+            for (OnlSearchCategoryOnlineMo searchCategoryOnline : searchCategoryOnlineResult) {
+                Long searchCategoryId = searchCategoryOnline.getSearchCategoryId();
+                onlSearchCategoryMo.add(onlSearchCategorySvc.getById(searchCategoryId));
+            }
+            onlOnlineRo.setSearchCategoryMo(onlSearchCategoryMo);
 
-        onlinesRo.setRecord(onlOnlineRo);
-        onlinesRo.setResult((byte) 1);
+            onlinesRo.setRecord(onlOnlineRo);
+            onlinesRo.setResult((byte) 1);
+        }
+        _log.info("获取上线信息的最终返回值-{}",onlinesRo);
+
         return onlinesRo;
     }
 
@@ -334,10 +341,10 @@ public class OnlOnlineCtrl {
             throws NumberFormatException, ParseException {
         // 获取当前登录用户id
         Long currentUserId = 520469568947224576L;
-        Long orgId         = 520874560590053376L;
+        Long orgId = 520874560590053376L;
         if (!isDebug) {
             currentUserId = JwtUtils.getJwtUserIdInCookie(req);
-            orgId         = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
+            orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
         }
         to.setOpId(currentUserId);
         final ReOnlineRo ro = new ReOnlineRo();

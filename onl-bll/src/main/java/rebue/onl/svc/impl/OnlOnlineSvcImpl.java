@@ -89,7 +89,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public int add(OnlOnlineMo mo) {
-        _log.info("添加上线信息");
+        _log.info("添加上线信息-{}",mo);
         // 如果id为空那么自动生成分布式id
         if (mo.getId() == null || mo.getId() == 0) {
             mo.setId(_idWorker.getId());
@@ -311,12 +311,16 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                 _log.error("添加上线信息添加上线规格信息时出错，用户id为：{}", to.getOpId());
                 throw new RuntimeException("添加商品规格出错");
             } else {
+                
                 // TODO 添加到搜索引擎
                 if (to.getIsPos() == 1) {
+                    _log.info("开始添加到搜索引擎onlineSpecMo-{}",onlineSpecMo);  
                     OnlOnlineSpecSo so = dozerMapper.map(onlineSpecMo, OnlOnlineSpecSo.class);
                     so.setProducId(to.getProductId());
                     so.setProducSpecId(to.getOnlineSpecs().get(i).getProductSpecId().toString());
+                    _log.info("添加搜索引擎参数-{}",so); 
                     onlOnlineSpecEsSvc.add(so);
+                    _log.info("添加搜索引擎结束");
                 }
             }
             // 添加上线规格信息结束
