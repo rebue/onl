@@ -63,4 +63,9 @@ public interface OnlOnlineSpecSvc {
 
     @PostMapping("/onl/onlinespec")
     Ro add(@RequestBody OnlOnlineSpecMo mo);
+    
+    
+    
+    @GetMapping(value = "/onl/online-spec/list")
+    public List<OnlOnlineSpecMo> selectOnlineSpec(@RequestParam("productSpecId") Long productSpecId);
 }

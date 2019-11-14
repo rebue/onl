@@ -260,4 +260,15 @@ public class OnlOnlineSpecCtrl {
             return esSvc.selectByName(onlineSpec);
         }
     }
+    
+    
+    /**
+     * 判断搜索类型
+     */
+    @GetMapping(value = "/onl/online-spec/list")
+    public List<OnlOnlineSpecMo> selectOnlineSpec(final OnlOnlineSpecMo mo) {
+        _log.info("扫码的参数: code-{}", mo);
+       return svc.list(mo);
+    }
+    
 }
