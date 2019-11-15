@@ -202,4 +202,15 @@ public class OnlSearchCategoryCtrl {
 		_log.info("根据店铺id获取搜索分类树的参数为：{}", shopId);
 		return svc.searchCategoryTreeList(shopId);
 	}
+	
+	
+	/**
+     * 添加搜索分类
+     *
+     */
+    @PostMapping("/onl/addSearchCategory")
+    int addSearchCategory(@RequestBody OnlSearchCategoryMo mo) throws Exception {
+        _log.info("添加搜索分类 OnlSearchCategoryMo: {}", mo);
+        return svc.add(mo);
+    }
 }
