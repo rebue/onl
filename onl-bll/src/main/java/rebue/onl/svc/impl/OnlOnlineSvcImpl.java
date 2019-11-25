@@ -987,7 +987,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             }
             if (onlOnlineMo.getDeliverOrgId() != null) {
                 _log.info("获取发货组织名称的参数为：{}", onlOnlineMo.getDeliverOrgId());
-                final SucOrgRo sucOrgRo = sucOrgSvc.getById(onlOnlineMo.getSupplierId());
+                final SucOrgRo sucOrgRo = sucOrgSvc.getById(onlOnlineMo.getDeliverOrgId());
                 _log.info("获取发货组织名称的返回值为：{}", sucOrgRo);
                 if (sucOrgRo.getRecord() != null && sucOrgRo.getRecord().getName() != null) {
                     onlineListRo.setDeliverOrgName(sucOrgRo.getRecord().getName());
