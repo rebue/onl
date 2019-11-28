@@ -91,9 +91,7 @@ public interface OnlOnlineMapper extends MybatisBaseMapper<OnlOnlineMo, Long> {
     "        COUNT(*) AS INVENTORY_COUNT" + // 
     "    FROM" + // 
     "        ONL_ONLINE_SPEC c" + // 
-    "    WHERE" + // 
-    "        c.ONLINE_ID = #{onlineId}" + // 
-    "            AND c.CURRENT_ONLINE_COUNT > c.SALE_COUNT) AS b " + "SET " + "    a.ONLINE_STATE = 0 " + "WHERE" + "    a.ID = #{onlineId}" + "        AND a.ONLINE_STATE = 1" + "        AND b.INVENTORY_COUNT = 0;")
+    "    WHERE" + "        c.ONLINE_ID = #{onlineId}" + "            AND c.CURRENT_ONLINE_COUNT > c.SALE_COUNT) AS b " + "SET " + "    a.ONLINE_STATE = 0 " + "WHERE" + "    a.ID = #{onlineId}" + "        AND a.ONLINE_STATE = 1" + "        AND b.INVENTORY_COUNT = 0;")
     int autoOffline(@Param("onlineId") Long onlineId);
 
     /**
@@ -102,14 +100,13 @@ public interface OnlOnlineMapper extends MybatisBaseMapper<OnlOnlineMo, Long> {
      * @return
      */
     List<SupplierGoodsRo> selectSupplierGoods(SupplierGoodsTo record);
-    
+
     /**
      * 查询上线信息
      * @param to
      * @return
      */
     List<OnlOnlineMo> selectOnlineInfo(SelectOnlineTo to);
-    
-    
-    OnlOnlineMo  selectOne(OnlOnlineMo mo);
+
+    OnlOnlineMo selectOne(OnlOnlineMo mo);
 }

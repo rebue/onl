@@ -93,4 +93,8 @@ public class OnlOnlineSpecSo extends So implements Serializable {
      */
     private BigDecimal limitCount;
 
+    /**
+     * 是否是称重商品
+     */
+    private Boolean isWeighGoods;
 }

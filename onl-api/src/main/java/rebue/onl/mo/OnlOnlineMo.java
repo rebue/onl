@@ -128,6 +128,15 @@ public class OnlOnlineMo implements Serializable {
     private Boolean isBelow;
 
     /**
+     *    是否线上
+     *
+     *    数据库字段: ONL_ONLINE.IS_ONLINE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Boolean isOnline;
+
+    /**
      *    是否上线到平台
      *
      *    数据库字段: ONL_ONLINE.IS_ONLINE_PLATFORM
@@ -137,13 +146,22 @@ public class OnlOnlineMo implements Serializable {
     private Boolean isOnlinePlatform;
 
     /**
-     *    是否线上
+     *    是否是称重商品
      *
-     *    数据库字段: ONL_ONLINE.IS_ONLINE
+     *    数据库字段: ONL_ONLINE.IS_WEIGH_GOODS
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    private Boolean isOnline;
+    private Boolean isWeighGoods;
+
+    /**
+     *    商品简称
+     *
+     *    数据库字段: ONL_ONLINE.SHORT_NAME
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private String shortName;
 
     /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
@@ -415,6 +433,28 @@ public class OnlOnlineMo implements Serializable {
     }
 
     /**
+     *    是否线上
+     *
+     *    数据库字段: ONL_ONLINE.IS_ONLINE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Boolean getIsOnline() {
+        return isOnline;
+    }
+
+    /**
+     *    是否线上
+     *
+     *    数据库字段: ONL_ONLINE.IS_ONLINE
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setIsOnline(Boolean isOnline) {
+        this.isOnline = isOnline;
+    }
+
+    /**
      *    是否上线到平台
      *
      *    数据库字段: ONL_ONLINE.IS_ONLINE_PLATFORM
@@ -437,25 +477,47 @@ public class OnlOnlineMo implements Serializable {
     }
 
     /**
-     *    是否线上
+     *    是否是称重商品
      *
-     *    数据库字段: ONL_ONLINE.IS_ONLINE
+     *    数据库字段: ONL_ONLINE.IS_WEIGH_GOODS
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public Boolean getIsOnline() {
-        return isOnline;
+    public Boolean getIsWeighGoods() {
+        return isWeighGoods;
     }
 
     /**
-     *    是否线上
+     *    是否是称重商品
      *
-     *    数据库字段: ONL_ONLINE.IS_ONLINE
+     *    数据库字段: ONL_ONLINE.IS_WEIGH_GOODS
      *
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
-    public void setIsOnline(Boolean isOnline) {
-        this.isOnline = isOnline;
+    public void setIsWeighGoods(Boolean isWeighGoods) {
+        this.isWeighGoods = isWeighGoods;
+    }
+
+    /**
+     *    商品简称
+     *
+     *    数据库字段: ONL_ONLINE.SHORT_NAME
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public String getShortName() {
+        return shortName;
+    }
+
+    /**
+     *    商品简称
+     *
+     *    数据库字段: ONL_ONLINE.SHORT_NAME
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
     }
 
     /**
@@ -506,13 +568,6 @@ public class OnlOnlineMo implements Serializable {
 
     @Override
     public String toString() {
-        return "OnlOnlineMo [id=" + id + ", subjectType=" + subjectType + ", onlineTitle=" + onlineTitle
-                + ", onlineDetail=" + onlineDetail + ", onlineOrgId=" + onlineOrgId + ", supplierId=" + supplierId
-                + ", deliverOrgId=" + deliverOrgId + ", opId=" + opId + ", onlineState=" + onlineState + ", onlineTime="
-                + onlineTime + ", productId=" + productId + ", isBelow=" + isBelow + ", isOnlinePlatform="
-                + isOnlinePlatform + ", isOnline=" + isOnline + ", onlineId=" + onlineId + "]";
+        return "OnlOnlineMo [id=" + id + ", subjectType=" + subjectType + ", onlineTitle=" + onlineTitle + ", onlineDetail=" + onlineDetail + ", onlineOrgId=" + onlineOrgId + ", supplierId=" + supplierId + ", deliverOrgId=" + deliverOrgId + ", opId=" + opId + ", onlineState=" + onlineState + ", onlineTime=" + onlineTime + ", productId=" + productId + ", isBelow=" + isBelow + ", isOnlinePlatform=" + isOnlinePlatform + ", isOnline=" + isOnline + ", onlineId=" + onlineId + "]";
     }
-    
-    
- 
 }

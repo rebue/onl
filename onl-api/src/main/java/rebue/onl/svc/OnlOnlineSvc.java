@@ -23,63 +23,63 @@ import rebue.robotech.svc.MybatisBaseSvc;
  */
 public interface OnlOnlineSvc extends MybatisBaseSvc<OnlOnlineMo, java.lang.Long> {
 
-	/**
-	 * 获取上线商品列表 Title: selectOnlineGoodsList Description:
-	 *
-	 * @return
-	 * @date 2018年3月29日 下午5:40:42
-	 */
-	List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(OnlineGoodsListTo to);
+    /**
+     * 获取上线商品列表 Title: selectOnlineGoodsList Description:
+     *
+     * @return
+     * @date 2018年3月29日 下午5:40:42
+     */
+    List<OnlOnlineGoodsInfoRo> selectOnlineGoodsList(OnlineGoodsListTo to);
 
-	/**
-	 * 添加上线信息
-	 *
-	 * @param to
-	 * @return
-	 */
-	AddOnlineRo addOnline(AddOnlineTo to);
+    /**
+     * 添加上线信息
+     *
+     * @param to
+     * @return
+     */
+    AddOnlineRo addOnline(AddOnlineTo to);
 
-	/**
-	 * 根据id查询上线信息
-	 */
-	OnlOnlineMo listByPrimaryKey(Long id);
+    /**
+     * 根据id查询上线信息
+     */
+    OnlOnlineMo listByPrimaryKey(Long id);
 
-	/**
-	 * 重新上线
-	 */
-	ReOnlineRo reOnline(AddOnlineTo to);
+    /**
+     * 重新上线
+     */
+    ReOnlineRo reOnline(AddOnlineTo to);
 
-	/**
-	 * 重写查询上线信息
-	 */
-	PageInfo<OnlOnlineListRo> listEx(OnlOnlineListRo ro, int pageNum, int pageSize, String orderBy);
+    /**
+     * 重写查询上线信息
+     */
+    PageInfo<OnlOnlineListRo> listEx(OnlOnlineListRo ro, int pageNum, int pageSize, String orderBy);
 
-	/**
-	 * 下单后更新上线信息
-	 */
-	Ro updateOnlineAfterOrder(UpdateOnlineAfterOrderTo to);
+    /**
+     * 下单后更新上线信息
+     */
+    Ro updateOnlineAfterOrder(UpdateOnlineAfterOrderTo to);
 
-	/**
-	 * 商品下线
-	 * 
-	 * @param mo
-	 * @return
-	 */
-	Ro offline(OnlOnlineMo mo);
+    /**
+     * 商品下线
+     *
+     * @param mo
+     * @return
+     */
+    Ro offline(OnlOnlineMo mo);
 
-	/**
-	 * 供应商查询商品
-	 * 
-	 * @param mo
-	 * @return
-	 */
-	PageInfo<SupplierGoodsRo> supplierGoods(SupplierGoodsTo to, int pageNum, int pageSize);
+    /**
+     * 供应商查询商品
+     *
+     * @param mo
+     * @return
+     */
+    PageInfo<SupplierGoodsRo> supplierGoods(SupplierGoodsTo to, int pageNum, int pageSize);
 
-	/**
-	 * 获取上线商品树
-	 * 
-	 * @param onlineId
-	 * @return
-	 */
-	OnlOnlineTreeRo onlineTree(Long onlineId);
+    /**
+     * 获取上线商品树
+     *
+     * @param onlineId
+     * @return
+     */
+    OnlOnlineTreeRo onlineTree(Long onlineId);
 }
