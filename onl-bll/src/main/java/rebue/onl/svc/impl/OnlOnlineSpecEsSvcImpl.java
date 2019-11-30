@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.ro.OnlOnlineSpecEsRo;
 import rebue.onl.so.OnlOnlineSpecSo;
 import rebue.onl.svc.OnlOnlineSpecEsSvc;
 import rebue.robotech.svc.impl.EsBaseSvcImpl;
@@ -50,7 +50,7 @@ public class OnlOnlineSpecEsSvcImpl extends EsBaseSvcImpl<OnlOnlineSpecSo> imple
      * 根据名称查询上线信息
      */
     @Override
-    public List<OnlOnlineSpecMo> selectByName(String name) {
+    public List<OnlOnlineSpecEsRo> selectByName(String name) {
         _log.info("selectByName:{}", name);
         try {
             // 模糊查询
@@ -81,12 +81,12 @@ public class OnlOnlineSpecEsSvcImpl extends EsBaseSvcImpl<OnlOnlineSpecSo> imple
             SearchResponse search = esClient.search(searchRequest, RequestOptions.DEFAULT);
 
             _log.info("search返回值:{}", search);
-            SearchHits            hits = search.getHits();
-            List<OnlOnlineSpecMo> list = new ArrayList<OnlOnlineSpecMo>();
+            SearchHits              hits = search.getHits();
+            List<OnlOnlineSpecEsRo> list = new ArrayList<OnlOnlineSpecEsRo>();
             for (SearchHit hit : hits) {
                 Map<String, Object> tempSource = hit.getSourceAsMap();
                 if (tempSource != null) {
-                    OnlOnlineSpecMo mo = new OnlOnlineSpecMo();
+                    OnlOnlineSpecEsRo mo = new OnlOnlineSpecEsRo();
                     mo.setOnlineSpec(tempSource.get("onlineSpec").toString());
                     mo.setId(Long.parseLong(tempSource.get("id").toString()));
                     mo.setOnlineId(Long.parseLong(tempSource.get("onlineId").toString()));
@@ -98,6 +98,7 @@ public class OnlOnlineSpecEsSvcImpl extends EsBaseSvcImpl<OnlOnlineSpecSo> imple
                     mo.setCostPrice(new BigDecimal(tempSource.get("costPrice").toString()));
                     mo.setFirstBuyPoint(new BigDecimal(tempSource.get("firstBuyPoint").toString()));
                     mo.setLimitCount(new BigDecimal(tempSource.get("limitCount").toString()));
+                    mo.setIsWeighGoods(tempSource.get("isWeighGoods").toString().equalsIgnoreCase("true"));
                     list.add(mo);
                 }
             }

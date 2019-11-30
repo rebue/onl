@@ -1,6 +1,7 @@
 package rebue.onl.ctrl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,12 +20,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.dozermapper.core.Mapper;
 import com.github.pagehelper.PageInfo;
 
 import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.ro.OnlOnlineSpecEsRo;
 import rebue.onl.ro.OnlOnlineSpecInfoRo;
 import rebue.onl.svc.OnlOnlineSpecEsSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
+import rebue.onl.svc.OnlOnlineSvc;
 import rebue.onl.to.ModifySaleCountByIdTo;
 import rebue.robotech.dic.ResultDic;
 import rebue.robotech.ro.Ro;
@@ -49,7 +53,13 @@ public class OnlOnlineSpecCtrl {
     private OnlOnlineSpecSvc svc;
 
     @Resource
+    private OnlOnlineSvc onlineSvc;
+
+    @Resource
     private OnlOnlineSpecEsSvc esSvc;
+
+    @Resource
+    private Mapper dozerMapper;
 
     /**
      * 有唯一约束的字段名称
@@ -249,26 +259,33 @@ public class OnlOnlineSpecCtrl {
      * 判断搜索类型
      */
     @GetMapping(value = "/onl/online-spec/search")
-    public List<OnlOnlineSpecMo> selectBySearch(@RequestParam("onlineSpec") final String onlineSpec) {
+    public List<OnlOnlineSpecEsRo> selectBySearch(@RequestParam("onlineSpec") final String onlineSpec) {
         _log.info("搜索的参数: code-{}", onlineSpec);
         String reg = "^\\d{6}$";
         if (onlineSpec.matches(reg)) {
             _log.info("商品名称为6位纯数字,搜索条码");
-            return svc.selectByCode(onlineSpec);
+            List<OnlOnlineSpecMo>   list   = svc.selectByCode(onlineSpec);
+            List<OnlOnlineSpecEsRo> roList = new ArrayList<OnlOnlineSpecEsRo>();
+            for (OnlOnlineSpecMo mo : list) {
+                OnlOnlineSpecEsRo ro = dozerMapper.map(mo, OnlOnlineSpecEsRo.class);
+                ro.setIsWeighGoods(onlineSvc.existWeighGoods(ro.getOnlineId()));
+                roList.add(ro);
+            }
+            _log.info("搜索返回: list-{}", roList);
+            return roList;
         } else {
             _log.info("商品名称不为6位纯数字,搜索商品名称");
             return esSvc.selectByName(onlineSpec);
         }
     }
-    
-    
+
     /**
-     * 判断搜索类型
+     * 扫码
      */
     @GetMapping(value = "/onl/online-spec/list")
     public List<OnlOnlineSpecMo> selectOnlineSpec(final OnlOnlineSpecMo mo) {
-        _log.info("扫码的参数: code-{}", mo);
-       return svc.list(mo);
+        _log.info("扫码的参数: mo-{}", mo);
+        return svc.list(mo);
     }
-    
+
 }

@@ -2,7 +2,7 @@ package rebue.onl.svc;
 
 import java.util.List;
 
-import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.ro.OnlOnlineSpecEsRo;
 import rebue.onl.so.OnlOnlineSpecSo;
 import rebue.robotech.svc.EsBaseSvc;
 
@@ -11,5 +11,5 @@ import rebue.robotech.svc.EsBaseSvc;
  *
  */
 public interface OnlOnlineSpecEsSvc extends EsBaseSvc<OnlOnlineSpecSo> {
-    public List<OnlOnlineSpecMo> selectByName(String name);
+    public List<OnlOnlineSpecEsRo> selectByName(String name);
 }

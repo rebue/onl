@@ -1,7 +1,9 @@
 package rebue.onl.svc;
 
-import com.github.pagehelper.PageInfo;
 import java.util.List;
+
+import com.github.pagehelper.PageInfo;
+
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.ro.AddOnlineRo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
@@ -82,4 +84,12 @@ public interface OnlOnlineSvc extends MybatisBaseSvc<OnlOnlineMo, java.lang.Long
      * @return
      */
     OnlOnlineTreeRo onlineTree(Long onlineId);
+
+    /**
+     * 判断是否为称重商品
+     * 
+     * @param onlineId
+     * @return
+     */
+    boolean existWeighGoods(Long onlineId);
 }

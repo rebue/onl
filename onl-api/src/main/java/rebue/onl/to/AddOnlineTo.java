@@ -120,4 +120,9 @@ public class AddOnlineTo {
      * 是否为商超上线商品 0为不是 1为是
      */
     private Byte isPos;
+
+    /**
+     * 是否是称重商品
+     */
+    private Boolean isWeighGoods;
 }

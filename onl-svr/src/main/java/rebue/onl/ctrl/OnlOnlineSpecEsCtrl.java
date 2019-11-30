@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import rebue.onl.mo.OnlOnlineSpecMo;
+import rebue.onl.ro.OnlOnlineSpecEsRo;
 import rebue.onl.so.OnlOnlineSpecSo;
 import rebue.onl.svc.OnlOnlineSpecEsSvc;
 
@@ -40,7 +40,7 @@ public class OnlOnlineSpecEsCtrl {
      * 根据上线名称获取上线规格
      */
     @GetMapping("/onl/online-spec-es/select-by-name")
-    List<OnlOnlineSpecMo> selectByName(@RequestParam("onlineSpec") final String onlineSpec) {
+    List<OnlOnlineSpecEsRo> selectByName(@RequestParam("onlineSpec") final String onlineSpec) {
         _log.info("PrdProductSpecEsCtrl.getById:{}", onlineSpec);
         return svc.selectByName(onlineSpec);
     }
