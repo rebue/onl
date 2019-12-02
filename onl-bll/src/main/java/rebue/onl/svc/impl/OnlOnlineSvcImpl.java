@@ -205,6 +205,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         onlineMo.setIsBelow(isBelow);
         onlineMo.setIsOnline(isOnline);
         onlineMo.setIsOnlinePlatform(isOnlinePlatform);
+        onlineMo.setIsWeighGoods(to.getIsWeighGoods());
         _log.info("添加上线信息的参数为：{}", onlineMo);
         final int addResult = add(onlineMo);
         _log.info("添加上线信息的返回值为：{}", addResult);
