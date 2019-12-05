@@ -92,13 +92,29 @@ public class OnlOnlineSpecEsSvcImpl extends EsBaseSvcImpl<OnlOnlineSpecSo> imple
                     mo.setOnlineId(Long.parseLong(tempSource.get("onlineId").toString()));
                     mo.setSaleUnit(tempSource.get("saleUnit").toString());
                     mo.setSalePrice(new BigDecimal(tempSource.get("salePrice").toString()));
-                    mo.setBuyPoint(new BigDecimal(tempSource.get("buyPoint").toString()));
-                    mo.setCashbackAmount(new BigDecimal(tempSource.get("cashbackAmount").toString()));
-                    mo.setCommissionAmount(new BigDecimal(tempSource.get("commissionAmount").toString()));
-                    mo.setCostPrice(new BigDecimal(tempSource.get("costPrice").toString()));
-                    mo.setFirstBuyPoint(new BigDecimal(tempSource.get("firstBuyPoint").toString()));
-                    mo.setLimitCount(new BigDecimal(tempSource.get("limitCount").toString()));
-                    mo.setIsWeighGoods(tempSource.get("isWeighGoods").toString().equalsIgnoreCase("true"));
+                    if(tempSource.get("buyPoint") != null) {
+                        mo.setBuyPoint(new BigDecimal(tempSource.get("buyPoint").toString()));    
+                    }
+                    if(tempSource.get("cashbackAmount") != null) {
+                        mo.setCashbackAmount(new BigDecimal(tempSource.get("cashbackAmount").toString()));    
+                    }
+                    if(tempSource.get("commissionAmount") != null) {
+                        mo.setCommissionAmount(new BigDecimal(tempSource.get("commissionAmount").toString()));    
+                    }
+                    if(tempSource.get("firstBuyPoint") != null) {
+                        mo.setFirstBuyPoint(new BigDecimal(tempSource.get("firstBuyPoint").toString()));
+
+                    }
+                    if(tempSource.get("costPrice") != null) {
+                        mo.setCostPrice(new BigDecimal(tempSource.get("costPrice").toString()));    
+                    }
+                    if(tempSource.get("limitCount") != null) {
+                        mo.setLimitCount(new BigDecimal(tempSource.get("limitCount").toString()));    
+                    }
+                    if(tempSource.get("isWeighGoods") != null) {
+                        mo.setIsWeighGoods(tempSource.get("isWeighGoods").toString().equalsIgnoreCase("true"));    
+                    }
+                    
                     list.add(mo);
                 }
             }
