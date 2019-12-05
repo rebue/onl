@@ -446,4 +446,14 @@ public class OnlOnlineCtrl {
         _log.info("获取单个上线信息参数-{}", mo);
         return onlOnlineMapper.countSelective(mo);
     }
+    
+    /**
+     * 将上线的商品添加到搜索引擎里面
+     */
+    @GetMapping("/onl/online/add-goods-to-es")
+    void addGoodsToEs() {
+        _log.info("将上线的商品添加到搜索引擎");
+         svc.addGoodsToEs();
+    }
+    
 }

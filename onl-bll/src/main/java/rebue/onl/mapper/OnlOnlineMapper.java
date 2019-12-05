@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.ro.OnlOnlineGoodsInfoRo;
 import rebue.onl.ro.SupplierGoodsRo;
+import rebue.onl.so.OnlOnlineSpecSo;
 import rebue.onl.to.OnlineGoodsListTo;
 import rebue.onl.to.SelectOnlineTo;
 import rebue.onl.to.SupplierGoodsTo;
@@ -136,4 +137,7 @@ public interface OnlOnlineMapper extends MybatisBaseMapper<OnlOnlineMo, Long> {
      */
     @Select("SELECT IS_WEIGH_GOODS FROM onl.ONL_ONLINE where id =#{onlineId};")
     boolean existWeighGoods(@Param("onlineId") Long onlineId);
+
+    @Select("select  A.PRODUCT_ID , A.IS_WEIGH_GOODS, B.* from onl.ONL_ONLINE A , onl.ONL_ONLINE_SPEC B where A.ID = B.ONLINE_ID and A.OP_ID = 123456 ")
+    List<OnlOnlineSpecSo> getOnlineInfo();
 }

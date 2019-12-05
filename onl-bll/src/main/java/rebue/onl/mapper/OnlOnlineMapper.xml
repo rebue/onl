@@ -417,6 +417,9 @@
       <if test="onlineTime != null">
         and oo.ONLINE_TIME = #{onlineTime,jdbcType=TIMESTAMP}
       </if>
+        <if test="opId != null">
+        and oo.OP_ID = #{opId,jdbcType=BIGINT}
+      </if>
     </where>
   </select>
   
