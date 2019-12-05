@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import rebue.onl.mapper.OnlSearchCategoryOnlineMapper;
+import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.mo.OnlSearchCategoryOnlineMo;
 import rebue.onl.ro.OnlOnlineTreeRo;
 import rebue.onl.svc.OnlOnlineSvc;
@@ -33,16 +34,18 @@ import rebue.robotech.svc.impl.MybatisBaseSvcImpl;
  */
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 @Service
-public class OnlSearchCategoryOnlineSvcImpl extends MybatisBaseSvcImpl<OnlSearchCategoryOnlineMo, java.lang.Long, OnlSearchCategoryOnlineMapper> implements OnlSearchCategoryOnlineSvc {
+public class OnlSearchCategoryOnlineSvcImpl
+        extends MybatisBaseSvcImpl<OnlSearchCategoryOnlineMo, java.lang.Long, OnlSearchCategoryOnlineMapper>
+        implements OnlSearchCategoryOnlineSvc {
 
     /**
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
     private static final Logger _log = LoggerFactory.getLogger(OnlSearchCategoryOnlineSvcImpl.class);
-    
+
     @Resource
     private OnlSearchCategoryOnlineSvc thisSvc;
-    
+
     @Resource
     private OnlOnlineSvc onlOnlineSvc;
 
@@ -59,52 +62,78 @@ public class OnlSearchCategoryOnlineSvcImpl extends MybatisBaseSvcImpl<OnlSearch
         }
         return super.add(mo);
     }
-    
+
     /**
      * 根据搜索分类id获取上线商品树
+     * 
      * @param searchCategoryId
      * @return
      */
     @Override
     public List<OnlOnlineTreeRo> onlineTreeList(Long searchCategoryId) {
-    	_log.info("根据搜索分类id获取上线商品树的参数为：{}", searchCategoryId);
-    	List<OnlOnlineTreeRo> list = new ArrayList<OnlOnlineTreeRo>();
-    	if (searchCategoryId == null) {
-			_log.error("根据搜索分类id获取上线商品树时发现搜索分类id为null");
-			return list;
-		}
-    	
-    	OnlSearchCategoryOnlineMo searchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
-    	searchCategoryOnlineMo.setSearchCategoryId(searchCategoryId);
-    	_log.info("根据搜索分类id获取上线商品树根据id获取搜索分类上线信息的参数为：{}", searchCategoryOnlineMo);
-    	List<OnlSearchCategoryOnlineMo> searchCategoryOnlineList = thisSvc.list(searchCategoryOnlineMo);
-    	_log.info("根据搜索分类id获取上线商品树根据id获取搜索分类上线信息的参数为：{}", searchCategoryOnlineList);
-    	for (OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo : searchCategoryOnlineList) {
-    		_log.info("根据上线id获取上线商品树的参数为：{}", onlSearchCategoryOnlineMo.getOnlineId());
-			OnlOnlineTreeRo onlineTreeRo = onlOnlineSvc.onlineTree(onlSearchCategoryOnlineMo.getOnlineId());
-			_log.info("根据上线id获取上线商品树的返回值为：{}", onlineTreeRo);
-			if (onlineTreeRo != null && onlineTreeRo.getId() !=null ) {
-				list.add(onlineTreeRo);
-			}
-		}
-    	
-    	_log.info("根据搜索分类id获取上线商品树的返回值为：{}", list);
-    	return list;
+        _log.info("根据搜索分类id获取上线商品树的参数为：{}", searchCategoryId);
+        List<OnlOnlineTreeRo> list = new ArrayList<OnlOnlineTreeRo>();
+        if (searchCategoryId == null) {
+            _log.error("根据搜索分类id获取上线商品树时发现搜索分类id为null");
+            return list;
+        }
+
+        OnlSearchCategoryOnlineMo searchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
+        searchCategoryOnlineMo.setSearchCategoryId(searchCategoryId);
+        _log.info("根据搜索分类id获取上线商品树根据id获取搜索分类上线信息的参数为：{}", searchCategoryOnlineMo);
+        List<OnlSearchCategoryOnlineMo> searchCategoryOnlineList = thisSvc.list(searchCategoryOnlineMo);
+        _log.info("根据搜索分类id获取上线商品树根据id获取搜索分类上线信息的参数为：{}", searchCategoryOnlineList);
+        for (OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo : searchCategoryOnlineList) {
+            _log.info("根据上线id获取上线商品树的参数为：{}", onlSearchCategoryOnlineMo.getOnlineId());
+            OnlOnlineTreeRo onlineTreeRo = onlOnlineSvc.onlineTree(onlSearchCategoryOnlineMo.getOnlineId());
+            _log.info("根据上线id获取上线商品树的返回值为：{}", onlineTreeRo);
+            if (onlineTreeRo != null && onlineTreeRo.getId() != null) {
+                list.add(onlineTreeRo);
+            }
+        }
+
+        _log.info("根据搜索分类id获取上线商品树的返回值为：{}", list);
+        return list;
     }
 
-	@Override
-	public int deleteByOnlineId(OnlSearchCategoryOnlineMo searchCategoryOnlineMo) {
-		_log.info("开始根据上线id和搜索分类id删除记录");
-		int updateByOnlineIdResult =_mapper.deleteByOnlineId(searchCategoryOnlineMo);
-		return updateByOnlineIdResult;
-	}
-	
-	/**
-	 * 根据搜索分类id集合查询符合条件搜索上线信息
-	 */
-	@Override
-	public List<OnlSearchCategoryOnlineMo> selectBysearchCategoryIds(String searchCategoryIds) {
-		_log.info("根据搜索分类id集合查询所有上线id的参数为-{}",searchCategoryIds);
-		return _mapper.selectBysearchCategoryIds(searchCategoryIds);
-	}
+    @Override
+    public int deleteByOnlineId(OnlSearchCategoryOnlineMo searchCategoryOnlineMo) {
+        _log.info("开始根据上线id和搜索分类id删除记录");
+        int updateByOnlineIdResult = _mapper.deleteByOnlineId(searchCategoryOnlineMo);
+        return updateByOnlineIdResult;
+    }
+
+    /**
+     * 根据搜索分类id集合查询符合条件搜索上线信息
+     */
+    @Override
+    public List<OnlSearchCategoryOnlineMo> selectBysearchCategoryIds(String searchCategoryIds) {
+        _log.info("根据搜索分类id集合查询所有上线id的参数为-{}", searchCategoryIds);
+        return _mapper.selectBysearchCategoryIds(searchCategoryIds);
+    }
+
+    @Override
+    public void addCategoryOnline() {
+        OnlOnlineMo onlineMo = new OnlOnlineMo();
+        onlineMo.setOpId(123456l);
+        _log.info("获取所有上线的参数为-{}", onlineMo);
+        List<OnlOnlineMo> onlineResult = onlOnlineSvc.list(onlineMo);
+        _log.info("获取所有的上线的结果为-{}", onlineResult);
+        for (OnlOnlineMo item : onlineResult) {
+            OnlSearchCategoryOnlineMo searchMo = new OnlSearchCategoryOnlineMo();
+            searchMo.setOnlineId(item.getId());
+            searchMo.setSearchCategoryId(670428277747220482l);
+            _log.info("获取是否已经存在搜索上线中的参数为-{}", searchMo);
+            if (super.list(searchMo).size() < 1) {
+                OnlSearchCategoryOnlineMo addSearchMo = new OnlSearchCategoryOnlineMo();
+                addSearchMo.setOnlineId(item.getId());
+                addSearchMo.setSearchCategoryId(670428277747220482l); // 这里需要修改成线上的默认搜索分类
+                _log.info("添加搜索上线分类的参数为-{}", addSearchMo);
+                if (add(addSearchMo) != 1) {
+                    throw new IllegalArgumentException("添加失败");
+                }
+            }
+
+        }
+    }
 }

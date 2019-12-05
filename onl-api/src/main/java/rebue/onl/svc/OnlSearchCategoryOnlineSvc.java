@@ -36,4 +36,6 @@ public interface OnlSearchCategoryOnlineSvc extends MybatisBaseSvc<OnlSearchCate
      * @return
      */
     List<OnlSearchCategoryOnlineMo> selectBysearchCategoryIds(String searchCategoryIds);
+
+    void addCategoryOnline();
 }

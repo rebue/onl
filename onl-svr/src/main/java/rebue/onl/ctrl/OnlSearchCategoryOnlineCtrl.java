@@ -155,7 +155,9 @@ public class OnlSearchCategoryOnlineCtrl {
      * @mbg.generated 自动生成，如需修改，请删除本行
      */
     @GetMapping("/onl/searchcategoryonline")
-    PageInfo<OnlSearchCategoryOnlineMo> list(OnlSearchCategoryOnlineMo mo, @RequestParam(value = "pageNum", required = false) Integer pageNum, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+    PageInfo<OnlSearchCategoryOnlineMo> list(OnlSearchCategoryOnlineMo mo,
+            @RequestParam(value = "pageNum", required = false) Integer pageNum,
+            @RequestParam(value = "pageSize", required = false) Integer pageSize) {
         if (pageNum == null)
             pageNum = 1;
         if (pageSize == null)
@@ -180,5 +182,11 @@ public class OnlSearchCategoryOnlineCtrl {
     OnlSearchCategoryOnlineMo getById(@RequestParam("id") java.lang.Long id) {
         _log.info("get OnlSearchCategoryOnlineMo by id: " + id);
         return svc.getById(id);
+    }
+
+    @GetMapping("/onl/searchcategoryonline/add-category-online")
+    void addCategoryOnline() {
+        _log.info("添加已有商品在上线搜索中的分类");
+        svc.addCategoryOnline();
     }
 }
