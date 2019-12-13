@@ -11,6 +11,7 @@ import rebue.wheel.baseintf.EnumBase;
  * 板块类型
  * 0：普通
  * 1：全返
+ * 2：返积分
  */
 public enum OnlineSubjectTypeDic implements EnumBase {
 
@@ -21,7 +22,12 @@ public enum OnlineSubjectTypeDic implements EnumBase {
     /**
      * 1：拼全返
      */
-    BACK_COMMISSION(1);
+    BACK_COMMISSION(1),
+
+    /**
+     * 2:返积分
+     */
+    BACK_POINTS(2);
 
     /**
      * 枚举的所有项，注意这个变量是静态单例的

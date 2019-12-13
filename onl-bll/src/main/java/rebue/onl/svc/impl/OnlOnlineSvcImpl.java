@@ -173,18 +173,18 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             ro.setMsg("参数错误");
             return ro;
         }
-        final Long onlineId = _idWorker.getId();
-        Long productId = to.getProductId();
+        final Long onlineId  = _idWorker.getId();
+        Long       productId = to.getProductId();
         productId = productId == 0 ? onlineId : productId;
-        final Date onlineTime = new Date();
-        Long deliverOrgId = to.getDeliverOrgId();
+        final Date onlineTime   = new Date();
+        Long       deliverOrgId = to.getDeliverOrgId();
         deliverOrgId = deliverOrgId == 0 ? to.getOnlineOrgId() : deliverOrgId;
         // 是否线下
         Boolean isBelow = to.getIsBelowOnline() == 0 ? false : true;
         // 是否线上
         Boolean isOnline = to.getIsBelowOnline() == 0 ? true : false;
         if (to.getIsBelowOnline() == 2) {
-            isBelow = true;
+            isBelow  = true;
             isOnline = true;
         }
         // 是否上线到平台
@@ -217,7 +217,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         }
         // 添加上线信息结束
         // 添加上线日志信息开始
-        final Long onlineLogId = _idWorker.getId();
+        final Long           onlineLogId = _idWorker.getId();
         final OnlOnlineLogMo onlineLogMo = new OnlOnlineLogMo();
         onlineLogMo.setId(onlineLogId);
         onlineLogMo.setSupplierId(to.getSupplierId());
@@ -385,7 +385,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         List<Long> classificationIds = to.getClassificationId();
         for (Long classificationId : classificationIds) {
             // 搜索分类上线id
-            final Long searchCategoryOnlineId = _idWorker.getId();
+            final Long                      searchCategoryOnlineId    = _idWorker.getId();
             final OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
             onlSearchCategoryOnlineMo.setId(searchCategoryOnlineId);
             onlSearchCategoryOnlineMo.setOnlineId(onlineId);
@@ -402,8 +402,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 
         // 添加商品主图开始
         // 上线图片id
-        final Long onlinePicId = _idWorker.getId();
-        final OnlOnlinePicMo qsmmPicMo = new OnlOnlinePicMo();
+        final Long           onlinePicId = _idWorker.getId();
+        final OnlOnlinePicMo qsmmPicMo   = new OnlOnlinePicMo();
         qsmmPicMo.setId(onlinePicId);
         qsmmPicMo.setOnlineId(onlineId);
         qsmmPicMo.setPicPath(to.getGoodsQsmm());
@@ -584,7 +584,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         // 是否线上
         Boolean isOnline = to.getIsBelowOnline() == 0 ? true : false;
         if (to.getIsBelowOnline() == 2) {
-            isBelow = true;
+            isBelow  = true;
             isOnline = true;
         }
         // 是否上线到平台
@@ -605,6 +605,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         onlineMo.setIsBelow(isBelow);
         onlineMo.setIsOnline(isOnline);
         onlineMo.setIsOnlinePlatform(isOnlinePlatform);
+        onlineMo.setIsWeighGoods(to.getIsWeighGoods());
         _log.info("修改上线信息的参数为：{}", onlineMo);
         final int updateByPrimaryKeyResult = _mapper.updateByPrimaryKey(onlineMo);
         _log.info("修改上线信息的返回值为：{}", updateByPrimaryKeyResult);
@@ -655,7 +656,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         List<Long> classificationIds = to.getClassificationId();
         for (Long classificationId : classificationIds) {
             // 搜索分类上线id
-            final Long searchCategoryOnlineId = _idWorker.getId();
+            final Long                      searchCategoryOnlineId    = _idWorker.getId();
             final OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo = new OnlSearchCategoryOnlineMo();
             onlSearchCategoryOnlineMo.setId(searchCategoryOnlineId);
             onlSearchCategoryOnlineMo.setOnlineId(to.getOnlineId());
@@ -911,8 +912,8 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
     @SuppressWarnings("unchecked")
     public PageInfo<OnlOnlineListRo> listEx(final OnlOnlineListRo ro, final int pageNum, final int pageSize,
             final String orderBy) {
-        PageInfo<OnlOnlineListRo> pageInfo = new PageInfo<>();
-        final List<OnlOnlineListRo> listEx = new ArrayList<>();
+        PageInfo<OnlOnlineListRo>   pageInfo = new PageInfo<>();
+        final List<OnlOnlineListRo> listEx   = new ArrayList<>();
 
         // 根据thisOrgId和店铺名字查询当前卖家的所有店铺
         SlrShopMo ListslrShopMo = new SlrShopMo();
