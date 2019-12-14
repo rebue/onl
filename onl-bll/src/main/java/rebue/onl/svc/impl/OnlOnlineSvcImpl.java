@@ -302,8 +302,18 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlineSpecMo.setSeqNo(i);
             onlineSpecMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
             onlineSpecMo.setProductSpecId(to.getOnlineSpecs().get(i).getProductSpecId());// 添加产品规格id
+            // 如果版块类型为返积分商品（2）则购买积分为原返现金额*10,不再返现
+            if (to.getSubjectType() == 2) {
+                onlineSpecMo.setCommissionAmount(amount);
+                onlineSpecMo.setCashbackAmount(amount);
+                BigDecimal returnPoint = to.getOnlineSpecs().get(i).getCashbackAmount().multiply(BigDecimal.TEN);
+                _log.info("版块类型为返积分商品,返还的积分为:{}", returnPoint);
+                // 版块类型为返积分商品（2)商品只有设定的返还积分
+                onlineSpecMo.setBuyPoint(returnPoint);
+                onlineSpecMo.setFirstBuyPoint(returnPoint);
+            }
             if (onlineSpecMo.getLimitCount() == null) {
-                onlineSpecMo.setLimitCount(BigDecimal.ZERO);
+                onlineSpecMo.setLimitCount(amount);
             }
             _log.info("添加上线信息添加上线规格信息的参数为：{}", onlineSpecMo);
             final int addOnlineSpecResult = onlOnlineSpecSvc.add(onlineSpecMo);
@@ -724,8 +734,19 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlineSpecTo.setCashbackAmount(cashbackAmount);
             Long onlineSpecId = _idWorker.getId();
 
+            // 如果版块类型为返积分商品（2）则购买积分为原返现金额*10,不再返现
+            if (to.getSubjectType() == 2) {
+                onlineSpecTo.setCommissionAmount(amount);
+                onlineSpecTo.setCashbackAmount(amount);
+                BigDecimal returnPoint = to.getOnlineSpecs().get(i).getCashbackAmount().multiply(BigDecimal.TEN);
+                _log.info("版块类型为返积分商品,返还的积分为:{}", returnPoint);
+                // 版块类型为返积分商品（2)商品只有设定的返还积分
+                onlineSpecTo.setBuyPoint(returnPoint);
+                onlineSpecTo.setFirstBuyPoint(returnPoint);
+            }
+
             if (onlineSpecTo.getLimitCount() == null) {
-                onlineSpecTo.setLimitCount(BigDecimal.ZERO);
+                onlineSpecTo.setLimitCount(amount);
             }
             // 如果规格id的长度大于13位的话说明该规格属于已上线的规格
             if (to.getOnlineSpecs().get(i).getId().toString().length() > 13) {
