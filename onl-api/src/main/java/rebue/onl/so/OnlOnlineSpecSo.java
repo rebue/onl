@@ -2,6 +2,7 @@ package rebue.onl.so;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -97,4 +98,9 @@ public class OnlOnlineSpecSo extends So implements Serializable {
      * 是否是称重商品
      */
     private Boolean isWeighGoods;
+
+    /**
+     * 店铺id
+     */
+    private List<Long> shopId;
 }

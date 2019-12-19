@@ -50,8 +50,8 @@ public class OnlOnlineSpecEsSvcImpl extends EsBaseSvcImpl<OnlOnlineSpecSo> imple
      * 根据名称查询上线信息
      */
     @Override
-    public List<OnlOnlineSpecEsRo> selectByName(String name) {
-        _log.info("selectByName:{}", name);
+    public List<OnlOnlineSpecEsRo> selectByName(String name, Long shopId) {
+        _log.info("selectByName:{},shopId:{}", name, shopId);
         try {
             // 模糊查询
             QueryBuilder        queryBuilder        = QueryBuilders.matchPhraseQuery("onlineSpec.pinyin", name);// 加上.keyword就是精确查找
@@ -60,7 +60,14 @@ public class OnlOnlineSpecEsSvcImpl extends EsBaseSvcImpl<OnlOnlineSpecSo> imple
             searchSourceBuilder.from(0);
             // 每页数量
             searchSourceBuilder.size(12);
-            searchSourceBuilder.query(queryBuilder);
+            if (shopId != -1L) {
+                QueryBuilder queryBuilderShop = QueryBuilders.matchPhraseQuery("shopId", shopId);
+                QueryBuilder qb2              = QueryBuilders.boolQuery().must(queryBuilder).must(queryBuilderShop);
+                searchSourceBuilder.query(qb2);
+
+            } else {
+                searchSourceBuilder.query(queryBuilder);
+            }
 
             // 排序
             // Sort descending by _score (the default)
@@ -92,29 +99,29 @@ public class OnlOnlineSpecEsSvcImpl extends EsBaseSvcImpl<OnlOnlineSpecSo> imple
                     mo.setOnlineId(Long.parseLong(tempSource.get("onlineId").toString()));
                     mo.setSaleUnit(tempSource.get("saleUnit").toString());
                     mo.setSalePrice(new BigDecimal(tempSource.get("salePrice").toString()));
-                    if(tempSource.get("buyPoint") != null) {
-                        mo.setBuyPoint(new BigDecimal(tempSource.get("buyPoint").toString()));    
+                    if (tempSource.get("buyPoint") != null) {
+                        mo.setBuyPoint(new BigDecimal(tempSource.get("buyPoint").toString()));
                     }
-                    if(tempSource.get("cashbackAmount") != null) {
-                        mo.setCashbackAmount(new BigDecimal(tempSource.get("cashbackAmount").toString()));    
+                    if (tempSource.get("cashbackAmount") != null) {
+                        mo.setCashbackAmount(new BigDecimal(tempSource.get("cashbackAmount").toString()));
                     }
-                    if(tempSource.get("commissionAmount") != null) {
-                        mo.setCommissionAmount(new BigDecimal(tempSource.get("commissionAmount").toString()));    
+                    if (tempSource.get("commissionAmount") != null) {
+                        mo.setCommissionAmount(new BigDecimal(tempSource.get("commissionAmount").toString()));
                     }
-                    if(tempSource.get("firstBuyPoint") != null) {
+                    if (tempSource.get("firstBuyPoint") != null) {
                         mo.setFirstBuyPoint(new BigDecimal(tempSource.get("firstBuyPoint").toString()));
 
                     }
-                    if(tempSource.get("costPrice") != null) {
-                        mo.setCostPrice(new BigDecimal(tempSource.get("costPrice").toString()));    
+                    if (tempSource.get("costPrice") != null) {
+                        mo.setCostPrice(new BigDecimal(tempSource.get("costPrice").toString()));
                     }
-                    if(tempSource.get("limitCount") != null) {
-                        mo.setLimitCount(new BigDecimal(tempSource.get("limitCount").toString()));    
+                    if (tempSource.get("limitCount") != null) {
+                        mo.setLimitCount(new BigDecimal(tempSource.get("limitCount").toString()));
                     }
-                    if(tempSource.get("isWeighGoods") != null) {
-                        mo.setIsWeighGoods(tempSource.get("isWeighGoods").toString().equalsIgnoreCase("true"));    
+                    if (tempSource.get("isWeighGoods") != null) {
+                        mo.setIsWeighGoods(tempSource.get("isWeighGoods").toString().equalsIgnoreCase("true"));
                     }
-                    
+
                     list.add(mo);
                 }
             }

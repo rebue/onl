@@ -46,270 +46,278 @@ import rebue.wheel.StrUtils;
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 @Service
 public class OnlSearchCategorySvcImpl
-		extends MybatisBaseSvcImpl<OnlSearchCategoryMo, java.lang.Long, OnlSearchCategoryMapper>
-		implements OnlSearchCategorySvc {
+        extends MybatisBaseSvcImpl<OnlSearchCategoryMo, java.lang.Long, OnlSearchCategoryMapper>
+        implements OnlSearchCategorySvc {
 
-	/**
-	 * @mbg.generated 自动生成，如需修改，请删除本行
-	 */
-	private static final Logger _log = LoggerFactory.getLogger(OnlSearchCategorySvcImpl.class);
+    /**
+     * @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private static final Logger _log = LoggerFactory.getLogger(OnlSearchCategorySvcImpl.class);
 
-	@Resource
-	private OnlSearchCategorySvc thisSvc;
+    @Resource
+    private OnlSearchCategorySvc thisSvc;
 
-	@Resource
-	private Mapper dozerMapper;
+    @Resource
+    private Mapper dozerMapper;
 
-	@Resource
-	private SucOrgSvc sucOrgSvc;
+    @Resource
+    private SucOrgSvc sucOrgSvc;
 
-	@Resource
-	private SlrShopSvc slrShopSvc;
+    @Resource
+    private SlrShopSvc slrShopSvc;
 
-	@Resource
-	private OnlSearchCategoryOnlineSvc onlSearchCategoryOnlineSvc;
+    @Resource
+    private OnlSearchCategoryOnlineSvc onlSearchCategoryOnlineSvc;
 
-	@Resource
-	private OnlOnlineSvc onlOnlineSvc;
+    @Resource
+    private OnlOnlineSvc onlOnlineSvc;
 
-	/**
-	 * @mbg.generated 自动生成，如需修改，请删除本行
-	 */
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public int add(OnlSearchCategoryMo mo) {
-		_log.info("添加搜索分类");
-		// 如果id为空那么自动生成分布式id
-		if (mo.getId() == null || mo.getId() == 0) {
-			mo.setId(_idWorker.getId());
-		}
-		return super.add(mo);
-	}
+    /**
+     * @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public int add(OnlSearchCategoryMo mo) {
+        _log.info("添加搜索分类");
+        // 如果id为空那么自动生成分布式id
+        if (mo.getId() == null || mo.getId() == 0) {
+            mo.setId(_idWorker.getId());
+        }
+        return super.add(mo);
+    }
 
-	/**
-	 * 添加店铺搜索分类 流程： 1、判断参数 2、判断code是否为null，如果为null说明为顶级分类，否则为子类
-	 * 3、如果为顶级分类时，根据卖家和店铺查询分类的数量，如果数量小于10（不包含10）， 则前面补0
-	 * 4、如果为子类时，根据传过来的code查询该子类下面的分类，如果数量小于10（不包含10）， 则前面补0 5、添加店铺搜索分类
-	 * 注意：顶级分类为两位数，子类则在父类下面补两位
-	 * 
-	 * @param mo
-	 * @return
-	 */
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public Ro addEx(OnlSearchCategoryMo mo) {
-		_log.info("添加店铺搜索分类的参数为：{}", mo);
-		Ro ro = new Ro();
-		if (mo.getSellerId() == null || mo.getShopId() == null || mo.getName() == null) {
-			_log.error("添加店铺搜索分类时出现参数错误，请求的参数为：{}", mo);
-			ro.setResult(ResultDic.PARAM_ERROR);
-			ro.setMsg("参数错误");
-			return ro;
-		}
+    /**
+     * 添加店铺搜索分类 流程： 1、判断参数 2、判断code是否为null，如果为null说明为顶级分类，否则为子类
+     * 3、如果为顶级分类时，根据卖家和店铺查询分类的数量，如果数量小于10（不包含10）， 则前面补0
+     * 4、如果为子类时，根据传过来的code查询该子类下面的分类，如果数量小于10（不包含10）， 则前面补0 5、添加店铺搜索分类
+     * 注意：顶级分类为两位数，子类则在父类下面补两位
+     * 
+     * @param mo
+     * @return
+     */
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public Ro addEx(OnlSearchCategoryMo mo) {
+        _log.info("添加店铺搜索分类的参数为：{}", mo);
+        Ro ro = new Ro();
+        if (mo.getSellerId() == null || mo.getShopId() == null || mo.getName() == null) {
+            _log.error("添加店铺搜索分类时出现参数错误，请求的参数为：{}", mo);
+            ro.setResult(ResultDic.PARAM_ERROR);
+            ro.setMsg("参数错误");
+            return ro;
+        }
 
-		_log.info("添加店铺搜索分类根据卖家、店铺、分类编码查询分类数量的参数为：sellerId-{}, shopId-{}, code-{}", mo.getSellerId(), mo.getShopId(),
-				mo.getCode());
-		int count = _mapper.countBySellerAndShopAndCode(mo.getSellerId(), mo.getShopId(), mo.getCode());
-		_log.info("添加店铺搜索分类根据卖家、店铺、分类编码查询分类数量的返回值为：{}", count);
-		// 分类编码
-		String code = StrUtils.padLeft(String.valueOf(count), 2, '0');
-		// 如果添加的分类为子类，则先计算子类的code在与父类的code拼接
-		if (mo.getCode() != null && !"".equals(mo.getCode())) {
-			code = mo.getCode() + code;
-		}
-		mo.setCode(code);
+        _log.info("添加店铺搜索分类根据卖家、店铺、分类编码查询分类数量的参数为：sellerId-{}, shopId-{}, code-{}", mo.getSellerId(), mo.getShopId(),
+                mo.getCode());
+        int count = _mapper.countBySellerAndShopAndCode(mo.getSellerId(), mo.getShopId(), mo.getCode());
+        _log.info("添加店铺搜索分类根据卖家、店铺、分类编码查询分类数量的返回值为：{}", count);
+        // 分类编码
+        String code = StrUtils.padLeft(String.valueOf(count), 2, '0');
+        // 如果添加的分类为子类，则先计算子类的code在与父类的code拼接
+        if (mo.getCode() != null && !"".equals(mo.getCode())) {
+            code = mo.getCode() + code;
+        }
+        mo.setCode(code);
 
-		_log.info("添加店铺搜索分类的参数为：{}", mo);
-		int addResult = thisSvc.add(mo);
-		_log.info("添加店铺搜索分类的返回值为：{}", addResult);
-		if (addResult != 1) {
-			_log.error("添加店铺搜索分类时出现错误，请求的参数为：{}", mo);
-			throw new RuntimeException("添加出错");
-		}
+        _log.info("添加店铺搜索分类的参数为：{}", mo);
+        int addResult = thisSvc.add(mo);
+        _log.info("添加店铺搜索分类的返回值为：{}", addResult);
+        if (addResult != 1) {
+            _log.error("添加店铺搜索分类时出现错误，请求的参数为：{}", mo);
+            throw new RuntimeException("添加出错");
+        }
 
-		_log.info("添加店铺搜索分类成功，请求的参数为：{}", mo);
-		ro.setResult(ResultDic.SUCCESS);
-		ro.setMsg("添加成功");
-		return ro;
-	}
+        _log.info("添加店铺搜索分类成功，请求的参数为：{}", mo);
+        ro.setResult(ResultDic.SUCCESS);
+        ro.setMsg("添加成功");
+        return ro;
+    }
 
-	/**
-	 * 重写查询店铺分类信息
-	 * 
-	 * @param ro
-	 * @param pageNum
-	 * @param pageSize
-	 * @return
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public PageInfo<OnlSearchCategoryRo> listEx(OnlSearchCategoryRo ro, Integer pageNum, Integer pageSize) {
-		_log.info("查询店铺分类信息的参数为：SlrSearchCategoryRo-{}, pageNum-{}, pageSize-{}", ro, pageNum, pageSize);
-		OnlSearchCategoryMo searchCategoryMo = dozerMapper.map(ro, OnlSearchCategoryMo.class);
-		_log.info("查询店铺分类的参数为：{}", searchCategoryMo);
-		PageInfo<OnlSearchCategoryMo> doSelectPageInfo = PageHelper.startPage(pageNum, pageSize)
-				.doSelectPageInfo(() -> _mapper.selectSelective(searchCategoryMo));
-		_log.info("查询店铺分类的返回值为：{}", doSelectPageInfo);
-		PageInfo<OnlSearchCategoryRo> pageInfo = new PageInfo<>();
-		ArrayList<OnlSearchCategoryRo> arrayList = new ArrayList<>();
-		for (OnlSearchCategoryMo snlSearchCategoryMo : doSelectPageInfo.getList()) {
-			OnlSearchCategoryRo categoryRo = dozerMapper.map(snlSearchCategoryMo, OnlSearchCategoryRo.class);
-			_log.info("查询店铺分类查询组织信息的参数为：{}", snlSearchCategoryMo.getSellerId());
-			SucOrgRo sucOrgRo = sucOrgSvc.getById(snlSearchCategoryMo.getSellerId());
-			_log.info("查询店铺分类查询组织信息的返回值为：{}", sucOrgRo);
-			if (sucOrgRo.getResult() == 1) {
-				categoryRo.setSellerName(sucOrgRo.getRecord().getName());
-			}
-			_log.info("查询店铺分类查询店铺信息的参数为：{}", snlSearchCategoryMo.getShopId());
-			SlrShopMo slrShopMo = slrShopSvc.getById(snlSearchCategoryMo.getShopId());
-			_log.info("查询店铺分类查询店铺信息的返回值为：{}", slrShopMo);
-			if (slrShopMo != null) {
-				categoryRo.setShopName(slrShopMo.getShopName());
-			}
-			arrayList.add(categoryRo);
-		}
-		pageInfo = dozerMapper.map(doSelectPageInfo, PageInfo.class);
-		pageInfo.setList(arrayList);
-		_log.info("查询店铺分类的返回值为：{}", pageInfo);
-		return pageInfo;
-	}
+    /**
+     * 重写查询店铺分类信息
+     * 
+     * @param ro
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public PageInfo<OnlSearchCategoryRo> listEx(OnlSearchCategoryRo ro, Integer pageNum, Integer pageSize) {
+        _log.info("查询店铺分类信息的参数为：SlrSearchCategoryRo-{}, pageNum-{}, pageSize-{}", ro, pageNum, pageSize);
+        OnlSearchCategoryMo searchCategoryMo = dozerMapper.map(ro, OnlSearchCategoryMo.class);
+        _log.info("查询店铺分类的参数为：{}", searchCategoryMo);
+        PageInfo<OnlSearchCategoryMo> doSelectPageInfo = PageHelper.startPage(pageNum, pageSize)
+                .doSelectPageInfo(() -> _mapper.selectSelective(searchCategoryMo));
+        _log.info("查询店铺分类的返回值为：{}", doSelectPageInfo);
+        PageInfo<OnlSearchCategoryRo>  pageInfo  = new PageInfo<>();
+        ArrayList<OnlSearchCategoryRo> arrayList = new ArrayList<>();
+        for (OnlSearchCategoryMo snlSearchCategoryMo : doSelectPageInfo.getList()) {
+            OnlSearchCategoryRo categoryRo = dozerMapper.map(snlSearchCategoryMo, OnlSearchCategoryRo.class);
+            _log.info("查询店铺分类查询组织信息的参数为：{}", snlSearchCategoryMo.getSellerId());
+            SucOrgRo sucOrgRo = sucOrgSvc.getById(snlSearchCategoryMo.getSellerId());
+            _log.info("查询店铺分类查询组织信息的返回值为：{}", sucOrgRo);
+            if (sucOrgRo.getResult() == 1) {
+                categoryRo.setSellerName(sucOrgRo.getRecord().getName());
+            }
+            _log.info("查询店铺分类查询店铺信息的参数为：{}", snlSearchCategoryMo.getShopId());
+            SlrShopMo slrShopMo = slrShopSvc.getById(snlSearchCategoryMo.getShopId());
+            _log.info("查询店铺分类查询店铺信息的返回值为：{}", slrShopMo);
+            if (slrShopMo != null) {
+                categoryRo.setShopName(slrShopMo.getShopName());
+            }
+            arrayList.add(categoryRo);
+        }
+        pageInfo = dozerMapper.map(doSelectPageInfo, PageInfo.class);
+        pageInfo.setList(arrayList);
+        _log.info("查询店铺分类的返回值为：{}", pageInfo);
+        return pageInfo;
+    }
 
-	/**
-	 * 禁用/启用店铺搜索分类 注：该方法会禁用/启用该分类和该分类下的所有子分类
-	 * 
-	 * @param sellerId
-	 *            卖家id
-	 * @param shopId
-	 *            店铺id
-	 * @param code
-	 *            分类编码
-	 * @return
-	 */
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public Ro enable(OnlSearchCategoryMo mo) {
-		_log.info("禁用/启用店铺搜索分类的参数为：{}", mo);
-		Ro ro = new Ro();
-		if (mo.getSellerId() == null || mo.getShopId() == null || mo.getCode() == null || mo.getIsEnabled() == null) {
-			_log.error("禁用/启用店铺搜索分类时出现参数错误，请求的参数为：sellerId-{}, shopId-{}, code-{}", mo);
-			ro.setResult(ResultDic.PARAM_ERROR);
-			ro.setMsg("参数错误");
-			return ro;
-		}
+    /**
+     * 禁用/启用店铺搜索分类 注：该方法会禁用/启用该分类和该分类下的所有子分类
+     * 
+     * @param sellerId
+     *                 卖家id
+     * @param shopId
+     *                 店铺id
+     * @param code
+     *                 分类编码
+     * @return
+     */
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public Ro enable(OnlSearchCategoryMo mo) {
+        _log.info("禁用/启用店铺搜索分类的参数为：{}", mo);
+        Ro ro = new Ro();
+        if (mo.getSellerId() == null || mo.getShopId() == null || mo.getCode() == null || mo.getIsEnabled() == null) {
+            _log.error("禁用/启用店铺搜索分类时出现参数错误，请求的参数为：sellerId-{}, shopId-{}, code-{}", mo);
+            ro.setResult(ResultDic.PARAM_ERROR);
+            ro.setMsg("参数错误");
+            return ro;
+        }
 
-		int enableResult = _mapper.enable(mo.getSellerId(), mo.getShopId(), mo.getCode(), mo.getIsEnabled());
-		_log.info("禁用/启用店铺搜索分类的返回值为：{}", enableResult);
-		if (enableResult < 0) {
-			_log.error("禁用/启用店铺搜索分类时出现错误，请求的参数为：{}", mo);
-			ro.setResult(ResultDic.FAIL);
-			ro.setMsg("设置失败");
-			return ro;
-		}
+        int enableResult = _mapper.enable(mo.getSellerId(), mo.getShopId(), mo.getCode(), mo.getIsEnabled());
+        _log.info("禁用/启用店铺搜索分类的返回值为：{}", enableResult);
+        if (enableResult < 0) {
+            _log.error("禁用/启用店铺搜索分类时出现错误，请求的参数为：{}", mo);
+            ro.setResult(ResultDic.FAIL);
+            ro.setMsg("设置失败");
+            return ro;
+        }
 
-		_log.info("禁用/启用店铺搜索分类成功，请求的参数为：{}", mo);
-		ro.setResult(ResultDic.SUCCESS);
-		ro.setMsg("设置成功");
-		return ro;
-	}
+        _log.info("禁用/启用店铺搜索分类成功，请求的参数为：{}", mo);
+        ro.setResult(ResultDic.SUCCESS);
+        ro.setMsg("设置成功");
+        return ro;
+    }
 
-	/**
-	 * 根据店铺id获取搜索分类树
-	 * 
-	 * @param shopId
-	 * @return
-	 */
-	@Override
-	public List<OnlSearchCategoryTreeRo> searchCategoryTreeList(Long shopId) {
-		_log.info("获取店铺搜索分类树的参数为：{}", shopId);
-		
-		List<OnlSearchCategoryTreeRo> searchCategoryTreeList = new ArrayList<OnlSearchCategoryTreeRo>();
-		if (shopId == null) {
-			_log.error("获取搜索店铺分类树的参数为null, 请求的参数为：{}", shopId);
-			return searchCategoryTreeList;
-		}
+    /**
+     * 根据店铺id获取搜索分类树
+     * 
+     * @param shopId
+     * @return
+     */
+    @Override
+    public List<OnlSearchCategoryTreeRo> searchCategoryTreeList(Long shopId) {
+        _log.info("获取店铺搜索分类树的参数为：{}", shopId);
 
-		_log.info("获取店铺搜索分类树获取店铺顶级分类的参数为：{}", shopId);
-		List<OnlSearchCategoryMo> shopTopSearchCategoryList = _mapper.selectShopTopSearchCategory(shopId);
-		_log.info("获取店铺搜索分类树获取店铺顶级分类的返回值为：{}", String.valueOf(shopTopSearchCategoryList));
-		for (OnlSearchCategoryMo onlSearchCategoryMo : shopTopSearchCategoryList) {
-			
-			if (onlSearchCategoryMo.getIsEnabled() == true) {
-				_log.info("查询并设置子分类与活动列表开始--------------------------------------");
+        List<OnlSearchCategoryTreeRo> searchCategoryTreeList = new ArrayList<OnlSearchCategoryTreeRo>();
+        if (shopId == null) {
+            _log.error("获取搜索店铺分类树的参数为null, 请求的参数为：{}", shopId);
+            return searchCategoryTreeList;
+        }
 
-				// 获取子级分类
-				OnlSearchCategoryTreeRo categoryTreeRo = new OnlSearchCategoryTreeRo();
-				categoryTreeRo.setId(onlSearchCategoryMo.getId());
-				categoryTreeRo.setName(onlSearchCategoryMo.getName());
-				
-				_log.info("搜索子分类参数是：ShopId()-{} Code()-{}", onlSearchCategoryMo.getShopId(),
-						onlSearchCategoryMo.getCode());
-				List<OnlSearchCategoryTreeRo> categoryList = onlCategoryList(onlSearchCategoryMo.getShopId(),
-						onlSearchCategoryMo.getCode());
-				_log.info("搜索子分类结果是：{}", categoryList);
-				categoryTreeRo.setCategoryList(categoryList);
+        _log.info("获取店铺搜索分类树获取店铺顶级分类的参数为：{}", shopId);
+        List<OnlSearchCategoryMo> shopTopSearchCategoryList = _mapper.selectShopTopSearchCategory(shopId);
+        _log.info("获取店铺搜索分类树获取店铺顶级分类的返回值为：{}", String.valueOf(shopTopSearchCategoryList));
+        for (OnlSearchCategoryMo onlSearchCategoryMo : shopTopSearchCategoryList) {
 
-				searchCategoryTreeList.add(categoryTreeRo);
-				_log.info("查询并设置子分类与活动列表结束+++++++++++++++++++++++++++++++++");
-			}
+            if (onlSearchCategoryMo.getIsEnabled() == true) {
+                _log.info("查询并设置子分类与活动列表开始--------------------------------------");
 
-		}
-		return searchCategoryTreeList;
-	}
+                // 获取子级分类
+                OnlSearchCategoryTreeRo categoryTreeRo = new OnlSearchCategoryTreeRo();
+                categoryTreeRo.setId(onlSearchCategoryMo.getId());
+                categoryTreeRo.setName(onlSearchCategoryMo.getName());
 
-	/**
-	 * 根据店铺id和编码获取店铺搜索分类
-	 * 
-	 * @param list
-	 * @param code
-	 * @return
-	 */
-	public List<OnlSearchCategoryTreeRo> onlCategoryList(Long shopId, String code) {
-		_log.info("根据店铺id和编码查询店铺分类的参数为：shopId-{}, code-{}", shopId, code);
-		List<OnlSearchCategoryTreeRo> categoryList = new ArrayList<OnlSearchCategoryTreeRo>();
-		List<OnlSearchCategoryMo> shopSonSearchCategoryList = _mapper.selectShopSonSearchCategory(shopId, code);
-		_log.info("根据店铺id和编码查询店铺分类的返回值为：{}", String.valueOf(shopSonSearchCategoryList));
-		for (OnlSearchCategoryMo onlSearchCategoryMo : shopSonSearchCategoryList) {
-			_log.info("循环查询和设置活动列表开始-------------------------------------------");
-			OnlSearchCategoryTreeRo categoryTreeRo = new OnlSearchCategoryTreeRo();
-			categoryTreeRo.setId(onlSearchCategoryMo.getId());
-			categoryTreeRo.setName(onlSearchCategoryMo.getName());
+                _log.info("搜索子分类参数是：ShopId()-{} Code()-{}", onlSearchCategoryMo.getShopId(),
+                        onlSearchCategoryMo.getCode());
+                List<OnlSearchCategoryTreeRo> categoryList = onlCategoryList(onlSearchCategoryMo.getShopId(),
+                        onlSearchCategoryMo.getCode());
+                _log.info("搜索子分类结果是：{}", categoryList);
+                categoryTreeRo.setCategoryList(categoryList);
 
-			// 判断是否还有下一级，有的话就递归调用。
-			_log.info("循环查询是否还有下一级的参数为：shpoId-{} code-{}", onlSearchCategoryMo.getShopId(),
-					onlSearchCategoryMo.getCode());
-			List<OnlSearchCategoryTreeRo> nextCategoryList = onlCategoryList(onlSearchCategoryMo.getShopId(),
-					onlSearchCategoryMo.getCode());
-			_log.info("循环查询是否还有下一级的结果为：nextCategoryList-{}", nextCategoryList);
+                searchCategoryTreeList.add(categoryTreeRo);
+                _log.info("查询并设置子分类与活动列表结束+++++++++++++++++++++++++++++++++");
+            }
 
-			// 如果下一级返回的list不是空，那么这里不需要查询活动列表,因为只有最低层才有活动列表和商品列表。
-			if (nextCategoryList.size() != 0) {
-				categoryTreeRo.setCategoryList(nextCategoryList);
-			} else {
-				_log.info("根据搜索分类id查询上线商品树信息的参数为：{}", onlSearchCategoryMo.getId());
+        }
+        return searchCategoryTreeList;
+    }
 
-				List<OnlOnlineTreeRo> activityList = onlSearchCategoryOnlineSvc
-						.onlineTreeList(onlSearchCategoryMo.getId());
-				_log.info("根据搜索分类id查询上线商品树信息的返回值为：{}", activityList);
+    /**
+     * 根据店铺id和编码获取店铺搜索分类
+     * 
+     * @param list
+     * @param code
+     * @return
+     */
+    public List<OnlSearchCategoryTreeRo> onlCategoryList(Long shopId, String code) {
+        _log.info("根据店铺id和编码查询店铺分类的参数为：shopId-{}, code-{}", shopId, code);
+        List<OnlSearchCategoryTreeRo> categoryList              = new ArrayList<OnlSearchCategoryTreeRo>();
+        List<OnlSearchCategoryMo>     shopSonSearchCategoryList = _mapper.selectShopSonSearchCategory(shopId, code);
+        _log.info("根据店铺id和编码查询店铺分类的返回值为：{}", String.valueOf(shopSonSearchCategoryList));
+        for (OnlSearchCategoryMo onlSearchCategoryMo : shopSonSearchCategoryList) {
+            _log.info("循环查询和设置活动列表开始-------------------------------------------");
+            OnlSearchCategoryTreeRo categoryTreeRo = new OnlSearchCategoryTreeRo();
+            categoryTreeRo.setId(onlSearchCategoryMo.getId());
+            categoryTreeRo.setName(onlSearchCategoryMo.getName());
 
-				if (activityList.size() != 0) {
-					categoryTreeRo.setActivityList(activityList);
-				}
-			}
+            // 判断是否还有下一级，有的话就递归调用。
+            _log.info("循环查询是否还有下一级的参数为：shpoId-{} code-{}", onlSearchCategoryMo.getShopId(),
+                    onlSearchCategoryMo.getCode());
+            List<OnlSearchCategoryTreeRo> nextCategoryList = onlCategoryList(onlSearchCategoryMo.getShopId(),
+                    onlSearchCategoryMo.getCode());
+            _log.info("循环查询是否还有下一级的结果为：nextCategoryList-{}", nextCategoryList);
 
-			categoryList.add(categoryTreeRo);
-			_log.info("循环查询和设置活动列表结束+++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		}
-		_log.info("根据店铺id和编码查询店铺搜索分类的返回值为：{}", categoryList);
-		return categoryList;
-	}
-	
-	
-	/**
-	 * 根据店铺id集合获取所有搜索分类。
-	 */
-	@Override
-	public List<OnlSearchCategoryMo> searchCategoryByshopIds(String shopIds) {
-		_log.info("根据店铺id集合所有搜索分参数是：{}", shopIds);
-		return _mapper.searchCategoryByshopIds(shopIds);
-	}
+            // 如果下一级返回的list不是空，那么这里不需要查询活动列表,因为只有最低层才有活动列表和商品列表。
+            if (nextCategoryList.size() != 0) {
+                categoryTreeRo.setCategoryList(nextCategoryList);
+            } else {
+                _log.info("根据搜索分类id查询上线商品树信息的参数为：{}", onlSearchCategoryMo.getId());
+
+                List<OnlOnlineTreeRo> activityList = onlSearchCategoryOnlineSvc
+                        .onlineTreeList(onlSearchCategoryMo.getId());
+                _log.info("根据搜索分类id查询上线商品树信息的返回值为：{}", activityList);
+
+                if (activityList.size() != 0) {
+                    categoryTreeRo.setActivityList(activityList);
+                }
+            }
+
+            categoryList.add(categoryTreeRo);
+            _log.info("循环查询和设置活动列表结束+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        }
+        _log.info("根据店铺id和编码查询店铺搜索分类的返回值为：{}", categoryList);
+        return categoryList;
+    }
+
+    /**
+     * 根据店铺id集合获取所有搜索分类。
+     */
+    @Override
+    public List<OnlSearchCategoryMo> searchCategoryByshopIds(String shopIds) {
+        _log.info("根据店铺id集合所有搜索分参数是：{}", shopIds);
+        return _mapper.searchCategoryByshopIds(shopIds);
+    }
+
+    /**
+     * 根据店铺id和上线id判断该分类是否存在
+     */
+    @Override
+    public int countSelectiveByShopId(Long shopId, Long onlineId) {
+        _log.info("根据店铺id和上线id判断该分类是否存在参数是：shopId-{},onlineId-{}", shopId, onlineId);
+        return _mapper.countSelectiveByShopId(shopId, onlineId);
+    }
 }

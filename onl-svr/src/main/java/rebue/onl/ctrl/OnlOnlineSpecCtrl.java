@@ -250,21 +250,23 @@ public class OnlOnlineSpecCtrl {
      * @return
      */
     @GetMapping(value = "/onl/onlinespec/select-by-code")
-    public List<OnlOnlineSpecMo> selectByCode(String code) {
-        _log.info("根据条码获取上线规格信息的参数: code-{}", code);
-        return svc.selectByCode(code);
+    public List<OnlOnlineSpecMo> selectByCode(String code, Long shopId) {
+        _log.info("根据条码获取上线规格信息的参数: code-{},shopId--{}", code, shopId);
+        Long shop = shopId == null ? -1L : shopId;
+        return svc.selectByCode(code, shop);
     }
 
     /**
      * 判断搜索类型
      */
     @GetMapping(value = "/onl/online-spec/search")
-    public List<OnlOnlineSpecEsRo> selectBySearch(@RequestParam("onlineSpec") final String onlineSpec) {
-        _log.info("搜索的参数: code-{}", onlineSpec);
-        String reg = "^\\d{6}$";
+    public List<OnlOnlineSpecEsRo> selectBySearch(final String onlineSpec, Long shopId) {
+        _log.info("搜索的参数: code-{},shopId--{}", onlineSpec, shopId);
+        Long   shop = shopId == null ? -1L : shopId;
+        String reg  = "^\\d{6}$";
         if (onlineSpec.matches(reg)) {
             _log.info("商品名称为6位纯数字,搜索条码");
-            List<OnlOnlineSpecMo>   list   = svc.selectByCode(onlineSpec);
+            List<OnlOnlineSpecMo>   list   = svc.selectByCode(onlineSpec, shop);
             List<OnlOnlineSpecEsRo> roList = new ArrayList<OnlOnlineSpecEsRo>();
             for (OnlOnlineSpecMo mo : list) {
                 OnlOnlineSpecEsRo ro = dozerMapper.map(mo, OnlOnlineSpecEsRo.class);
@@ -275,7 +277,8 @@ public class OnlOnlineSpecCtrl {
             return roList;
         } else {
             _log.info("商品名称不为6位纯数字,搜索商品名称");
-            return esSvc.selectByName(onlineSpec);
+
+            return esSvc.selectByName(onlineSpec, shop);
         }
     }
 

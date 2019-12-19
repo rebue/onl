@@ -11,5 +11,5 @@ import rebue.robotech.svc.EsBaseSvc;
  *
  */
 public interface OnlOnlineSpecEsSvc extends EsBaseSvc<OnlOnlineSpecSo> {
-    public List<OnlOnlineSpecEsRo> selectByName(String name);
+    public List<OnlOnlineSpecEsRo> selectByName(String name, Long shopId);
 }

@@ -3,7 +3,9 @@ package rebue.onl.svc.impl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -329,6 +331,13 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                     OnlOnlineSpecSo so = dozerMapper.map(onlineSpecMo, OnlOnlineSpecSo.class);
                     so.setProducId(to.getProductId());
 
+                    // 店铺id
+                    Set<Long> shopIds = new HashSet<Long>();
+                    for (Long classificationId : to.getClassificationId()) {
+                        OnlSearchCategoryMo searchCategoryMo = onlSearchCategorySvc.getById(classificationId);
+                        shopIds.add(searchCategoryMo.getShopId());
+                    }
+                    so.setShopId(new ArrayList<>(shopIds));
                     so.setIsWeighGoods(to.getIsWeighGoods() == null ? false : to.getIsWeighGoods());
                     so.setProducSpecId(to.getOnlineSpecs().get(i).getProductSpecId().toString());
                     _log.info("添加搜索引擎参数-{}", so);

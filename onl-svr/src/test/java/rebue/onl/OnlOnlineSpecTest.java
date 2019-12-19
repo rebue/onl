@@ -29,7 +29,8 @@ public class OnlOnlineSpecTest {
 
     @Test
     public void test() throws IOException {
-        final String result = OkhttpUtils.get(hostUrl + "/onl/online-spec-es/select-by-name?name=bs");
+        final String result = OkhttpUtils
+                .get(hostUrl + "onl/online-spec-es/select-by-name?onlineSpec=sds&shopId=581703913896542208");
         System.out.println(result);
     }
 }

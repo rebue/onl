@@ -85,5 +85,5 @@ public interface OnlOnlineSpecSvc extends MybatisBaseSvc<OnlOnlineSpecMo, java.l
     /**
      * 根据条码获取上线规格信息
      */
-    List<OnlOnlineSpecMo> selectByCode(String code);
+    List<OnlOnlineSpecMo> selectByCode(String code, Long shopId);
 }

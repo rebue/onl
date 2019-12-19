@@ -40,8 +40,9 @@ public class OnlOnlineSpecEsCtrl {
      * 根据上线名称获取上线规格
      */
     @GetMapping("/onl/online-spec-es/select-by-name")
-    List<OnlOnlineSpecEsRo> selectByName(@RequestParam("onlineSpec") final String onlineSpec) {
+    List<OnlOnlineSpecEsRo> selectByName(@RequestParam("onlineSpec") final String onlineSpec, Long shopId) {
         _log.info("PrdProductSpecEsCtrl.getById:{}", onlineSpec);
-        return svc.selectByName(onlineSpec);
+        Long shop = shopId == null ? -1L : shopId;
+        return svc.selectByName(onlineSpec, shop);
     }
 }

@@ -22,6 +22,7 @@ import rebue.onl.svc.OnlCartSvc;
 import rebue.onl.svc.OnlOnlineSpecEsSvc;
 import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
+import rebue.onl.svc.OnlSearchCategorySvc;
 import rebue.onl.to.ModifySaleCountByIdTo;
 import rebue.onl.to.OnlOnlineSpecTo;
 import rebue.prd.mo.PrdProductSpecCodeMo;
@@ -82,6 +83,9 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
 
     @Resource
     private PrdProductSpecCodeSvc prdProductSpecCodeSvc;
+
+    @Resource
+    private OnlSearchCategorySvc onlSearchCategorySvc;
 
     /**
      * 根据商品规格编号查询商品规格信息 2018年3月29日14:28:59
@@ -268,7 +272,7 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
      * 根据条码获取上线规格信息
      */
     @Override
-    public List<OnlOnlineSpecMo> selectByCode(String code) {
+    public List<OnlOnlineSpecMo> selectByCode(String code, Long ShopId) {
         List<OnlOnlineSpecMo> list = new ArrayList<OnlOnlineSpecMo>();
         _log.info("根据条码获取产品规格信息的参数为：code-{}", code);
         List<PrdProductSpecCodeMo> codeList = prdProductSpecCodeSvc.selectByCode(code);
@@ -280,7 +284,17 @@ public class OnlOnlineSpecSvcImpl extends MybatisBaseSvcImpl<OnlOnlineSpecMo, ja
             List<OnlOnlineSpecMo> onlSpec = _mapper.selectSelective(mo);
             _log.info("根据产品规格获取上线规格的返回值为：mo-{}", onlSpec);
             if (onlSpec != null && onlSpec.size() != 0) {
-                list.addAll(onlSpec);
+                if (ShopId != -1L) {
+                    for (OnlOnlineSpecMo spec : onlSpec) {
+                        int result = onlSearchCategorySvc.countSelectiveByShopId(ShopId, spec.getOnlineId());
+                        _log.info("根据上线id和店铺id的返回值为：result-{}", result);
+                        if (result == 1) {
+                            list.add(spec);
+                        }
+                    }
+                } else {
+                    list.addAll(onlSpec);
+                }
             }
         }
         _log.info("根据条码获取上线规格信息：list-{}", list);
