@@ -775,7 +775,14 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                         OnlOnlineSpecSo so = dozerMapper.map(onlineSpecTo, OnlOnlineSpecSo.class);
                         so.setProducId(to.getProductId());
                         so.setIsWeighGoods(to.getIsWeighGoods() == null ? false : to.getIsWeighGoods());
-
+                        // 店铺id
+                        Set<Long> shopIds = new HashSet<Long>();
+                        for (Long classificationId : to.getClassificationId()) {
+                            OnlSearchCategoryMo searchCategoryMo = onlSearchCategorySvc.getById(classificationId);
+                            shopIds.add(searchCategoryMo.getShopId());
+                        }
+                        so.setShopId(new ArrayList<>(shopIds));
+                        so.setIsWeighGoods(to.getIsWeighGoods() == null ? false : to.getIsWeighGoods());
                         so.setProducSpecId(to.getOnlineSpecs().get(i).getProductSpecId().toString());
                         onlOnlineSpecEsSvc.add(so);
                     }
