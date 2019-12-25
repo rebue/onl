@@ -1,9 +1,10 @@
 package rebue.onl.ctrl;
 
-import com.github.pagehelper.PageInfo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.github.pagehelper.PageInfo;
+
 import rebue.onl.mo.OnlSearchCategoryOnlineMo;
 import rebue.onl.svc.OnlSearchCategoryOnlineSvc;
 import rebue.robotech.dic.ResultDic;
@@ -77,7 +81,7 @@ public class OnlSearchCategoryOnlineCtrl {
             return ro;
         } catch (RuntimeException e) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String msg = "添加失败，出现运行时异常(" + sdf.format(new Date()) + ")";
+            String           msg = "添加失败，出现运行时异常(" + sdf.format(new Date()) + ")";
             _log.error(msg + ": mo=" + mo, e);
             ro.setMsg(msg);
             ro.setResult(ResultDic.FAIL);
@@ -116,7 +120,7 @@ public class OnlSearchCategoryOnlineCtrl {
             return ro;
         } catch (RuntimeException e) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String msg = "修改失败，出现运行时异常(" + sdf.format(new Date()) + ")";
+            String           msg = "修改失败，出现运行时异常(" + sdf.format(new Date()) + ")";
             _log.error("{}: mo-{}", msg, mo);
             ro.setMsg(msg);
             ro.setResult(ResultDic.FAIL);
@@ -133,7 +137,7 @@ public class OnlSearchCategoryOnlineCtrl {
     Ro del(@RequestParam("id") java.lang.Long id) {
         _log.info("del OnlSearchCategoryOnlineMo by id: {}", id);
         int result = svc.del(id);
-        Ro ro = new Ro();
+        Ro  ro     = new Ro();
         if (result == 1) {
             String msg = "删除成功";
             _log.info("{}: id-{}", msg, id);
@@ -189,4 +193,11 @@ public class OnlSearchCategoryOnlineCtrl {
         _log.info("添加已有商品在上线搜索中的分类");
         svc.addCategoryOnline();
     }
+
+    @GetMapping("/onl/searchcategoryonline/get-by-onlineid")
+    OnlSearchCategoryOnlineMo getByOnlineId(@RequestBody OnlSearchCategoryOnlineMo mo) {
+        _log.info("getByOnlineId mo: {}", mo);
+        return svc.getOne(mo);
+    }
+
 }

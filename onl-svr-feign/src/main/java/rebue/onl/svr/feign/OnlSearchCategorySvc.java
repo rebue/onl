@@ -23,8 +23,10 @@ public interface OnlSearchCategorySvc {
      */
     @GetMapping("/onl/searchcategory/tree")
     List<OnlSearchCategoryTreeRo> searchCategoryTreeList(@RequestParam("shopId") Long shopId);
-    
-    
+
     @PostMapping("/onl/addSearchCategory")
     int addSearchCategory(@RequestBody OnlSearchCategoryMo mo);
+
+    @GetMapping("/onl/searchcategory/get-one-by-name")
+    OnlSearchCategoryMo getOneByName(@RequestBody OnlSearchCategoryMo mo);
 }

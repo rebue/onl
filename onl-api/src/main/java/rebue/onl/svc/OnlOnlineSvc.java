@@ -94,4 +94,6 @@ public interface OnlOnlineSvc extends MybatisBaseSvc<OnlOnlineMo, java.lang.Long
     boolean existWeighGoods(Long onlineId);
 
     void addGoodsToEs();
+
+    OnlOnlineMo getOneByName(OnlOnlineMo mo);
 }

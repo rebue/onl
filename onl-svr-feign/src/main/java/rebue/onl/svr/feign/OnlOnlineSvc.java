@@ -65,4 +65,7 @@ public interface OnlOnlineSvc {
     @PostMapping("/onl/online/online-to-pos")
     AddOnlineRo onlineToPos(@RequestBody final AddOnlineTo to);
 
+    @GetMapping("/onl/online/get-one-by-name")
+    OnlOnlineMo getOneByName(@RequestBody final OnlOnlineMo mo);
+
 }

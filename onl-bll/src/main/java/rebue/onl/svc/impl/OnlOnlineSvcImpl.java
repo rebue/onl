@@ -1202,4 +1202,10 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlOnlineSpecEsSvc.add(item);
         }
     }
+
+    @Override
+    public OnlOnlineMo getOneByName(OnlOnlineMo mo) {
+        _log.info("getOneByName-{}", mo.getOnlineTitle());
+        return _mapper.getOneByName(mo.getOnlineTitle());
+    }
 }

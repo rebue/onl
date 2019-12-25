@@ -227,4 +227,10 @@ public class OnlSearchCategoryCtrl {
         _log.info("根据店铺id和上线id判断该分类是否存在:shopId-{},onlineId-{}", shopId, onlineId);
         return svc.countSelectiveByShopId(shopId, onlineId);
     }
+
+    @GetMapping("/onl/searchcategory/get-one-by-name")
+    OnlSearchCategoryMo getOneByName(@RequestBody OnlSearchCategoryMo mo) {
+        _log.info("getOneByName OnlSearchCategoryMo: {}", mo);
+        return svc.getOne(mo);
+    }
 }

@@ -81,7 +81,7 @@ public class OnlOnlineCtrl {
     Ro del(@RequestParam("id") java.lang.Long id) {
         _log.info("del OnlOnlineMo by id: {}", id);
         int result = svc.del(id);
-        Ro ro = new Ro();
+        Ro  ro     = new Ro();
         if (result == 1) {
             String msg = "删除成功";
             _log.info("{}: id-{}", msg, id);
@@ -128,11 +128,9 @@ public class OnlOnlineCtrl {
 
     @Resource
     private OnlSearchCategorySvc onlSearchCategorySvc;
-    
-    
+
     @Resource
     private OnlOnlineMapper onlOnlineMapper;
-    
 
     /**
      * 添加上线信息
@@ -143,10 +141,10 @@ public class OnlOnlineCtrl {
     AddOnlineRo add(@RequestBody final AddOnlineTo to, final HttpServletRequest req) throws Exception {
         // 获取当前登录用户id
         Long currentUserId = 520469568947224576L;
-        Long orgId = 520874560590053376L;
+        Long orgId         = 520874560590053376L;
         if (!isDebug) {
             currentUserId = JwtUtils.getJwtUserIdInCookie(req);
-            orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
+            orgId         = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
             _log.info("从cookie中获取的组织id：{}", orgId);
             _log.info("从cookie中获取的用户：{}", currentUserId);
         }
@@ -301,7 +299,7 @@ public class OnlOnlineCtrl {
             onlOnlineRo.setOnlineSpecList(onlineSpecSvc.list(onlineSpecMo));
             // 获取规格属性信息
             final List<OnlOnlineSpecAttrMo> onlineSpecAttrMoList = new ArrayList<OnlOnlineSpecAttrMo>();
-            final List<OnlOnlineSpecMo> onlineSpecList = onlOnlineRo.getOnlineSpecList();
+            final List<OnlOnlineSpecMo>     onlineSpecList       = onlOnlineRo.getOnlineSpecList();
             for (OnlOnlineSpecMo onlOnlineSpecMo : onlineSpecList) {
                 final OnlOnlineSpecAttrMo onlineSpecAttrMo = new OnlOnlineSpecAttrMo();
                 onlineSpecAttrMo.setOnlineSpecId(onlOnlineSpecMo.getId());
@@ -347,10 +345,10 @@ public class OnlOnlineCtrl {
             throws NumberFormatException, ParseException {
         // 获取当前登录用户id
         Long currentUserId = 520469568947224576L;
-        Long orgId = 520874560590053376L;
+        Long orgId         = 520874560590053376L;
         if (!isDebug) {
             currentUserId = JwtUtils.getJwtUserIdInCookie(req);
-            orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
+            orgId         = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
         }
         to.setOpId(currentUserId);
         final ReOnlineRo ro = new ReOnlineRo();
@@ -446,14 +444,20 @@ public class OnlOnlineCtrl {
         _log.info("获取单个上线信息参数-{}", mo);
         return onlOnlineMapper.countSelective(mo);
     }
-    
+
     /**
      * 将上线的商品添加到搜索引擎里面
      */
     @GetMapping("/onl/online/add-goods-to-es")
     void addGoodsToEs() {
         _log.info("将上线的商品添加到搜索引擎");
-         svc.addGoodsToEs();
+        svc.addGoodsToEs();
     }
-    
+
+    @GetMapping("/onl/online/get-one-by-name")
+    OnlOnlineMo getOneByName(@RequestBody final OnlOnlineMo mo) {
+        _log.info("getOneByName mo-{}", mo);
+        return svc.getOneByName(mo);
+    }
+
 }
