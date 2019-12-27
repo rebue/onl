@@ -141,6 +141,6 @@ public interface OnlOnlineMapper extends MybatisBaseMapper<OnlOnlineMo, Long> {
     @Select("select  A.PRODUCT_ID , A.IS_WEIGH_GOODS, B.* from onl.ONL_ONLINE A , onl.ONL_ONLINE_SPEC B where A.ID = B.ONLINE_ID and A.OP_ID = 123456 ")
     List<OnlOnlineSpecSo> getOnlineInfo();
 
-    @Select("select * from onl.ONL_ONLINE where ONLINE_TITLE=#{onlineTitle} and OP_ID=1234567")
+    @Select("select * from onl.ONL_ONLINE where ONLINE_TITLE=#{onlineTitle} and OP_ID=1234567 order by id desc limit 1")
     OnlOnlineMo getOneByName(@Param("onlineTitle") String onlineTitle);
 }

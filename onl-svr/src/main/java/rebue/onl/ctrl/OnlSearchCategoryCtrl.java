@@ -233,4 +233,17 @@ public class OnlSearchCategoryCtrl {
         _log.info("getOneByName OnlSearchCategoryMo: {}", mo);
         return svc.getOne(mo);
     }
+
+    /**
+     * 根据店铺id获取搜索分类树(不获取产品列表)
+     * 
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/onl/searchcategory/select-category-tree")
+    List<OnlSearchCategoryTreeRo> selectCategoryTreeListByshopId(@RequestParam("shopId") Long shopId) {
+        _log.info("根据店铺id获取搜索分类树的参数为(不获取产品列表)：{}", shopId);
+        return svc.selectCategoryTreeListByshopId(shopId);
+    }
+
 }

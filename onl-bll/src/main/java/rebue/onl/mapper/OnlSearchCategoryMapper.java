@@ -115,7 +115,7 @@ public interface OnlSearchCategoryMapper extends MybatisBaseMapper<OnlSearchCate
      * @param shopId
      * @return
      */
-    @Select("SELECT * FROM ONL_SEARCH_CATEGORY where SHOP_ID = #{shopId,jdbcType=BIGINT} and code like '__';")
+    @Select("SELECT * FROM ONL_SEARCH_CATEGORY where SHOP_ID = #{shopId,jdbcType=BIGINT} and code like '__' or code like '___' ;")
     List<OnlSearchCategoryMo> selectShopTopSearchCategory(@Param("shopId") Long shopId);
 
     /**
