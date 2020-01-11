@@ -958,7 +958,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         ListslrShopMo.setSellerId(ro.getThisOrgId());
         _log.info("根据当前组织id获取该组织下的所有店铺的信息参数为：{}", ListslrShopMo);
         List<SlrShopMo> slrShopMoList = slrShopSvc.list(ListslrShopMo);
-        _log.info("根据当前组织id获取该组织下的所有店铺的信息结果为：slrShopMoList-{}", slrShopMoList);
+      //  _log.info("根据当前组织id获取该组织下的所有店铺的信息结果为：slrShopMoList-{}", slrShopMoList);
         if (slrShopMoList.size() == 0) {
             return pageInfo;
         }
@@ -975,7 +975,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         }
         _log.info("根据店铺id集合获取所有搜索分类的参数为: shopIds-{}", shopIds);
         List<OnlSearchCategoryMo> onlSearchCategoryList = onlSearchCategorySvc.searchCategoryByshopIds(shopIds);
-        _log.info("根据店铺id集合获取所有搜索分类的结果为: shopIds-{}", onlSearchCategoryList);
+     //   _log.info("根据店铺id集合获取所有搜索分类的结果为: shopIds-{}", onlSearchCategoryList);
         if (onlSearchCategoryList.size() == 0) {
             return pageInfo;
         }
@@ -993,7 +993,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         _log.info("根据搜索分类id集合获取搜索上线信息参数为: searchCategoryId-{}", searchCategoryIds);
         List<OnlSearchCategoryOnlineMo> SearchCategoryOnlineList = onlSearchCategoryOnlineSvc
                 .selectBysearchCategoryIds(searchCategoryIds);
-        _log.info("根据搜索分类id集合获取搜索上线结果为: SearchCategoryOnlineList-{}", SearchCategoryOnlineList);
+     //   _log.info("根据搜索分类id集合获取搜索上线结果为: SearchCategoryOnlineList-{}", SearchCategoryOnlineList);
         if (SearchCategoryOnlineList.size() == 0) {
             return pageInfo;
         }
@@ -1016,14 +1016,14 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         _log.info("查询上线信息的参数为 SelectOnlineTo-{} ", SelectOnlineTo);
         final PageInfo<OnlOnlineMo> onlinePageInfo = PageHelper.startPage(pageNum, pageSize, orderBy)
                 .doSelectPageInfo(() -> _mapper.selectOnlineInfo(SelectOnlineTo));
-        _log.info("查询上线信息的结果为 onlinePageInfo.getList()-{} ", onlinePageInfo.getList());
+     //   _log.info("查询上线信息的结果为 onlinePageInfo.getList()-{} ", onlinePageInfo.getList());
 
         for (final OnlOnlineMo onlOnlineMo : onlinePageInfo.getList()) {
             final OnlOnlineListRo onlineListRo = dozerMapper.map(onlOnlineMo, OnlOnlineListRo.class);
             if (onlOnlineMo.getSupplierId() != null) {
                 _log.info("获取供应商名称参数为：{}", onlOnlineMo.getSupplierId());
                 final SucOrgRo sucOrgRo = sucOrgSvc.getById(onlOnlineMo.getSupplierId());
-                _log.info("获取供应商名称的返回值为：{}", sucOrgRo);
+          //      _log.info("获取供应商名称的返回值为：{}", sucOrgRo);
                 if (sucOrgRo.getRecord() != null && sucOrgRo.getRecord().getName() != null) {
                     onlineListRo.setSupplierName(sucOrgRo.getRecord().getName());
                 }
@@ -1031,7 +1031,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             if (onlOnlineMo.getDeliverOrgId() != null) {
                 _log.info("获取发货组织名称的参数为：{}", onlOnlineMo.getDeliverOrgId());
                 final SucOrgRo sucOrgRo = sucOrgSvc.getById(onlOnlineMo.getDeliverOrgId());
-                _log.info("获取发货组织名称的返回值为：{}", sucOrgRo);
+           //     _log.info("获取发货组织名称的返回值为：{}", sucOrgRo);
                 if (sucOrgRo.getRecord() != null && sucOrgRo.getRecord().getName() != null) {
                     onlineListRo.setDeliverOrgName(sucOrgRo.getRecord().getName());
                 }
@@ -1040,7 +1040,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlinePromotionMo.setOnlineId(onlOnlineMo.getId());
             _log.info("重写查询上线信息查询推广信息的参数为:{}", onlinePromotionMo);
             OnlOnlinePromotionMo onlOnlinePromotionMo = onlOnlinePromotionSvc.getOne(onlinePromotionMo);
-            _log.info("重写查询上线信息查询推广信息的返回值为:{}", onlOnlinePromotionMo);
+         //   _log.info("重写查询上线信息查询推广信息的返回值为:{}", onlOnlinePromotionMo);
             if (onlOnlinePromotionMo != null) {
                 onlineListRo.setOnlineId(onlOnlinePromotionMo.getOnlineId());
             }
@@ -1048,7 +1048,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         }
         pageInfo = dozerMapper.map(onlinePageInfo, PageInfo.class);
         pageInfo.setList(listEx);
-        _log.info("重写查询上线信息的返回值为：{}", pageInfo);
+     //   _log.info("重写查询上线信息的返回值为：{}", pageInfo);
         return pageInfo;
     }
 
