@@ -200,7 +200,7 @@ public class OnlOnlineCtrl {
         }
         ro.setThisOrgId(orgId);
         final PageInfo<OnlOnlineListRo> result = svc.listEx(ro, pageNum, pageSize, "ONLINE_TIME DESC");
-        _log.info("result: " + result);
+       // _log.info("result: " + result);
         return result;
     }
 
