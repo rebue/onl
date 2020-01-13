@@ -246,4 +246,17 @@ public class OnlSearchCategoryCtrl {
         return svc.selectCategoryTreeListByshopId(shopId);
     }
 
+    /**
+     * 根据上线id获取搜索分类
+     * 
+     * @param onlineId
+     * @return
+     */
+    @GetMapping("/onl/searchcategory/get-category-by-online")
+    List<OnlSearchCategoryTreeRo> getCategoryByOnline(@RequestParam("onlineId") Long onlineId,
+            @RequestParam("shopId") Long shopId) {
+        _log.info("根据上线id获取搜索分类的参数为 onlineId-{},shopId-{}", onlineId, shopId);
+        return svc.getCategoryByOnlineId(onlineId, shopId);
+    }
+
 }

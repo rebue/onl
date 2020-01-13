@@ -81,4 +81,9 @@ public interface OnlSearchCategorySvc extends MybatisBaseSvc<OnlSearchCategoryMo
      * @return
      */
     List<OnlSearchCategoryTreeRo> selectCategoryTreeListByshopId(Long shopId);
+
+    /**
+     * 根据上线id获取搜索分类
+     */
+    List<OnlSearchCategoryTreeRo> getCategoryByOnlineId(Long onlineId, Long shopId);
 }
