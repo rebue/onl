@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * 上线规格
+ * 上线详情
  *
  * 数据库表: ONL_ONLINE_SPEC
  *
@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 public class OnlOnlineSpecMo implements Serializable {
 
     /**
-     *    上线规格ID
+     *    上线详情ID
      *
      *    数据库字段: ONL_ONLINE_SPEC.ID
      *
@@ -34,7 +34,7 @@ public class OnlOnlineSpecMo implements Serializable {
     private Long onlineId;
 
     /**
-     *    产品规格ID
+     *    产品详情ID
      *
      *    数据库字段: ONL_ONLINE_SPEC.PRODUCT_SPEC_ID
      *
@@ -43,7 +43,7 @@ public class OnlOnlineSpecMo implements Serializable {
     private Long productSpecId;
 
     /**
-     *    上线规格名称
+     *    上线详情名称
      *
      *    数据库字段: ONL_ONLINE_SPEC.ONLINE_SPEC
      *
@@ -124,12 +124,12 @@ public class OnlOnlineSpecMo implements Serializable {
     private BigDecimal currentOnlineCount;
 
     /**
-     *     限制购买数量(默认为0，不限制)
-     * 每个人限制购买的数量
+     *    限制购买数量(默认为0，不限制)
+     *                每个人限制购买的数量
      *
-     *     数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
+     *    数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
      *
-     *     @mbg.generated 自动生成，如需修改，请删除本行
+     *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private BigDecimal limitCount;
 
@@ -161,12 +161,21 @@ public class OnlOnlineSpecMo implements Serializable {
     private Boolean isHaveFirstOrder;
 
     /**
+     *    店铺ID
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.SHOP_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    private Long shopId;
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     private static final long serialVersionUID = 1L;
 
     /**
-     *    上线规格ID
+     *    上线详情ID
      *
      *    数据库字段: ONL_ONLINE_SPEC.ID
      *
@@ -177,7 +186,7 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
-     *    上线规格ID
+     *    上线详情ID
      *
      *    数据库字段: ONL_ONLINE_SPEC.ID
      *
@@ -210,7 +219,7 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
-     *    产品规格ID
+     *    产品详情ID
      *
      *    数据库字段: ONL_ONLINE_SPEC.PRODUCT_SPEC_ID
      *
@@ -221,7 +230,7 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
-     *    产品规格ID
+     *    产品详情ID
      *
      *    数据库字段: ONL_ONLINE_SPEC.PRODUCT_SPEC_ID
      *
@@ -232,7 +241,7 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
-     *    上线规格名称
+     *    上线详情名称
      *
      *    数据库字段: ONL_ONLINE_SPEC.ONLINE_SPEC
      *
@@ -243,7 +252,7 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
-     *    上线规格名称
+     *    上线详情名称
      *
      *    数据库字段: ONL_ONLINE_SPEC.ONLINE_SPEC
      *
@@ -430,24 +439,24 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
-     *     限制购买数量(默认为0，不限制)
-     * 每个人限制购买的数量
+     *    限制购买数量(默认为0，不限制)
+     *                每个人限制购买的数量
      *
-     *     数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
+     *    数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
      *
-     *     @mbg.generated 自动生成，如需修改，请删除本行
+     *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     public BigDecimal getLimitCount() {
         return limitCount;
     }
 
     /**
-     *     限制购买数量(默认为0，不限制)
-     * 每个人限制购买的数量
+     *    限制购买数量(默认为0，不限制)
+     *                每个人限制购买的数量
      *
-     *     数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
+     *    数据库字段: ONL_ONLINE_SPEC.LIMIT_COUNT
      *
-     *     @mbg.generated 自动生成，如需修改，请删除本行
+     *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     public void setLimitCount(BigDecimal limitCount) {
         this.limitCount = limitCount;
@@ -520,6 +529,28 @@ public class OnlOnlineSpecMo implements Serializable {
     }
 
     /**
+     *    店铺ID
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.SHOP_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public Long getShopId() {
+        return shopId;
+    }
+
+    /**
+     *    店铺ID
+     *
+     *    数据库字段: ONL_ONLINE_SPEC.SHOP_ID
+     *
+     *    @mbg.generated 自动生成，如需修改，请删除本行
+     */
+    public void setShopId(Long shopId) {
+        this.shopId = shopId;
+    }
+
+    /**
      *    @mbg.generated 自动生成，如需修改，请删除本行
      */
     @Override
@@ -544,6 +575,7 @@ public class OnlOnlineSpecMo implements Serializable {
         sb.append(", saleCount=").append(saleCount);
         sb.append(", seqNo=").append(seqNo);
         sb.append(", isHaveFirstOrder=").append(isHaveFirstOrder);
+        sb.append(", shopId=").append(shopId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

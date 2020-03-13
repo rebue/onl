@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2019/7/15 17:04:42                           */
+/* Created on:     2020/3/11 15:13:22                           */
 /*==============================================================*/
 
 
@@ -65,6 +65,7 @@ create table ONL_ONLINE
    IS_ONLINE_PLATFORM   bool not null comment '是否上线到平台',
    IS_WEIGH_GOODS       bool not null default false comment '是否是称重商品',
    SHORT_NAME           varchar(20) comment '商品简称',
+   SHOP_ID              bigint not null comment '店铺ID',
    primary key (ID)
 );
 
@@ -160,6 +161,7 @@ create table ONL_ONLINE_SPEC
    SALE_COUNT           decimal(20,4) not null comment '销售数量',
    SEQ_NO               int not null comment '排序号',
    IS_HAVE_FIRST_ORDER  bool comment '是否有首单',
+   SHOP_ID              bigint not null comment '店铺ID',
    primary key (ID)
 );
 

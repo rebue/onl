@@ -193,6 +193,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         Boolean isOnlinePlatform = to.getIsOnlinePlatform() == 0 ? false : true;
         // 添加上线信息开始
         final OnlOnlineMo onlineMo = new OnlOnlineMo();
+        // 先查询该商品是否已经上线过
         onlineMo.setId(onlineId);
         onlineMo.setOnlineTitle(to.getOnlineName());
         onlineMo.setSupplierId(to.getSupplierId());
@@ -211,7 +212,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         _log.info("添加上线信息的参数为：{}", onlineMo);
         final int addResult = add(onlineMo);
         _log.info("添加上线信息的返回值为：{}", addResult);
-        if (addResult != 1) {
+       if (addResult != 1) {
             _log.error("添加上线信息出错，用户id为：{}", to.getOpId());
             ro.setResult(AddOnlineDic.ADD_GOODS_ONLINE_ERROR);
             ro.setMsg("添加上线信息出错");
@@ -243,7 +244,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             throw new RuntimeException("添加上线日志出错");
         }
         // 添加上线日志信息结束
-        for (int i = 0; i < to.getOnlineSpecs().size(); i++) {
+           for (int i = 0; i < to.getOnlineSpecs().size(); i++) {
             // 添加上线规格信息开始
             final OnlOnlineSpecMo onlineSpecMo = new OnlOnlineSpecMo();
             // 上线规格名称
@@ -326,24 +327,24 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             } else {
 
                 // 添加到搜索引擎
-                if (to.getIsPos() == 1) {
-                    _log.info("开始添加到搜索引擎onlineSpecMo-{}", onlineSpecMo);
-                    OnlOnlineSpecSo so = dozerMapper.map(onlineSpecMo, OnlOnlineSpecSo.class);
-                    so.setProducId(to.getProductId());
-
-                    // 店铺id
-                    Set<Long> shopIds = new HashSet<Long>();
-                    for (Long classificationId : to.getClassificationId()) {
-                        OnlSearchCategoryMo searchCategoryMo = onlSearchCategorySvc.getById(classificationId);
-                        shopIds.add(searchCategoryMo.getShopId());
-                    }
-                    so.setShopId(new ArrayList<>(shopIds));
-                    so.setIsWeighGoods(to.getIsWeighGoods() == null ? false : to.getIsWeighGoods());
-                    so.setProducSpecId(to.getOnlineSpecs().get(i).getProductSpecId().toString());
-                    _log.info("添加搜索引擎参数-{}", so);
-                    onlOnlineSpecEsSvc.add(so);
-                    _log.info("添加搜索引擎结束");
-                }
+//                if (to.getIsPos() == 1) {
+//                    _log.info("开始添加到搜索引擎onlineSpecMo-{}", onlineSpecMo);
+//                    OnlOnlineSpecSo so = dozerMapper.map(onlineSpecMo, OnlOnlineSpecSo.class);
+//                    so.setProducId(to.getProductId());
+//
+//                    // 店铺id
+//                    Set<Long> shopIds = new HashSet<Long>();
+//                    for (Long classificationId : to.getClassificationId()) {
+//                        OnlSearchCategoryMo searchCategoryMo = onlSearchCategorySvc.getById(classificationId);
+//                        shopIds.add(searchCategoryMo.getShopId());
+//                    }
+//                    so.setShopId(new ArrayList<>(shopIds));
+//                    so.setIsWeighGoods(to.getIsWeighGoods() == null ? false : to.getIsWeighGoods());
+//                    so.setProducSpecId(to.getOnlineSpecs().get(i).getProductSpecId().toString());
+//                    _log.info("添加搜索引擎参数-{}", so);
+//                    onlOnlineSpecEsSvc.add(so);
+//                    _log.info("添加搜索引擎结束");
+//                }
             }
             // 添加上线规格信息结束
             if (to.getAttrNames() != null) {
@@ -401,7 +402,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         }
         // 添加搜索分类上线开始
         // 搜索分类上线id
-        List<Long> classificationIds = to.getClassificationId();
+           /*       List<Long> classificationIds = to.getClassificationId();
         for (Long classificationId : classificationIds) {
             // 搜索分类上线id
             final Long                      searchCategoryOnlineId    = _idWorker.getId();
@@ -479,7 +480,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                 throw new RuntimeException("添加上线轮播图日志出错");
             }
             // 添加上线图片日志结束
-        }
+        }*/
         _log.info("发布商品成功，用户id为：{}", to.getOpId());
         ro.setResult(AddOnlineDic.SUCCESS);
         ro.setMsg("发布成功");

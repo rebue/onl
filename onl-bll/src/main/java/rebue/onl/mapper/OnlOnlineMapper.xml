@@ -22,6 +22,7 @@
     <result column="IS_ONLINE_PLATFORM" jdbcType="BIT" property="isOnlinePlatform" />
     <result column="IS_WEIGH_GOODS" jdbcType="BIT" property="isWeighGoods" />
     <result column="SHORT_NAME" jdbcType="VARCHAR" property="shortName" />
+    <result column="SHOP_ID" jdbcType="BIGINT" property="shopId" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
@@ -30,7 +31,7 @@
     -->
     ID, SUBJECT_TYPE, ONLINE_TITLE, ONLINE_DETAIL, ONLINE_ORG_ID, SUPPLIER_ID, DELIVER_ORG_ID, 
     OP_ID, ONLINE_STATE, ONLINE_TIME, PRODUCT_ID, IS_BELOW, IS_ONLINE, IS_ONLINE_PLATFORM, 
-    IS_WEIGH_GOODS, SHORT_NAME
+    IS_WEIGH_GOODS, SHORT_NAME, SHOP_ID
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--
@@ -60,13 +61,13 @@
       DELIVER_ORG_ID, OP_ID, ONLINE_STATE, 
       ONLINE_TIME, PRODUCT_ID, IS_BELOW, 
       IS_ONLINE, IS_ONLINE_PLATFORM, IS_WEIGH_GOODS, 
-      SHORT_NAME)
+      SHORT_NAME, SHOP_ID)
     values (#{id,jdbcType=BIGINT}, #{subjectType,jdbcType=TINYINT}, #{onlineTitle,jdbcType=VARCHAR}, 
       #{onlineDetail,jdbcType=VARCHAR}, #{onlineOrgId,jdbcType=BIGINT}, #{supplierId,jdbcType=BIGINT}, 
       #{deliverOrgId,jdbcType=BIGINT}, #{opId,jdbcType=BIGINT}, #{onlineState,jdbcType=TINYINT}, 
       #{onlineTime,jdbcType=TIMESTAMP}, #{productId,jdbcType=BIGINT}, #{isBelow,jdbcType=BIT}, 
       #{isOnline,jdbcType=BIT}, #{isOnlinePlatform,jdbcType=BIT}, #{isWeighGoods,jdbcType=BIT}, 
-      #{shortName,jdbcType=VARCHAR})
+      #{shortName,jdbcType=VARCHAR}, #{shopId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="rebue.onl.mo.OnlOnlineMo">
     <!--
@@ -123,6 +124,9 @@
       <if test="shortName != null">
         SHORT_NAME,
       </if>
+      <if test="shopId != null">
+        SHOP_ID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -172,6 +176,9 @@
       </if>
       <if test="shortName != null">
         #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -227,6 +234,9 @@
       <if test="shortName != null">
         SHORT_NAME = #{shortName,jdbcType=VARCHAR},
       </if>
+      <if test="shopId != null">
+        SHOP_ID = #{shopId,jdbcType=BIGINT},
+      </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
@@ -250,7 +260,8 @@
       IS_ONLINE = #{isOnline,jdbcType=BIT},
       IS_ONLINE_PLATFORM = #{isOnlinePlatform,jdbcType=BIT},
       IS_WEIGH_GOODS = #{isWeighGoods,jdbcType=BIT},
-      SHORT_NAME = #{shortName,jdbcType=VARCHAR}
+      SHORT_NAME = #{shortName,jdbcType=VARCHAR},
+      SHOP_ID = #{shopId,jdbcType=BIGINT}
     where ID = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectAll" resultMap="BaseResultMap">
@@ -260,7 +271,7 @@
     -->
     select ID, SUBJECT_TYPE, ONLINE_TITLE, ONLINE_DETAIL, ONLINE_ORG_ID, SUPPLIER_ID, 
     DELIVER_ORG_ID, OP_ID, ONLINE_STATE, ONLINE_TIME, PRODUCT_ID, IS_BELOW, IS_ONLINE, 
-    IS_ONLINE_PLATFORM, IS_WEIGH_GOODS, SHORT_NAME
+    IS_ONLINE_PLATFORM, IS_WEIGH_GOODS, SHORT_NAME, SHOP_ID
     from ONL_ONLINE
   </select>
 
@@ -329,6 +340,9 @@
       <if test="shortName != null and shortName != ''">
         and SHORT_NAME = #{shortName,jdbcType=VARCHAR}
       </if>
+      <if test="shopId != null and shopId != ''">
+        and SHOP_ID = #{shopId,jdbcType=BIGINT}
+      </if>
     </where>
   </select>
   <select id="countSelective" parameterType="rebue.onl.mo.OnlOnlineMo" resultType="int">
@@ -383,6 +397,9 @@
       </if>
       <if test="shortName != null and shortName != ''">
         and SHORT_NAME = #{shortName,jdbcType=VARCHAR}
+      </if>
+      <if test="shopId != null">
+        and SHOP_ID = #{shopId,jdbcType=BIGINT}
       </if>
     </where>
   </select>
