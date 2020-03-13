@@ -17,6 +17,7 @@ import com.github.pagehelper.PageInfo;
 
 import rebue.onl.mapper.OnlSearchCategoryMapper;
 import rebue.onl.mo.OnlSearchCategoryMo;
+import rebue.onl.mo.OnlSearchCategoryOnlineMo;
 import rebue.onl.ro.OnlOnlineTreeRo;
 import rebue.onl.ro.OnlSearchCategoryRo;
 import rebue.onl.ro.OnlSearchCategoryTreeRo;
@@ -398,5 +399,56 @@ public class OnlSearchCategorySvcImpl
         }
         _log.info("根据店铺id和编码查询店铺搜索分类的返回值为：{}", categoryList);
         return categoryList;
+    }
+
+    /**
+     * 根据上线id获取搜索分类
+     */
+    @Override
+    public List<OnlSearchCategoryTreeRo> getCategoryByOnlineId(Long onlineId, Long shopId) {
+        _log.info("根据上线id获取搜索分类的参数为：onlineId-{},shopId-{}", onlineId, shopId);
+        List<OnlSearchCategoryTreeRo> searchCategoryTreeList = new ArrayList<OnlSearchCategoryTreeRo>();
+        OnlSearchCategoryOnlineMo     searchCategory         = new OnlSearchCategoryOnlineMo();
+        searchCategory.setOnlineId(onlineId);
+        List<OnlSearchCategoryOnlineMo> categoryList = onlSearchCategoryOnlineSvc.list(searchCategory);
+        _log.info("根据上线id获取搜索分类上线的返回值为-{}", categoryList);
+        for (OnlSearchCategoryOnlineMo category : categoryList) {
+            _log.info("获取搜索分类的参数为：searchCategoryId-{}", category.getSearchCategoryId());
+            OnlSearchCategoryMo searchCategoryMo = thisSvc.getById(category.getSearchCategoryId());
+            _log.info("获取搜索分类code的返回值为：code-{}", searchCategoryMo.getCode());
+            Integer parent = searchCategoryMo.getCode().length() % 2 == 1 ? 3 : 2;
+
+            searchCategoryTreeList.add(getSearchCategoryByCode(searchCategoryMo.getCode(), parent, onlineId, shopId));
+        }
+        return searchCategoryTreeList;
+    }
+
+    private OnlSearchCategoryTreeRo getSearchCategoryByCode(String code, Integer digit, Long onlineId, Long shopId) {
+        _log.info("获取搜索分类的code为：code-{},digit-{}", code, digit);
+        OnlSearchCategoryTreeRo ro         = new OnlSearchCategoryTreeRo();
+        String                  parentCode = code.substring(0, digit);
+        _log.info("父搜索分类的code为：code-{}", parentCode);
+        OnlSearchCategoryMo searchCategoryCode = new OnlSearchCategoryMo();
+        searchCategoryCode.setCode(parentCode);
+        searchCategoryCode.setShopId(shopId);
+        _log.info("根据父搜索分类查询搜索分类的参数-{}", searchCategoryCode);
+        List<OnlSearchCategoryMo> list = thisSvc.list(searchCategoryCode);
+        _log.info("根据父搜索分类的code查询搜索分类的返回值：list-{}", list);
+        ro = dozerMapper.map(list.get(0), OnlSearchCategoryTreeRo.class);
+        if (code.length() == digit) {
+            _log.info("查询搜索子分类上线商品的参数：onlineId-{}", onlineId);
+            OnlOnlineTreeRo treeRo = onlOnlineSvc.onlineTree(onlineId);
+            _log.info("查询搜索子分类上线商品的返回值：onlineId-{}", treeRo);
+            List<OnlOnlineTreeRo> activityList = new ArrayList<OnlOnlineTreeRo>();
+            activityList.add(treeRo);
+            ro.setActivityList(activityList);
+        } else {
+            List<OnlSearchCategoryTreeRo> categoryList = new ArrayList<OnlSearchCategoryTreeRo>();
+            Integer                       newDigit     = digit + 2;
+            categoryList.add(getSearchCategoryByCode(code, newDigit, onlineId, shopId));
+            ro.setCategoryList(categoryList);
+        }
+
+        return ro;
     }
 }
