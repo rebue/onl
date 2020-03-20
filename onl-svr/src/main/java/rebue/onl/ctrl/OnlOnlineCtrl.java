@@ -45,6 +45,7 @@ import rebue.onl.svc.OnlOnlineSpecSvc;
 import rebue.onl.svc.OnlOnlineSvc;
 import rebue.onl.svc.OnlSearchCategoryOnlineSvc;
 import rebue.onl.svc.OnlSearchCategorySvc;
+import rebue.onl.to.AddOnlineByPosTo;
 import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlineGoodsListTo;
 import rebue.onl.to.SupplierGoodsTo;
@@ -200,7 +201,7 @@ public class OnlOnlineCtrl {
         }
         ro.setThisOrgId(orgId);
         final PageInfo<OnlOnlineListRo> result = svc.listEx(ro, pageNum, pageSize, "ONLINE_TIME DESC");
-       // _log.info("result: " + result);
+        // _log.info("result: " + result);
         return result;
     }
 
@@ -458,6 +459,18 @@ public class OnlOnlineCtrl {
     OnlOnlineMo getOneByName(@RequestBody final OnlOnlineMo mo) {
         _log.info("getOneByName mo-{}", mo);
         return svc.getOneByName(mo);
+    }
+
+    /**
+     * 收银机扫码上线商品
+     * 
+     * @param to
+     * @return
+     */
+    @PostMapping("/onl/online/add-online-by-pos")
+    AddOnlineRo addOnlineByPos(@RequestBody final AddOnlineByPosTo to) {
+        _log.info("addOnlineByPos to-{}", to);
+        return svc.addOnlineByPos(to);
     }
 
 }

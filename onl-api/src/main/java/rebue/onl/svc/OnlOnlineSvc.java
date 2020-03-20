@@ -11,6 +11,7 @@ import rebue.onl.ro.OnlOnlineListRo;
 import rebue.onl.ro.OnlOnlineTreeRo;
 import rebue.onl.ro.ReOnlineRo;
 import rebue.onl.ro.SupplierGoodsRo;
+import rebue.onl.to.AddOnlineByPosTo;
 import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.OnlineGoodsListTo;
 import rebue.onl.to.SupplierGoodsTo;
@@ -96,4 +97,12 @@ public interface OnlOnlineSvc extends MybatisBaseSvc<OnlOnlineMo, java.lang.Long
     void addGoodsToEs();
 
     OnlOnlineMo getOneByName(OnlOnlineMo mo);
+
+    /**
+     * 收银系统上线商品
+     * 
+     * @param to
+     * @return
+     */
+    AddOnlineRo addOnlineByPos(AddOnlineByPosTo to);
 }

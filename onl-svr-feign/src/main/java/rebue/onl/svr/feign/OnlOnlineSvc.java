@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import rebue.onl.mo.OnlOnlineMo;
 import rebue.onl.ro.AddOnlineRo;
+import rebue.onl.to.AddOnlineByPosTo;
 import rebue.onl.to.AddOnlineTo;
 import rebue.onl.to.UpdateOnlineAfterOrderTo;
 import rebue.robotech.ro.Ro;
@@ -68,4 +69,12 @@ public interface OnlOnlineSvc {
     @GetMapping("/onl/online/get-one-by-name")
     OnlOnlineMo getOneByName(@RequestBody final OnlOnlineMo mo);
 
+    /**
+     * 收银机扫码上线商品
+     * 
+     * @param to
+     * @return
+     */
+    @PostMapping("/onl/online/add-online-by-pos")
+    AddOnlineRo addOnlineByPos(@RequestBody final AddOnlineByPosTo to);
 }
