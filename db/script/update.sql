@@ -270,7 +270,9 @@ alter table ONL_ONLINE add column IS_WEIGH_GOODS boolean default false comment "
 alter table ONL_ONLINE add column  SHORT_NAME           varchar(20) comment '商品简称';
 
 -- ------------------------------------------------------- 上面的已更新到线上 2019.12.06 ----------------------------------------------------
-
+ alter table ONL_ONLINE add column  SHOP_ID              bigint not null comment '店铺ID';
+ alter table ONL_ONLINE_SPEC add column  SHOP_ID              bigint not null comment '店铺ID';
+-- ------------------------------------------------------- 上面的已更新到线上 2020.03.23 ----------------------------------------------------
 
 
 	
