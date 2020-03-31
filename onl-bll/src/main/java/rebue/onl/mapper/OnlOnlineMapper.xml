@@ -532,8 +532,8 @@
       <if test="onlineState != null and onlineState != '-1' ">
         and ONLINE_STATE = #{onlineState,jdbcType=TINYINT}
       </if>
-       <if test=" onlineIds != null ">
-        and id in(${onlineIds})
+       <if test=" shopIds != null ">
+        and SHOP_ID in(${shopIds})
       </if>
     </where>
   </select>

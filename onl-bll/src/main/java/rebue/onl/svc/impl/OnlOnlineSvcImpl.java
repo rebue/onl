@@ -210,6 +210,11 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         onlineMo.setIsOnline(isOnline);
         onlineMo.setIsOnlinePlatform(isOnlinePlatform);
         onlineMo.setIsWeighGoods(to.getIsWeighGoods());
+       // ---------------------------
+        // 获取店铺id
+        OnlSearchCategoryMo  searchCategory =  onlSearchCategorySvc.getById(to.getClassificationId().get(0));
+        onlineMo.setShopId(searchCategory.getShopId());
+        // ---------------------------
         _log.info("添加上线信息的参数为：{}", onlineMo);
         final int addResult = add(onlineMo);
         _log.info("添加上线信息的返回值为：{}", addResult);
@@ -306,6 +311,9 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             onlineSpecMo.setSeqNo(i);
             onlineSpecMo.setCurrentOnlineCount(to.getOnlineSpecs().get(i).getCurrentOnlineCount());
             onlineSpecMo.setProductSpecId(to.getOnlineSpecs().get(i).getProductSpecId());// 添加产品规格id
+            // -----------------------
+            onlineSpecMo.setShopId(searchCategory.getShopId());
+            // -----------------------
             // 如果版块类型为返积分商品（2）则购买积分为原返现金额*10,不再返现
             if (to.getSubjectType() == 2) {
                 onlineSpecMo.setCommissionAmount(amount);
@@ -342,7 +350,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
 //                    so.setShopId(new ArrayList<>(shopIds));
 //                    so.setIsWeighGoods(to.getIsWeighGoods() == null ? false : to.getIsWeighGoods());
 //                    so.setProducSpecId(to.getOnlineSpecs().get(i).getProductSpecId().toString());
-//                    _log.info("添加搜索引擎参数-{}", so);
+//                    _log.info("添加搜索引擎参数-  {}", so);
 //                    onlOnlineSpecEsSvc.add(so);
 //                    _log.info("添加搜索引擎结束");
 //                }
@@ -980,45 +988,45 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
                 shopIds += "'" + slrShopMoList.get(i).getId() + "'";
             }
         }
-        _log.info("根据店铺id集合获取所有搜索分类的参数为: shopIds-{}", shopIds);
-        List<OnlSearchCategoryMo> onlSearchCategoryList = onlSearchCategorySvc.searchCategoryByshopIds(shopIds);
-        // _log.info("根据店铺id集合获取所有搜索分类的结果为: shopIds-{}", onlSearchCategoryList);
-        if (onlSearchCategoryList.size() == 0) {
-            return pageInfo;
-        }
-
-        // 根据分类id集合获取所有上线id
-        // 拼接的searchCategoryIds
-        String searchCategoryIds = "";
-        for (int i = 0; i < onlSearchCategoryList.size(); i++) {
-            if (i != 0 && i < onlSearchCategoryList.size()) {
-                searchCategoryIds += ",'" + onlSearchCategoryList.get(i).getId() + "'";
-            } else {
-                searchCategoryIds += "'" + onlSearchCategoryList.get(i).getId() + "'";
-            }
-        }
-        _log.info("根据搜索分类id集合获取搜索上线信息参数为: searchCategoryId-{}", searchCategoryIds);
-        List<OnlSearchCategoryOnlineMo> SearchCategoryOnlineList = onlSearchCategoryOnlineSvc
-                .selectBysearchCategoryIds(searchCategoryIds);
-        // _log.info("根据搜索分类id集合获取搜索上线结果为: SearchCategoryOnlineList-{}",
-        // SearchCategoryOnlineList);
-        if (SearchCategoryOnlineList.size() == 0) {
-            return pageInfo;
-        }
+//        _log.info("根据店铺id集合获取所有搜索分类的参数为: shopIds-{}", shopIds);
+//        List<OnlSearchCategoryMo> onlSearchCategoryList = onlSearchCategorySvc.searchCategoryByshopIds(shopIds);
+//        // _log.info("根据店铺id集合获取所有搜索分类的结果为: shopIds-{}", onlSearchCategoryList);
+//        if (onlSearchCategoryList.size() == 0) {
+//            return pageInfo;
+//        }
+//
+//        // 根据分类id集合获取所有上线id
+//        // 拼接的searchCategoryIds
+//        String searchCategoryIds = "";
+//        for (int i = 0; i < onlSearchCategoryList.size(); i++) {
+//            if (i != 0 && i < onlSearchCategoryList.size()) {
+//                searchCategoryIds += ",'" + onlSearchCategoryList.get(i).getId() + "'";
+//            } else {
+//                searchCategoryIds += "'" + onlSearchCategoryList.get(i).getId() + "'";
+//            }
+//        }
+//        _log.info("根据搜索分类id集合获取搜索上线信息参数为: searchCategoryId-{}", searchCategoryIds);
+//        List<OnlSearchCategoryOnlineMo> SearchCategoryOnlineList = onlSearchCategoryOnlineSvc
+//                .selectBysearchCategoryIds(searchCategoryIds);
+//        // _log.info("根据搜索分类id集合获取搜索上线结果为: SearchCategoryOnlineList-{}",
+//        // SearchCategoryOnlineList);
+//        if (SearchCategoryOnlineList.size() == 0) {
+//            return pageInfo;
+//        }
 
         // 根据上线id集合获取所有的上线信息。
         // 拼接的onlinerIds
-        String onlineIds = "";
-        for (int i = 0; i < SearchCategoryOnlineList.size(); i++) {
-            if (i != 0 && i < SearchCategoryOnlineList.size()) {
-                onlineIds += ",'" + SearchCategoryOnlineList.get(i).getOnlineId() + "'";
-            } else {
-                onlineIds += "'" + SearchCategoryOnlineList.get(i).getOnlineId() + "'";
-            }
-        }
-        _log.info("拼接后的上线id集合 onlinerIds-{} ", onlineIds);
+//        String onlineIds = "";
+//        for (int i = 0; i < SearchCategoryOnlineList.size(); i++) {
+//            if (i != 0 && i < SearchCategoryOnlineList.size()) {
+//                onlineIds += ",'" + SearchCategoryOnlineList.get(i).getOnlineId() + "'";
+//            } else {
+//                onlineIds += "'" + SearchCategoryOnlineList.get(i).getOnlineId() + "'";
+//            }
+//        }
+//        _log.info("拼接后的上线id集合 onlinerIds-{} ", onlineIds);
         SelectOnlineTo SelectOnlineTo = new SelectOnlineTo();
-        SelectOnlineTo.setOnlineIds(onlineIds);
+        SelectOnlineTo.setShopIds(shopIds);
         SelectOnlineTo.setOnlineState(ro.getOnlineState());
         SelectOnlineTo.setOnlineTitle(ro.getOnlineTitle());
         _log.info("查询上线信息的参数为 SelectOnlineTo-{} ", SelectOnlineTo);

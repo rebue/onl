@@ -13,7 +13,7 @@ public class SelectOnlineTo {
 	/**
 	 * 上线id集合
 	 */
-	private String onlineIds;
+	private String shopIds;
 	
 	
 	/**

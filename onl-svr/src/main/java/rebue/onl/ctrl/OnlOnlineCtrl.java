@@ -142,7 +142,7 @@ public class OnlOnlineCtrl {
     AddOnlineRo add(@RequestBody final AddOnlineTo to, final HttpServletRequest req) throws Exception {
         // 获取当前登录用户id
         Long currentUserId = 520469568947224576L;
-        Long orgId         = 520874560590053376L;
+        Long orgId         = 517928358546243584L;
         if (!isDebug) {
             currentUserId = JwtUtils.getJwtUserIdInCookie(req);
             orgId         = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
@@ -195,7 +195,7 @@ public class OnlOnlineCtrl {
             _log.error(msg);
             throw new IllegalArgumentException(msg);
         }
-        Long orgId = 581703841586741249L;
+        Long orgId = 517928358546243584L;
         if (!isDebug) {
             orgId = (Long) JwtUtils.getJwtAdditionItemInCookie(req, "orgId");
         }
