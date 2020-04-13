@@ -411,90 +411,90 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
         }
         // 添加搜索分类上线开始
         // 搜索分类上线id
-        /*
-         * List<Long> classificationIds = to.getClassificationId();
-         * for (Long classificationId : classificationIds) {
-         * // 搜索分类上线id
-         * final Long searchCategoryOnlineId = _idWorker.getId();
-         * final OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo = new
-         * OnlSearchCategoryOnlineMo();
-         * onlSearchCategoryOnlineMo.setId(searchCategoryOnlineId);
-         * onlSearchCategoryOnlineMo.setOnlineId(onlineId);
-         * onlSearchCategoryOnlineMo.setSearchCategoryId(classificationId);
-         * _log.info("添加搜索分类上线的参数为：{}", onlSearchCategoryOnlineMo);
-         * final int searchCategoryOnlineResult =
-         * onlSearchCategoryOnlineSvc.add(onlSearchCategoryOnlineMo);
-         * _log.info("添加搜索分类上线的返回值为：{}", searchCategoryOnlineResult);
-         * if (searchCategoryOnlineResult == 0) {
-         * _log.error("添加搜索分类上线时出错，用户id为：{}", to.getOpId());
-         * throw new RuntimeException("添加搜索分类上线出错");
-         * }
-         * }
-         * // 添加搜索分类上线结束
-         * 
-         * // 添加商品主图开始
-         * // 上线图片id
-         * final Long onlinePicId = _idWorker.getId();
-         * final OnlOnlinePicMo qsmmPicMo = new OnlOnlinePicMo();
-         * qsmmPicMo.setId(onlinePicId);
-         * qsmmPicMo.setOnlineId(onlineId);
-         * qsmmPicMo.setPicPath(to.getGoodsQsmm());
-         * qsmmPicMo.setPicType((byte) 1);
-         * _log.info("添加上线信息添加商品主图的参数为：{}", qsmmPicMo);
-         * final int addQsmmResult = onlOnlinePicSvc.add(qsmmPicMo);
-         * _log.info("添加上线信息添加商品主图的返回值为：{}", addQsmmResult);
-         * if (addQsmmResult != 1) {
-         * _log.error("添加上线信息添加商品主图时出错，用户id为：{}", to.getOpId());
-         * throw new RuntimeException("添加商品主图出错");
-         * }
-         * // 添加商品主图结束
-         * // 添加上线图片日志开始
-         * OnlOnlinePicLogMo onlinePicLogMo = new OnlOnlinePicLogMo();
-         * onlinePicLogMo.setOnlineLogId(onlineLogId);
-         * onlinePicLogMo.setOnlineId(onlineId);
-         * onlinePicLogMo.setPicType((byte) 1);
-         * onlinePicLogMo.setPicPath(to.getGoodsQsmm());
-         * _log.info("添加上线信息添加上线主图日志的参数为：{}", onlinePicLogMo);
-         * final int addOnlineQsmmLogResult = onlOnlinePicLogSvc.add(onlinePicLogMo);
-         * _log.info("添加上线信息添加上线主图日志的返回值为：{}", addOnlineQsmmLogResult);
-         * if (addOnlineQsmmLogResult != 1) {
-         * _log.error("添加上线信息添加上线主图日志出错，操作人id为：{}", to.getOpId());
-         * throw new RuntimeException("添加上线主图日志出错");
-         * }
-         * for (int j = 0; j < to.getSlideshow().size(); j++) {
-         * // 轮播图id
-         * final Long picId = _idWorker.getId();
-         * // 添加商品轮播图开始
-         * final OnlOnlinePicMo picMo = new OnlOnlinePicMo();
-         * picMo.setId(picId);
-         * picMo.setOnlineId(onlineId);
-         * picMo.setPicPath(String.valueOf(to.getSlideshow().get(j).get("slideshow")));
-         * picMo.setPicType((byte) 0);
-         * _log.info("添加上线信息添加商品轮播图的参数为：{}", picMo);
-         * final int addPicResult = onlOnlinePicSvc.add(picMo);
-         * _log.info("添加上线信息添加商品轮播图的返回值为：{}", addPicResult);
-         * if (addPicResult != 1) {
-         * _log.error("添加上线商信息添加商品轮播图出错，用户id为：{}", to.getOpId());
-         * throw new RuntimeException("添加商品轮播图出错");
-         * }
-         * // 添加商品轮播图结束
-         * // 添加上线图片日志开始
-         * onlinePicLogMo = new OnlOnlinePicLogMo();
-         * onlinePicLogMo.setOnlineLogId(onlineLogId);
-         * onlinePicLogMo.setOnlineId(onlineId);
-         * onlinePicLogMo.setPicType((byte) 0);
-         * onlinePicLogMo.setPicPath(String.valueOf(to.getSlideshow().get(j).get(
-         * "slideshow")));
-         * _log.info("添加上线信息添加上线轮播图日志的参数为：{}", onlinePicLogMo);
-         * final int addOnlinePicLogResult = onlOnlinePicLogSvc.add(onlinePicLogMo);
-         * _log.info("添加上线信息添加上线轮播图日志的返回值为：{}", addOnlinePicLogResult);
-         * if (addOnlinePicLogResult != 1) {
-         * _log.error("添加上线信息添加上线轮播图日志出错，操作人id为：{}", to.getOpId());
-         * throw new RuntimeException("添加上线轮播图日志出错");
-         * }
-         * // 添加上线图片日志结束
-         * }
-         */
+        
+          List<Long> classificationIds = to.getClassificationId();
+          for (Long classificationId : classificationIds) {
+          // 搜索分类上线id
+          final Long searchCategoryOnlineId = _idWorker.getId();
+          final OnlSearchCategoryOnlineMo onlSearchCategoryOnlineMo = new
+          OnlSearchCategoryOnlineMo();
+          onlSearchCategoryOnlineMo.setId(searchCategoryOnlineId);
+          onlSearchCategoryOnlineMo.setOnlineId(onlineId);
+          onlSearchCategoryOnlineMo.setSearchCategoryId(classificationId);
+          _log.info("添加搜索分类上线的参数为：{}", onlSearchCategoryOnlineMo);
+          final int searchCategoryOnlineResult =
+          onlSearchCategoryOnlineSvc.add(onlSearchCategoryOnlineMo);
+          _log.info("添加搜索分类上线的返回值为：{}", searchCategoryOnlineResult);
+          if (searchCategoryOnlineResult == 0) {
+          _log.error("添加搜索分类上线时出错，用户id为：{}", to.getOpId());
+          throw new RuntimeException("添加搜索分类上线出错");
+          }
+          }
+          // 添加搜索分类上线结束
+          
+          // 添加商品主图开始
+          // 上线图片id
+          final Long onlinePicId = _idWorker.getId();
+          final OnlOnlinePicMo qsmmPicMo = new OnlOnlinePicMo();
+          qsmmPicMo.setId(onlinePicId);
+          qsmmPicMo.setOnlineId(onlineId);
+          qsmmPicMo.setPicPath(to.getGoodsQsmm());
+          qsmmPicMo.setPicType((byte) 1);
+          _log.info("添加上线信息添加商品主图的参数为：{}", qsmmPicMo);
+          final int addQsmmResult = onlOnlinePicSvc.add(qsmmPicMo);
+          _log.info("添加上线信息添加商品主图的返回值为：{}", addQsmmResult);
+          if (addQsmmResult != 1) {
+          _log.error("添加上线信息添加商品主图时出错，用户id为：{}", to.getOpId());
+          throw new RuntimeException("添加商品主图出错");
+          }
+          // 添加商品主图结束
+          // 添加上线图片日志开始
+          OnlOnlinePicLogMo onlinePicLogMo = new OnlOnlinePicLogMo();
+          onlinePicLogMo.setOnlineLogId(onlineLogId);
+          onlinePicLogMo.setOnlineId(onlineId);
+          onlinePicLogMo.setPicType((byte) 1);
+          onlinePicLogMo.setPicPath(to.getGoodsQsmm());
+          _log.info("添加上线信息添加上线主图日志的参数为：{}", onlinePicLogMo);
+          final int addOnlineQsmmLogResult = onlOnlinePicLogSvc.add(onlinePicLogMo);
+          _log.info("添加上线信息添加上线主图日志的返回值为：{}", addOnlineQsmmLogResult);
+          if (addOnlineQsmmLogResult != 1) {
+          _log.error("添加上线信息添加上线主图日志出错，操作人id为：{}", to.getOpId());
+          throw new RuntimeException("添加上线主图日志出错");
+          }
+          for (int j = 0; j < to.getSlideshow().size(); j++) {
+          // 轮播图id
+          final Long picId = _idWorker.getId();
+          // 添加商品轮播图开始
+          final OnlOnlinePicMo picMo = new OnlOnlinePicMo();
+          picMo.setId(picId);
+          picMo.setOnlineId(onlineId);
+          picMo.setPicPath(String.valueOf(to.getSlideshow().get(j).get("slideshow")));
+          picMo.setPicType((byte) 0);
+          _log.info("添加上线信息添加商品轮播图的参数为：{}", picMo);
+          final int addPicResult = onlOnlinePicSvc.add(picMo);
+          _log.info("添加上线信息添加商品轮播图的返回值为：{}", addPicResult);
+          if (addPicResult != 1) {
+          _log.error("添加上线商信息添加商品轮播图出错，用户id为：{}", to.getOpId());
+          throw new RuntimeException("添加商品轮播图出错");
+          }
+          // 添加商品轮播图结束
+          // 添加上线图片日志开始
+          onlinePicLogMo = new OnlOnlinePicLogMo();
+          onlinePicLogMo.setOnlineLogId(onlineLogId);
+          onlinePicLogMo.setOnlineId(onlineId);
+          onlinePicLogMo.setPicType((byte) 0);
+          onlinePicLogMo.setPicPath(String.valueOf(to.getSlideshow().get(j).get(
+          "slideshow")));
+          _log.info("添加上线信息添加上线轮播图日志的参数为：{}", onlinePicLogMo);
+          final int addOnlinePicLogResult = onlOnlinePicLogSvc.add(onlinePicLogMo);
+          _log.info("添加上线信息添加上线轮播图日志的返回值为：{}", addOnlinePicLogResult);
+          if (addOnlinePicLogResult != 1) {
+          _log.error("添加上线信息添加上线轮播图日志出错，操作人id为：{}", to.getOpId());
+          throw new RuntimeException("添加上线轮播图日志出错");
+          }
+          // 添加上线图片日志结束
+          }
+         
         _log.info("发布商品成功，用户id为：{}", to.getOpId());
         ro.setResult(AddOnlineDic.SUCCESS);
         ro.setMsg("发布成功");
@@ -543,7 +543,7 @@ public class OnlOnlineSvcImpl extends MybatisBaseSvcImpl<OnlOnlineMo, java.lang.
             throw new RuntimeException("下线失败");
         } else {
             // 将下线的上线规格从elasticSearch中移除
-            onlOnlineSpecSvc.deleteEsByOnlineId(mo.getId());
+          //  onlOnlineSpecSvc.deleteEsByOnlineId(mo.getId());
         }
         _log.info("商品下线成功,请求参数为:{}", mo);
         ro.setResult(ResultDic.SUCCESS);
